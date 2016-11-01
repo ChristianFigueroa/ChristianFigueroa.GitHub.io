@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+	<title>World History Flash Cards</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		html {
+			overflow-x:hidden;
+		}
+		body {
+			margin: 0;
+			background: #00ACC1;
+			padding-bottom: 4.5vmin;
+			overflow: hidden;
+		}
+
+		h1#header {
+			text-align: center;
+			color: #fff;
+			font-size: 15vmin;
+			font-family: "Open Sans";
+			font-weight: 700;
+			margin: 0.3em 0;
+		}
+
+		div#previewCont {
+			height: 42vmin;
+			width: 100%;
+			background: rgba(255, 255, 255, 0.3);
+			position: relative;
+		}
+
+		div#preview, div#previewAnim {
+			height: 100%;
+			width: 70vmin;
+			background: #fff;
+			margin: auto;
+			position: relative;
+			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+			text-align: center;
+			display: table;
+		}
+
+		div#previewPageCont {
+			width: 100%;
+			height: 6vh;
+		}
+
+		div.prevPageSelector {
+			height: 100%;
+			width: 20%;
+			background-color: #007887;
+			float: left;
+			cursor: pointer;
+			transition: background-color 0.7s ease-in-out;
+		}
+
+		div.prevPageSelector[data-h] {
+			background-color: #4BA1AB;
+		}
+
+		div.prevPageSelector.selected {
+			background-color: #ddd;
+		}
+
+		div.bodySection {
+			max-width: 360px;
+			width: 94%;
+			float: left;
+			background: #DDD;
+			float: left;
+			margin: 6vh 0 0 3vw;
+			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+			padding-bottom: 2.5vmin;
+			position: relative;
+		}
+
+		div.bodySection:first-child {
+			margin-left: 0;
+		}
+
+		div.bodySection > h2 {
+			text-align: center;
+			color: #26c6da;
+			font-family: "Open Sans";
+			font-size: 6vmin;
+			margin: 2.5vmin 0;
+			text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);0
+		}
+
+		div.goToButton {
+			border: 3px solid #fff;
+			color: #fff;
+			text-align: center;
+			font-family: Lato;
+			font-size: 3em;
+			background: #4DD0E1;
+			text-decoration: none;
+			overflow: hidden;
+		}
+
+		a {
+			text-decoration: none;
+			display: inline-block;
+			width: 80%;
+			margin: 2.5vmin 0 0 10%;
+		}
+
+		a:focus div.goToButton, div.goToButton:hover {
+			color: #4DD0E1;
+			background: #fff;
+		}
+
+		p.pseudoSelect {
+			position: absolute;
+			margin-top: 0;
+			width: 80%;
+			left: 10%;
+			text-align: center;
+			font-family: Lato;
+			font-size: 1.5em;
+			border-bottom: 3px solid #26c6da;
+			white-space: pre;
+			overflow: hidden;
+		}
+
+		select, input#findInput {
+			width: 80%;
+			margin-left: 10%;
+			border: 0 solid #26c6da;
+			background: #ddd;
+			color: rgba(0, 0, 0, 0.87);
+			font-size: 1.5em;
+			opacity: 0;
+		}
+
+		input#findInput {
+			opacity: 1;
+			font-family: Lato;
+			border-bottom: 3px solid #26c6da;
+			transition: border-color 0.5s ease-in-out;
+			text-align: center;
+			display: none;
+		}
+
+		input#findInput:focus {
+			border-color: #FFA726;
+		}
+
+		option {
+			background: #007887;
+			color: #ddd;
+			border-bottom: 1px solid #ddd;
+		}
+
+		span.placeholder {
+			color: rgba(0, 0, 0, 0.37);
+			font-style: italic;
+		}
+
+		span.period, span.chapter, div.title {
+			font-family: Lato;
+			font-size: 3vmin;
+		}
+
+		span.period {
+			float: left;
+			position: absolute;
+			left: 1vmin;
+			top: 2vmin;
+		}
+
+		span.chapter {
+			float: right;
+			position: absolute;
+			right: 1vmin;
+			top: 2vmin;
+		}
+
+		div.title {
+			position: relative;
+			display: table-cell;
+			vertical-align: middle;
+			max-width: 50vmin;
+			font-size: 4.5vmin;
+		}
+
+		span.number {
+			font-family: Montserrat;
+			font-size: 95%;
+		}
+	</style>
+	<script charset='UTF-8' src='flash_card_info.js'></script>
+	<script charset='UTF-8' src='../../../assets/essentials.js'></script>
+</head>
+<body>
+	<h1 id='header'>World History Flash Cards</h1>
+	<div id='previewCont'>
+		<div id='preview'></div>
+	</div>
+	<div id='previewPageCont'>
+		<div class='prevPageSelector selected'></div>
+		<div class='prevPageSelector'></div>
+		<div class='prevPageSelector'></div>
+		<div class='prevPageSelector'></div>
+		<div class='prevPageSelector'></div>
+	</div>
+	<div id='bodyContainer'>
+		<div class='bodySection'>
+			<h2>Find Flash Cards!</h2>
+			<p class='pseudoSelect' id='findPseudoSelectT'>By: Period</p>
+			<select id='findSelectT' style='margin-bottom:2.5vmin'><option value='0'>Period</option><option value='1'>Chapter</option><option value='2'>Title</option></select>
+			<p class='pseudoSelect' id='findPseudoSelectQ1'>Foundations</p>
+			<select id='findSelectQ1'><option value='0'>Foundations</option><option value='1'>Classical</option><option value='2'>Post Classical</option></select>
+			<p class='pseudoSelect' id='findPseudoSelectQ2' style='display:none'>Chapter 1</p>
+			<select id='findSelectQ2' style='display:none'></select>
+			<input type='text' id='findInput'>
+			<a href='find?t=0&q=0' id='a-find'><div class='goToButton'>Go!</div></a>
+			<script type="text/javascript">document.getElementById('findSelectT').selectedIndex=document.getElementById('findSelectQ1').selectedIndex=document.getElementById('findSelectQ2').selectedIndex=0;document.getElementById('findInput').placeholder=FLASHCARDS.getRandom().title.unescape()</script>
+		</div>
+		<div class='bodySection'>
+			<h2>View All Flash Cards!</h2>
+			<a href='view' id='a-view'><div class='goToButton'>Go!</div></a>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	"use strict";
+	var previewFive=[FLASHCARDS.getRandom(),FLASHCARDS.getRandom(),FLASHCARDS.getRandom(),FLASHCARDS.getRandom(),FLASHCARDS.getRandom()]
+	FLASHCARDS[''].forEach(function(a,b){if(~FLASHCARDS.SKIPPEDCHAPTERS.indexOf(b))return;$id('findSelectQ2').innerHTML+='<option value='+b+'>Chapter '+(b+1)+'</option>'})
+	$id('preview').innerHTML='<span class="period">Period: '+previewFive[0].period+'</span><span class="chapter"> Chapter: <span class="number">'+previewFive[0].chapter+'</span></span><div class="title">'+previewFive[0].title+'</div>'
+	$id('preview').change=function(a){
+		var el=$$('div.prevPageSelector.selected'),ind=Array.prototype.indexOf.call($('div.prevPageSelector'),el),a=a||a==0?a:(ind+1)%5;
+		if(a==ind)return;
+		var b=document.createElement('div'),c=$id('preview').rect.left,z=previewFive[a];
+		b.id='previewAnim';
+		b.innerHTML='<span class="period">Period: '+z.period+'</span><span class="chapter">Chapter: <span class="number">'+z.chapter+'</span></span><div class="title">'+z.title+'</div>';
+		if(a!=0&&ind!=4&&ind<a){
+			b.css({left:window.innerWidth+c+'px',position:'absolute',top:0,opacity:0})
+			$id('previewCont').appendChild(b)
+			b.interval(function(a){
+				this.css({left:window.innerWidth-a/30*window.innerWidth-3+c+'px',opacity:a/15-1});
+				// Constantly changes background color to update any unpainted areas where the card gets cut off and stays in the background
+				// Both values create the same color on the blue background, so there's no noticeable change, but still forces the document to update
+				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+			},10,30,[],function(){var a=this;a.id='preview';a.change=$id('preview').change;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';a.css({position:'relative',left:0,opacity:1})},5)})
+			$id('preview').interval(function(a){
+				this.css({left:-a/30*window.innerWidth-1+'px',opacity:-a/15+1});
+				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+			},10,30,[],function(){var a=this;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';$id('previewCont').removeChild(a)},3)})
+		}else{
+			b.css({left:c-window.innerWidth+'px',position:'absolute',top:0,opacity:0})
+			$id('previewCont').appendChild(b)
+			b.interval(function(a){
+				this.css({left:c-window.innerWidth+a/30*window.innerWidth+'px',opacity:a/15-1});
+				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+			},10,30,[],function(){var a=this;a.id='preview';a.change=$id('preview').change;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';a.css({position:'relative',left:0,opacity:1})},5)})
+			$id('preview').interval(function(a){
+				this.css({left:a/30*window.innerWidth+1+'px',opacity:-a/15+1});
+				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+			},10,30,[],function(){var a=this;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';$id('previewCont').removeChild(a)},3)})
+		}
+	}
+	$('div.prevPageSelector').forEach(function(el){el.ael(['click'],function(e){$id('preview').change(Array.prototype.indexOf.call($('div.prevPageSelector'),e.target)%5);this.removeAttribute('data-h');this.t=0;$$('div.prevPageSelector.selected').className='prevPageSelector';e.target.className+=' selected'});el.ael(['mouseover','mousemove'],function(){this.setAttribute('data-h',1)});el.ael(['mouseout','mouseleave','touchend','touchcancel'],function(){this.removeAttribute('data-h')})});
+	setInterval(function(){var el=$$('div.prevPageSelector.selected');el.t=el.t?(el.t+1)%65:1;if(!el.t){$id('preview').change();el.className='prevPageSelector';$id('previewPageCont').children[(Array.prototype.indexOf.call($('div.prevPageSelector'),el)+1)%5].className+=' selected';$$('div.prevPageSelector.selected').t=0}},100);
+	window.addEventListener('resize',function(){
+		var a=$id('bodyContainer'),b=(Math.floor(Math.min(360,a.rect.width*.94))*2+window.innerWidth*.03);
+		a.style.paddingLeft=a.rect.width>b?(function(){$('.bodySection')[1].style.marginLeft='';return(a.rect.width-b)/2+'px'})():(function(){$('.bodySection')[1].style.marginLeft='0';return(a.rect.width-Math.floor(Math.min(360,a.rect.width*.94)))/2+'px'})();
+	})
+	window.dispatchEvent(new Event('resize'))
+	$id('findSelectT').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/t=\d/,'t='+this.value);$id('findPseudoSelectT').innerText='By: '+this.options[this.selectedIndex].innerHTML;
+		if(this.value==0){
+			$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+$id('findSelectQ1').value);
+			$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display='block';
+			$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display=$id('findInput').style.display='none';
+		}else if(this.value==1){
+			$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+$id('findSelectQ2').value);
+			$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display=$id('findInput').style.display='none';
+			$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display='block';
+		}else{
+			$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+encodeURIComponent($id('findInput').value||$id('findInput').placeholder))
+			$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display=$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display='none';
+			$id('findInput').style.display='block';
+		}
+	})
+	$id('findSelectQ1').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/q=\d/,'q='+this.value);$id('findPseudoSelectQ1').innerText=this.options[this.selectedIndex].innerHTML})
+	$id('findSelectQ2').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/q=\d\d?/,'q='+this.value);$id('findPseudoSelectQ2').innerText=this.options[this.selectedIndex].innerHTML})
+	$id('findInput').ael(['input'],function(){var a=FLASHCARDS.getRandom().title;if(!this.value)this.placeholder=a.unescape();$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+encodeURIComponent(this.value||a.unescape()))})
+	$('select').forEach(function(a){a.ael(['keydown','keyup','input'],function(){if(this.id=='findSelectT'){this.dispatchEvent(new Event('change'))}else{$id(this.id.replace('Select','PseudoSelect')).innerText=this.options[this.selectedIndex].innerHTML}})})
+	</script>
+</body>
+</html>
