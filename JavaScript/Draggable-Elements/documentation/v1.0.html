@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta content="text/html" http-equiv="Content-Type">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Documentation</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600italic,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='../../../assets/css/theme.css' rel='stylesheet' type='text/css'>
+	<style>
+		body{
+			background: #f5f5f5;
+			overflow-x: hidden;
+			padding-bottom: 2.8125em;
+		}
+
+		h1 {
+			font-family: "Open Sans";
+			text-align: center;
+			font-size: 9vw;
+			margin: .25em auto 0 auto;
+			color: #202020;
+			width: 80%;
+			padding-bottom: .125em;
+			border-bottom: 0.1em solid #00ACC1;
+			font-weight: bold;
+		}
+
+		h3 {
+			font-family: "Open Sans";
+			text-align: center;
+			font-size: 3.4vw;
+			color: #202020;
+			margin: .25em 0 0;
+			font-weight: bold;
+		}
+
+		h3 a {
+			text-decoration: none;
+			color: #202020;
+			margin: 0 .2em;
+		}
+
+		h3 a:hover, h3 a:focus, h3 a:active {
+			text-decoration: underline;
+		}
+
+		h2 {
+			font-family: "Open Sans";
+			font-size: 2em;
+			margin: 1.25em auto 0;
+			color: #DDD;
+			width: 90%;
+			border-bottom: 0.15em solid #00ACC1;
+			background: #456;
+			padding: 0.1em 0.3em 0;
+			border-top-left-radius: .2em;
+			border-top-right-radius: .2em;
+			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.37);
+			z-index: 1;
+			position: relative;
+			overflow-x: auto;
+            overflow-y: hidden;
+            font-weight: bold;
+		}
+
+		h2:hover, h2:focus {
+			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3), 0 15px 20px 5px rgba(0, 0, 0, 0.2)
+		}
+
+		p.info {
+			margin: auto;
+			font-family: "Open Sans";
+			color: rgba(0, 0, 0, .87);
+			line-height: 1.3;
+		}
+
+		div.info {
+			margin: auto;
+			font-family: "Open Sans";
+			font-size: 1.25em;
+			color: rgba(0, 0, 0, .87);
+			position: relative;
+		}
+
+		div.info a {
+			color: #00ACC1;
+			text-decoration: none;
+		}
+
+		div.info a:hover {
+			text-decoration: underline;
+		}
+
+		ul.info {
+			font-family: "Open Sans";
+			font-size: 1.2em;
+			list-style: square;
+			margin: .25em auto;
+			text-align: left;
+			white-space: nowrap;
+		}
+
+		ul.info li {
+			float:left;
+			clear:left;
+		}
+
+		ul.info ul {
+			list-style: square;
+		}
+
+		div.container {
+			width: 90%;
+			margin: auto;
+			text-align: justify;
+			padding: .5625em .675em;
+			background-color: #ddd;
+			border-bottom-left-radius: .45em;
+			border-bottom-right-radius: .45em;
+			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.37);
+			overflow-x: hidden;
+		}
+
+		div#toTop {
+			position: fixed;
+			width: 20vw;
+			height: 4.5vw;
+			top: 1vw;
+			left: 78vw;
+			background: #fff;
+			font-size: 3vw;
+			font-family: "Open Sans";
+			color: #00ACC1;
+			text-align: center;
+			box-shadow: 0 0 40px 15px rgba(0, 0, 0, 0.57);
+			border-radius: 1.5vw;
+			cursor: pointer;
+			z-index: 1;
+		}
+
+		div#toTop:hover {
+			background: #00ACC1;
+			color: #fff;
+		}
+
+		div#toTop a {
+			color: inherit;
+			text-decoration: none;
+			display: block;
+			height: 100%;
+			width: 100%;
+			border-radius: inherit;
+		}
+
+		@media (max-width: 500px) {
+			div.container {
+				font-size: .75em;
+				padding: .0375em .45em;
+			}
+			h2 {
+				font-size: 1.5em;
+				padding: .075em .225em 0;
+			}
+			div#toTop {
+				width: 40vw;
+				height: 9vw;
+				top: 1vw;
+				left: 58vw;
+				font-size: 6vw;
+				border-radius: 3vw;
+			}
+		}
+
+		div.code {
+			background: #002B36;
+			border-radius: .6em;
+			overflow-x: auto;
+			box-shadow: 0 0 20px 2px #002B36;
+			overflow-y: hidden;
+		}
+
+		code {
+			color: #839496;
+			border-radius: .6em;
+			padding: .3em;
+			position: relative;
+			font-family: Consolas, Monaco, "Ubuntu Mono", Courier, monospace;
+			font-size: 1em;
+			white-space: pre;
+		}
+
+		code.bg {
+			background-color: #002B36;
+			font-size: .9em;
+		}
+
+		div.code > table {
+			border-collapse: collapse;
+			empty-cells: show;
+			table-layout: fixed;
+			font-family: Cosnolas, Monaco, "Ubuntu Mono", Courier, monospace;
+			font-size: 1em;
+			position: relative;
+			top: .1em;
+		}
+
+		div.code > table tr {
+			display: block;
+			white-space: pre;
+		}
+
+		div.code > table tr:first-child {
+			margin: .3em 0 0 0;
+		}
+
+		div.code > table tr:last-child {
+			margin: 0 0 .3em 0;
+		}
+
+		div.code > table td:nth-child(1) {
+			padding-right: .3em;
+			color: #586E75;
+			font-weight: 700;
+		}
+		div.code > table td:nth-child(2) {
+			background-color: #586E75;
+			padding: .75px;
+			border-spacing: 0;
+			border-width: 0;
+		}
+
+		div.code > table td:nth-child(3) {
+			padding-left: .3em;
+			color: #839496;
+		}
+
+		div.code > table span.keyword, code span.keyword, div.code > table span.operator, code span.operator {
+			color: #859900;
+		}
+
+		div.code > table span.method, div.code > table span.boolean, code span.method, code span.boolean, div.code > table span.null, code span.null {
+			color: #b58900;
+		}
+
+		div.code > table span.string, code span.string {
+			color: #2aa198;
+		}
+
+		div.code > table span.objkey, code span.objkey {
+			color: #93A1A1;
+		}
+
+		div.code > table span.tag, code span.tag {
+			color: #268bd2;
+			font-weight: bold;
+		}
+
+		div.code > table span.comment, code span.comment {
+			color: #586E75;
+		}
+
+		div.code > table span.declaration, code span.declaration, div.code > table span.variable, code span.variable, div.code > table span.number, code span.number {
+			color: #268BD2;
+		}
+
+		code i {
+			color: #CD322F;
+		}
+
+		span.info {
+			color: #00ACC1;
+		}
+
+		div.info > table {
+			border-collapse: collapse;
+		}
+
+		div.info table td:first-child {
+			vertical-align: top;
+			font-weight: bold;
+			white-space: pre;
+		}
+
+		div.info > table > tbody > tr > td:nth-child(2) {
+			border-left: 1px solid #333;
+			padding-left: .1em;
+		}
+
+		div.info > table > tbody > tr > td {
+			padding: .2em 0;
+		}
+
+		div.info > table > tbody > tr:not(:first-child) {
+			border-top: 1px solid #333;
+		}
+
+		span.arg {
+			color: #CD322F;
+			font-style: italic;
+			font-family: Consolas, Monaco, "Ubuntu Mono", Courier monospace;
+			font-weight: bold;
+		}
+
+		div.info table td.syntax {
+			background-color: #002B36;
+			box-shadow: 0 0 20px 2px #002B36;
+			overflow-x: auto;
+            overflow-y: hidden;
+			display: block;
+			height: 100%;
+		}
+
+		samp {
+			font-family: Consolas, Monaco, "Ubuntu Mono", Courier, monospace;
+			font-size: 90%;
+			vertical-align: baseline;
+			line-height: 1.2;
+		}
+
+		p.caption {
+			margin: .3em 0 0 0;
+			font-size: .85em;
+		}
+
+		div.divider {
+			height: .6em;
+			width: 0;
+		}
+
+		div.notice {
+			background-color: #FFF;
+			font-size: .65em;
+			display: inline-block;
+			padding: .25em;
+			border-radius: .25em;
+			color: #202020;
+			border: 1px solid #555;
+			margin-top: .5em;
+			box-shadow: 0 0 10px 0 rgba(0,0,0,.37)
+		}
+
+		td.shrink {
+			display: block;
+			overflow-x: auto;
+		}
+
+		ul.info li a {
+			color: rgba(0,0,0,.87);
+		}
+
+		td.shrink table td:nth-child(2) {
+			min-width: 200px;
+		}
+
+		td.shrink td:nth-child(2) {
+			padding-bottom: .3em;
+		}
+
+		div#chartCont {
+			width: 100%;
+			text-align:center;
+			overflow-x: auto;
+			position: relative;
+			overflow-y: hidden;
+		}
+
+		div#chart {
+			display: inline-block;
+		}
+
+		div#chartSlCo {
+			width: 100%;
+			height: 30px;
+			position: relative;
+		}
+
+		div#chartSl {
+			height: 30px;
+			width: 60px;
+			background: #00ACC1;
+			text-align: center;
+			font-family: "Montserrat", "Open Sans", "Franklin Gothic", "Helvetica Neue", Arial, sans-serif;
+			display: table;
+			cursor: pointer;
+			position: absolute;
+		}
+
+		div#chartSlText {
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+		div#pseudoSl {
+			position: absolute;
+			height: 15px;
+			top: 7.5px;
+			width: 100%;
+			background: #AAA;
+		}
+
+		span.math {
+			font-family: "Cambria Math", serif;
+			font-style:italic
+		}
+
+		span.math.shift {
+			position: relative;
+			left: -.1em;
+		}
+
+		span.math > span.func {
+			font-style: normal;
+		}
+
+		circle {
+			fill: #A00;
+			transition: r 1s
+		}
+
+		line.gl {
+			stroke: #888;
+			stroke-width: 1;
+		}
+
+		div#chartinfo {
+			position: absolute;
+			height: 30px;
+			white-space: pre;
+			top: 0;
+			left: 0;
+			background: #eaeaea;
+			display: none;
+			pointer-events: none;
+			padding: 5px;
+			font-family: Montserrat;
+			font-size: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 20px 5px rgba(0,0,0,.37);
+			table-layout: fixed;;
+		}
+		div#chartinfo div {
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			border-width:0;
+			padding: 5px;
+		}
+
+		rect#chartBG {
+			fill: #fff;
+		}
+
+		h2 > a.hashRef {
+			margin-left: .4em;
+			opacity: 0;
+			pointer-events: none;
+			position: relative;
+			top: .3em;
+			height: .8em;
+			display: inline-block;
+		}
+
+		h2:hover > a.hashRef, h2:focus > a.hashRef, h2 > a.hashRef:focus, h2 > a.hashRef:focus {
+			opacity: 1;
+			pointer-events: initial;
+		}
+
+		h2 > a.hashRef > svg {
+			vertical-align: top
+		}
+	</style>
+	<script charset='UTF-8' src='../Draggable-Elements.js'></script>
+</head>
+<body>
+	<h1 id='Header'>Documentation</h1>
+	<h3><a href='../home'>Home</a><a href='../demo'>Demo</a><a href='../changelog'>Changelog</a><a href='../download'>Download</a></h3>
+	<br>
+	<h2 id='Contents'>Contents<a href='#Contents' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container"><div class='info' style='font-size:initial'>
+		<ul class="info">
+			<li><b><a href='#Terminology'>Terminology</a></b></li>
+			<li><b><a href='#DraggableElement'>DraggableElement <span style='font-style:italic;color:#777;font-weight:400'>(constructor)</span></a></b>
+				<ul>
+					<li><b><a href='#Options'>Options</a></b></li>
+					<li><b><a href='#IsInstance'>( &#133; ).isInstance</a></b></li>
+				</ul>
+			</li>
+			<li><b><a href='#Draggable_Element_Proto'>DraggableElement.prototype</a></b>
+				<ul>
+					<li><b><a href='#Element'>( &#133; ).element</a></b></li>
+					<li><b><a href='#Config'>( &#133; ).config</a></b></li>
+					<li><b><a href='#Destroy'>( &#133; ).destroy</a></b></li>
+					<li><b><a href='#UpdateCSS'>( &#133; ).updateCSS</a></b></li>
+				</ul>
+			</li>
+			<li><b><a href='#Event'>Events</a></b>
+				<ul>
+					<li><b><a href='#DragInitEvent'>DragInitEvent</a></b></li>
+					<li><b><a href='#DragStartEvent'>DragStartEvent</a></b></li>
+					<li><b><a href='#DragMoveEvent'>DragMoveEvent</a></b></li>
+					<li><b><a href='#DragEndEvent'>DragEndEvent</a></b></li>
+					<li><b><a href='#DragFramEvent'>DragFrameEvent</a></b></li>
+					<li><b><a href='#DragDoneEvent'>DragDoneEvent</a></b></li>	
+				</ul>
+			</li>
+			<li><b><a href='#Inertia'>Inertia</a></b></li></ul></div></div>
+		</ul>
+	<h2 id='Terminology'>Terminology<a href='#Terminology' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class='container'>
+		<div class='info'>
+			<table>
+				<tr>
+					<td>DraggableElement&nbsp;</td>
+					<td>DraggableElement (no space and caps) refers to the DraggableElement constructor.  See <a href='#DraggableElement'>DraggableElement</a> for more information about this constructor and the objects it creates.</td>
+				</tr>
+				<tr>
+					<td>draggable element&nbsp;</td>
+					<td>A draggable element (with space) refers to an element that has become draggable using the DraggableElement constructor. Note that it is not an <samp>instanceof</samp> DraggableElement, it still just a regular HTML element that also happens to be draggable by the user.</td>
+				</tr>
+				<tr>
+					<td>.draggableElement&nbsp;</td>
+					<td>Each draggable element inherits this property that refers to the DraggableElement object associated with that element. This object <i>is</i> an <samp>instanceof</samp> the DraggableElement constructor. See <a href='#Draggable_Element_Proto'>DraggableElement.prototype</a> for more information about this property.</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='DraggableElement'>DraggableElement <span style='font-style:italic;font-weight:600;opacity:.75'>(constructor)</span><a href='#DraggableElement' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>Constructor that instantiates a new draggable element. There are three ways to call this constructor shown in the syntax area below.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor'>Constructor</a></td>
+				</tr>
+				<tr>
+					<td>Returns: </td>
+					<td>DraggableElement object or element called upon, depending on how it is called</td>
+				</tr>
+				<tr>
+					<td>Syntax: </td>
+					<td class='syntax'><code><span class='keyword'>new</span> <span class='declaration'>DraggableElement</span>(<i>elem</i>, <i>[args]</i>); <span class='comment'>// Returns DraggableElement object</span></code><br><code><span class='declaration'>DraggableElement</span>(<i>elem</i>, <i>[args]</i>); <span class='comment'>// Returns DraggableElement object</span></code><br><code><i>elem</i>.<span class="method">draggableElement</span>(<i>[args]</i>); <span class='comment'>// Return element called upon</span></code></td>
+				</tr>
+				<tr>
+					<td>Values: </td>
+					<td><table>
+						<tr>
+							<td><span class="arg">elem</span>  </td>
+							<td>Element to be converted to a draggable element. Must inherit from <samp>HTMLElement</samp> (Must be direct or indirect descendant of document).</td>
+						</tr>
+						<tr>
+							<td><span class="arg">args</span>  </td>
+							<td>JSON object with key value pairs determining the options for the draggable element. See <a href='#Options'>Options</a> for valid keys and values.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>").<span class="method">draggableElement</span>({<span class="objkey">inertia</span>: <span class="boolean">true</span>});</td></tr></table></div><p class="caption">All three statements above accomplish the same task: #myElement becomes a draggable element. The first two statements will return the DraggableElement object that is created while the third statement will return the element that it was called upon.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='Options'>Options<a href='#Options' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<p class="info">When using the .draggableElement method on an element, a JSON object can be passed as an argument to instantiate the draggable element with certain settings that affect its behavior. Below are some key-value pairs that can be included in the JSON object. Any keys not in the list below will be ignored. Note that keys are case-sensitive and always appear in camelCase format.</p>
+			<table>
+				<tr>
+					<td id='Options>Bounds'>bounds </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></samp>, <samp><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></samp>, or <samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'>[<span class="operator">-</span><span class="number">Infinity</span>, <span class="operator">-</span><span class="number">Infinity</span>, <span class="number">Infinity</span>, <span class="number">Infinity</span>]</code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Determines the bounding box for the draggable element to remain in while being dragged.<div class='divider'></div>&#8227; If <samp>Array</samp>, must be of the form <samp>[left, top, right, bottom]</samp>, where each array element is a number in pixels from the top of the top left of the document. Note that resizing by the user may cause this bounding box to shrink or grow more than you want since each number is measured in absolute pixels. In this case, add a resize event listener in your code to accommodate for this and update the bounds to the necessary amount.<div class="divider"></div>&#8227; If <samp>Element</samp>, the bounding box of the element will be used as the boundaries (using the .getBoundingClientRect method). Window resizing is taken into account: when the window is resized, the boundaries are updated and the element is moved if necessary to keep it inside the bounds. To ensure that the element is exactly where you want it however, it is recommended to add your own resize listener to update the element's position manually.<div class="divider"></div>&#8227; If <samp>String</samp>, must be one of two values: "parent" or "body". "parent" will be evaluated as the element's parent node and prevents it from leaving the parent's bounding box. "body" will be evaluated as document.body and prevents it from going off screen or expanding an existing element's size.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>CSS'>css</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'>{}</code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Defines any CSS that should be applied to the element while it is being dragged. Use <samp>{cssProperty: valueForThatProperty}</samp> to define any CSS changes. After being released, it will return to its old CSS, which is gathered when the draggable element is first instantiated. To update its CSS that it should return to, use the <a href='#UpdateCSS'>.updateCSS</a> method on the element. The following CSS properties are ignored: top, left, bottom, right, position, and cursor. To alter the cursor to be used, use the <a href='#Options>Cursor'>cursor</a> option.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Cursor'>cursor </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></samp> or <samp><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean'>Boolean</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'>"<span class="string">move</span>"</code>,&nbsp;<code class='bg'>"<span class="string">ns-resize</span>"</code>,&nbsp;or&nbsp;<code class="bg">"<span class="string">ew-resize</span>"</code> depending on the active axes</td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Defines what cursor should appear on the element while being dragged. The entire <samp>&lt;html&gt;</samp> element also receives this cursor style. After the element is released, the default cursors are restored for both the element and the <samp>&lt;html&gt;</samp> element.<div class="divider"></div>&#8227; If <samp>String</samp>, that string is used for the cursor. Click <a href='https://developer.mozilla.org/en-US/docs/Web/CSS/cursor'>here</a> for a list of cursors that can be applied. If the string is not any of these, the cursor style will not be applied.<div class="divider"></div>&#8227; If <samp>Boolean</samp>, defines whether the cursor should be changed at all. <samp>false</samp> will not alter the cursor styling at all while <samp>true</samp> will use the default values.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Dependents'>dependents</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a>Array</a></samp>, <samp><a>NodeList</a></samp>, <samp><a>HTMLCollection</a></samp>, or <samp><a>Element</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'>[]</code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Defines any elements that should be moved alongside the draggable element and mirror its movements. Each time the draggable element is moved, its dependents also move the same amount. Dependents can be outside of the draggable element's bounding box and will still mirror the movement of the draggable element. Note that on window resizing, the dependents are moved the same amount that the draggable elements are moved. It is recommended that you add your own resizing event handler to manually position the dependents to the correct location.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>DoX'>doX </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class="boolean">true</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Indicates whether or not the element should be draggable horizontally. If <samp>false</samp>, the element will have an "ns-resize" cursor and will not be able to move side to side.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>DoY'>doY </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class="boolean">true</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Indicates whether or not the element should be draggable vertically. If <samp>false</samp>, the element will have an "ew-resize" cursor and will not be able to move up and down.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Inertia'>inertia </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class="boolean">false</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Indicates whether or not the element will have inertia. See <a href='#Inertia'>Inertia</a> for more information on the behavior of this option.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>InertiaCollision'>inertiaCollision </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'>"<span class="string">bounce</span>"</code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Dictates what happens when the element collides with a boundary <strong>while in its inertia state</strong>. If the user is still dragging and hasn't released the element (i.e. the element is still in its dragging state), the element will remain at the cursor's position. If inertia is disabled, this option has no effect.<div class="divider" id="Options>InertiaCollision>Bounce"></div>&#8227; If "<b>bounce</b>", the element will bounce off the wall in the opposite direction it collided in. Works similar to how a mirror reflects light.<div class="divider"></div id="Options>InertiaCollision>Slide">&#8227; If "<b>slide</b>", the element will slide along the wall it collided into. Works similar to "bounce" except the element will stay adjacent to the wall.<div class="divider" id="Options>InertiaCollision>Stop"></div>&#8227; If "<b>stop</b>", the element will completely halt once it collides with a boundary. If a 'done' callback is applied, the callback will be invoked right when it collides.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>InertiaResistance'>inertiaResistance </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class="number">1</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Affects how resistant the element is to slowing down while in its inertia state. If inertia is disabled, this option has no effect. The number must be in a range between 0&#150;2.5. 0 is the same as having no inertia; the element will stop as soon as it is released. 2.5 is the same as having no friction to slow the element; it will move at the same speed forever or until grabbed again by the user. If the number is outside the range, it will automatically be put into the range depending on which number it is closest to. See <a href='#Inertia'>Inertia</a> for more information on how resistance affects the element's behavior.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>InertiaThreshold'>inertiaThreshold </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><samp><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></samp></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class="number">5</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>After the user releases an element, all the movements in the last 120 milliseconds are gathered and evaluated. If at least one of their distances (measured using <a href='https://en.wikipedia.org/wiki/Chebyshev_distance'>Chebyshev Distance</a>) exceeds the inertiaThreshold, then inertia is applied to the element. Otherwise, the element will remain stationary after being released and the 'done' callback is not invoked. This is to prevent small movements from activating the inertia state. A higher inertiaThreshold will force the user to move faster to apply the inertia.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>KeepSelection'>keepSelection</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean'>Boolean</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='boolean'>false</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>When a draggable element is moved, by default the user may also accidentally highlight certain elements because they are dragging the cursor over them. If this property is set to <samp>false</samp>, the selection is removed each time the element is moved to prevent accidental highlighting. Set to <samp>true</samp> to keep the default highlighting behavior.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Init'>init</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='null'>null</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Function to be called after the element has been instantiated. This callback function will only run once right after all the default properties for the new draggable element have been defined and it is ready to be dragged.<div class="divider"></div>Receives one argument: <a href='#DragInitEvent'>DragInitEvent</a>.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Start'>start</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='null'>null</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Function to be called each time the user starts a new drag. This callback function may be called more than once depending on how many times the user drags the element.<div class="divider"></div>Receives two arguments: <a href='#DragStartEvent'>DragStartEvent</a>, and the original mouse or touch event that started the drag.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Move'>move</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='null'>null</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Function to be called each time the user moves the draggable element at least one pixel. This function may be called hundreds of times per drag, or may not be called at all if the user doesn't move the element at least one pixel while dragging.<div class="divider"></div>Receives two arguments: <a href='#DragMoveEvent'>DragMoveEvent</a>, and the original mouse or touch move event that caused the element to be dragged.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>End'>end</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='null'>null</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Function to be called once the user releases the draggable element and ends its dragging state. If the draggable element has no inertia applied to it, this is the last event that will be fired before starting again and calling the <a href='#Options>Start'>start</a> callback. Otherwise, two other events are also fired as shown below.<div class="divider"></div>Receives three arguments: <a href='#DragEndEvent'>DragEndEvent</a>, the original mouse or touch event that ended the dragging, and a callable function that will prevent inertia from starting if invoked. If inertia is not applied to the element, the function does nothing. The third argument is meant for you to allow, or disallow inertia from taking place, based on any calculations made in this function.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Frame'>frame</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='null'>null</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Function to be called for each "frame" of inertia that takes place about every 25 milliseconds. Each frame of inertia moves the element a certain distance and calls this function after the element has been moved. This function may be called hundreds of time if the user gave the element sufficient speed, or may not be called at all if inertia is never triggered. This callback function is only invoked if inertia is enabled for the element.<div class="divider"></div>Receives two arguments: <a href='#DragFrameEvent'>DragFrameEvent</a>, and a function that, when invoked, will end the inertia earlier than planned. This allows you to control how long inertia lasts based on any calculations made in this function.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td id='Options>Done'>done</td>
+					<td class='shrink'><table>
+						<tr>
+							<td>Type: </td>
+							<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+						</tr>
+						<tr>
+							<td>Default: </td>
+							<td><code class='bg'><span class='null'>null</span></code></td>
+						</tr>
+						<tr>
+							<td>Desc: </td>
+							<td>Function to be called after the element has finished its inertia state and is completely done moving. This function is only called once, even if inertia never actually took place. If this is the case, it is called immediately after the end event. This callback function is only invoked if inertia is enabled for the element.<div class="divider"></div>Receives one argument: <a href='#DragDoneEvent'>DragDoneEvent</a>. This argument contains information pertaining to whether the element actually entered its inertia state, whether the user grabbed the element again before it came to a complete stop, and other information about the element.</td>
+						</tr>
+					</table></td>
+				</tr>
+			</table>
+			<p class="info">Any keys not in the table above will be ignored when instantiating the draggable element. Any keys that are not of the correct type will either raise an error along the way, or just not function as they are supposed to.</p>
+		</div>
+	</div>
+	<h2 id='IsInstance'>( &#133; ).isInstance<a href='#IsInstance' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class='info'>
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>Function that determines whether an element is considered a draggable element (i.e. its .draggableElement property is an <samp>instanceof</samp> <a href='#DraggableElement'>DraggableElement</a>).</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+				</tr>
+				<tr>
+					<td>Returns: </td>
+					<td>Boolean indicating whether the element is a draggable element.</td>
+				</tr>
+				<tr>
+					<td>Syntax: </td>
+					<td class='syntax'><code><span class="declaration">DraggableElement</span>.<span class="method">isInstance</span>(<i>elem</i>); <span class="comment">;</code></td>
+				</tr>
+				<tr>
+					<td>Values: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td><span class="arg">elem</span>  </td>
+							<td>Element to be tested.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">DraggableElement</span>.<span class="method">isInstance</span>(<span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>"));</td></tr></table></div><p class="caption">Determines whether #myElement is a draggable element.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='Draggable_Element_Proto'>DraggableElement.prototype<a href='#Draggable_Element_Proto' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class='container'>
+		<div class='info'>
+			<p class='info'>On instantiation as a draggable element, an HTMLElement inherits a .draggableElement property that replaces its original .draggableElement method (shown in use <a href='#DraggableElement'>here</a>). Once that property has been replaced, it becomes an instance of <a href='#DraggableElement'>DraggableElement</a> and inherits from its prototype. Below are the methods and properties associated with its prototype. You can call these properties directly from the draggable element's .draggableElement object property. See the examples below to see how you can use these properties and methods.</p>
+		</div>
+	</div>
+	<h2 id='Element'>( &#133; ).element<a href='#Element' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class='info'>
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>Provides a reference to the draggable element that this DraggableElement object is associated with and helps with chaining JavaScript statements together.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>HTMLElement</a></td>
+				</tr>
+				<tr>
+					<td>Syntax: </td>
+					<td class='syntax'><code><i>elem</i>.<span class='method'>draggableElement</span>.element; <span class="comment">// Will return <i><span style='color:#A4302F'>elem</span></i></span></code></td>
+				</tr>
+				<tr>
+					<td>Values: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td><span class="arg">elem</span>  </td>
+							<td>Draggable element that will be returned.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>").<span class='method'>draggableElement</span>.element === <span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>");</td></tr></table></div><p class="caption">The above statement will always return <samp>true</samp>.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='Config'>( &#133; ).config<a href='#Config' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class='info'>
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>Object used to overwrite a draggable element's current settings.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Syntax: </td>
+					<td class='syntax'><code><i>elem</i>.<span class='method'>draggableElement</span>.config[<i>setting</i>]; <span class="comment">// Get setting</span></code><br><code><i>elem</i>.<span class='method'>draggableElement</span>.config[<i>setting</i>] = <i>value</i>; <span class='comment'>// Set setting</span></code></td>
+				</tr>
+				<tr>
+					<td>Values: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td><span class="arg">elem</span>  </td>
+							<td>Draggable element to change setting for.</td>
+						</tr>
+						<tr>
+							<td><span class="arg">setting</span>  </td>
+							<td>Any key from <a href='#Options'>Options</a> to get or set value for.</td>
+						</tr>
+						<tr>
+							<td><span class="arg">value</span>  </td>
+							<td>If changing an option, this is the desired value for the option you are changing. After changing the value, it is evaluated to check if it is valid for that option. If the value provided is not valid, then the actual configuration for the draggable element is never changed. Attempting to get the same property after setting it will reveal what value the draggable element actually has. For example, if you set the inertia of a draggable element to '1', when you try to get the same property, it will return as <samp>true</samp> instead of '1' because that was what it was evaluated to.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>").<span class='method'>draggableElement</span>.config.inertiaResistance = "<span class='string'>10</span>";</td></tr><tr><td>   2</td><td></td><td><span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>").<span class='method'>draggableElement</span>.config.inertiaResistance; <span class='comment'>// Returns 2.5</span></td></tr></table></div><p class="caption">Gets element with id "myElement" and attempts to change its inertiaResistance to '10'. First, the string is turned into a number. Then it is lowered to the maximum value for inertiaResistance: 2.5. When you try to get the property in line 2, it returns the evaluated value, which is 2.5 as a number instead of as a string.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id="Destroy">( &#133; ).destroy<a href='#Destroy' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class='info'>
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>Method used to remove the Dragabble Element's ability to be dragged. Does <b>not</b> destroy the element. The element can be re-instantiated using the same methods as described <a href='#DraggableElement'>here</a>.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+				</tr>
+				<tr>
+					<td>Returns: </td>
+					<td>Element called upon</td>
+				</tr>
+				<tr>
+					<td>Syntax: </td>
+					<td class='syntax'><code><i>elem</i>.draggableElement.<span class="method">destroy</span>();</code></td>
+				</tr>
+				<tr>
+					<td>Values: </td>
+					<td><table>
+						<tr>
+							<td><span class="arg">elem</span>  </td>
+							<td>draggable element to remove dragging ability from.</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>").draggableElement.<span class="method">destroy</span>();</td></tr></table></div><p class="caption">Remove the dragging ability from #myElement. To make it draggable again, use the <a href='#DraggableElement'>DraggableElement</a> constructor on it again.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='UpdateCSS'>( &#133; ).updateCSS<a href='#UpdateCSS' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class='container'>
+		<div class='info'>
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>This method only applies to a draggable element using the <a href='#Options>CSS'>css</a> option. When an element is using this option, it temporarily takes on a desired css style as defined in the css option. Once the element is released, it reverts to any css styles recorded and saved on the element. When the element is instantiated using the <a href='#DraggableElement'>DraggableElement</a> constructor, its CSS is recorded, frozen, and stored for later use so that it may revert back to this css. Sometimes though, you may not want it to revert back to the CSS recorded when the element is instantiated. This method allows you to discard any saved CSS and record the element's current CSS (at the time this method is called). The next time the user releases that draggable element, it's CSS style will take on what was recorded. It is recommended that you call this method in the <a href='#Options>Start'>start event callback</a> if your element is changing its style constantly, so as to return to the same style before its drag began.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions'>Function</a></td>
+				</tr>
+				<tr>
+					<td>Returns: </td>
+					<td>The calculated CSS as a JSON object (frozen clone of what getComputedStyle returns)</td>
+				</tr>
+				<tr>
+					<td>Syntax: </td>
+					<td class='syntax'><code><i>elem</i>.draggableElement.<span class='method'>updateCSS</span>();</code></td>
+				</tr>
+				<tr>
+					<td>Values: </td>
+					<td><table>
+						<tr>
+							<td><span class='arg'>elem</span>  </td>
+							<td>The element to record the CSS for</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="keyword">document</span>.<span class="method">getElementById</span>("<span class="string">myElement</span>").draggableElement.<span class="method">updateCSS</span>();</td></tr></table></div><p class="caption">Records the current CSS applied to #myElement. The next time the user releases the element, any changed CSS will revert back to what was just recorded.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='Events'>Events<a href='#Events' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class='container'>
+		<div class='info'>
+			<p class='info'>There are six total events that pertain to a draggable element. The order in which they are fired is as follows: <a href='#Options>Init'>Init</a>, <a href='#Options>Start'>Start</a>, <a href='#Options>Move'>Move</a>, <a href='#Options>End'>End</a>, <a href='#Options>Frame'>Frame</a>, and <a href='#Options>Done'>Done</a>. The last two, Frame and Done, are only fired if the draggable element has inertia enabled. You can configure a callback for each event that will be called only when that event fires. Those callbacks each receive at least one argument that will always include information about the event. Below are the constructors used for the instantiation of said arguments along with the information they include.</p>
+		</div>
+	</div>
+	<h2 id="DragInitEvent">DragInitEvent<a href='#DragInitEvent' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>The first argument passed to the <a href='#Options>Init'>init</a> callback if one is defined. Contains basic information about the draggable element that the callback can access.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Properties: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>target </td>
+							<td>The draggable element that was instantiated.</td>
+						</tr>
+						<tr>
+							<td>bounds </td>
+							<td>The bounding box for the draggable element represented as a four element Array.</td>
+						</tr>
+						<tr>
+							<td>callbacks </td>
+							<td>Any callbacks defined for the draggable element represented as a JSON object with six keys: init, start, move, end, frame, done. Each key's value is the callback function associated with that event, or null if a callback is not defined.</td>
+						</tr>
+						<tr>
+							<td>axes </td>
+							<td>A JSON object specifying which axes are currently enabled for the draggable element. There are keys 'x' and 'y', each with a boolean value indicating whether that axis is enabled.</td>
+						</tr>
+						<tr>
+							<td>coordinates </td>
+							<td>A JSON object with only a single 'init' key.<div class="divider"></div>&#8227; <strong>init</strong> &#151; A JSON object with three keys: 'x', 'y', and 'timestamp'. The 'x' and 'y' keys each represent the coordinates of the element at the time it was instantiated as a draggable element. This can serve as a reference in later event callbacks. The timestamp is the time in milliseconds that the event was fired. It uses <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> for its measurement, only if it is supported by the browser. Otherwise, it will be measured using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a>.</td>
+						</tr>
+						<tr>
+							<td>timestamp </td>
+							<td>Time in milliseconds indicating when the event occurred using <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> or <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a> depending on browser compatibility.</td>
+						</tr>
+						<tr>
+							<td>type </td>
+							<td>String with value "draginit".</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">function</span> (dragInitEvent) {</td></tr><tr><td>   2</td><td></td><td>    <span class="keyword">console</span>.<span class="method">log</span>(<span class="variable">dragInitEvent</span>);</td></tr><tr><td>   3</td><td></td><td>};</td></tr></table></div><p class="caption">A function that, when assigned to the <a href='#Options>Init'>init</a> callback, will output all the properties of the DragInitEvent to the console.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id="DragStartEvent">DragStartEvent<a href='#DragStartEvent' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>The first argument passed to the <a href='#Options>Start'>start</a> callback if one is defined. Contains basic information about the draggable element that the callback can access.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Properties: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>target </td>
+							<td>The draggable element that the user is targetting.</td>
+						</tr>
+						<tr>
+							<td>bounds </td>
+							<td>The bounding box for the draggable element represented as a four element Array.</td>
+						</tr>
+						<tr>
+							<td>callbacks </td>
+							<td>Any callbacks defined for the draggable element represented as a JSON object with six keys: init, start, move, end, frame, done. Each key's value is the callback function associated with that event, or null if a callback is not defined.</td>
+						</tr>
+						<tr>
+							<td>axes </td>
+							<td>A JSON object specifying which axes are currently enabled for the draggable element. There are keys 'x' and 'y', each with a boolean value indicating whether that axis is enabled.</td>
+						</tr>
+						<tr>
+							<td>coordinates </td>
+							<td>A JSON object with two keys: 'init' and 'start'.<div class="divider"></div>&#8227; <strong>init</strong> &#151; A JSON object with three keys: 'x', 'y', and 'timestamp'. The 'x' and 'y' keys each represent the coordinates of the element at the time it was instantiated as a draggable element. This can serve as a reference in later event callbacks. The timestamp is the time in milliseconds that the event was fired. It uses <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> for its measurement, only if it is supported by the browser. Otherwise, it will be measured using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a>.<div class="divider"></div>&#8227; <strong>start</strong> &#151; A JSON object with similar keys to the that of the <b>init</b> JSON object: 'x', 'y', and 'timestamp', that apply to when the user started the drag.</td>
+						</tr>
+						<tr>
+							<td>timestamp </td>
+							<td>Time in milliseconds indicating when the event occurred using <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> or <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a> depending on browser compatibility.</td>
+						</tr>
+						<tr>
+							<td>type </td>
+							<td>String with value "dragstart".</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">function</span> (dragStartEvent) {</td></tr><tr><td>   2</td><td></td><td>    <span class="keyword">console</span>.<span class="method">log</span>(<span class="variable">dragStartEvent</span>);</td></tr><tr><td>   3</td><td></td><td>};</td></tr></table></div><p class="caption">A function that, when assigned to the <a href='#Options>Start'>start</a> callback, will output all the properties of the DragStartEvent to the console.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id="DragMoveEvent">DragMoveEvent<a href='#DragMoveEvent' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>The first argument passed to the <a href='#Options>Move'>move</a> callback if one is defined. Contains basic information about the draggable element that the callback can access.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Properties: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>target </td>
+							<td>The draggable element that the user is targetting.</td>
+						</tr>
+						<tr>
+							<td>bounds </td>
+							<td>The bounding box for the draggable element represented as a four element Array.</td>
+						</tr>
+						<tr>
+							<td>callbacks </td>
+							<td>Any callbacks defined for the draggable element represented as a JSON object with six keys: init, start, move, end, frame, done. Each key's value is the callback function associated with that event, or null if a callback is not defined.</td>
+						</tr>
+						<tr>
+							<td>axes </td>
+							<td>A JSON object specifying which axes are currently enabled for the draggable element. There are keys 'x' and 'y', each with a boolean value indicating whether that axis is enabled.</td>
+						</tr>
+						<tr>
+							<td>coordinates </td>
+							<td>A JSON object with two keys: 'init', 'start', and 'move'.<div class="divider"></div>&#8227; <strong>init</strong> &#151; A JSON object with three keys: 'x', 'y', and 'timestamp'. The 'x' and 'y' keys each represent the coordinates of the element at the time it was instantiated as a draggable element. This can serve as a reference in later event callbacks. The timestamp is the time in milliseconds that the event was fired. It uses <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> for its measurement, only if it is supported by the browser. Otherwise, it will be measured using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a>.<div class="divider"></div>&#8227; <strong>start</strong> &#151; A JSON object with similar keys to the that of the <b>init</b> JSON object: 'x', 'y', and 'timestamp', that apply to when the user started the drag.<div class="divider"></div>&#8227; <strong>move</strong> &#151; An <i>Array</i> of JSON objects, with each item in the array representing a move event fired by the user. This value is compiled into an array since more than one move event may be fired per drag. The array contains a 'last' property (<code class='bg'>( <span class='variable'>&#133;</span> ).coordinates.move.last</code>) that represents the last item in the array for quicker access. Each object in the array is similar to the JSON object of the <b>init</b> and <b>start</b> keys, except that they have an extra key: 'distance'. This key (as you probably guessed) contains the distance between the current location and the previous location before the move event was fired and is represented as a JSON object with 'x' and 'y' keys.</td>
+						</tr>
+						<tr>
+							<td>distance </td>
+							<td>The distance of the last movement (shortcut for <samp>coordinates.move.last.distance</samp>).</td>
+						</tr>
+						<tr>
+							<td>timestamp </td>
+							<td>Time in milliseconds indicating when the event occurred using <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> or <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a> depending on browser compatibility.</td>
+						</tr>
+						<tr>
+							<td>type </td>
+							<td>String with value "dragmove".</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">function</span> (dragMoveEvent) {</td></tr><tr><td>   2</td><td></td><td>    <span class="keyword">console</span>.<span class="method">log</span>(<span class="variable">dragMoveEvent</span>);</td></tr><tr><td>   3</td><td></td><td>};</td></tr></table></div><p class="caption">A function that, when assigned to the <a href='#Options>Move'>move</a> callback, will output all the properties of the DragMoveEvent to the console.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id="DragEndEvent">DragEndEvent<a href='#DragEndEvent' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>The first argument passed to the <a href='#Options>End'>end</a> callback if one is defined. Contains basic information about the draggable element that the callback can access.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Properties: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>target </td>
+							<td>The draggable element that the user is targetting.</td>
+						</tr>
+						<tr>
+							<td>bounds </td>
+							<td>The bounding box for the draggable element represented as a four element Array.</td>
+						</tr>
+						<tr>
+							<td>callbacks </td>
+							<td>Any callbacks defined for the draggable element represented as a JSON object with six keys: init, start, move, end, frame, done. Each key's value is the callback function associated with that event, or null if a callback is not defined.</td>
+						</tr>
+						<tr>
+							<td>axes </td>
+							<td>A JSON object specifying which axes are currently enabled for the draggable element. There are keys 'x' and 'y', each with a boolean value indicating whether that axis is enabled.</td>
+						</tr>
+						<tr>
+							<td>coordinates </td>
+							<td>A JSON object with four keys: 'init', 'start', 'move', 'end'.<div class="divider"></div>&#8227; <strong>init</strong> &#151; A JSON object with three keys: 'x', 'y', and 'timestamp'. The 'x' and 'y' keys each represent the coordinates of the element at the time it was instantiated as a draggable element. This can serve as a reference in later event callbacks. The timestamp is the time in milliseconds that the event was fired. It uses <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> for its measurement, only if it is supported by the browser. Otherwise, it will be measured using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a>.<div class="divider"></div>&#8227; <strong>start</strong> &#151; A JSON object with similar keys to the that of the <b>init</b> JSON object: 'x', 'y', and 'timestamp', that apply to when the user started the drag.<div class="divider"></div>&#8227; <strong>move</strong> &#151; An <i>Array</i> of JSON objects, with each item in the array representing a move event fired by the user. This value is compiled into an array since more than one move event may be fired per drag. The array contains a 'last' property (<code class='bg'>( <span class='variable'>&#133;</span> ).coordinates.move.last</code>) that represents the last item in the array for quicker access. Each object in the array is similar to the JSON object of the <b>init</b> and <b>start</b> keys, except that they have an extra key: 'distance'. This key (as you probably guessed) contains the distance between the current location and the previous location before the move event was fired and is represented as a JSON object with 'x' and 'y' keys.<div class="divider"></div>&#8227; <strong>end</strong> &#151; A JSON object with four keys: 'x', 'y', 'timestamp', and 'distance'.</td>
+						</tr>
+						<tr>
+							<td>distance </td>
+							<td>The distance between the end event and the last move event (shortcut for <samp>coordinates.end.distance</samp>).</td>
+						</tr>
+						<tr>
+							<td>endDistance </td>
+							<td>The distance between the end event and the start event (i.e. how far the element moved while it was being dragged by the user).</td>
+						</tr>
+						<tr>
+							<td>endTime </td>
+							<td>The total time in milliseconds that the element was being dragged by the user (end event's timestamp &#8722; start event's timestamp).</td>
+						</tr>
+						<tr>
+							<td>timestamp </td>
+							<td>Time in milliseconds indicating when the event occurred using <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> or <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a> depending on browser compatibility.</td>
+						</tr>
+						<tr>
+							<td>hasInertia </td>
+							<td>Boolean indicating whether inertia will be triggered for the element (i.e. the user was moving fast enough to trigger it and the element has its <a href='#Options>Inertia'>inertia</a> enabled).</td>
+						</tr>
+						<tr>
+							<td>type </td>
+							<td>String with value "dragend".</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">function</span> (dragEndEvent) {</td></tr><tr><td>   2</td><td></td><td>    <span class="keyword">console</span>.<span class="method">log</span>(<span class="variable">dragEndEvent</span>);</td></tr><tr><td>   3</td><td></td><td>};</td></tr></table></div><p class="caption">A function that, when assigned to the <a href='#Options>End'>end</a> callback, will output all the properties of the DragEndEvent to the console.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id="DragFrameEvent">DragFrameEvent<a href='#DragFrameEvent' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>The first argument passed to the <a href='#Options>Frame'>frame</a> callback if one is defined. Contains basic information about the draggable element that the callback can access.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Properties: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>target </td>
+							<td>The draggable element that the user is targetting.</td>
+						</tr>
+						<tr>
+							<td>bounds </td>
+							<td>The bounding box for the draggable element represented as a four element Array.</td>
+						</tr>
+						<tr>
+							<td>callbacks </td>
+							<td>Any callbacks defined for the draggable element represented as a JSON object with six keys: init, start, move, end, frame, done. Each key's value is the callback function associated with that event, or null if a callback is not defined.</td>
+						</tr>
+						<tr>
+							<td>axes </td>
+							<td>A JSON object specifying which axes are currently enabled for the draggable element. There are keys 'x' and 'y', each with a boolean value indicating whether that axis is enabled.</td>
+						</tr>
+						<tr>
+							<td>coordinates </td>
+							<td>A JSON object with four keys: 'init', 'start', 'move', 'end'.<div class="divider"></div>&#8227; <strong>init</strong> &#151; A JSON object with three keys: 'x', 'y', and 'timestamp'. The 'x' and 'y' keys each represent the coordinates of the element at the time it was instantiated as a draggable element. This can serve as a reference in later event callbacks. The timestamp is the time in milliseconds that the event was fired. It uses <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> for its measurement, only if it is supported by the browser. Otherwise, it will be measured using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a>.<div class="divider"></div>&#8227; <strong>start</strong> &#151; A JSON object with similar keys to the that of the <b>init</b> JSON object: 'x', 'y', and 'timestamp', that apply to when the user started the drag.<div class="divider"></div>&#8227; <strong>move</strong> &#151; An <i>Array</i> of JSON objects, with each item in the array representing a move event fired by the user. This value is compiled into an array since more than one move event may be fired per drag. The array contains a 'last' property (<code class='bg'>( <span class='variable'>&#133;</span> ).coordinates.move.last</code>) that represents the last item in the array for quicker access. Each object in the array is similar to the JSON object of the <b>init</b> and <b>start</b> keys, except that they have an extra key: 'distance'. This key (as you probably guessed) contains the distance between the current location and the previous location before the move event was fired and is represented as a JSON object with 'x' and 'y' keys.<div class="divider"></div>&#8227; <strong>end</strong> &#151; A JSON object with four keys: 'x', 'y', 'timestamp', and 'distance'.<div class="divider"></div>&#8227; <strong>frame</strong> &#151; An Array of JSON objects with four keys: 'x', 'y', 'timestamp', and 'distance'. The Array is similar to that of <b>move</b>. It also contains a 'last' property to access the last item in the Array. The distance key is the measure between the coordinates of the current frame event and the previous frame event.</td>
+						</tr>
+						<tr>
+							<td>distance </td>
+							<td>The distance between the current frame event and the last frame event (or the end event, if this is the first frame event) (shortcut for <samp>coordinates.frame.last.distance</samp>).</td>
+						</tr>
+						<tr>
+							<td>endDistance </td>
+							<td>The distance between the end event and the start event (i.e. how far the element moved while it was being dragged by the user).</td>
+						</tr>
+						<tr>
+							<td>endTime </td>
+							<td>The total time in milliseconds that the element was being dragged by the user (end event's timestamp &#8722; start event's timestamp).</td>
+						</tr>
+						<tr>
+							<td>timestamp </td>
+							<td>Time in milliseconds indicating when the event occurred using <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> or <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a> depending on browser compatibility.</td>
+						</tr>
+						<tr>
+							<td>direction </td>
+							<td>The current direction the element is going represented as a JSON object with 'x' and 'y' keys. Each value is a number in pixels. The next frame event will use these values to determine where the element should go (<span class='math'>[value] * 0.4 * inertiaResistance</span>). These values are usually the same as <samp>coordinates.frame.last.distance</samp>, except when the element collides with a boundary. Using these values along with the second argument to the <a href='#Options>Frame'>frame</a> callback, you can manually set up a point for inertia to stop.</td>
+						</tr>
+						<tr>
+							<td>type </td>
+							<td>String with value "dragframe".</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">function</span> (dragFrameEvent) {</td></tr><tr><td>   2</td><td></td><td>    <span class="keyword">console</span>.<span class="method">log</span>(<span class="variable">dragFrameEvent</span>);</td></tr><tr><td>   3</td><td></td><td>};</td></tr></table></div><p class="caption">A function that, when assigned to the <a href='#Options>Frame'>frame</a> callback, will output all the properties of the DragFrameEvent to the console.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id="DragDoneEvent">DragDoneEvent<a href='#DragDoneEvent' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<table>
+				<tr>
+					<td>Desc: </td>
+					<td>The first argument passed to the <a href='#Options>Done'>done</a> callback if one is defined. Contains basic information about the draggable element that the callback can access.</td>
+				</tr>
+				<tr>
+					<td>Type: </td>
+					<td><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'>Object</a></td>
+				</tr>
+				<tr>
+					<td>Properties: </td>
+					<td class='shrink'><table>
+						<tr>
+							<td>target </td>
+							<td>The draggable element that the user is targetting.</td>
+						</tr>
+						<tr>
+							<td>bounds </td>
+							<td>The bounding box for the draggable element represented as a four element Array.</td>
+						</tr>
+						<tr>
+							<td>callbacks </td>
+							<td>Any callbacks defined for the draggable element represented as a JSON object with six keys: init, start, move, end, frame, done. Each key's value is the callback function associated with that event, or null if a callback is not defined.</td>
+						</tr>
+						<tr>
+							<td>axes </td>
+							<td>A JSON object specifying which axes are currently enabled for the draggable element. There are keys 'x' and 'y', each with a boolean value indicating whether that axis is enabled.</td>
+						</tr>
+						<tr>
+							<td>coordinates </td>
+							<td>A JSON object with four keys: 'init', 'start', 'move', 'end'.<div class="divider"></div>&#8227; <strong>init</strong> &#151; A JSON object with three keys: 'x', 'y', and 'timestamp'. The 'x' and 'y' keys each represent the coordinates of the element at the time it was instantiated as a draggable element. This can serve as a reference in later event callbacks. The timestamp is the time in milliseconds that the event was fired. It uses <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> for its measurement, only if it is supported by the browser. Otherwise, it will be measured using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a>.<div class="divider"></div>&#8227; <strong>start</strong> &#151; A JSON object with similar keys to the that of the <b>init</b> JSON object: 'x', 'y', and 'timestamp', that apply to when the user started the drag.<div class="divider"></div>&#8227; <strong>move</strong> &#151; An <i>Array</i> of JSON objects, with each item in the array representing a move event fired by the user. This value is compiled into an array since more than one move event may be fired per drag. The array contains a 'last' property (<code class='bg'>( <span class='variable'>&#133;</span> ).coordinates.move.last</code>) that represents the last item in the array for quicker access. Each object in the array is similar to the JSON object of the <b>init</b> and <b>start</b> keys, except that they have an extra key: 'distance'. This key (as you probably guessed) contains the distance between the current location and the previous location before the move event was fired and is represented as a JSON object with 'x' and 'y' keys.<div class="divider"></div>&#8227; <strong>end</strong> &#151; A JSON object with four keys: 'x', 'y', 'timestamp', and 'distance'.<div class="divider"></div>&#8227; <strong>frame</strong> &#151; An Array of JSON objects with four keys: 'x', 'y', 'timestamp', and 'distance'. The Array is similar to that of <b>move</b>. It also contains a 'last' property to access the last item in the Array. The distance key is the measure between the coordinates of the current frame event and the previous frame event.<div class="divider"></div>&#8227; <strong>done</strong> &#151; A JSON object with 'x', 'y', 'timestamp', and 'distance' keys. Distance is the measure between the done event and the last frame event.</td>
+						</tr>
+						<tr>
+							<td>distance </td>
+							<td>The distance between the current done event and the last frame event (shortcut for <samp>coordinates.done.distance</samp>).</td>
+						</tr>
+						<tr>
+							<td>endDistance </td>
+							<td>The distance between the end event and the start event (i.e. how far the element moved while it was being dragged by the user).</td>
+						</tr>
+						<tr>
+							<td>endTime </td>
+							<td>The total time in milliseconds that the element was being dragged by the user (end event's timestamp &#8722; start event's timestamp).</td>
+						</tr>
+						<tr>
+							<td>doneDistance </td>
+							<td>The distance between the done event and the start event.</td>
+						</tr>
+						<tr>
+							<td>doneTime</td>
+							<td>The total time in milliseconds that the element was being dragged by the user (done event's timestamp &#8722; start event's timestamp).</td>
+						</tr>
+						<tr>
+							<td>brokeThreshold </td>
+							<td>Boolean indicating whether the user was moving fast enough to break the inertiaThreshold and trigger the element's inertia state (see <a href='#Inertia'>Inertia</a> for more info on inertiaThreshold).</td>
+						</tr>
+						<tr>
+							<td>interrupted </td>
+							<td>Boolean indicating whether the user re-grabbed the element while it was still moving from inertia. If <samp>true</samp>, the element is being held down by the user when the <a href='#Options>Done'>done</a> callback is called.</td>
+						</tr>
+						<tr>
+							<td>timestamp </td>
+							<td>Time in milliseconds indicating when the event occurred using <a href='https://developer.mozilla.org/en-US/docs/Web/API/Performance/now'>performance.now()</a> or <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime'>Date.getTime()</a> depending on browser compatibility.</td>
+						</tr>
+						<tr>
+							<td>direction </td>
+							<td>The current direction the element is going represented as a JSON object with 'x' and 'y' keys. Each value is a number in pixels. The next frame event will use these values to determine where the element should go (<span class='math'>[value] * 0.4 * inertiaResistance</span>). These values are usually the same as <samp>coordinates.frame.last.distance</samp>, except when the element collides with a boundary. Using these values along with the second argument to the <a href='#Options>Frame'>frame</a> callback, you can manually set up a point for inertia to stop.</td>
+						</tr>
+						<tr>
+							<td>type </td>
+							<td>String with value "dragdone".</td>
+						</tr>
+					</table></td>
+				</tr>
+				<tr>
+					<td>Example: </td>
+					<td><div class="code"><table><tr><td>   1</td><td></td><td><span class="declaration">function</span> (dragDoneEvent) {</td></tr><tr><td>   2</td><td></td><td>    <span class="keyword">console</span>.<span class="method">log</span>(<span class="variable">dragDoneEvent</span>);</td></tr><tr><td>   3</td><td></td><td>};</td></tr></table></div><p class="caption">A function that, when assigned to the <a href='#Options>Done'>done</a> callback, will output all the properties of the DragDoneEvent to the console.</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<h2 id='Inertia'>Inertia<a href='#Inertia' class='hashRef'>
+		<svg height=".8em" width=".8em" viewBox='-25 -10 563 563'>
+			<g transform="translate(-40,-465.53825)">
+				<path d="m286.82394,765.53825c40,40 80,40 120,0 l 120,-120m0,0c40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0l-120,120 c -40,40 -40,80 0,120" style="fill:none;stroke:#DDD;stroke-width:60px" />
+				<path d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m100,952.3622c40,40 80,40 120,0 40,-40 80,-80 120,-120 40,-40 40,-80 0,-120 -40,-40 -80,-40 -120,0 -40,40 -80,80 -120,120 -40,40 -40,80 0,120z"/>
+				<path d="m286.82394,765.53829c40,40 80,40 120,0l120,-120" style="fill:none;stroke:#456;stroke-width:90px" />
+				<path style="fill:none;stroke:#DDD;stroke-width:60px" d="m286.82394,765.53829c40,40 80,40 120,0l120,-120"/>
+			</g>
+		</svg>
+	</a></h2>
+	<div class="container">
+		<div class="info">
+			<p class="info"><a href="#Options>Inertia">Inertia</a> is a toggleable option for a draggable element. When a user is dragging an element around, if he/she released the element while it was still moving, that element will go into its inertia state in which it will continue going the direction it was released in and gradually come to a stop. On the home page, there is a small demo box that can be dragged and moved around. If you drag it and release the box while you are still moving your cursor (or finger), the box will not stop as soon as you release. Instead, it will continue moving and even bounce of the walls if it collides with one. Another option you can configure is how resistant the element is to slowing down while in its inertia state. An element's speed at any given moment can be calculated using the formula&#8194;<span class='math'>f(v,&#8198;r,&#8198;t) = v&#8198;&#215;&#8198;(0.4&#8198;&#215;&#8198;r)<sup>t&#8198;&#8725;&#8198;25</sup></span> where <span class="math">v =</span> speed of the element when released, <span class="math">r =</span> <a href="#Options>InertiaResistance">inertiaResistance</a>, and <span class="math">t = </span> time in milliseconds since the element was released.</p>
+			<div id='chartCont'>
+				<div id='chart'>
+					<svg height='272' width='1022'>
+						<rect id='chartBG' x='11' y='11' width='1000' height='250'></rect>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+						<line class='gl v' y1='10' y2='262'></line>
+
+						<line class='gl h' x1='10' x2='1012'></line>
+						<line class='gl h' x1='10' x2='1012'></line>
+						<line class='gl h' x1='10' x2='1012'></line>
+						<line class='gl h' x1='10' x2='1012'></line>
+						<line class='gl h' x1='10' x2='1012'></line>
+						<line class='gl h' x1='10' x2='1012'></line>
+
+						<path d='M11,11Q36,108.51482265544139 61,161Q86,200.00592906217653 111,221Q136,236.6023716248706 161,245Q186,251.24094864994825 211,254.6Q236,257.0963794599793 261,258.44Q286,259.43855178399167 311,259.976Q336,260.37542071359667 361,260.59040000000005Q386,260.7501682854387 411,260.83616Q436,260.9000673141755 461,260.934464Q486,260.96002692567015 511,260.97378560000004Q536,260.9840107702681 561,260.98951424Q586,260.99360430810725 611,260.995805696Q636,260.9974417232429 661,260.9983222784Q686,260.99897668929714 711,260.99932891136Q736,260.9995906757189 761,260.999731564544Q786,260.9998362702876 811,260.9998926258176Q836,260.999934508115 861,260.999957050327Q886,260.999973803246 911,260.9999828201308Q936,260.9999895212984 961,260.9999931280523Q986,260.9999958085193 1011,260.999997251221' fill='none' stroke='#A00' stroke-width='3' id='chartcurve'></path>
+
+						<g id='chartInfo'>
+							<circle cx='11' cy='11' r='5'></circle>
+							<circle cx='61' cy='161' r='5'></circle>
+							<circle cx='111' cy='221' r='5'></circle>
+							<circle cx='161' cy='245' r='5'></circle>
+							<circle cx='211' cy='254.6' r='5'></circle>
+							<circle cx='261' cy='258.44' r='5'></circle>
+							<circle cx='311' cy='259.976' r='5'></circle>
+							<circle cx='361' cy='260.5904' r='5'></circle>
+							<circle cx='411' cy='260.8362' r='5'></circle>
+							<circle cx='461' cy='260.9345' r='5'></circle>
+							<circle cx='511' cy='260.9738' r='5'></circle>
+							<circle cx='561' cy='260.9895' r='5'></circle>
+							<circle cx='611' cy='260.9958' r='5'></circle>
+							<circle cx='661' cy='260.9983' r='5'></circle>
+							<circle cx='711' cy='260.9993' r='5'></circle>
+							<circle cx='761' cy='260.9997' r='5'></circle>
+							<circle cx='811' cy='260.9999' r='5'></circle>
+							<circle cx='861' cy='261' r='5'></circle>
+							<circle cx='911' cy='261' r='5'></circle>
+							<circle cx='961' cy='261' r='5'></circle>
+							<circle cx='1011' cy='261' r='5'></circle>
+						</g>
+					</svg>
+					<script type="text/javascript">Array.prototype.forEach.call(document.querySelectorAll('.gl.v'),function(a,b){a.setAttribute('x1',b*50+11);a.setAttribute('x2',b*50+11)});Array.prototype.forEach.call(document.querySelectorAll('.gl.h'),function(a,b){a.setAttribute('y1',b*50+11);a.setAttribute('y2',b*50+11)});</script>
+				</div>
+			</div>
+			<div id='chartinfo'></div>
+			<div style='text-align:center;font-family:"Open Sans"'>Inertia Resistance (<span class="math shift" style='font-weight:700;'>r</span>) =</div>
+			<div id='chartSlCo'><div id='pseudoSl'></div><div id="chartSl"><div id="chartSlText">1</div></div></div>
+			<p class="info">The chart above shows the deceleration of the element. Hover over one of the plots to see the value for that plot. The X represents the number of milliseconds since the element was released (<span class="math shift">t</span>) and the Y represents the speed the element will be traveling at that point in time. The Y is measured in terms of <span class="math">v</span>. So speed starts at <span class="math">1v</span> and slows down to <span class="math">0v</span>. Inertia Resistance (<span class="math shift">r</span>) can be changed to see how that factor will affect the speed by moving the blue box with the number in it. At <span class="math">r = 0</span>, the element will stop immediately upon entering its inertia state while <span class="math">r = 2.5</span>&#8194;will force the element to maintain the same speed indefinitely.</p>
+			<div class="divider"></div>
+			<p class="info">An element is considered "done moving" once its speed reaches 0.1px/25ms in both the x and y axis. After it reaches this speed, the element settles and the 'done' <a href="#Options>Callbacks">callback</a> is called if one is defined. The time span of an element's inertia state (the time between when the user releases the element and when the element is done moving) can be measured using the formula&#8194;<span class="math">t = <span class='func'>log</span><sub>(0.4&#8198;&#215;&#8198;r)</sub>(0.1&#8198;&#8725;&#8198;v)&#8198;&#215;&#8198;25</span>. This formula would get the exact millisecond that the element <i>should</i> stop, but since JavaScript doesn't run <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval">setInterval</a> functions only 1 millisecond apart, each "frame" of inertia is 25 milliseconds apart. As such, the actual formula for the inertia time would be <span class="math">t = <span class='func'>ceil</span>(&#8198;<span class='func'>log</span><sub>(0.4&#8198;&#215;&#8198;r)</sub>(0.1&#8198;&#8725;&#8198;v)&#8198;)&#8198;&#215;&#8198;25</span>. This formula will return the proper value for <span class="math">t</span>.</p>
+			<div class="divider"></div>
+			<p class="info">The <a href="#Options>InertiaThreshold">inertiaThreshold</a> of an element can also affect the behavior of that element. Instead of affecting speed however, the inertiaThreshold affects whether inertia will be applied to that element in the first place. Basically, inertiaThreshold says how sensitive the element is to triggering its inertia. When the user releases the element, any movements in the last 120 milliseconds are gathered. The movements' distances are then compared again the inertiaThreshold. If the distance in either axis exceeds this value, then inertia is triggered. This is to prevent the user from moving only a single pixel at the end of his/her movement and triggering inertia for such an insignificant value. By default, at least one of the user's movements have to exceed 5 pixels. Of course you can prevent this behavior by setting the draggable element's inertiaThreshold to a value <span class="math"><=0</span>. This will cause any movement at least one pixel in distance to trigger inertia, as long as it occurs in the last 120 milliseconds before the element is released. Check out these two demos to compare how inertiaThreshold can affect the behavior of the element's inertia: <a href="demo#inertia=true&inertiaThreshold=1">Threshold=1</a>, <a href="demo#inertia=true&inertiaThreshold=250">Threshold=250</a>.</p>
+			<div class="divider"></div>
+			<p class="info">If there are boundaries on an element (<a href="#Options>Bounds">bounds</a> option) and inertia is toggled on, what happens when an element collides with a boundary. This is also a configurable setting under <a href="#Options>InertiaCollision">inertiaCollision</a>. There are a total of three values this option can accept: <a href="#Options>InertiaCollision>Bounce">"bounce"</a>, <a href="#Options>InertiaCollision>Slide">"slide"</a>, and <a href="#Options>InertiaCollision>Stop">"stop"</a>. If configured with "bounce" (<a href="demo#inertia=true&inertiaCollision=bounce">Demo</a>), an element will, as you guessed, bounce off a wall. If an element was traveling diagonally and it collides with its left boundary, its 'x' movement will be negated so that it travels in the opposite x direction. Its 'y' movement will be unaffected so that, when the two are combined, the element seems to reflect off the wall and looks like it is bouncing off of it. The "slide" value (<a href="demo#inertia=true&inertiaCollision=slide">Demo</a>) is similar. If the same element were configured with "slide" instead of "bounce", the 'x' movement would not be negated. Instead, it would be set to 0 so that it is no longer moving horizontally. Its 'y' value would again remain the same. This creates the effect that the element is sliding alongside the wall. This can continue until it slows down and stops naturally, or it collides with the top or bottom corner of the bounding box. If it collides with a corner, the element will stop completely since it can no longer slide along the same wall. If any of the draggable element's axes are turned off (<a href="#Options>DoX">doX</a> or <a href="#Options>DoY">doY</a>) when it collides with a wall, it will not be able to slide, since it will be a head-on collision and not have any movement in the other axis. This is similar to the "stop" value (<a href="demo#inertia=true&inertiaCollision=stop">Demo</a>). With the "stop" value, when an element collides with one of it boundaries, it stops altogether. Both axes' movements become 0 and its inertia state ends there. If you have any ideas for anything you might want added or changed, <a href="https://github.com/ChristianFigueroa/Draggable-Elements">make a suggestion or fork me on GitHub.</a></p>
+		</div>
+	</div>
+	<div id='toTop' style='opacity:0;font-weight:bold;'><a href='#Header'>Go To Top</a></div>
+	<script type="text/javascript">
+	Array.prototype.forEach.call(document.querySelectorAll('circle'),function(a){
+		['mouseenter','mouseover','touchstart'].forEach(function(b){
+			a.addEventListener(b,function(){
+				var c=document.getElementById('chartinfo'),d=document.getElementById('chartCont');
+				c.innerHTML='<div>X: '+((+a.getAttribute('cx')-11)/2).toFixed()+'ms</div><div>Y: '+((250-(+a.getAttribute('cy')-11))/2.5/100).toFixed(3).replace(/((\.0)?0)?0$/,'')+'v</div>'
+				c.style.display='table';
+				c.style.top=Math.max(c.parentNode.children[0].getBoundingClientRect().height+20,+a.getAttribute('cy')-50+c.parentNode.children[0].getBoundingClientRect().height)+'px';
+				c.style.left=Math.min(c.parentNode.getBoundingClientRect().width-c.getBoundingClientRect().width-10-(Math.max(0,10-(d.scrollWidth-d.clientWidth)+d.scrollLeft)),Math.max(20,+a.getAttribute('cx')-(c.getBoundingClientRect().width/2)-d.scrollLeft))+'px';
+				a.setAttribute('r','8');
+			})
+		});
+		['mouseleave','mouseout'].forEach(function(b){a.addEventListener(b,function(){document.getElementById('chartinfo').style.display='none';a.setAttribute('r','5')})});
+		['touchmove','touchend','touchcancel'].forEach(function(b){a.addEventListener(b,function(c){c.stopPropagation()})});
+		['touchmove','touchend','touchcancel'].forEach(function(b){document.addEventListener(b,function(c){document.getElementById('chartinfo').style.display='none';a.setAttribute('r','5')})});
+	})
+	document.getElementById('chartSl').draggableElement({bounds:'parent',doY:false,move:function(e){
+		if(document.selection)document.selection.empty();else if(getSelection)getSelection().removeAllRanges();
+		var a=this.parentNode.getBoundingClientRect(),b=((e.coordinates.move[e.coordinates.move.length-1].x-a.left)/(a.width-this.getBoundingClientRect().width)*2.5).toFixed(2);
+		var c=e.coordinates.move[e.coordinates.move.length-1].amt=b;
+		if(!e.distance.x||(e.coordinates.move.length>1&&e.coordinates.move[e.coordinates.move.length-2].amt==c))return;
+		this.children[0].innerText=b.replace(/(\.0)?0$/,'');
+		(function(path,num){
+			if(!num||num==2.5){path.setAttribute('d','M10 '+((2.5-num)*100+11)+'l1002 1');
+			Array.prototype.forEach.call(document.querySelectorAll('circle'),function(a){
+				a.setAttribute('cy',((2.5-num)*100+11));
+			})
+			return};
+			var y=function(x){return 100*Math.pow((.4*num),x/25)},s='M11,11',e;
+			document.querySelector('circle:first-child').setAttribute('cy','11')
+			for(var x=0;x<500;x+=25){
+				e={x:x+25,y:y(x+25)}
+				c={x:x+12.5,y:(8*y(x+12.5)-y(x)-y(x+25))/6}
+				s+='Q'+(c.x*2+11)+','+((100-c.y)*2.5+11)+' '+(e.x*2+11)+','+((100-e.y)*2.5+11);
+				document.querySelector('circle:nth-child('+(x/25+2)+')').setAttribute('cy',((100-e.y)*2.5+11));
+			}
+			path.setAttribute('d',s)
+		})(document.querySelector('path#chartcurve'),+b);
+	}})
+	document.getElementById('chartSl').style.left=(document.getElementById('chartSlCo').getBoundingClientRect().width-document.getElementById('chartSl').getBoundingClientRect().width)*.4+'px';
+		Array.prototype.forEach.call(document.querySelectorAll('a'),function(a){
+			a.addEventListener('click',function(){window.dispatchEvent(new Event('hashchange'))})
+		});
+		window.addEventListener('hashchange',function(){
+			try{window.scrollTop=document.getElementById(decodeURIComponent(location.hash.substring(1))).getBoundingClientRect().top+scrollY}catch(e){return};
+		});
+		window.addEventListener('resize',function(){
+			Array.prototype.forEach.call(document.querySelectorAll('div.code'),function(a){
+				a.style.width=a.parentNode.parentNode.parentNode.parentNode.parentNode.getBoundingClientRect().width-a.parentNode.parentNode.children[0].getBoundingClientRect().width+'px';
+			});
+			Array.prototype.forEach.call(document.querySelectorAll('td.shrink'),function(a){
+				a.style.width=a.offsetParent.offsetParent.getBoundingClientRect().width-a.offsetLeft+'px';
+			})
+			Array.prototype.forEach.call(document.querySelectorAll('td.syntax'),function(a){
+				a.style.width=a.parentNode.parentNode.parentNode.parentNode.getBoundingClientRect().width-a.parentNode.children[0].getBoundingClientRect().width+'px';
+			});
+		});
+		window.dispatchEvent(new Event('resize'));
+		setInterval(function(){
+			document.getElementById('toTop').style.opacity=Math.min(1,Math.max(0,parseFloat(document.getElementById('toTop').style.opacity)+(scrollY>100?.1:-.1))).toFixed(1);document.getElementById('toTop').style.display=document.getElementById('toTop').style.opacity==0?'none':''
+		},35)
+	</script>
+</body>
+</html>
