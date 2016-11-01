@@ -1,0 +1,190 @@
+<html>
+<head>
+	<title>Flat Clock</title>
+	<style type='text/css'>
+
+	@font-face {
+		font-family: 'SixCapsRegular';
+		src: url('SixCaps-webfont.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('Montserrat-Regular.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	body {
+		margin: 0;
+		overflow: hidden;
+	}
+
+	div#time {
+		display: block;
+		width: 100%;
+		margin-top: 16%;
+		margin-bottom: 9%;
+		font-weight: 700;
+	}
+
+	div.timeDisp {
+		width: 33.3333%;
+		display: inline-block;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.87);
+		font-family: 'Montserrat';
+		font-size: 450%;
+		line-height: 0.5;
+	}
+
+	div#timeHours {
+		float: left;
+	}
+
+	div#timeSeconds {
+		float: right;
+	}
+
+	div.timeColon {
+		color: #0E76AA;
+		font-size: 450%;
+		position: absolute;
+		top: 5%;
+	}
+
+	div.timeColon#colonOne {
+		left: 30%;
+	}
+
+	div.timeColon#colonTwo {
+		left: 63.3333%;
+	}
+
+	div.backBar {
+		background-color: rgba(100, 100, 100, 0.7);
+		width: 100%;
+		height: 5%;
+		margin-top: 5.5%;
+		font-size: 0;
+		position: relative;
+	}
+
+	div.backBarMain {
+		background-color: #0E76AA;
+		width: 30%;
+		height: 140%;
+		position: relative;
+		top: -20%;
+		display: inline-block;
+		font-size: 13vw;
+		font-family: "SixCapsRegular";
+		color: #ddd;
+		text-align: center;
+		line-height: 0.97;
+		box-shadow: 0px 5px 23px 7px rgba(0, 0, 0, 0.8);
+	}
+
+	div#datebar.backBar > div.backBarMain {
+		line-height: 0.94
+	}
+
+	div.backBarDay {
+		width: 17.5%;
+		height: 100%;
+		display: inline-block;
+		position: relative;
+		top: -2vh;
+		font-size: 9vw;
+		font-family: "SixCapsRegular";
+		color: #ddd;
+		text-align: center;
+	}
+
+	div.backBarDivider {
+		position: absolute;
+		height: 4vh;
+		width: 0.5vw;
+		background-color: #ddd;
+		top: 0.5vh;
+	}
+
+	div.backBarDivider.first {
+		left: 17.25vw;
+	}
+
+	div.backBarDivider.second {
+		left: 82.25vw;
+	}
+
+	div#datebar.backBar > div.backBarDay{
+		top: -2vh;
+	}
+	</style>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalabale=no, maximum-scale=1.0'>
+</head>
+<body>
+	<script type='text/javascript'>window.innerHeight=document.documentElement.innerHeight=document.body.style.height=667;window.innerWidth=document.documentElement.innerWidth=document.body.style.width=375</script>
+	<div id='time'>
+		<div class='timeDisp' id='timeHours'></div>
+		<div class='timeDisp' id='timeMinutes'></div>
+		<div class='timeDisp' id='timeSeconds'></div>
+		<div class='timeColon' id='colonOne'>:</div>
+		<div class='timeColon' id='colonTwo'>:</div>
+	</div>
+	<div class='backBar' id='weekdaybar'>
+		<div class='backBarDay one'></div>
+		<div class='backBarDay two'></div>
+		<div class='backBarMain'></div>
+		<div class='backBarDay three'></div>
+		<div class='backBarDay four'></div>
+		<div class='backBarDivider first'></div>
+		<div class='backBarDivider second'></div>
+	</div>
+	<div class='backBar' id='datebar'>
+		<div class='backBarDay one'></div>
+		<div class='backBarDay two'></div>
+		<div class='backBarMain'></div>
+		<div class='backBarDay three'></div>
+		<div class='backBarDay four'></div>
+		<div class='backBarDivider first'></div>
+		<div class='backBarDivider second'></div>
+	</div>
+	<script type='text/javascript'>
+
+		function updateTime() {
+			time = new Date()
+			days = ['SUN', 'MON', 'TUE', 'WED', 'THURS', 'FRI', 'SAT']
+			daysfull = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
+			document.querySelector('div#timeHours').innerText = ((time.getHours() % 12 || 12) < 10 ? '0' : '') + (time.getHours() % 12 || 12)
+			document.querySelector('div#timeMinutes').innerText = (time.getMinutes() < 10 ? '0' : '') + time.getMinutes()
+			document.querySelector('div#timeSeconds').innerText = (time.getSeconds() < 10 ? '0' : '') + time.getSeconds()
+
+			document.querySelector('div#weekdaybar.backBar > div.backBarDay.one').innerText = days[(time.getDay() + 5) % 7]
+			document.querySelector('div#weekdaybar.backBar > div.backBarDay.two').innerText = days[(time.getDay() + 6) % 7]
+			document.querySelector('div#weekdaybar.backBar > div.backBarMain'). innerText = daysfull[time.getDay()]
+			document.querySelector('div#weekdaybar.backBar > div.backBarDay.three').innerText = days[(time.getDay() + 1) % 7]
+			document.querySelector('div#weekdaybar.backBar > div.backBarDay.four').innerText = days[(time.getDay() + 2) % 7]
+
+			function addEnding(num) {
+				switch(num) {
+					case 1: case 21: case 31: return num + 'ST'; break;
+					case 2: case 22: return num + 'ND'; break;
+					case 3: case 23: return num + 'RD'; break;
+					default: return num + 'TH' ; break;
+				}
+			}
+
+			document.querySelector('div#datebar.backBar > div.backBarDay.one').innerText = addEnding((new Date(time.getTime() - 172800000)).getDate())
+			document.querySelector('div#datebar.backBar > div.backBarDay.two').innerText = addEnding((new Date(time.getTime() - 86400000)).getDate())
+			document.querySelector('div#datebar.backBar > div.backBarMain').innerText = addEnding(time.getDate())
+			document.querySelector('div#datebar.backBar > div.backBarDay.three').innerText = addEnding((new Date(time.getTime() + 86400000)).getDate())
+			document.querySelector('div#dateBar.backBar > div.backBarDay.four').innerText = addEnding((new Date(time.getTime() + 172800000)).getDate())
+		}
+		updateTime()
+		setInterval(updateTime, 1000)
+	</script>
+</body>
+</html>
