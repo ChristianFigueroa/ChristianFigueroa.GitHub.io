@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+	<title>No JavaScript :(</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+	<style>
+		@font-face {
+			font-family: 'Bitter';
+			font-style: normal;
+			font-weight: 400;
+			src:url('/assets/Bitter-Regular.woff2') format('woff2'),
+				url('/assets/Bitter-Regular.woff') format('woff'),
+				url('/assets/Bitter-Regular.ttf') format('truetype');
+		}
+
+		html {
+			padding-bottom: 3vw;
+		}
+
+		body {
+			margin: 0;
+			background: #00ACC1;
+			overflow-x: hidden;
+		}
+
+		h1#header {
+			color: white;
+			font-family: Bitter;
+			font-size: 3em;
+			text-align: center;
+			position: relative;
+			width: 100vw;
+			margin-bottom: 0;
+			cursor: default;
+		}
+
+		div.flashcard {
+			background: #fff;
+			width: 85vw;
+			max-width: 400px;
+			height: 51vw;
+			max-height: 240px;
+			float: left;
+			margin: 3vw 0 0 3vw;
+			display: table;
+			text-align: justify;
+			cursor: default;
+			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		div.flashCardInner {
+			position: relative;
+			display: table;
+			height: 100%;
+			width: 96%;
+			padding: 0 2%;
+			font-size: 15px;
+		}
+
+		div.flashCardInner *:not(code):not(samp) {
+			color: rgba(0, 0, 0, 0.87);
+		}
+
+		span.period, span.chapter, div.title {
+			font-family: Lato;
+			font-size: 4vw;
+		}
+
+		span.period {
+			float: left;
+			position: absolute;
+			left: 1vmin;
+			top: 2vmin;
+		}
+
+		span.chapter {
+			float: right;
+			position: absolute;
+			right: 1vmin;
+			top: 2vmin;
+		}
+
+		div.title {
+			position: relative;
+			display: table-cell;
+			vertical-align: middle;
+			max-width: 50vmin;
+			font-size: 6vw;
+			text-align: center;
+		}
+
+		span.number {
+			font-family: Montserrat;
+			font-size: 95%;
+		}
+
+		span.theme, span.def, span.sig {
+			font-family: Bitter;
+			display: inline-block;
+			margin-top: 0.2em;
+		}
+
+		span.era {
+			font-size: 65%;
+			font-weight: 600;
+		}
+
+		code, samp {
+			font-family: Bitter;
+		}
+
+		noscript {
+			height: 100vh;
+			width: 100vw;
+			color: #fff;
+			font-size: 3em;
+			font-family: Lato, sans-serif;
+		}
+
+		noscript p {
+			text-align: center;
+			margin: 2vw;
+		}
+
+		noscript a {
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<noscript><p>Javascript must be enabled to view this page. Click <a href='http://enable-javascript.com/'>here</a> to find out how to re-enable it.</p></noscript>
+	<h1 id='header'></h1>
+	<script charset='UTF-8' src='../../../assets/essentials.js'></script>
+	<script charset='UTF-8' src='flash_card_info.js'></script>
+	<script type="text/javascript">
+		"use strict";
+		!function(){
+			var args=parseUrlArgs(),w=window;
+			if(args.id){
+				var shownFlashCards=[];
+				var ids=args.id.split(',');
+				for(var i=ids.length-1;i>=0;i--){shownFlashCards.push(FLASHCARDS.getTitle(ids[i]));if(shownFlashCards[shownFlashCards.length-1]==null)break};if(i>=0)location.replace('view');
+				shownFlashCards.reverse();
+				document.title='Viewing: '+shownFlashCards.map(function(a){return a.title}).join(', ');
+			}else{
+				if(!args.t||!args.q||!(args.t in [0,1,2])||args.t==0&&!(args.q>=0&&args.q<=FLASHCARDS.PERIODS.length-1)||args.t==1&&!(args.q>=0&&args.q<=FLASHCARDS[''].length))location.replace('view');
+				document.title='Viewing: '+(args.t==0?'Period - ':args.t==1?'Chapter - ':'"')+(args.t==0?FLASHCARDS.PERIODS[args.q]:args.t==2?args.q:~args.q?+args.q+1:'All')+(args.t>1?'"':'');
+				var shownFlashCards=args.t==0?FLASHCARDS.getPeriod(args.q):args.t==1?(~args.q?FLASHCARDS.getChapter(+args.q):FLASHCARDS.getAll()):[];
+				var reg=/\s/g,map=[[/\u00ED/g,'i'],[/\u00FC/g,'u'],[/\u00E7/g,'c']]
+				// Used for searching algorithm
+				// Makes certain characters equal others (e.g. T == t, í == i, Ñ == n)
+				String.prototype.searchFunc=function(){var a=this.toString().toLowerCase();a=a.includes('&')?a.unescape():a;a=a.replace(reg,'');map.forEach(function(b){a=a.replace(b[0],b[1])});return a};
+				// Searching algorithm that can account for small spelling mistakes
+				// Gives each flash card a score depending on their similarity to the search query
+				// Higher scores are shown first while very low scores (<0.5) are discarded altogether
+				// If however the word includes the search query and it takes up at least 20% of the word (e.g. 'e' in 'bloodletting rituals' will not work while 'blood' will work), it will be shown either way; score will only affect its position in the results
+				if(args.t==2){
+					var a=args.q.searchFunc(),b=FLASHCARDS.getAll(),c=a.length,z={};
+					for(var i=0,l=b.length;i<l;i++){
+						var d=b[i].title.searchFunc(),score=1,s=0;
+						if(d.includes(a)){score+=c/d.length;if(c>=d.length*.2)s=1}
+						if(d.length>=2*c&&d.length<3*c||d.length<.5*c){if(d.includes(a)){z[0.15]?z[0.15].push(a):z[0.15]=[b[i]];continue}else if(!s)continue}
+						score-=Math.abs(c-d.length)/c
+						if(score<0.5&&!s)continue;
+						var e=new String(a),f=d,g;
+						for(var n=0,k=e.length;n<k;n++){
+							if(!f)break;
+							g=f,f=f.replace(e[n],'')
+							if(g.length==f.length){score-=1/d.length;continue}
+							if(d.indexOf(e[n])==n)score+=1/e.length;
+						}
+						if(score<0.5&&!s)continue;
+						z[score]?z[score].push(b[i]):z[score]=[b[i]]
+					};
+					var h=[],j=0;for(n in z)h.push(n);h.sort();
+					for(var i=h.length;i>0;i--)for(var n=0;n<z[h[i-1]].length;n++){shownFlashCards[j]=z[h[i-1]][n];j++};
+					shownFlashCards.length=j;
+				}
+			}
+			setInterval(function(){
+				$('[data-a]').forEach(function(){
+					this.removeAttribute('data-a');
+					this.removeAttribute('data-d');
+					this.setAttribute('data-c',1);
+				});
+				$('[data-b]').forEach(function(){
+					this.removeAttribute('data-b');
+					this.removeAttribute('data-c');
+					this.removeAttribute('data-e');
+					this.setAttribute('data-d',1);
+				});
+				$('[data-c]').forEach(function(){
+					if(this.active){
+						if(this.style.opacity==1){this.removeAttribute('data-c');return};
+						if(!+this.style.opacity){
+							var i=this.parentNode.getAttribute('data-i');
+							this.innerHTML='<span class="theme"><strong>Theme:</strong> '+shownFlashCards[i].theme+'</span><br><span class="def"><strong>Definition:</strong> '+shownFlashCards[i].def.replace(/(?:B\.)?C\.E\./g,'<span class="era">$&</span>')+'</span><br><span class="sig"><strong>Significance:</strong> '+shownFlashCards[i].sig.replace(/(?:B\.)?C\.E\./g,'<span class="era">$&</span>')+'</span>';
+						}
+						this.style.opacity=(+this.style.opacity+.1).toFixed(1);
+						if(this.style.opacity==1){this.removeAttribute('data-c');this.setAttribute('data-e',1)}
+					}else{
+						this.style.opacity=((this.style.opacity||1)-.1).toFixed(1);
+						this.active=this.style.opacity>0?0:1;
+						this.inactive=this.style.opacity>0?1:0;
+					}
+				});
+				$('[data-d]').forEach(function(){
+					if(this.inactive){
+						if(this.style.opacity==1){this.removeAttribute('data-d');return};
+						if(!+this.style.opacity){
+							var i=this.parentNode.getAttribute('data-i');
+							this.innerHTML='<span class="period">Period: '+shownFlashCards[i].period+'</span><span class="chapter">Chapter: <span class="number">'+shownFlashCards[i].chapter+'</span></span><div class="title">'+shownFlashCards[i].title+'</div>';
+							$('.title').forEach(function(){this.style.fontSize=Math.min(28.2353,window.innerWidth*.06)+'px'});
+							$('.period, .chapter').forEach(function(){this.style.fontSize=Math.min(18.8235,window.innerWidth*.04)+'px'})
+						}
+						this.style.opacity=(+this.style.opacity+.1).toFixed(1);
+						if(this.style.opacity==1)this.removeAttribute('data-d');
+					}else{
+						this.style.opacity=((this.style.opacity||1)-.1).toFixed(1);
+						this.inactive=this.style.opacity>0?0:1;
+						this.active=this.style.opacity>0?1:0;
+					}
+				})
+			},35)
+			for(var i=0,l=shownFlashCards.length;i<l;i++){
+				var a=document.createElement('div');
+				a.className='flashcard';
+				a.innerHTML='<div class="flashCardInner"><span class="period">Period: '+shownFlashCards[i].period+'</span><span class="chapter">Chapter: <span class="number">'+shownFlashCards[i].chapter+'</span></span><div class="title">'+shownFlashCards[i].title+'</div></div>';
+				a.setAttribute('data-i',i);
+				a.style.opacity='1';
+				a.children[0].ael(['mousein','mouseover','hover','touchstart','mousedown','click'],function(){
+					$('[data-e],[data-c]').forEach(function(){this.dispatchEvent(new MouseEvent('mouseout'))})
+					if(this.hasAttribute('data-b'))this.removeAttribute('data-b');else this.setAttribute('data-a',1)
+				})
+				a.children[0].ael(['mouseout','mouseleave','touchend','touchcancel'],function(){
+					if(this.hasAttribute('data-a'))this.removeAttribute('data-a');else this.setAttribute('data-b',1)
+				})
+				document.body.appendChild(a);
+			}
+			if(args.id){
+				$id('header').innerHTML='';
+			}else if(args.t==2){
+				$id('header').innerHTML='"'+args.q+'" | '+shownFlashCards.length+' Results';
+			}else if(+args.t){
+				$id('header').innerHTML='Chapter'+(~args.q?' '+(+args.q+1):': All')
+			}else{
+				$id('header').innerHTML='Period: '+FLASHCARDS.PERIODS[args.q];
+			}
+			w.addEventListener('resize',function(){
+				if(~~(document.body.rect.width/(Math.min(400,w.innerWidth*.85)+w.innerWidth*.03))>shownFlashCards.length)document.body.style.paddingLeft=$id('header').style.right=(document.body.rect.width-(shownFlashCards.length*(Math.min(400,w.innerWidth*.85)+w.innerWidth*.03)))/2-w.innerWidth*.015+'px';else document.body.style.paddingLeft=$id('header').style.right=((document.body.rect.width-w.innerWidth*.03)%(Math.min(400,w.innerWidth*.85)+w.innerWidth*.03))/2+'px';
+				$('.flashCardInner').forEach(function(){this.style.fontSize=Math.min(15,window.innerWidth*.031875)+'px'})
+				$('.title').forEach(function(){this.style.fontSize=Math.min(28.2353,window.innerWidth*.06)+'px'});
+				$('.period, .chapter').forEach(function(){this.style.fontSize=Math.min(18.8235,window.innerWidth*.04)+'px'})
+			})
+			w.dispatchEvent(new Event('resize'))
+		}();
+	</script>
+</body>
+</html>
