@@ -3,7 +3,7 @@
 <head>
 	<title>ChristianFigueroa.GitHub.io</title>
 	<meta charset='utf-8'/>
-	<meta name='viewport' content='initial-scale=1,width=device-width'/>
+	<meta name='viewport' content='initial-scale=1,width=device-width,user-scalable=yes'/>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
 	<style>
 		@font-face {
@@ -70,6 +70,7 @@
 			background: #D3D3D3;
 			font-size: 6em;
 			color: #345;
+			hyphens: auto;
 		}
 
 		nav {
@@ -78,12 +79,12 @@
 			height: 15vh;
 			min-height: 50px;
 			text-align: center;
-			display: table;
 			border-bottom: 5px solid #00acc1;
 			position: fixed;
 			top: 0;
 			white-space: nowrap;
 			overflow-x: auto;
+			overflow-y: hidden;
 			table-layout: fixed;
 		}
 
@@ -97,13 +98,18 @@
 		}
 
 		div#center {
-			display: table-cell;
-			vertical-align: middle;
+			display: table;
 			background: #F3F3F3;
 			height: 100%;
 			font-size: 0;
 			width: 52vh;
 			min-width: 132px;
+			table-layout: fixed;
+		}
+
+		div#center div {
+			display: table-cell;
+			vertical-align: middle;
 		}
 
 		div#buffer {
@@ -203,24 +209,30 @@
 			display: block;
 			color: inherit;
 		}
+
+		@media (max-width: 500px) {
+			body {font-size: 45%}
+		}
 	</style>
 </head>
 <body>
 	<div id='buffer'></div>
 	<nav>
 		<div id='center'>
-			<a href='https://github.com/ChristianFigueroa'>
-				<div class='minicon svg-octocat' viewBox="0 0 744.0945 744.09448" title='GitHub' data-v='0'></div>
-			</a>
-			<a href='./AP/Biology/'>
-				<div class='minicon svg-dna' title='AP Bio' data-v='1'></div>
-			</a>
-			<a href='./AP/History/'>
-				<div class='minicon svg-spartan' title='AP World History' data-v='2'></div>
-			</a>
-			<a href='./JavaScript/'>
-				<div class='minicon svg-js' title='JavaScript' data-v='3'></div>
-			</a>
+			<div>
+				<a href='https://github.com/ChristianFigueroa'>
+					<div class='minicon svg-octocat' viewBox="0 0 744.0945 744.09448" title='GitHub' data-v='0'></div>
+				</a>
+				<a href='./AP/Biology/'>
+					<div class='minicon svg-dna' title='AP Bio' data-v='1'></div>
+				</a>
+				<a href='./AP/History/'>
+					<div class='minicon svg-spartan' title='AP World History' data-v='2'></div>
+				</a>
+				<a href='./JavaScript/'>
+					<div class='minicon svg-js' title='JavaScript' data-v='3'></div>
+				</a>
+			</div>
 		</div>
 	</nav>
 	<table>
@@ -230,7 +242,7 @@
 					<svg class='svg svg-octocat'></svg>
 				</a>
 			</td>
-			<td class='text'><a href='https://github.com/ChristianFigueroa'>GitHub</a></td>
+			<td class='text'><a href='https://github.com/ChristianFigueroa'>Git&#173;Hub</a></td>
 		</tr>
 		<tr data-v='1'>
 			<td class='icon'>
@@ -246,7 +258,7 @@
 					<div class='svg svg-spartan'></div>
 				</a>
 			</td>
-			<td class='text'><a href='./AP/History'>AP World History</a></td>
+			<td class='text'><a href='./AP/History'>AP World His&#173;tory</a></td>
 		</tr>
 		<tr data-v='3'>
 			<td class='icon'>
@@ -254,10 +266,10 @@
 					<div class='svg svg-js'></div>
 				</a>
 			</td>
-			<td class='text'><a href='./JavaScript'>JavaScript</a></td>
+			<td class='text'><a href='./JavaScript'>Java&#173;Script</a></td>
 		</tr>
 	</table>
-	<a href='./updates'><div class='header'>Recent Updates</div></a>
+	<a href='./updates'><div class='header'>Re&#173;cent Up&#173;dates</div></a>
 	<div id='updates'><noscript>
 		<a href='http://enable-javascript.com/'>
 			<table class='update' title='Click to enable JavaScript'>
