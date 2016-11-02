@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+	<title>History Timeline</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+	<style>
+		body {
+			margin: 0;
+			background: #456;
+		}
+
+		div#timeline {
+			background: #DDD;
+			margin: 1vw;
+			border-radius: 8px;
+			font-size: 0;
+			overflow-x: auto;
+			overflow-y: ;
+			position: relative;
+		}
+
+		div#timelineScroll {
+			white-space: nowrap;
+			display: inline-block;
+		}
+
+		div.century {
+			font-size: initial;
+			display: inline-block;
+			height: calc(13vw + 30.2em);
+		}
+
+		div.century:first-child > div.dec:first-child {
+			border-top-left-radius: 8px;
+		}
+
+		div.dec {
+			height: 1.25vw;
+			width: 18px;
+			display: inline-block;
+			vertical-align: top;
+			margin: 0 -.25em 0 0;
+			border-left: 1px solid #000;
+			border-right: 1px solid #000;
+		}
+
+		div.dec:first-child {
+			border-left: 0;
+		}
+
+		div.century:not(.jump) div.dec:nth-child(5) {
+			border-right: 0;
+		}
+
+		div.century:not(.jump) div.dec:nth-child(7) {
+			border-left: 0;
+		}
+
+		div.century:not(.jump) div.dec:nth-child(11) {
+			border-right: 0;
+		}
+
+		div.d50 {
+			height: 3vw;
+			width: 2px;
+			background: #000;
+			display: inline-block;
+			margin: 0 -.25em 0 0;
+			vertical-align: top;
+		}
+
+		div.d100 {
+			height: 5vw;
+			width: 2px;
+			background: #000;
+			display: inline-block;
+			margin: 0;
+			vertical-align: top;
+		}
+
+		div.d500 {
+			height: 8.5vw;
+			width: 2px;
+			background: #000;
+			display: inline-block;
+			margin: 0;
+			vertical-align: top;
+		}
+
+		div.d0 {
+			height: 100%;
+			width: 2px;
+			background: #000;
+			display: inline-block;
+			margin: 0;
+			vertical-align: top;
+		}
+
+		div.perend {
+			height: 100%;
+			width: 2px;
+			background: #888;
+			display: inline-block;
+			margin: 0;
+			vertical-align: top;
+			margin-right: calc(-.25em - 2px);
+		}
+
+		div.century.jump div.dec:nth-child(9) {
+			border-right: 0;
+		}
+
+		div#position {
+			height: calc(30.2em + 13vw);
+			position: absolute;
+			font-size: initial;
+			background: #800;
+			pointer-events: none;
+			display: none;
+			width: 4px;
+			top: 0;
+		}
+
+		div.foundations {
+			background: rgba(0, 172, 193, .3)
+		}
+
+		div.classical {
+			background: rgba(255, 125, 0, .3)
+		}
+
+		div#events {
+			position: relative;
+			width: 10800px;
+			font-size: initial;
+			height: 30.2em;
+			margin-top: -30.2em;
+		}
+
+		div[data-type='point'] {
+			height: 1.2em;
+			background: #CCC;
+			border: 1px solid #888;
+			border-radius: 4px;
+			font-family: "Open Sans";
+			font-size: 1em;
+			line-height: 1;
+			padding: .2em;
+			display: inline-block;
+			cursor: pointer;
+			overflow: hidden;
+			white-space: pre;
+			box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3) inset;
+			margin-bottom: .15em;
+			position: absolute;
+			z-index: 1
+		}
+
+		div[data-type='point'][data-state='closed'] {
+			color: rgba(0,0,0,0);
+			width: 2px;
+		}
+
+		div[data-type='point'][data-state='open'] {
+			z-index: 1;
+			box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3) inset, 0 0 20px 5px rgba(0,0,0,.4);
+		}
+
+		div[data-type='range'] {
+			height: 1.2em;
+			background: #CCC;
+			border: 1px solid #888;
+			border-radius: 4px;
+			font-family: "Open Sans";
+			font-size: 1em;
+			line-height: 1;
+			padding: .2em;
+			display: inline-block;
+			cursor: pointer;
+			overflow: hidden;
+			white-space: pre;
+			box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3) inset;
+			margin-bottom: .15em;
+			position: absolute;
+			z-index: 1
+		}
+
+		div[data-type='range'] div {
+			height: 1.2em;
+			width: 20px;
+			position: absolute;
+			top: 4px;
+			right: 0;
+			background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgb(204,204,204) 60%, rgb(204,204,204) 80%, rgb(170,170,170) 100%);
+			background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%, rgb(204,204,204) 60%, rgb(204,204,204) 80%, rgb(170,170,170) 100%);
+			background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(204,204,204) 60%, rgb(204,204,204) 80%, rgb(170,170,170) 100%);
+		}
+
+		div[data-type='range'][data-state='open'] {
+			z-index: 1;
+			box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3) inset, 0 0 20px 5px rgba(0,0,0,.4);
+		}
+
+		div[data-type='range'][data-state='open'] div {
+			width: 0;
+		}
+
+		div[data-layer='1'] {
+			top: .2em;
+		}
+
+		div[data-layer='2'] {
+			top: 2.2em;
+		}
+
+		div[data-layer='3'] {
+			top: 4.2em;
+		}
+
+		div[data-layer='4'] {
+			top: 6.2em;
+		}
+
+		div[data-layer='5'] {
+			top: 8.2em;
+		}
+
+		div[data-layer='6'] {
+			top: 10.2em;
+		}
+
+		div[data-layer='7'] {
+			top: 12.2em;
+		}
+
+		div[data-layer='8'] {
+			top: 14.2em;
+		}
+
+		div[data-layer='9'] {
+			top: 16.2em;
+		}
+
+		div[data-layer='10'] {
+			top: 18.2em;
+		}
+
+		div[data-layer='11'] {
+			top: 20.2em;
+		}
+
+		div[data-layer='12'] {
+			top: 22.2em;
+		}
+
+		div[data-layer='13'] {
+			top: 24.2em;
+		}
+
+		div[data-layer='14'] {
+			top: 26.2em;
+		}
+
+		div[data-layer='15'] {
+			top: 28.2em;
+		}
+
+		div[data-layer='16'] {
+			top: 30.2em;
+		}
+
+		div#span {
+			height: 100%;
+			position: absolute;
+			background: rgba(0,0,0,.15);
+			top: 0;
+			pointer-events: none;
+			border: 0 solid rgba(0,0,0,.4);
+			border-width: 0 1px;
+		}
+
+		div#location {
+			position: absolute;
+			font-size: initial;
+			top: 10vw;
+			font-family: "Open Sans";
+			background: #CCC;
+			box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3) inset;
+			border: 1px solid #999;
+			padding: 3px;
+			border-radius: 8px;
+			pointer-events: none;
+		}
+
+		div a {
+			color: #00acc1;
+			text-decoration: none;
+		}
+
+		div a:hover, div a:active {
+			text-decoration: underline;
+		}
+
+		div.filtercontainer {
+			width: 98%;
+			margin-left: 1%;
+			position: relative;
+		}
+
+		div.filterdesc {
+			float: left;
+			padding: 5px 0;
+			background: #DDD;
+			font-family: "Open Sans";
+			border-top-left-radius: 8px;
+			border-bottom-left-radius: 8px;
+			width: 25%;
+			overflow: auto;
+			white-space: nowrap;
+			text-align: center;
+			font-size: 1.3em;
+			position: absolute;
+			box-shadow: 0 0 5px 0 rgba(0,0,0,.3) inset;
+			border-right: .2em solid #00acc1;
+		}
+
+		div.filterselector {
+			float: left;
+			width: calc(75% - 5px);
+			font-size: 1.3em;
+			border-radius: 8px;
+			background: #AAA;
+			padding: 5px 0;
+			padding-left: calc(25% + 5px);
+			font-family: "Open Sans";
+			overflow: auto;
+			white-space: nowrap;
+		}
+
+		div.filterbutton {
+			display: inline-block;
+			width: 1.5em;
+			height: 1.5em;
+			border-radius: 25%;
+			text-align: center;
+			background: #DDD;
+			margin-left: .2em;
+		}
+
+		div.filterbutton:last-child {
+			margin-right: .2em;
+		}
+	</style>
+</head>
+<body>
+	<noscript><style>div#nojs{font-family:"Open Sans",Arial,Helvetica,sans-serif;font-size:5vmin;text-align:center}div#nojs>span{display:block;width:85%;margin-left:7.5%}a{text-decoration:none;color:#00acc1}a:hover{text-decoration: underline}img#nojsico{height:40vmin;width:40vmin;display:block;margin:auto}noscript{z-index:1000;position:fixed;height:100vh;width:100vw;background:#F5F5F5;top:0;left:0;overflow-y:auto}div.nojscrossstripes{height:10%;width:100%;background-image:url("/assets/cross_stripe.svg");border-bottom:1.5vh solid #678}</style><div class='nojscrossstripes'></div><div id='nojs'><a href='http://enable-javascript.com/'><img id='nojsico' src='/assets/no_js.svg'></a><span>Your broswer settings have your JavaScript disabled. Unfortunately, this page requires JavaScript to work properly. Please <a href='http://enable-javascript.com'>enable JavaScript</a> and refresh to continue.</span></div></noscript>
+	<div id='timeline'>
+		<div id='timelineScroll'>
+			<div class='century foundations' id='c-3300'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-3200'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-3100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century foundations' id='c-3000'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2900'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2800'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2700'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2600'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century foundations' id='c-2500'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2400'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2300'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2200'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-2100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century foundations' id='c-2000'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1900'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1800'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1700'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1600'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century foundations' id='c-1500'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1400'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1300'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1200'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-1100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century foundations' id='c-1000'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-900'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-800'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century foundations' id='c-700'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='perend'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c-600'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century classical' id='c-500'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c-400'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c-300'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c-200'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c-100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d0'></div>
+			</div>
+			<div class='century classical' id='c100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c200'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c300'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c400'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century classical' id='c500'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century classical' id='c600'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='perend'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century postclassical' id='c700'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century postclassical' id='c800'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century postclassical' id='c900'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century postclassical' id='c1000'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d500'></div>
+			</div>
+			<div class='century' id='c1100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1200'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1300'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1400'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1500'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1600'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1700'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1800'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c1900'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c2000'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+			<div class='century' id='c2100'>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d50'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='dec'></div>
+				<div class='d100'></div>
+			</div>
+		</div>
+		<div id='events'>
+			<div data-year1='-3200' data-year2='-2350' data-type='range' data-state='closed' data-layer='1' data-regions='Asia' data-chapter='2'>[3,200&#8198;&#150;&#8198;2350 <small>B.C.E.</small>] Era of Sumerian dominance in <a href='Flash_Cards/find?id=Mesopotamia'>Mesopotamia</a><div></div></div>
+			<div data-year1='-3100' data-year2='-2660' data-type='range' data-state='closed' data-layer='3' data-regions='Africa' data-chapter='3'>[3,100&#8198;&#150;&#8198;2,660 <small>B.C.E.</small>] Archaic Period of Egyptian history<div></div></div>
+			<div data-year1='-3000' data-year2='-1000' data-type='range' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='2'>[3,000&#8198;&#150;&#8198;1,000 <small>B.C.E.</small>] Era of Indo-European migrations<div></div></div>
+			<div data-year1='-2660' data-year2='-2160' data-type='range' data-state='closed' data-layer='4' data-regions='Africa' data-chapter='3'>[2,660&#8198;&#150;&#8198;2,160 <small>B.C.E.</small>] Egyptian Old Kingdom<div></div></div>
+			<div data-year1='-2600' data-year2='-2500' data-type='range' data-state='closed' data-layer='3' data-regions='Africa' data-chapter='3'>[2,600&#8198;&#150;&#8198;2,500 <small>B.C.E.</small>] Era of pyramid building in Egypt<div></div></div>
+			<div data-year1='-2500' data-year2='-1450' data-type='range' data-state='closed' data-layer='5' data-regions='Africa' data-chapter='3'>[2,500&#8198;&#150;&#8198;1,450 <small>B.C.E.</small>] Early kingdom of Kush with capital at Kerma<div></div></div>
+			<div data-year1='-2500' data-year2='-2000' data-type='range' data-state='closed' data-layer='6' data-regions='Asia' data-chapter='4'>[2,500&#8198;&#150;&#8198;2,000 <small>B.C.E.</small>] High point of <a href='Flash_Cards/find?id=Harappan%20Society'>Harappan society</a><div></div></div>
+			<div data-year1='-2350' data-year2='-1600' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='2'>[2,350&#8198;&#150;&#8198;1,600 <small>B.C.E.</small>] Era of Babylonian dominance in <a href='Flash_Cards/find?id=Mesopotamia'>Mesopotamia</a><div></div></div>
+			<div data-year1='-2334' data-year2='-2315' data-type='range' data-state='closed' data-layer='1' data-regions='Asia' data-chapter='2'>[2,334&#8198;&#150;&#8198;2,315 <small>B.C.E.</small>] Reign of Sargon of Akkad<div></div></div>
+			<div data-year1='-2200' data-year2='-1766' data-type='range' data-state='closed' data-layer='7' data-regions='Asia' data-chapter='5'>[2,200&#8198;&#150;&#8198;1,766 <small>B.C.E.</small>] Xia Dynasty<div></div></div>
+			<div data-year1='-1792' data-year2='-1750' data-type='range' data-state='closed' data-layer='1' data-chapter='Asia' data-chapter='2'>[1,792&#8198;&#150;&#8198;1,750 <small>B.C.E.</small>] Reign of Hammurabi<div></div></div>
+			<div data-year1='-1766' data-year2='-1122' data-type='range' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='5'>[1,766&#8198;&#150;&#8198;1,122 <small>B.C.E.</small>] Shang Dynasty<div></div></div>
+			<div data-year1='-1700' data-year2='-1200' data-type='range' data-state='closed' data-layer='4' data-regions='Asia' data-chapter='2'>[1,700&#8198;&#150;&#8198;1,200 <small>B.C.E.</small>] Era of Hittite dominance in Anatolia<div></div></div>
+			<div data-year1='-1550' data-year2='-1070' data-type='range' data-state='closed' data-layer='3' data-regions='Africa' data-chapter='3'>[1,550&#8198;&#150;&#8198;1,070 <small>B.C.E.</small>] Egyptian New Kingdom<div></div></div>
+			<div data-year1='-1500' data-year2='-500' data-type='range' data-state='closed' data-layer='6' data-regions='Asia' data-chapter='4'>[1,500&#8198;&#150;&#8198;500 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Vedas'>Vedic Age</a><div></div></div>
+			<div data-year1='-1500' data-year2='-500' data-type='range' data-state='closed' data-layer='10' data-regions='Oceania' data-chapter='6'>[1,500&#8198;&#150;&#8198;500 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Lapita%20Peoples'>Lapita</a> Society<div></div></div>
+			<div data-year1='-1500' data-year2='700' data-type='range' data-state='closed' data-layer='9' data-regions='Oceania' data-chapter='6'>[1,500 <small>B.C.E.</small>&#8198;&#150;&#8198;700 <small>C.E.</small>] Austronesian migrations to Pacific Islands<div></div></div>
+			<div data-year1='-1479' data-year2='-1425' data-type='range' data-state='closed' data-layer='1' data-regions='Africa' data-chapter='3'>[1,479&#8198;&#150;&#8198;1,425 <small>B.C.E.</small>] Reign of Pharaoh Tuthmosis III<div></div></div>
+			<div data-year1='-1473' data-year2='-1458' data-type='range' data-state='closed' data-layer='7' data-regions='Africa' data-chapter='3'>[1,473&#8198;&#150;&#8198;1,458 <small>B.C.E.</small>] Reign of Queen Hatshepsut (coruler with Tuthmosis III)<div></div></div>
+			<div data-year1='-1400' data-year2='-900' data-type='range' data-state='closed' data-layer='7' data-regions='Asia' data-chapter='4'>[1,400&#8198;&#150;&#8198;900 <small>B.C.E.</small>] Composition of the Rig Veda<div></div></div>
+			<div data-year1='-1353' data-year2='-1335' data-type='range' data-state='closed' data-layer='1' data-regions='Africa' data-chapter='3'>[1,353&#8198;&#150;&#8198;1,335 <small>B.C.E.</small>] Reign of Amenhotep IV (Akhenaten)<div></div></div>
+			<div data-year1='-1200' data-year2='-100' data-type='range' data-state='closed' data-layer='1' data-regions='Americas' data-chapter='6'>[1,200&#8198;&#150;&#8198;100 <small>B.C.E.</small>] Olmec society<div></div></div>
+			<div data-year1='-1122' data-year2='-256' data-type='range' data-state='closed' data-layer='4' data-regions='Asia' data-chapter='5'>[1,122&#8198;&#150;&#8198;256 <small>B.C.E.</small>] Zhou Dynasty<div></div></div>
+			<div data-year1='-1000' data-year2='-612' data-type='range' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='2'>[1,000&#8198;&#150;&#8198;612 <small>B.C.E.</small>] Era of Assyrian dominance in <a href='Flash_Cards/find?id=Mesopotamia'>Mesopotamia</a><div></div></div>
+			<div data-year1='-1000' data-year2='-970' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='2'>[1,000&#8198;&#150;&#8198;970 <small>B.C.E.</small>] Reign of Israelite King David<div></div></div>
+			<div data-year1='-1000' data-year2='-500' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='4'>[1,000&#8198;&#150;&#8198;500 <small>B.C.E.</small>] Formation of regional kingdoms in northern India<div></div></div>
+			<div data-year1='-1000' data-year2='-300' data-type='range' data-state='closed' data-layer='11' data-regions='Americas' data-chapter='6'>[1,000&#8198;&#150;&#8198;300 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Chav%C3%ADn%20Cult'>Chav&#237;n Cult</a><div></div></div>
+			<div data-year1='-970' data-year2='-940' data-type='range' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='2'>[970&#8198;&#150;&#8198;940 <small>B.C.E.</small>] Reign of Israelite King Solomon<div></div></div>
+			<div data-year1='-800' data-year2='-400' data-type='range' data-state='closed' data-layer='7' data-regions='Asia' data-chapter='4'>[800&#8198;&#150;&#8198;400 <small>B.C.E.</small>] Composition of the principal Upanishads<div></div></div>
+			<div data-year1='-605' data-year2='-562' data-type='range' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='2'>[605&#8198;&#150;&#8198;562 <small>B.C.E.</small>] Reign of Nebuchadnezzar<div></div></div>
+			<div data-year1='-600' data-year2='-550' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='2'>[600&#8198;&#150;&#8198;550 <small>B.C.E.</small>] New Babylonian Empire<div></div></div>
+			<div data-year1='-563' data-year2='-483' data-type='range' data-state='closed' data-layer='13' data-regions='Asia' data-chapter='9'>[563&#8198;&#150;&#8198;483 <small>C.E.</small>] Life of <a href='Flash_Cards/find?id=Siddhartha%20Gautama'>Siddhartha Gautama</a>, the <a href='Flash_Cards/find?id=Nirvana,Four%20Noble%20Truths'>Buddha</a><div></div></div>
+			<div data-year1='-558' data-year2='-330' data-type='range' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='7'>[558&#8198;&#150;&#8198;330 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Achaemenids'>Achaemenid Dynasty</a><div></div></div>
+			<div data-year1='-558' data-year2='-530' data-type='range' data-state='closed' data-layer='12' data-regions='Asia' data-chapter='7'>[558&#8198;&#150;&#8198;530 <small>B.C.E.</small>] Reign of Cyrus the <a href='Flash_Cards/find?id=Achaemenids'>Achaemenid</a><div></div></div>
+			<div data-year1='-551' data-year2='-479' data-type='range' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='8'>[551&#8198;&#150;&#8198;479 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Analects'>Confucius</a><div></div></div>
+			<div data-year1='-540' data-year2='-468' data-type='range' data-state='closed' data-layer='14' data-regions='Asia' data-chapter='9'>[540&#8198;&#150;&#8198;468 <small>C.E.</small>] Life of Vardhamana Mahavira<div></div></div>
+			<div data-year1='-521' data-year2='-486' data-type='range' data-state='closed' data-layer='12' data-regions='Asia' data-chapter='7'>[521&#8198;&#150;&#8198;486 <small>B.C.E.</small>] Reign of <a href='Flash_Cards/find?id=Darius,Achaemenids'>Darius</a><div></div></div>
+			<div data-year1='-403' data-year2='-221' data-type='range' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='5'>[403&#8198;&#150;&#8198;221 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Period%20of%20Warring%20States'>Period of Warring States</a><div></div></div>
+			<div data-year1='-390' data-year2='-338' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='8'>[390&#8198;&#150;&#8198;338 <small>B.C.E.</small>] Shang Yang<div></div></div>
+			<div data-year1='-372' data-year2='-289' data-type='range' data-state='closed' data-layer='6' data-regions='Asia' data-chapter='8'>[372&#8198;&#150;&#8198;289 <small>B.C.E.</small>] Mencius<div></div></div>
+			<div data-year1='-334' data-year2='-330' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='7'>[334&#8198;&#150;&#8198;330 <small>B.C.E.</small>] Invasion and conquest of the Achaemenid empire by <a href='Flash_Cards/find?id=Alexander%20of%20Macedon'>Alexander of Macedon</a><div></div></div>
+			<div data-year1='-323' data-year2='-83' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='7'>[323&#8198;&#150;&#8198;83 <small>B.C.E.</small>] Seleucid Dynasty<div></div></div>
+			<div data-year1='-321' data-year2='-185' data-type='range' data-state='closed' data-layer='7' data-regions='Asia' data-chapter='9'>[321&#8198;&#150;&#8198;185 <small>C.E.</small>] Mauryan Dynasty<div></div></div>
+			<div data-year1='-321' data-year2='-297' data-type='range' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='9'>[321&#8198;&#150;&#8198;297 <small>C.E.</small>] Reign of Chandragupta Maurya<div></div></div>
+			<div data-year1='-298' data-year2='-238' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='8'>[298&#8198;&#150;&#8198;238 <small>B.C.E.</small>] Xunzi<div></div></div>
+			<div data-year1='-280' data-year2='-233' data-type='range' data-state='closed' data-layer='6' data-regions='Asia' data-chapter='8'>[280&#8198;&#150;&#8198;233 <small>B.C.E.</small>] Han Feizi<div></div></div>
+			<div data-year1='-268' data-year2='-232' data-type='range' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='9'>[268&#8198;&#150;&#8198;232 <small>B.C.E.</small>] Reign of <a href='Flash_Cards/find?id=Ashoka'>Ashoka</a> Maurya<div></div></div>
+			<div data-year1='-247' data-year2='224' data-type='range' data-state='closed' data-layer='4' data-regions='Asia' data-chapter='7'>[247 <small>B.C.E.</small>&#8198;&#150;&#8198;224 <small>C.E.</small>] Parthian Dynasty<div></div></div>
+			<div data-year1='-221' data-year2='-207' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='8'>[221&#8198;&#150;&#8198;207 <small>B.C.E.</small>] <a href='Flash_Cards/find?id=Qin%20Shihuangdi'>Qin</a> Dynasty<div></div></div>
+			<div data-year1='-206' data-year2='9' data-type='range' data-state='closed' data-layer='6' data-regions='Asia' data-chapter='8'>[206 <small>B.C.E.</small>&#8198;&#150;&#8198;9 <small>C.E.</small>] Early Han Dynasty<div></div></div>
+			<div data-year1='-200' data-year2='750' data-type='range' data-state='closed' data-layer='2' data-regions='Americas' data-chapter='6'>[200 <small>B.C.E.</small>&#8198;&#150;&#8198;750 <small>C.E.</small>] <a href='Flash_Cards/find?id=Teotihuacan'>Teotihuacan</a> Society<div></div></div>
+			<div data-year1='-182' data-year2='1' data-type='range' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='9'>[182 <small>B.C.E.</small>&#8198;&#150;&#8198;1 <small>C.E.</small>] Bactrian Rule in Northern India<div></div></div>
+			<div data-year1='-141' data-year2='-87' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='8'>[141&#8198;&#150;&#8198;87 <small>B.C.E.</small>] Reign of Han Wudi<div></div></div>
+			<div data-year1='1' data-year2='270' data-type='range' data-state='closed' data-layer='1' data-regions='Asia' data-chapter='9'>[1&#8198;&#150;&#8198;270 <small>C.E.</small>] Kushan Empire in northern India and central Asia<div></div></div>
+			<div data-year1='9' data-year2='23' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='8'>[9&#8198;&#150;&#8198;23 <small>C.E.</small>] Reign of Wang Mang<div></div></div>
+			<div data-year1='25' data-year2='220' data-type='range' data-state='closed' data-layer='6' data-regions='Asia' data-chapter='8'>[25&#8198;&#150;&#8198;220 <small>C.E.</small>] Later Han Dynasty<div></div></div>
+			<div data-year1='127' data-year2='153' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='9'>[127&#8198;&#150;&#8198;153 <small>C.E.</small>] Reign of Kushan emperor Kanishka<div></div></div>
+			<div data-year1='224' data-year2='651' data-type='range' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='7'>[224&#8198;&#150;&#8198;651 <small>C.E.</small>] Sasanid Dynasty<div></div></div>
+			<div data-year1='300' data-year2='1100' data-type='range' data-state='closed' data-layer='1' data-regions='Americas' data-chapter='6'>[300&#8198;&#150;&#8198;1,100 <small>C.E.</small>] Maya Society<div></div></div>
+			<div data-year1='300' data-year2='700' data-type='range' data-state='closed' data-layer='4' data-regions='Americas' data-chapter='6'>[300&#8198;&#150;&#8198;700 <small>C.E.</small>] Mochica Society<div></div></div>
+			<div data-year1='320' data-year2='550' data-type='range' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='9'>[320&#8198;&#150;&#8198;550 <small>C.E.</small>] Gupta Dynasty<div></div></div>
+
+			<div data-year='-3100' data-type='point' data-state='closed' data-layer='2' data-regions='Africa' data-chapter='3'>[3,100 <small>B.C.E.</small>] Unification of Egypt</div>
+			<div data-year='-3000' data-type='point' data-state='closed' data-layer='4' data-regions='Americas' data-chapter='6'>[3,000 <small>B.C.E.</small>] Origins of agriculture in South America</div>
+			<div data-year='-3000' data-type='point' data-state='closed' data-layer='5' data-regions='Oceania' data-chapter='6'>[3,000 <small>B.C.E.</small>] Austronesian migrations to New Guinea</div>
+			<div data-year='-3000' data-type='point' data-state='closed' data-layer='6' data-regions='Oceania' data-chapter='6'>[3,000 <small>B.C.E.</small>] Origins of agriculture in New Guinea</div>
+			<div data-year='-2000' data-type='point' data-state='closed' data-layer='1' data-regions='Africa' data-chapter='3'>[2,000 <small>B.C.E.</small>] Beginning of Bantu migrations</div>
+			<div data-year='-1900' data-type='point' data-state='closed' data-layer='1' data-regions='Asia' data-chapter='4'>[1,900 <small>B.C.E.</small>] Beginning of <a href='Flash_Cards/find?id=Harrapan%20Society'>Harappan</a> decline</div>
+			<div data-year='-1500' data-type='point' data-state='closed' data-layer='1' data-regions='Asia' data-chapter='4'>[1,500 <small>B.C.E.</small>] Beginning of Aryan migration to India</div>
+			<div data-year='-1000' data-type='point' data-state='closed' data-layer='13' data-regions='Asia' data-chapter='4'>[1,000 <small>B.C.E.</small>] Early Aryan migrations into the Ganges River valley</div>
+			<div data-year='-1000' data-type='point' data-state='closed' data-layer='12' data-regions='Asia' data-chapter='4'>[1,000 <small>B.C.E.</small>] Emergence of varna distinctions</div>
+			<div data-year='-900' data-type='point' data-state='closed' data-layer='2' data-regions='Africa' data-chapter='3'>[900 <small>B.C.E.</small>] Invention of iron metallurgy in sub-Saharan Africa</div>
+			<div data-year='-760' data-type='point' data-state='closed' data-layer='2' data-regions='Africa' data-chapter='3'>[760 <small>B.C.E.</small>] Conquest of Egypt by King Kashta of Kush</div>
+			<div data-year='-750' data-type='point' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='4'>[750 <small>B.C.E.</small>] Establishment of the first Aryan cities in the Ganges valley</div>
+			<div data-year='-722' data-type='point' data-state='closed' data-layer='2' data-regions='Asia' data-chapter='2'>[722 <small>B.C.E.</small>] Assyrian conquest of the kingdom of Israel</div>
+			<div data-year='-586' data-type='point' data-state='closed' data-layer='8' data-regions='Asia' data-chapter='2'>[586 <small>B.C.E.</small>] New Babylonian conquest of the kingdom of Judah</div>
+			<div data-year='-520' data-type='point' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='9'>[520 <small>B.C.E.</small>] Invasion of India by Darius of Persia</div>
+			<div data-year='-500' data-type='point' data-state='closed' data-layer='3' data-regions='Asia' data-chapter='4'>[500 <small>B.C.E.</small>] Early Aryan migrations to the Deccan Plateau</div>
+			<div data-year='-327' data-type='point' data-state='closed' data-layer='5' data-regions='Asia' data-chapter='9'>[327 <small>B.C.E.</small>] Invasion of India by <a href='Flash_Cards/find?id=Alexander%20of%20Macedon'>Alexander of Macedon</a></div>
+
+			<div data-year='-1200' data-type='point' data-state='closed' data-layer='11'>[1,200 <small>B.C.E.</small>] San Lorenzo becomes great ceremonial center</div>
+			<div data-year='-1200' data-type='point' data-state='closed' data-layer='5'>[1,200 <small>B.C.E.</small>] Olmec civilizations come from villages along Gulf of Mexico</div>
+		</div>
+		<div id='span'></div>
+		<div id='position'></div>
+	</div>
+	<div id='location' style='visibility:hidden'></div>
+	<!-- Not yet implemented -->
+	<!--<div class='filtercontainer'>
+		<div class='filterdesc'>Filter by Chapter</div>
+		<div class='filterselector'>
+			<div class='filterbutton'>1</div>
+			<div class='filterbutton'>2</div>
+			<div class='filterbutton'>3</div>
+			<div class='filterbutton'>4</div>
+			<div class='filterbutton'>5</div>
+			<div class='filterbutton'>6</div>
+			<div class='filterbutton'>7</div>
+			<div class='filterbutton'>8</div>
+			<div class='filterbutton'>9</div>
+			<div class='filterbutton'>10</div>
+			<div class='filterbutton'>11</div>
+			<div class='filterbutton'>12</div>
+			<div class='filterbutton'>13</div>
+			<div class='filterbutton'>14</div>
+			<div class='filterbutton'>15</div>
+			<div class='filterbutton'>16</div>
+			<div class='filterbutton'>17</div>
+			<div class='filterbutton'>18</div>
+			<div class='filterbutton'>19</div>
+			<div class='filterbutton'>20</div>
+			<div class='filterbutton'>21</div>
+			<div class='filterbutton'>22</div>
+			<div class='filterbutton'>23</div>
+			<div class='filterbutton'>24</div>
+			<div class='filterbutton'>25</div>
+			<div class='filterbutton'>26</div>
+			<div class='filterbutton'>27</div>
+			<div class='filterbutton'>28</div>
+			<div class='filterbutton'>29</div>
+		</div>
+	</div>-->
+	<script type="text/javascript">
+		!function() {
+			var mousePosition = window.innerWidth * .01, minyear = -document.querySelector('div#timelineScroll div:first-child').id.substring(1);
+			document.getElementById('timeline').addEventListener('mousemove', function(e) {
+				var year = Math.round(Math.round(e.clientX + this.scrollLeft - window.innerWidth * .01) / 2) - minyear || 1;
+				mousePosition = e.clientX
+				document.getElementById('location').innerText = year < 0 ? Math.abs(year) + ' B.C.E.' : year + ' C.E.';
+				document.getElementById('location').style.left = Math.max(window.innerWidth * .01, Math.min(document.getElementById('timeline').getBoundingClientRect().right - document.getElementById('location').getBoundingClientRect().width, e.clientX - document.getElementById('location').getBoundingClientRect().width / 2)) + 'px';
+				document.getElementById('position').style.left = Math.max(this.scrollLeft, Math.min(this.getBoundingClientRect().right - document.getElementById('position').getBoundingClientRect().width - window.innerWidth * .01 + this.scrollLeft, e.clientX - document.getElementById('position').getBoundingClientRect().width / 2 - window.innerWidth * .01 + this.scrollLeft)) + 'px';
+				document.getElementById('position').style.display = 'block';
+				document.getElementById('location').style.visibility = '';
+			});
+			document.getElementById('timeline').addEventListener('scroll', function(e) {
+				var year = Math.round(Math.round(mousePosition + this.scrollLeft - window.innerWidth * .01) / 2) - minyear || 1;
+				document.getElementById('location').innerText = year < 0 ? Math.abs(year) + ' B.C.E.' : year + ' C.E.';
+				document.getElementById('location').style.left = e.clientX - document.getElementById('location').getBoundingClientRect().width / 2;
+				document.getElementById('position').style.left = Math.max(this.scrollLeft, Math.min(this.getBoundingClientRect().right - document.getElementById('position').getBoundingClientRect().width - window.innerWidth * .01 + this.scrollLeft, mousePosition - document.getElementById('position').getBoundingClientRect().width / 2 - window.innerWidth * .01 + this.scrollLeft)) + 'px';
+			});
+			document.getElementById('timeline').addEventListener('mouseleave', function() {
+				document.getElementById('position').style.display = 'none';
+				document.getElementById('location').style.visibility = 'hidden';
+			})
+
+			Array.prototype.forEach.call(document.querySelectorAll('[data-type="point"]'), function(point) {
+				point.style.left = (minyear + +point.getAttribute('data-year')) * 2 - 6 + 'px';
+				point.addEventListener('mouseenter', function() {
+					this.setAttribute('data-state', 'open');
+					if (this.int) {
+						clearInterval(this.int);
+						this.int = 0;
+						this.style.width = '';
+						this.style.color = '';
+					}
+					this.style.zIndex = '3';
+					document.getElementById('span').style.width = '0px';
+					document.getElementById('span').style.borderWidth = '0 2px';
+					document.getElementById('span').style.left = parseFloat(this.style.left) + 3 + 'px';
+					document.getElementById('span').style.top = -(document.getElementById('timeline').getBoundingClientRect().bottom - point.getBoundingClientRect().bottom) + 'px';
+					document.getElementById('span').style.opacity = '';
+				});
+				point.addEventListener('mouseleave', function() {
+					point.style.width = Math.round(point.getBoundingClientRect().width) - 8 + 'px'
+					point.style.color = 'rgba(0,0,0,1)';
+					point.style.zIndex = '2';
+					var width = parseFloat(point.style.width), i = 0;
+					this.int = setInterval(function() {
+						point.style.width = (width - 2) * ((39 - i) / 40) + 2 + 'px';
+						point.style.color = 'rgba(0,0,0,' + Math.max(0, (19 - i) / 20) + ')';
+						i++;
+						if (i > 39) {
+							clearInterval(point.int);
+							point.int = 0;
+							point.style.width = '';
+							point.style.color = '';
+							point.style.zIndex = '';
+						}
+					}, 5)
+					this.setAttribute('data-state', 'closed');
+					document.getElementById('span').style.opacity = '0';
+				})
+			});
+
+			Array.prototype.forEach.call(document.querySelectorAll('[data-type="range"]'), function(range) {
+				range.style.left = (minyear + +range.getAttribute('data-year1')) * 2 - 6 + 'px';
+				var defwidth = (range.getAttribute('data-year2') - range.getAttribute('data-year1')) * 2;
+				range.style.width = defwidth + 'px'
+				range.addEventListener('mouseenter', function() {
+					this.setAttribute('data-state', 'open');
+					if (this.int) {
+						clearInterval(this.int);
+						this.int = 0;
+						this.style.color = '';
+					}
+					this.style.zIndex = '3';
+					this.style.width = '';
+					if (this.getBoundingClientRect().width < defwidth) {
+						this.style.width = defwidth + 'px';
+					}
+					document.getElementById('span').style.width = defwidth + 'px';
+					document.getElementById('span').style.borderWidth = '0 1px';
+					document.getElementById('span').style.left = parseFloat(this.style.left) + 4 + 'px';
+					document.getElementById('span').style.top = -(document.getElementById('timeline').getBoundingClientRect().bottom - range.getBoundingClientRect().bottom) + 'px';
+					document.getElementById('span').style.opacity = '';
+				});
+				range.addEventListener('mouseleave', function() {
+					var leaveWidth = false;
+					if (range.style.width == defwidth + 'px') leaveWidth = true;
+					range.style.width = Math.round(range.getBoundingClientRect().width) - 8 + 'px';
+					var width = parseFloat(range.style.width), i = 0;
+					range.style.zIndex = '2';
+					this.int = setInterval(function() {
+						if (!leaveWidth) range.style.width = (width - defwidth) * ((39 - i) / 40) + defwidth + 'px';
+						i++;
+						if (i > 39) {
+							clearInterval(range.int);
+							range.int = 0;
+							range.style.zIndex = '';
+							if (!leaveWidth) range.style.width = defwidth + 'px';
+						}
+					}, 5)
+					this.setAttribute('data-state', 'closed');
+					document.getElementById('span').style.opacity = '0';
+				})
+			})
+			setInterval(function() {
+				var selection = window.getSelection();
+				if (selection.isCollapsed) return;
+				if (selection.focusNode) {
+					if (selection.focusNode.hasAttribute && selection.focusNode.hasAttribute('data-state')) {
+						var elem = selection.focusNode;
+					} else if (selection.focusNode.parentNode.hasAttribute('data-state')) {
+						var elem = selection.focusNode.parentNode;
+					} else if (selection.focusNode.parentNode.parentNode.hasAttribute('data-state')) {
+						var elem = selection.focusNode.parentNode.parentNode;
+					} else if (selection.focusNode.parentNode.parentNode.parentNode.hasAttribute('data-state')) {
+						var elem = selection.focusNode.parentNode.parentNode.parentNode;
+					} else {
+						return;
+					};
+					Array.prototype.forEach.call(document.querySelectorAll('[data-state="open"]'), function(openelem) {
+						if (openelem == elem) return;
+						openelem.dispatchEvent(new MouseEvent('mouseleave'));
+					});
+					if (elem.getAttribute('data-state') == 'closed') elem.dispatchEvent(new Event('mouseenter'));
+				};
+			}, 100)
+		}()
+	</script>
+</body>
+</html>
