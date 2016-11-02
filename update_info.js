@@ -3,7 +3,7 @@ var UPDATES=[
 		title: 'New Timeline Page',
 		category: 'AP World History',
 		description: 'New timeline page that displays the years from 3,300 B.C.E. all the way to 2,100 C.E. and documents important events mentioned in the history textbook. It will be updated somewhat regularly as we read more chapters from the textbook.',
-		date: new Date(),
+		date: new Date('2016-11-02T04:56:20Z'),
 		link:'./AP/History/Timeline'
 	},{
 		title: 'Chapter 15 Flash Cards',
