@@ -1,50 +1,275 @@
-﻿<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang='en-US'>
 <head>
-	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
 	<title>ChristianFigueroa.GitHub.io</title>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet">
+	<meta charset='utf-8'/>
+	<meta name='viewport' content='initial-scale=1,width=device-width'/>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
 	<style>
-		body{margin:0}
-		div#fullHeader{width:100%;height:30vh;background-image:url('https://christianfigueroa.github.io/assets/png/homepageHeader_BG.png');background-size:100%;overflow:auto}
-		div#fullHeader>h1{color:#fff;font-family:"Open Sans";font-weight:700;position:relative;top:8vh;margin:0;text-align:center}
-		div#headerStrip{width:100%;min-height:10vh;background-color:#00ACC1;position:relative;z-index:100;overflow-x:auto}
-		div#headerStripHold{height:0;width:100%;position:relative;top:0}
-		div.bodySec{width:100%;position:relative}
-		div#githubRefer{background:#E5E5E5;text-align:center;padding-bottom:8vmin;padding-top:12vmin}
-		div#githubRefer>a>img{margin:0 auto;position:relative;height:30%}
-		div#githubRefer>a:nth-child(3){display:inline-block;margin-top:6vmin;cursor:pointer;border-radius:8px}
-		div#githubRefer>a>div{padding:1vmin 3vmin;background-color:#313131;display:inline-block;border-radius:8px;box-shadow:0 4px 16px 0.35vw rgba(0,0,0,0.3);font-family:Lato;font-size:1.5em;color:#E5E5E5;max-width:94vw;overflow:auto}
-		div#githubRefer>a>div:hover{background-color:#5F5F5F}
-		div#ap-bioRefer{background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0, 0, 0, 0.6)),url('https://christianfigueroa.github.io/assets/png/homepageAP-Bio_BG.png');background-size:100%;padding-bottom:8.2vmin}
-		div.bodySec:not(#githubRefer)>a{margin:0;text-align:center;color:#fff;font-family:Montserrat;font-weight:700;font-size:15vmin;position:relative;top:10vmin;margin-bottom:3vmin;text-decoration:none}
-		div.bodySec:not(#githubRefer)>div{width:100%;position:relative;top:12vmin;display:inline-block}
-		div.bodySec:not(#githubRefer)>div>a{font-family:Lato;font-size:200%;text-decoration:none;color:#fff;text-align:center}
-		div.bodySec>a>h2{margin:0}
-		div.bodySec:not(#githubRefer)>div>a>div{max-width:100%;overflow:auto;border-top:3px solid #fff;background-color:rgba(255,255,255,0.25)}
-		div.bodySec:not(#githubRefer)>div>a:hover>div{background-color:#fff;color:#444}
-		div.bodySec:not(#githubRefer)>div>a:last-child>div{border-bottom:3px solid #fff}
-		div#jsRefer{background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('https://christianfigueroa.github.io/assets/png/homepageJS_BG.png');background-size:100%;padding-bottom:8.2vmin;overflow:hidden}
-		div#pythonRefer{background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('https://christianfigueroa.github.io/assets/png/homepagePython_BG.png');background-size:100%;padding-bottom:8.2vmin;overflow:hidden}
-		table#headerStripTable{height:10vh}
-		table#headerStripTable td{color:#fff;font-family:"Open Sans";font-size:5vh;font-weight:700;white-space:pre;cursor:pointer;padding:0 1vw;}
-		table#headerStripTable td:hover{background:#0097A7}
-		table#headerStripTable td>img{height:4.5vh;position:relative;top:.4vh;margin-right:1.5vh}
+		@font-face {
+			font-family: 'BPreplay';
+			font-style: italic;
+			font-weight: 700;
+			src: url('assets/BPreplay-BoldItalics.woff2') format('woff2'),
+				 url('assets/BPreplay-BoldItalics.woff') format('woff'),
+				 url('assets/BPreplay-BoldItalics.ttf') format('truetype');
+		}
+
+		html, body {
+			margin: 0;
+			overflow-x: hidden;
+			width: 100vw;
+			padding-bottom: 2vh;
+			background-color: #F3F3F3;
+		}
+
+		.svg-spartan {
+			background: url('assets/spartan.svg');
+		}
+
+		.svg-octocat {
+			background: url('assets/octocat.svg');
+		}
+
+		.svg-dna {
+			background: url('assets/dna.svg');
+		}
+
+		.svg-js {
+			background: url('assets/js.svg');
+		}
+
+		table {
+			table-layout: fixed;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td {
+			cursor: pointer;
+		}
+
+		tr:not(:first-child) {
+			border-top: 3px solid #456;
+		}
+
+		tr:hover td {
+			background: #C3C3C3;
+		}
+
+		td.icon {
+			background: #D3D3D3;
+			width: 8em;
+		}
+
+		td.text {
+			font-family: BPreplay, sans-serif;
+			font-style: italic;
+			font-weight: 700;
+			padding-left: .1em;
+			background: #D3D3D3;
+			font-size: 6em;
+			color: #345;
+		}
+
+		nav {
+			width: 100%;
+			max-width: 100vw;
+			height: 15vh;
+			min-height: 50px;
+			text-align: center;
+			display: table;
+			border-bottom: 5px solid #00acc1;
+			position: fixed;
+			top: 0;
+			white-space: nowrap;
+			overflow-x: auto;
+			table-layout: fixed;
+		}
+
+		div.minicon {
+			height: 13vh;
+			min-height: 43px;
+			width: 13vh;
+			min-width: 43px;
+			cursor: pointer;
+			display: inline-block;
+		}
+
+		div#center {
+			display: table-cell;
+			vertical-align: middle;
+			background: #F3F3F3;
+			height: 100%;
+			font-size: 0;
+			width: 52vh;
+			min-width: 132px;
+		}
+
+		div#buffer {
+			height: calc(15vh + 5px);
+			min-height: 55px;
+		}
+
+		div.header {
+			text-align: center;
+			width: 100%;
+			font-size: 3em;
+			font-family: BPreplay;
+			font-weight: 700;
+			font-style: italic;
+			border-top: 5px solid #00acc1;
+			border-bottom: 5px solid #00acc1;
+			color: #456;
+			background: #F3F3F3;
+			line-height: 1.75;
+		}
+
+		div.header:hover {
+			color: #007c91;
+			text-decoration: underline;
+		}
+
+		div#updates {
+			width: 100%;
+			background: #DDD;
+		}
+
+		table.update {
+			font-size: inherit;
+			text-align: justify;
+		}
+
+		table.update tr {
+			border-bottom: 3px solid #456;
+		}
+
+		td.updatetext {
+			padding: .7em 1.3em .7em 0
+		}
+
+		td.updatetext h3 {
+			margin: 0;
+			font-family: BPreplay, sans-serif;
+			font-weight: 700;
+			font-style: italic;
+			font-size: 2em;
+			color: #00acc1;
+		}
+
+		td.updatetext span {
+			font-family: "Open Sans";
+			font-size: 1.2em;
+			color: rgba(0,0,0,.87);
+		}
+
+		div.updateicon {
+			height: 4em;
+			width: 4em;
+			margin: auto;
+		}
+
+		td.updateicon {
+			width: 5em;
+			text-align: center;
+		}
+
+		td.updatetext time {
+			font-family: "Open Sans";
+			font-weight: 400;
+			color: #678;
+			font-size: .55em;
+			vertical-align: 20%;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		td.updatetext span a {
+			color: #00acc1;
+		}
+
+		td.updatetext span a:hover {
+			text-decoration: underline;
+		}
+
+		.svg {
+			height: 8em;
+			width: 8em;
+		}
+
+		td.text a {
+			display: block;
+			color: inherit;
+		}
 	</style>
 </head>
-<body lang='en'>
-	<div id='fullHeader'><h1>ChristianFigueroa.GitHub.io</h1></div>
-	<div id='headerStrip'><table id='headerStripTable'><tr><td id='headerGitHub'><img src='https://christianfigueroa.github.io/assets/png/GitHub-Cat_small.png'>GitHub</td><td id='headerAPBiology'>AP Biology</td><td id='headerJavaScript'>JavaScript</td><td id='headerPython'>Python</td></tr></table></div>
-	<div id='headerStripHold'></div>
-	<div class='bodySec' id='githubRefer'><a href='https://github.com/ChristianFigueroa'><img src="https://christianfigueroa.github.io/assets/png/GitHub-Full.png"></a><br><a href='https://github.com/ChristianFigueroa'><div>GitHub.com/ChristianFigueroa</div></a></div>
-	<div class='bodySec' id='ap-bioRefer'><a href='https://christianfigueroa.github.io/AP/Biology/'><h2>AP Biology</h2></a><div></div></div>
-	<div class='bodySec' id='jsRefer'><a href='https://christianfigueroa.github.io/JavaScript/'><h2>JavaScript</h2></a><div></div></div>
-	<div class='bodySec' id='pythonRefer'><a href='https://christianfigueroa.github.io/Python/'><h2><img src='https://christianfigueroa.github.io/assets/png/homepagePython_Sym.png'>&#8197;Python</h2></a><div></div></div>
-	<script src='homepageConfig.js' type='text/javascript'></script>
-	<script>window.onresize=function(){document.querySelector('div#fullHeader>h1').style.fontSize=Math.min(window.innerHeight*.1,window.innerWidth*.06)+'px';document.querySelector('div#fullHeader>h1').style.top=Math.min(window.innerHeight*.08,window.innerWidth*.048)+'px';document.querySelector('div#fullHeader').style.height=Math.min(window.innerHeight*.3,window.innerWidth*.18)+'px';document.querySelector('div#githubRefer>a>img').style.width=Math.min(window.innerWidth*.8,window.innerHeight*.875948275862069)+'px';document.querySelector('div#githubRefer>a>img').style.height=Math.min(window.innerHeight*.18,window.innerWidth*.1643932683790965)+'px';document.querySelector('div#ap-bioRefer>a>h2').style.fontSize=Math.max(window.innerWidth*.15,window.innerHeight*.1)+'px';document.querySelector('div#jsRefer>a>h2').style.fontSize=Math.max(window.innerWidth*.15,window.innerHeight*.1)+'px';document.querySelector('div#pythonRefer>a>h2').style.fontSize=Math.max(window.innerWidth*.15,window.innerHeight*.1)+'px';document.querySelector('div#pythonRefer>a>h2>img').style.height=Math.max(window.innerWidth*.1125,window.innerHeight*.075)+'px'};window.onresize();!function(){headerStrip=document.querySelector('div#headerStrip');var headerStripHold=document.querySelector('div#headerStripHold'),fullHeader=document.querySelector('div#fullHeader'),html=document.documentElement,body=document.body;setInterval(function(){if(html.scrollTop>=fullHeader.getBoundingClientRect().height||body.scrollTop>=fullHeader.getBoundingClientRect().height){headerStrip.style.position='fixed';headerStrip.style.top='0';headerStripHold.style.height='10vh'}else{headerStrip.style.position='relative';headerStrip.style.top='';headerStripHold.style.height=''}},5);var key={'GitHub':['githubRefer','GitHub'],'AP Biology':['ap-bioRefer','APBiology'],'JavaScript':['jsRefer','JavaScript'],'Python':['pythonRefer','Python']},tr=document.querySelector('#headerStripTable tr');for(section in recents){for(var i=0;i<recents[section].length;i++){var a=document.createElement('a'),div=document.createElement('div');div.innerText=recents[section][i].title;a.href=recents[section][i].url;a.appendChild(div);document.querySelector('div#'+key[section][0]+'>div').appendChild(a)}};for(i=0;i<order.length;i++){var node=document.getElementById(key[order[i]][0]);document.body.removeChild(node);document.body.appendChild(node);node=document.getElementById('header'+key[order[i]][1]);tr.removeChild(node);tr.appendChild(node)};document.getElementById('headerGitHub').onclick=function(){location='https://github.com/ChristianFigueroa'};document.getElementById('headerAPBiology').onclick=function(){location='https://christianfigueroa.github.io/AP/Biology'};document.getElementById('headerJavaScript').onclick=function(){location='https://christianfigueroa.github.io/JavaScript'};document.getElementById('headerPython').onclick=function(){location='https://christianfigueroa.github.io/Python'}}()</script>
+<body>
+	<div id='buffer'></div>
+	<nav>
+		<div id='center'>
+			<a href='https://github.com/ChristianFigueroa'>
+				<div class='minicon svg-octocat' viewBox="0 0 744.0945 744.09448" title='GitHub' data-v='0'></div>
+			</a>
+			<a href='./AP/Biology/'>
+				<div class='minicon svg-dna' title='AP Bio' data-v='1'></div>
+			</a>
+			<a href='./AP/History/'>
+				<div class='minicon svg-spartan' title='AP World History' data-v='2'></div>
+			</a>
+			<a href='./JavaScript/'>
+				<div class='minicon svg-js' title='JavaScript' data-v='3'></div>
+			</a>
+		</div>
+	</nav>
+	<table>
+		<tr data-v='0'>
+			<td class='icon'>
+				<a href='https://github.com/ChristianFigueroa'>
+					<svg class='svg svg-octocat'></svg>
+				</a>
+			</td>
+			<td class='text'><a href='https://github.com/ChristianFigueroa'>GitHub</a></td>
+		</tr>
+		<tr data-v='1'>
+			<td class='icon'>
+				<a href='./AP/Biology'>
+					<div class='svg svg-dna'></div>
+				</a>
+			</td>
+			<td class='text'><a href='./AP/Biology'>AP Bio</a></td>
+		</tr>
+		<tr data-v='2'>
+			<td class='icon'>
+				<a href='./AP/History'>
+					<div class='svg svg-spartan'></div>
+				</a>
+			</td>
+			<td class='text'><a href='./AP/History'>AP World History</a></td>
+		</tr>
+		<tr data-v='3'>
+			<td class='icon'>
+				<a href='./JavaScript'>
+					<div class='svg svg-js'></div>
+				</a>
+			</td>
+			<td class='text'><a href='./JavaScript'>JavaScript</a></td>
+		</tr>
+	</table>
+	<a href='./updates'><div class='header'>Recent Updates</div></a>
+	<div id='updates'><noscript>
+		<a href='http://enable-javascript.com/'>
+			<table class='update' title='Click to enable JavaScript'>
+				<tr>
+					<td class='updateicon'><div style='background:url("assets/no_js.svg")' class='updateicon'></div></td>
+					<td class='updatetext'><h3 class='update'>Please Enable JavaScript</h3><span>JavaScript is required to load Recent Updates. Click here to find out how to enable it for your browser.</span></td>
+				</tr>
+			</table>
+		</a>
+	</noscript></div>
+	<script src='JavaScript/toElapsedString.js'></script>
+	<script src='./update_info.js'></script>
+	<script type="text/javascript">Array.prototype.forEach.call(document.querySelectorAll('td,div.minicon'),function(e){e.addEventListener('click',function(){location=['https://github.com/ChristianFigueroa','./AP/Biology/','./AP/History/','./JavaScript'][this.parentNode.getAttribute('data-v')||this.getAttribute('data-v')]})});UPDATES.forEach(function(a,i){if(i>5)return;var b=document.createElement('table'),c=document.createElement('h3'),d=document.createElement('span'),e=document.createElement('a');b.innerHTML='<tr><td class="updateicon"></td><td class="updatetext"></td></tr>';b.children[0].children[0].children[0].innerHTML=SVGS[a.category];c.innerHTML=a.title+' <time>('+a.date.toElapsedString()+')</time>';b.className='update';b.children[0].children[0].children[1].appendChild(c);d.innerHTML=a.description;b.children[0].children[0].children[1].appendChild(d);b.children[0].children[0].children[1].children[0].children[0].title=['January','February','March','April','May','June','July','August','September','October','November','December'][a.date.getMonth()]+' '+a.date.getDate()+', '+a.date.getFullYear()+', '+(a.date.getHours()%12||12)+':'+('00'+a.date.getMinutes()).substr(a.date.getMinutes().toString().length)+(a.date.getHours()<12?' AM':' PM');b.children[0].children[0].children[1].children[0].children[0].setAttribute('datetime',a.date.toISOString());e.appendChild(b);e.href=a.link;document.getElementById('updates').appendChild(e)});(onresize=function(){document.getElementById('updates').style.fontSize=document.querySelector('body>a').style.fontSize=innerWidth<=500||window.outerWidth<=500?'2em':''})();</script>
 </body>
 </html>
