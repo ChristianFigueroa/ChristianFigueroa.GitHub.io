@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+	<title>All Updates</title>
+	<meta charset='utf-8'/>
+	<meta name='viewport' content='initial-scale=1,width=device-width'/>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400'/>
+	<style>
+		@font-face {
+			font-family: 'BPreplay';
+			font-style: italic;
+			font-weight: 700;
+			src: url('assets/BPreplay-BoldItalics.woff2') format('woff2'),
+				 url('assets/BPreplay-BoldItalics.woff') format('woff'),
+				 url('assets/BPreplay-BoldItalics.ttf') format('truetype');
+		}
+
+		html, body {
+			margin: 0;
+		}
+
+		.svg-spartan {
+			background: url('assets/spartan.svg');
+		}
+
+		.svg-octocat {
+			background: url('assets/octocat.svg');
+		}
+
+		.svg-dna {
+			background: url('assets/dna.svg');
+		}
+
+		.svg-js {
+			background: url('assets/js.svg');
+		}
+
+		div#header {
+			width: 100%;
+			font-family: 'BPreplay';
+			font-size: 15vh;
+			color: #456;
+			border-bottom: 5px solid #00acc1;
+			text-align: center;
+		}
+
+		div#main {
+			background: #ddd;
+			min-height: calc(81vh - 5px);
+		}
+
+		table.update {
+			font-size: inherit;
+			text-align: justify;
+			table-layout: fixed;
+			border-collapse: collapse;
+			width: 100%;
+
+		}
+
+		table.update tr {
+			border-bottom: 3px solid #456;
+		}
+
+		td.updatetext {
+			padding: .7em 1.3em .7em 0
+		}
+
+		td.updatetext h3 {
+			margin: 0;
+			font-family: BPreplay, sans-serif;
+			font-weight: 700;
+			font-style: italic;
+			font-size: 2em;
+			color: #00acc1;
+		}
+
+		td.updatetext span {
+			font-family: "Open Sans";
+			font-size: 1.2em;
+			color: rgba(0,0,0,.87);
+		}
+
+		div.updateicon {
+			height: 4em;
+			width: 4em;
+			margin: auto;
+		}
+
+		td.updateicon {
+			width: 5em;
+			text-align: center;
+		}
+
+		td.updatetext time {
+			font-family: "Open Sans";
+			font-weight: 400;
+			color: #678;
+			font-size: .55em;
+			vertical-align: 20%;
+		}
+
+		a {
+			text-decoration: none;
+			color: #00acc1;
+		}
+
+		table.update a:hover {
+			text-decoration: underline;
+		}
+
+		tr:hover td {
+			background: #C3C3C3;
+		}
+	</style>
+</head>
+<body>
+	<div id='header'>All Updates</div>
+	<noscript><style>div#nojs{font-family:"Open Sans",Arial,Helvetica,sans-serif;font-size:5vmin;text-align:center}div#nojs>span{display:block;width:85%;margin-left:7.5%}a{text-decoration:none;color:#00acc1}a:hover{text-decoration: underline}img#nojsico{height:40vmin;width:40vmin;display:block;margin:auto}noscript{z-index:1000;position:fixed;height:100vh;width:100vw;background:#F5F5F5;top:0;left:0;overflow-y:auto}div.nojscrossstripes{height:10%;width:100%;background-image:url("/assets/cross_stripe.svg");border-bottom:1.5vh solid #678}</style><div class='nojscrossstripes'></div><div id='nojs'><a href='http://enable-javascript.com/'><img id='nojsico' src='/assets/no_js.svg'></a><span>Your broswer settings have your JavaScript disabled. Unfortunately, this page requires JavaScript to work properly. Please <a href='http://enable-javascript.com'>enable JavaScript</a> and refresh to continue.</span></div></noscript>
+	<div id='main'></div>
+	<script src='update_info.js'></script>
+	<script src='JavaScript/toElapsedString.js'></script>
+	<script type="text/javascript">UPDATES.forEach(function(a,i){var b=document.createElement('table'),c=document.createElement('h3'),d=document.createElement('span'),e=document.createElement('a');b.innerHTML='<tr><td class="updateicon"></td><td class="updatetext"></td></tr>';b.children[0].children[0].children[0].innerHTML=SVGS[a.category];c.innerHTML=a.title+' <time>('+a.date.toElapsedString()+')</time>';b.className='update';b.children[0].children[0].children[1].appendChild(c);d.innerHTML=a.description;b.children[0].children[0].children[1].appendChild(d);b.children[0].children[0].children[1].children[0].children[0].title=['January','February','March','April','May','June','July','August','September','October','November','December'][a.date.getMonth()]+' '+a.date.getDate()+', '+a.date.getFullYear()+', '+(a.date.getHours()%12||12)+':'+('00'+a.date.getMinutes()).substr(a.date.getMinutes().toString().length)+(a.date.getHours()<12?' AM':' PM');b.children[0].children[0].children[1].children[0].children[0].setAttribute('datetime',a.date.toISOString());e.appendChild(b);e.href=a.link;document.getElementById('main').appendChild(e)});</script>
+</body>
+</html>
