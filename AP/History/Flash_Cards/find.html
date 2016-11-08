@@ -12,9 +12,10 @@
 			font-family: 'Bitter';
 			font-style: normal;
 			font-weight: 400;
-			src:url('/assets/Bitter-Regular.woff2') format('woff2'),
-				url('/assets/Bitter-Regular.woff') format('woff'),
-				url('/assets/Bitter-Regular.ttf') format('truetype');
+			src: local('Bitter'),
+				 url('/assets/Bitter-Regular.woff2') format('woff2'),
+				 url('/assets/Bitter-Regular.woff') format('woff'),
+				 url('/assets/Bitter-Regular.ttf') format('truetype');
 		}
 
 		html {
@@ -145,10 +146,10 @@
 				var ids=args.id.split(',');
 				for(var i=ids.length-1;i>=0;i--){shownFlashCards.push(FLASHCARDS.getTitle(ids[i]));if(shownFlashCards[shownFlashCards.length-1]==null)break};if(i>=0)location.replace('view');
 				shownFlashCards.reverse();
-				document.title='Viewing: '+shownFlashCards.map(function(a){return a.title}).join(', ');
+				document.title=shownFlashCards.map(function(a){return a.title}).join(', ')+' \u00b7 ChristianFigueroa.GitHub.io';
 			}else{
 				if(!args.t||!args.q||!(args.t in [0,1,2])||args.t==0&&!(args.q>=0&&args.q<=FLASHCARDS.PERIODS.length-1)||args.t==1&&!(args.q>=0&&args.q<=FLASHCARDS[''].length))location.replace('view');
-				document.title='Viewing: '+(args.t==0?'Period - ':args.t==1?'Chapter - ':'"')+(args.t==0?FLASHCARDS.PERIODS[args.q]:args.t==2?args.q:~args.q?+args.q+1:'All')+(args.t>1?'"':'');
+				document.title=(args.t==0?'':args.t==1?'Chapter ':'"')+(args.t==0?FLASHCARDS.PERIODS[args.q]+' Period':args.t==2?args.q:~args.q?+args.q+1:'All')+(args.t>1?'"':'')+' \u00b7 ChristianFigueroa.GitHub.io';
 				var shownFlashCards=args.t==0?FLASHCARDS.getPeriod(args.q):args.t==1?(~args.q?FLASHCARDS.getChapter(+args.q):FLASHCARDS.getAll()):[];
 				var reg=/\s/g,map=[[/\u00ED/g,'i'],[/\u00FC/g,'u'],[/\u00E7/g,'c']]
 				// Used for searching algorithm
