@@ -206,8 +206,8 @@
 					chapter: 7,
 					period: C
 				},{
-					title: '"Eyes and Ears of the King"',
-					def: 'The "Eyes and Ears of the King" were basically spies who went around the Achaemenid empire, making sure that the satraps did as they were supposed to and didn\'t go against Darius\'s orders.',
+					title: 'Eyes and Ears of the King',
+					def: 'The Eyes and Ears of the King were basically spies who went around the Achaemenid empire, making sure that the satraps did as they were supposed to and didn\'t go against Darius\'s orders.',
 					sig: 'The idea of subordinates ruling over a section of an empire had failed in China already, so by doing this, Darius was able to ensure the satraps wouldn\'t commit treason.',
 					theme: P,
 					chapter: 7,
@@ -629,6 +629,78 @@
 					sig: 'Promoters of the bhakti movement like guru Kabir acted like <a href="find?id=Sufis" style="color:#00acc1">Sufis</a> for Hinduism and helped build bridges between India\'s social and cultural communities.',
 					theme: R,
 					chapter: 15,
+					period: PC
+				}
+			],[
+				{
+					title: 'Constantinople',
+					def: 'Constantinople was the first city of the Byzantine Empire, founded by Constantine. Constantinople was located on a peninsula which held a great military advantage since land invasions were much harder to pull off.',
+					sig: 'Even though the capital was eventually taken by Muslims, Constantinople was able to withstand many invasions which greatly strengthened the empire. It was the ideal location for a capital of an empire.',
+					theme: G,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Hagia Sophia',
+					def: 'The Hagia Sophia was a huge Christian church built by Justinian while he was emperor of Byzantium. It featured an enormous dome associated with the heavens encircling Earth. It was later turned into a mosque after Ottoman invaders conquered the area.',
+					sig: 'This church demonstrated how prominent Christianity was in this empire. Elaborate buildings like the Hagia Sophia were built to promote God and his teachings.',
+					theme: R,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Greek Fire',
+					def: 'Greek fire was a weapon used by Byzantine forces to fend off Muslim attacks. It was able to stay ignited even while floating on water and often burned many troops to death because of its very high flammability.',
+					sig: 'The only way the Byzantine Empire was able to withstand Muslim invasions was through the help of innovations like Greek fire. Had they not been prepared, the empire would have been conquered by the ever-growing Islamic Empire.',
+					theme: A,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Charlemagne',
+					def: 'Charlemagne was an emperor of the Frankish Empire whose rule was comparable to that of Harsha in northern India. He relied on counts to enact his policy and used <a href="find?id=Missi%20Dominici" style="color:#00acc1">missi dominici</a> to make sure they stayed loyal to Charlemagne.',
+					sig: 'Even though Charlemagne was a great emperor over his subjects, he also led to conflict between two already-feuding churches. Their opposing viewpoints led to the Great Schism.',
+					theme: P,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Missi Dominici',
+					def: 'The missi dominici translates to "envoys of the land ruler" and was a group of people hired by <a href="find?id=Charlemagne" style="color:#00acc1">Charlemagne</a> to keep his counts on his side and prevent autonomy. They went around the empire, reviewing the counts\' accounts.',
+					sig: 'The missi dominici were very important to the success of the Carolingian Empire. This group of people were similar to the tactics used by <a href="find?id=Darius,Eyes%20and%20Ears%20of%20the%20King" style="color:#00acc1">Darius</a> that led to the success of his empire.',
+					theme: P,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Vikings',
+					def: 'Vikings were seafaring plunderers focused on looting settlements by using their advanced shipbuilding techniques. Their boats could travel the open ocean using sails and travel up rivers using oars. Even if internal struggle hadn\'t collapsed the Carolingian empire, vikings would have.',
+					sig: 'Viking invasions were usually successful in looting, and as a result had a negative effect on the economies of the empires they invaded which usually weakened that empire.',
+					theme: P,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Bezant',
+					def: 'Bezants were gold coins manufactured first in the Byzantine Empire (hence the similar names), but were later minted as well in the Arabic Empire. They were rare up until the 13<sup style="vertical-align:top;font-size:70%">th</sup> century since they were so expensive to mint.',
+					sig: 'Bezants had a set value that helped to standardize currencies in Byzantium. They could be used in transactions since both parties knew exactly the amount the coin would be worth.',
+					theme: E,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Heavy Plow',
+					def: 'Heavy plows were one of several innovations form western Europe that allowed for an increase in agricultural production. It differed from the previous light plow in that it was able to handle the heavy moist dirt that the previous light plow wasn\'t made for.',
+					sig: 'When there\'s a jump in agricultural production, there\'s a jump in population as demonstrated many times in history. The heavy plow probably had the same affect.',
+					theme: A,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Iconoclasm',
+					def: 'Iconoclasm was a movement that began with Emperor Leo III in which religious paintings of saints and holy images were treated as idols instead of aids for religious practice. Christianity banned the use of idols, and as such, Leo III began to destroy these paintings.',
+					sig: 'Iconoclasm sparked many riots and angry Christians in the empire that used the icons as a stimulus to help in worship. These riots continued in the empire\'s streets for over a century.',
+					theme: R,
+					chapter: 16,
+					period: PC
+				},{
+					title: 'Saint Benedict',
+					def: 'Saint Benedict and Saint Basil were two reformers who gave Christian monasteries a standard set of regulations for them to follow. Previous to this, monasteries varied greatly in their rules from one another.',
+					sig: 'The regulation of monastery rules helped the spread of Christianity. More people were encouraged to join monasteries and lead ascetic religious lives, following Christian doctrine.',
+					theme: R,
+					chapter: 16,
 					period: PC
 				}
 			]
