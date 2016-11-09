@@ -1,5 +1,11 @@
 var UPDATES=[
 	{
+		title: 'Chapter 16 Flash Cards',
+		category: 'AP World History',
+		description: '10 new flash cards: Constantinople, Hagia Sophia, Greek Fire, Charlemagne, Missi Dominici, Vikings, Bezant, Heavy Plows, Iconoclasm, Saint Benedict.',
+		date: new Date('2016-11-08T07:59:12Z'),
+		link: './AP/History/Flash_Cards/find?t=1&q=15'
+	},{
 		title: 'New Timeline Page',
 		category: 'AP World History',
 		description: 'New timeline page that displays the years from 3,300 B.C.E. all the way to 2,100 C.E. and documents important events mentioned in the history textbook. It will be updated somewhat regularly as we read more chapters from the textbook.',
