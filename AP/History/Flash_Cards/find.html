@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='en-US'>
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
@@ -113,27 +113,10 @@
 		code, samp {
 			font-family: Bitter;
 		}
-
-		noscript {
-			height: 100vh;
-			width: 100vw;
-			color: #fff;
-			font-size: 3em;
-			font-family: Lato, sans-serif;
-		}
-
-		noscript p {
-			text-align: center;
-			margin: 2vw;
-		}
-
-		noscript a {
-			color: #fff;
-		}
 	</style>
 </head>
 <body>
-	<noscript><p>Javascript must be enabled to view this page. Click <a href='http://enable-javascript.com/'>here</a> to find out how to re-enable it.</p></noscript>
+	<noscript><style>div#nojs{font-family:"Open Sans",Arial,Helvetica,sans-serif;font-size:5vmin;text-align:center}div#nojs>span{display:block;width:85%;margin-left:7.5%}a{text-decoration:none;color:#00acc1}a:hover{text-decoration: underline}img#nojsico{height:40vmin;width:40vmin;display:block;margin:auto}noscript{z-index:1000;position:fixed;height:100vh;width:100vw;background:#F5F5F5;top:0;left:0;overflow-y:auto}div.nojscrossstripes{height:10%;width:100%;background-image:url("/assets/cross_stripe.svg");border-bottom:1.5vh solid #678}</style><div class='nojscrossstripes'></div><div id='nojs'><a href='http://enable-javascript.com/'><img id='nojsico' src='/assets/no_js.svg'></a><span>Your broswer settings have your JavaScript disabled. Unfortunately, this page requires JavaScript to work properly. Please <a href='http://enable-javascript.com'>enable JavaScript</a> and refresh to continue.</span></div></noscript>
 	<h1 id='header'></h1>
 	<script charset='UTF-8' src='../../../assets/essentials.js'></script>
 	<script charset='UTF-8' src='flash_card_info.js'></script>
@@ -227,19 +210,22 @@
 					}
 				})
 			},35)
+			shownFlashCards=shownFlashCards.length?shownFlashCards:[{title:'No Flash Cards for this Chapter',def:'',sig:'',theme:'',chapter:'<span style="font-family:Lato;font-size:105.2631578947368%">None</span>',period:'None',empty:1}];
 			for(var i=0,l=shownFlashCards.length;i<l;i++){
 				var a=document.createElement('div');
 				a.className='flashcard';
 				a.innerHTML='<div class="flashCardInner"><span class="period">Period: '+shownFlashCards[i].period+'</span><span class="chapter">Chapter: <span class="number">'+shownFlashCards[i].chapter+'</span></span><div class="title">'+shownFlashCards[i].title+'</div></div>';
 				a.setAttribute('data-i',i);
 				a.style.opacity='1';
-				a.children[0].ael(['mousein','mouseover','hover','touchstart','mousedown','click'],function(){
-					$('[data-e],[data-c]').forEach(function(){this.dispatchEvent(new MouseEvent('mouseout'))})
-					if(this.hasAttribute('data-b'))this.removeAttribute('data-b');else this.setAttribute('data-a',1)
-				})
-				a.children[0].ael(['mouseout','mouseleave','touchend','touchcancel'],function(){
-					if(this.hasAttribute('data-a'))this.removeAttribute('data-a');else this.setAttribute('data-b',1)
-				})
+				if(!shownFlashCards[i].empty){
+					a.children[0].ael(['mousein','mouseover','hover','touchstart','mousedown','click'],function(){
+						$('[data-e],[data-c]').forEach(function(){this.dispatchEvent(new MouseEvent('mouseout'))})
+						if(this.hasAttribute('data-b'))this.removeAttribute('data-b');else this.setAttribute('data-a',1)
+					})
+					a.children[0].ael(['mouseout','mouseleave','touchend','touchcancel'],function(){
+						if(this.hasAttribute('data-a'))this.removeAttribute('data-a');else this.setAttribute('data-b',1)
+					})
+				}
 				document.body.appendChild(a);
 			}
 			if(args.id){
