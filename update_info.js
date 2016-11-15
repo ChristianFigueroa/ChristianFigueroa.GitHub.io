@@ -1,5 +1,11 @@
 var UPDATES=[
 	{
+		title: 'Chapter 19 Flash Cards',
+		category: 'AP World History',
+		description: '10 new flash cards: Investiture Contest, Horse Collars, Hanseatic League, Chivalry, Troubadours, Cathedral Schools, Saint Thomas Aquinas, Eucharist, Relics, Reconquista',
+		date: new Date('2016-11-15T08:31:09Z'),
+		link: './AP/History/Flash_Cards/find?t=1&q=18'
+	},{
 		title: 'Chapter 16 Flash Cards',
 		category: 'AP World History',
 		description: '10 new flash cards: Constantinople, Hagia Sophia, Greek Fire, Charlemagne, Missi Dominici, Vikings, Bezant, Heavy Plows, Iconoclasm, Saint Benedict.',
