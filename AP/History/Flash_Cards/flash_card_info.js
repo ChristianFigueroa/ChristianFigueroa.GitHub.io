@@ -309,7 +309,7 @@
 					period: C
 				},{
 					title: 'Dharma',
-					def: 'The Dharma was a Buddhist belief that involved the Four Noble Truths and the Noble Eightfold Path. It stated that for an individual to achieve nirvana, they had to separate themselves from the world\' desires.',
+					def: 'The Dharma was a Buddhist belief that involved the Four Noble Truths and the Noble Eightfold Path. It stated that for an individual to achieve nirvana, they had to separate themselves from the world\'s desires.',
 					sig: 'This was what the Buddhists believed was their ultimate salvation. By following the Buddhist dharma, they would eventually achieve spiritual independence.',
 					theme: R,
 					chapter: 9,
@@ -703,10 +703,82 @@
 					chapter: 16,
 					period: PC
 				}
+			],[],[],[
+				{
+					title: 'Investiture Contest',
+					def: 'Pope Gregory VII and Emperor Henry IV were at odds with another in who would decide who would be a church official. Pope Gregory then excommunicated Emperor Henry. The emperor had to beg barefoot in the snow for the Pope to allow him back into the church.',
+					sig: 'This displays just how split religion and politics were in western Europe and how much power the pope had compared to the emperor.',
+					theme: P,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Horse Collars',
+					def: 'Horse collars allowed horses to pull plows using their chests instead of their necks, which normally would choke them. This let farmers replace slow oxen with faster horses and increase agricultural production.',
+					sig: 'An increase in agriculture in any empire usually leads to a population growth, in this case a very big one. It also increased trade in the Mediterranean basin.',
+					theme: E,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Hanseatic League',
+					def: 'The Hanseatic League was a group of traders in northern Europe that included many big trading cities. They were able to control trade between these cities. Products included grain, fish, furs, and timber.',
+					sig: 'The Hanseatic League was connected with the Mediterranean basin trade. The two trade networks connected all of Europe and let all the empires trade with one another.',
+					theme: E,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Chivalry',
+					def: 'Chivalry was basically a set of rules nobles followed that made them more polite to others, especially women. This change in behavior towards women greatly increased the power of women in medieval times. Society was still patriarchal, but was also a little more fair to women.',
+					sig: 'Women weren\'t treated as poorly and were even allowed to get professional jobs like a physician in some cases.',
+					theme: S,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Troubadours',
+					def: 'Troubadours were poets who sang about love around Europe. These poems increased <a href="find?id=Chivalry" style="color:#00acc1">chivalry</a> and thus also increased the idea of respect towards women.',
+					sig: 'This increased gender equality allowed women to get professional jobs like a physician. This was the first time since ancient humans that women were seen almost equal to men.',
+					theme: S,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Cathedral Schools',
+					def: 'Education in Europe was very elementary, instead people were educated through the Bible or religious doctrine.  Cathedral schools opened in church cathedrals for the sole purpose of teaching people about Christianity.',
+					sig: 'Students and faculty formed their own guilds that had power to demand rights for themselves. These guilds were able to form full-fledged universities that had specializations like theology or law.',
+					theme: R,
+					chapter: 19,
+					period: M
+				},{
+					title: 'St. Thomas Aquinas',
+					def: 'Saint Thomas Aquinas was famous for his fusion of natural reason and religious faith. He concluded that you didn\'t have to give up religion to pursue an advanced education. You could use logic and faith.',
+					sig: 'With his conclusion, more people stayed religious and still went to school to learn. People today are now scientists and Christians because they use Thomas Aquinas\' system of thought.',
+					theme: R,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Eucharist',
+					def: 'The Eucharist is the bread and wine Christians eat for communion. It is to represent the Last Supper in which Jesus gave bread and wine to his disciples.',
+					sig: 'The Eucharist helped Christians back then and acted as an aid similar to religious paintings. It attracted more converts to Christianity. ',
+					theme: R,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Relics',
+					def: 'Saint relics were any objects left behind by famous saints including the crown of thorns worn by Jesus, milk from the Virgin Mary in a flask, etc. People began to use saints more and more around this time in medieval Europe.',
+					sig: 'These relics were so famous that people would actually make pilgrimages to holy sites to see these relics. This led to travel businesses forming, like inns along the path pilgrims took or guides to lead them.',
+					theme: R,
+					chapter: 19,
+					period: M
+				},{
+					title: 'Reconquista',
+					def: 'The reconquista means the "reconquest" in Spanish. It began with the remaining Christian cities taking back surrounding cities. After some cities were conquered, more people joined and slowly took back all of Spain.',
+					sig: 'The reconquista spread Christianity dramatically in Spain. Christians were able to push Muslims out of the region. ',
+					theme: R,
+					chapter: 19,
+					period: M
+				}
 			]
 		],
-		PERIODS:[F,C,PC],
-		SKIPPEDCHAPTERS: [11, 12], // Values are actual chapter - 1 (e.g. 0 = Chapter 1)
+		PERIODS:[F,C,PC,E],
+		SKIPPEDCHAPTERS: [11, 12, 16, 17], // Values are actual chapter - 1 (e.g. 0 = Chapter 1)
 		getAll:function(){var b=[];for(var i=0,n=0,l=this[''].length;i<l;i++)b=b.concat(this[''][i]);b.getPeriod=function(a){return FLASHCARDS.getPeriod(a)};b.getChapter=function(a){return FLASHCARDS.getChapter(a)};b.getTitle=function(a){return FLASHCARDS.getTitle(a)};b.getRandom=function(a){return FLASHCARDS.getRandom(a)};return b},getRandom:function(c){function r(){var a=m.floor(m.random()*FLASHCARDS[''].length);return~FLASHCARDS.SKIPPEDCHAPTERS.indexOf(a)?r():a};var a=this[''][c||c==0?c:r()];return a[m.floor(m.random()*a.length)]},getPeriod:function(a){var b=[];for(var i=0,n=0,l=this[''].length;i<l;i++){if(!this[''][i][0])continue;this[''][i][0].period==this.PERIODS[a]?(function(){for(var j=0,k=FLASHCARDS[''][i].length;j<k;j++){b[n]=FLASHCARDS[''][i][j];n++}})():0};b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getChapter=function(a){var b=[],c=this;for(var i=0,n=0;i<c.length;i++){c[i].chapter==a?(function(){b[n]=c[i];n++})():0};b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getTitle=function(a){for(var i=0;i<this.length;i++){if(this[i].title==a)return this[i]}};return b};b.getTitle=function(a){for(var i=0;i<this.length;i++)if(this[i].title==a)return this[i]};return b},getChapter:function(a){var b=[],c=this[''][a];for(var i=0,l=c.length;i<l;i++)b[i]=c[i];b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getTitle=function(a){for(var i=0;i<this.length;i++){if(this[i].title==a)return this[i]}return null};return b},getTitle:function(a){for(var i=0,l=this[''].length;i<l;i++)for(var n=0,k=this[''][i].length;n<k;n++)if(this[''][i][n].title==a)return this[''][i][n];return null}
 	}
 }();
