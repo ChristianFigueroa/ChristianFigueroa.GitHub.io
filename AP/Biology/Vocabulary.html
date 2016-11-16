@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+	<title>Biology Vocabulary &#183; ChristianFigueroa.GitHub.io</title>
+	<meta charset='utf-8'/>
+	<meta name='viewport' content='initial-scale=1,width=device-width,minimum-scale=1'/>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,700italic' rel='stylesheet' type='text/css'>
+	<style>
+		body, html {
+			margin: 0;
+			background: #DDD;
+		}
+
+		#searchbar {
+			background: #00acc1;
+			color: #fff;
+			text-align: center;
+			padding: .5em 0;
+			white-space: nowrap;
+			position: fixed;
+			width: 100%;
+			box-shadow: 0 0 20px 5px rgba(0,0,0,.3)
+		}
+
+		#filler {
+			height: 3.5em
+		}
+
+		input {
+			width: 12em;
+			font-family: "Open Sans";
+			font-size: 1.3em;
+			font-weight: 600;
+			border: 0;
+			padding: .2em .6em;
+			background: #10bcd1;
+			border-radius: .25em;
+			color: #fff;
+			min-width: 12em;
+			max-width: calc(100% - 2em);
+			cursor: text;
+			margin-left: 1.7em;
+			box-shadow: 0 0 10px 0px rgba(0,0,0,.3);
+			transition: box-shadow .1s linear;
+		}
+
+		input:hover, input:focus, input:active {
+			box-shadow: 0 0 10px 4px rgba(0,0,0,.3);
+		}
+
+		#placeholder {
+			width: 20ch;
+			font-family: "Open Sans";
+			font-size: 1.3em;
+			font-weight: 600;
+			border-radius: .25em;
+			margin: -1.8em auto 0;
+			text-align: center;
+			color: rgba(255,255,255,.7);
+			padding: .2em .6em;
+			pointer-events: none;
+		}
+
+		#searchwidth {
+			font-size: 1.3em;
+			font-family: "Open Sans";
+			font-weight: 600;
+			visibility: hidden;
+			pointer-events: none;
+			display: inline;
+			white-space: pre;
+			position: absolute;
+		}
+
+		table {
+			font-family: "Open Sans";
+			background: #DDD;
+			border-collapse: collapse;
+			color: rgba(0,0,0,.87);
+			width: 100%;
+		}
+
+		td:first-child {
+			vertical-align: top;
+			padding: .3em;
+			font-weight: 600;
+		}
+
+		tr {
+			border-bottom: 2px solid #BBB;
+			font-size: 1.2em;
+			hyphens: auto;
+		}
+
+		tr:first-child[data-hidden="hidden"] {
+			display: none;
+		}
+
+		td:last-child {
+			padding: .3em 0;
+		}
+
+		input[data-invalid] {
+			background: #f77;
+		}
+
+		sub {
+			font-size: 70%;
+		}
+
+		samp {
+			background: #CCC;
+			padding: .2em;
+			border-radius: .3em;
+			color: #777;
+			white-space: normal;
+			hyphens: auto;
+		}
+
+		samp:before, samp:after, samp::before, samp::after {
+			content: '\2005';
+			white-space: pre;
+			font-family: "Open Sans";
+		}
+
+		samp:not(:last-child):not(.f) {
+			margin-right: .3em;
+		}
+
+		#searchhelp {
+			height: 1em;
+			width: 1em;
+			display: inline-block;
+			background: #10bcd1;
+			font-size: 1.7em;
+			padding: .2em;
+			border-radius: 50%;
+			vertical-align: top;
+			font-family: "Open Sans";
+			line-height: .9;
+			font-weight: 700;
+			box-shadow: 0 0 10px 0px rgba(0,0,0,.3);
+			cursor: default;
+			transition: box-shadow .1s linear;
+		}
+
+		#searchhelp:hover, #searchhelp:focus, #searchhelp:active {
+			box-shadow: 0 0 10px 4px rgba(0,0,0,.3);
+		}
+
+		#searchhelpinfo {
+			position: absolute;
+			top: 3em;
+			background: #DDD;
+			width: 30em;
+			max-width: calc(100% - 3em);
+			color: rgba(0,0,0,.87);
+			font-size: 1.15em;
+			border-radius: .3em;
+			font-family: "Open Sans";
+			font-weight: 600;
+			box-shadow: 0 0 20px 5px rgba(0,0,0,.6);
+			padding: .25em .6em;
+			opacity: 0;
+			transition: opacity .25s linear;
+			pointer-events: none;
+		}
+
+		@media (max-width: 350px) {
+			#search {
+				min-width: calc(80vw - 3em);
+				max-width: calc(80vw - 3em);
+			}
+
+			td {
+				font-size: 75%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id='searchbar'>
+		<input type='text' id='search'>
+		<div id='searchhelp' tabindex='0'>?</div>
+		<div id='placeholder'>Search</div>
+		<div id='searchwidth'></div>
+		<div id='searchhelpinfo'>
+			- Type<wbr> in<wbr> any<wbr> search<wbr> query<wbr> to<wbr> filter<wbr> the<wbr> words.<br>- Use<wbr> a<wbr> preceding<wbr> '#'<wbr> to<wbr> search<wbr> by<wbr> <samp class='f'>tags</samp><wbr> (e.g.<wbr> #dna,<wbr> #atp).<br>- You<wbr> can<wbr> also<wbr> use<wbr> /re/<wbr> syntax<wbr> for<wbr> a<wbr> regexp<wbr> search.
+		</div>
+	</div>
+	<div id='filler'></div>
+	<div>
+		<table>
+			<tr data-hidden='hidden'>
+				<td>No Results</td>
+				<td>Your search did not turn up any results. Check for any misspellings or consider using /re/ syntax for a regexp search.</td>
+			</tr>
+			<tr id='anaphase' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Anaphase</td>
+				<td>Anaphase is the fourthsubstage of the mitotic stage of the cell cycle in which the chromosomes that were previously lined up in the middle of the cell are severed at their cohesin proteins. This allows the attached spindle fibers to pull the two new single-chromatid chromosomes to their designated half of the cell.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='adenosine_triphosphate,atp' class='cellular_respiration fermentation atp cells'>
+				<td>Adenosine Triphospate</td>
+				<td>The cell's main usable source of energy used to power cellular processes. It is synthesized through cellular respiration and made up of adenine, a nitrogenous base; ribose, a 5-carbon sugar; and three phosphate groups. Also abbreviated as ATP.<br><samp>ATP</samp><samp>Fermentation</samp><samp>Cellular Respiration</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='atp_synthase' class='cellular_respiration atp cells'>
+				<td>ATP Synthase</td>
+				<td>The protein responsible for ATP synthesis in cellular respiration. It makes use of a proton motive force to power the rotation of a "motor" in the protein complex that then uses its energy to combine ADP + P<sub>i</sub> into ATP.<br><samp>Cellular Respiration</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='cell_cycle,mitosis' class='cell_cycle mitosis cells'>
+				<td>Cell Cycle</td>
+				<td>The process by which a cell divides into two genetically identical daughter cells. Sometimes also referred to as Mitosis.<br><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='cellular_respiration' class='cellular_respiration atp cells'>
+				<td>Cellular Respiration</td>
+				<td>The cellular process that converts glucose into ATP, a form of energy more manageable by the cell. There are both aerobic and anaerobic cellular respiration, the former using oxygen as the final electron acceptor in the electron transport chain and the latter using other electronegative elements, such as sulfur.<br><samp>Cellular Respiration</samp><wbr><samp>ATP</samp><wbr><samp>Cells</samp></td>
+			</tr>
+			<tr id='centromere' class='dna cells'>
+				<td>Centromere</td>
+				<td>The region of a double-chromatid chromosome where the two chromatids are connected in the middle and where the protein kinetochore is located during the cell cycle.<br><samp>DNA</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='chromatid' class='dna cells'>
+				<td>Chromatid</td>
+				<td>A single strand of DNA that has been compressed by winding around histones and coiling together. It is considered a chromosome only when it is not connected to its sister chromatid. After being connected, both sister chromatids together make up a single chromosome.<br><samp>DNA</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='chromosome' class='dna cells'>
+				<td>Chromosome</td>
+				<td>Condensed DNA that has been wrapped around histones and gathered into chromatids. A chromosome can be a single chromatid or a pair of sister chromatids joined at their centromeres.<br><samp>DNA</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='cleavage_furrow' class='cell_cycle mitosis cells'>
+				<td>Cleavage Furrow</td>
+				<td>The pinch in the cell membrane that develops in cytokinesis during the cell cycle. At the end of cytokinesis, the cleavage furrow pinches the cell into two separate daughter cells.<br><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='cohesin' class='protein cell_cycle mitosis cells'>
+				<td>Cohesin</td>
+				<td>The protein located on the ends of a double-chromatid chromosome that connect the two chromatid ens together. During anaphase of the cell cycle, when the chromosome is split apart, the cohesin releases the two ends to allow the two sister chromatids to be split apart.<br><samp>Protein</samp><samp>Cell Cycle</samp><samp>Mitosis</samp></td>
+			</tr>
+			<tr id='cytokinesis' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Cytokinesis</td>
+				<td>The sixth and final substage of the mitotic stage of the cell cycle in which a cleavage furrow forms that eventually pinches the cell into two genetically identical daughter cells.<br><samp>Mitotic Stage<samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='electron_trasnsport_chain_cellular_respiration,etc_cellular respiration' class='cellular_respiration atp cells'>
+				<td>Electron Transport Chain (Cellular Respiration)</td>
+				<td>The electron transport chain is located on the inner membrane of the mitochondria and is responsible for using electrons as an energy source to fuel the pumping of hydrogen ions (H<sup>+</sup>) against its electrochemical gradient. This proton motive force is then used to power oxidative phosphorylation.<br><samp>Cellular Respiration</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='gap_1_of_interphase,g1_of_interphase' class='interphase cell_cycle mitosis cells'>
+				<td>Gap 1 of Interphase</td>
+				<td>The first substage of interphase of the cell cycle that occurs immediately after cytokinesis and is primarily responsible for cell growth. Abbreviated as G<sub>1</sub> of Interphase.<br><samp>Interphase</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='gap_2_of_interphase,g2_of_interphase' class='interphase cell_cycle mitosis cells'>
+				<td>Gap 2 of Interphase</td>
+				<td>The third and final substage of interphase of the cell cycle that occurs immediately after the S phase of interphase and before the mitotic stage. During this substage, organelles are duplicated so that each will go into a separate daughter cell at the end of mitosis. Abbreviated as G<sub>2</sub> of Interphase.<br><samp>Interphase</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='glycolysis' class='cellular_respiration fermentation atp cells'>
+				<td>Glycolysis</td>
+				<td>The first process in cellular respiration in which glucose goes through a series of chemical reactions resulting in two pyruvate molecules that pass into the pyruvate oxidation This process releases two ATP per glucose.<br><samp>Cellular Respiration</samp><samp>Fermentation</samp><samp>ATP</samp><samp>Cells</td>
+			</tr>
+			<tr id='interphase' class='interphase cell_cycle mitosis cells'>
+				<td>Interphase</td>
+				<td>A stage of the cell cycle with three substages, G<sub>1</sub> (Gap 1), S (Synthesis), and G<sub>2</sub> (Gap 2), that is responsible for the growth of the cell among other things.<br><samp>Interphase</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='kinetochore' class='protein cell_cycle mitosis cells'>
+				<td>Kinteochore</td>
+				<td>The protein that attaches to the mitotic spindle during prometaphase of the cell cycle and is located on the centromere of a chromosome.<br><samp>Protein</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='krebs_cycle,citric_acid_cycle,tricarboxylic_acid_cycle,tca_cycle' class='cellular_respiration atp cells'>
+				<td>Krebs Cycle</td>
+				<td>The third process in cellular respiration in which acetyl-CoA goes through a series of chemical reactions resulting in 2CO<sub>2</sub>, 3NADH, and FADH<sub>2</sub>. The NADH and FADH<sub>2</sub> are taken to the electron transport chain to use in oxidative phosphorylation. Also referred to as the citric acid cycle or tricarboxylic acid (TCA) cycle.<br><samp>Cellular Respir&shyation</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='meiosis' class='cells'>
+				<td>Meiosis</td>
+				<td>The process by which a cell of a sexually reproductive organism divides into four haploid gametes, each able to unite with a gamete of the opposite sex to form a zygote.<br><samp>Cells</samp></td>
+			</tr>
+			<tr id='metaphase' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Metaphase</td>
+				<td>The third substage of the mitotic stage of the cell cycle in which the chromosomes are lined up in the middle of the cell, equidistant from the centrioles at each pole.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='mitotic_stage' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Mitotic Stage</td>
+				<td>A stage of the cell cycle with six substages, Prophase, Prometaphase, Metaphase, Anaphase, Teleophase and Cytokinesis, that is responsible for the DNA separation and splitting of the cell in the cell cycle.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='prometaphase' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Prometaphase</td>
+				<td>The second substage of the mitotic stage of the cell cycle in which the nuclear envelope disappears and mitotic spindles attach to the kinetochore proteins at the centromeres, pulling them to the middle of the cell.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='prophase' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Prophase</td>
+				<td>The first substage of the mitotic stage of the cell cycle in which chromosomes and mitotic spindles form, the nucleolus disappears, and the centrioles begin moving to opposite ends of the cell, propelled by the growing mitotic spindles.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='proton_morive_force' class='cellular_respiration photosynthesis atp cells'>
+				<td>Proton Motive Force</td>
+				<td></td>
+			</tr>
+			<tr id='pyruvate_oxidation' class='cellular_respiration atp cells'>
+				<td>Pyruvate Oxidation</td>
+				<td>The second process in cellular respiration in which two pyruvate combine with coenzyme A to form acetyl-CoA, which then goes to the Krebs cycle.<br><samp>Cellular Respiration</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='synthesis_phase_of_interphase,s_phase_of_interphase,s_of_interphase,synthesis_stage_of_interphase,s_stage_of_interphase' class='interphase cell_cycle_mitosis cells'>
+				<td>Synthesis Phase of Interphase</td>
+				<td>The second stage of interphase of the cell cycle in which DNA is duplicated to later be split between the two daughter cells produced during mitosis. Abbreviated as S of Interphase.<br><samp>Interphase</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='telophase' class='mitotic_stage cell_cycle mitosis cells'>
+				<td>Telophase</td>
+				<td>The fifth substage of the mitotic stage of the cell cycle in which the nuclear envelope and the nucleolus reappear as the DNA decompresses from its chromosomal state. Any left over spindle fibers is dissolved.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+			</tr>
+		</table>
+	</div>
+	<script	type='text/javascript'>
+	"strict mode";
+		document.getElementById('search').addEventListener('keydown',function(z){
+			var a=this,b=document.getElementById('searchwidth'),c,d,e,f,g,h=a.value;
+			setTimeout(function(){
+				if(a.value==h&&z.isTrusted)return;
+				c=a.value.toLowerCase().trim()||'/./';
+				document.getElementById('placeholder').style.visibility=a.value?'hidden':'';
+				b.innerText=a.value;
+				a.style.width=b.scrollWidth+'px';
+				a.removeAttribute('data-invalid');
+				if(/^\/.*\/$/.test(c)){
+					try {
+						d = new RegExp(c.match(/^\/(.*)\/$/)[1], 'i')
+					} catch (_) {
+						a.setAttribute('data-invalid', 1);
+						d = /./
+					};
+					for (e=document.querySelectorAll('tr:not(:first-child)'),f=e.length-1;f>= 0;f--,g=0) {
+						e[f].id.replace(/_/g,' ').split(',').forEach(function(h){g=g||d.test(h)});
+						if(g){
+							e[f].style.display = ''
+						} else {
+							e[f].style.display = 'none'
+						}
+					}
+				} else if (/^#/.test(c)) {
+					c = c.replace(/ /g, '_').replace(/[^a-z\d_]/g, '').replace(/(?:^_*|_*$)/g,'');
+					if (!c) {
+						for (e = document.querySelectorAll('tr'), f = e.length - 1; f >= 0; f--) {
+							e[f].style.display = ''
+						};
+						return
+					}
+					for (e = document.querySelectorAll('tr:not(:first-child):not([class*=" '+c+'"]):not([class^="'+c+'"])'), f = e.length - 1; f >= 0; f--) {
+						e[f].style.display = 'none'
+					};
+					for (e = document.querySelectorAll('tr:not(:first-child)[class*=" '+c+'"], tr:not(:first-child)[class^="'+c+'"]'), f = e.length - 1; f >= 0; f--) {
+						e[f].style.display = ''
+					}
+				} else {
+					c = c.replace(/ /g, '_').replace(/[^a-z\d_]/g, '');
+					if (!c) {
+						for (e = document.querySelectorAll('tr'), f = e.length - 1; f >= 0; f--) {
+							e[f].style.display = ''
+						};
+						return
+					};
+					for (e = document.querySelectorAll('tr:not(:first-child):not([id*="' + c + '"])'), f = e.length - 1; f >= 0; f--) {
+						e[f].style.display = 'none'
+					};
+					for (e = document.querySelectorAll('tr:not(:first-child)[id*="' + c + '"]'), f = e.length - 1; f >= 0; f--) {
+						e[f].style.display = ''
+					}
+				};
+				if(document.querySelector('tr:not([style*=display]):not([style*=none]):not(:first-child)')){document.querySelector('tr:first-child').setAttribute('data-hidden','hidden')}else{document.querySelector('tr:first-child').setAttribute('data-hidden','shown')}
+
+			},0);
+		});
+		!function(){
+			function a(a,b){
+				if(this.t)clearInterval(this.t);
+				document.getElementById('searchhelpinfo').style.display='block';
+				setTimeout(function(){document.getElementById('searchhelpinfo').style.opacity=1},0)
+				a=document.getElementById('searchhelpinfo').getBoundingClientRect().width/2,b=this.getBoundingClientRect();
+				document.getElementById('searchhelpinfo').style.left = ((b.right-b.left)/2+b.left + a > innerWidth ? innerWidth / 2 - a : (b.right-b.left)/2+b.left - a) + 'px';
+			};
+			function b(){
+				document.getElementById('searchhelpinfo').style.opacity=0;
+				this.t=setTimeout(function(){document.getElementById('searchhelpinfo').style.display='none'},250)
+			};
+			document.getElementById('search').dispatchEvent(new Event('keydown'));
+			document.getElementById('searchhelp').addEventListener('mouseenter',a);
+			document.getElementById('searchhelp').addEventListener('focus',a);
+			document.getElementById('searchhelp').addEventListener('mouseleave',b);
+			document.getElementById('searchhelp').addEventListener('blur',b);
+		}();
+	</script>
+</body>
+</html>
