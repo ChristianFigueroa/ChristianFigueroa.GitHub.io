@@ -357,8 +357,10 @@
 	<script	type='text/javascript'>
 		"strict mode";
 		document.getElementById('search').addEventListener('keydown',function(z){
-			var a=this,b=document.getElementById('searchwidth'),c,d,e,f,g,h=a.value;
-			setTimeout(function(){
+			var a=this,b=document.getElementById('searchwidth'),c,d,e,f,g,h=a.value,i=0
+			j=setInterval(function(){
+				i++;
+				if(i>15){clearInterval(j);return}
 				if(a.value==h&&z.isTrusted)return;
 				c=a.value.toLowerCase().trim()||'/./';
 				document.getElementById('placeholder').style.visibility=a.value?'hidden':'';
@@ -410,8 +412,8 @@
 					}
 				};
 				if(document.querySelector('tr:not([style*=display]):not([style*=none]):not(:first-child)')){document.querySelector('tr:first-child').setAttribute('data-hidden','hidden')}else{document.querySelector('tr:first-child').setAttribute('data-hidden','shown')}
-
-			},3);
+				clearInterval(j);
+			},1);
 		});
 		!function(){
 			function a(a,b){
