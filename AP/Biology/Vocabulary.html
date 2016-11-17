@@ -9,6 +9,7 @@
 		body, html {
 			margin: 0;
 			background: #DDD;
+			color: rgba(0,0,0,.87);
 		}
 
 		#searchbar {
@@ -23,7 +24,16 @@
 		}
 
 		#filler {
-			height: 3.5em
+			height: 1.666666666666666em;
+			background: #00acc1;
+			color: #fff;
+			text-align: center;
+			font-family: "Open Sans";
+			font-size: 1.3em;
+			padding: .45em 1em;
+			font-weight: 700;
+			white-space: pre;
+			overflow-x: auto;
 		}
 
 		input {
@@ -115,6 +125,7 @@
 			color: #777;
 			white-space: normal;
 			hyphens: auto;
+			margin-bottom: .2em;
 		}
 
 		samp:before, samp:after, samp::before, samp::after {
@@ -154,7 +165,6 @@
 			background: #DDD;
 			width: 30em;
 			max-width: calc(100% - 3em);
-			color: rgba(0,0,0,.87);
 			font-size: 1.15em;
 			border-radius: .3em;
 			font-family: "Open Sans";
@@ -164,6 +174,13 @@
 			opacity: 0;
 			transition: opacity .25s linear;
 			pointer-events: none;
+			white-space: initial;
+			text-align: left;
+			color: rgba(0,0,0,.87);
+		}
+
+		#tabcon {
+			overflow-x: auto;
 		}
 
 		@media (max-width: 350px) {
@@ -185,23 +202,27 @@
 		<div id='placeholder'>Search</div>
 		<div id='searchwidth'></div>
 		<div id='searchhelpinfo'>
-			- Type<wbr> in<wbr> any<wbr> search<wbr> query<wbr> to<wbr> filter<wbr> the<wbr> words.<br>- Use<wbr> a<wbr> preceding<wbr> '#'<wbr> to<wbr> search<wbr> by<wbr> <samp class='f'>tags</samp><wbr> (e.g.<wbr> #dna,<wbr> #atp).<br>- You<wbr> can<wbr> also<wbr> use<wbr> /re/<wbr> syntax<wbr> for<wbr> a<wbr> regexp<wbr> search.
+			- Type in any search query to filter the words.<br>- Use a preceding "#" to search by <samp class='f'>tags</samp> (e.g. #dna, #atp).<br>- You can also use /re/ syntax for a regexp search.
 		</div>
 	</div>
-	<div id='filler'></div>
-	<div>
+	<div id='filler'><noscript><style type="text/css">#searchbar{display:none}</style>Enable your browser's JavaScipt settings to use the search bar.</noscript></div>
+	<div id='tabcon'>
 		<table>
+			<!--
+				Should be added later
+				Haploid, Diploid, Zygote, Gamete, Karyotype.Homologous Chromosome, Sister Chromatid, Locus, Allele, Gene, Phenotype, Genotype, Cell Plate, Spindle Apparatus, Crossing Over, Sperm, Egg
+			-->
 			<tr data-hidden='hidden'>
 				<td>No Results</td>
 				<td>Your search did not turn up any results. Check for any misspellings or consider using /re/ syntax for a regexp search.</td>
 			</tr>
 			<tr id='anaphase' class='mitotic_stage cell_cycle mitosis cells'>
 				<td>Anaphase</td>
-				<td>Anaphase is the fourthsubstage of the mitotic stage of the cell cycle in which the chromosomes that were previously lined up in the middle of the cell are severed at their cohesin proteins. This allows the attached spindle fibers to pull the two new single-chromatid chromosomes to their designated half of the cell.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+				<td>Anaphase is the fourth substage of the mitotic stage of the cell cycle in which the chromosomes that were previously lined up in the middle of the cell are severed at their cohesin proteins. This allows the attached spindle fibers to pull the two new single-chromatid chromosomes to their designated half of the cell.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='adenosine_triphosphate,atp' class='cellular_respiration fermentation atp cells'>
 				<td>Adenosine Triphospate</td>
-				<td>The cell's main usable source of energy used to power cellular processes. It is synthesized through cellular respiration and made up of adenine, a nitrogenous base; ribose, a 5-carbon sugar; and three phosphate groups. Also abbreviated as ATP.<br><samp>ATP</samp><samp>Fermentation</samp><samp>Cellular Respiration</samp><samp>Cells</samp></td>
+				<td>The cell's main source of energy used to power cellular processes. It is synthesized through cellular respiration and made up of adenine, a nitrogenous base; ribose, a 5-carbon sugar; and three phosphate groups. Also abbreviated as ATP.<br><samp>ATP</samp><samp>Fermentation</samp><samp>Cellular Respiration</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='atp_synthase' class='cellular_respiration atp cells'>
 				<td>ATP Synthase</td>
@@ -209,11 +230,11 @@
 			</tr>
 			<tr id='cell_cycle,mitosis' class='cell_cycle mitosis cells'>
 				<td>Cell Cycle</td>
-				<td>The process by which a cell divides into two genetically identical daughter cells. Sometimes also referred to as Mitosis.<br><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+				<td>The process in which a cell divides into two genetically identical daughter cells It includes two phases: interphase and the mitotic phase. Sometimes also referred to as Mitosis.<br><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='cellular_respiration' class='cellular_respiration atp cells'>
 				<td>Cellular Respiration</td>
-				<td>The cellular process that converts glucose into ATP, a form of energy more manageable by the cell. There are both aerobic and anaerobic cellular respiration, the former using oxygen as the final electron acceptor in the electron transport chain and the latter using other electronegative elements, such as sulfur.<br><samp>Cellular Respiration</samp><wbr><samp>ATP</samp><wbr><samp>Cells</samp></td>
+				<td>The cellular process that converts glucose into ATP, a form of energy more manageable by the cell. There are both aerobic and anaerobic cellular respiration, the former using oxygen as the final electron acceptor in the electron transport chain and the latter using other electronegative elements, such as sulfur. The overall chemical formula for cellular respiration is C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub> &#8594; 6CO<sub>2</sub> + 6H<sub>2</sub>O + energy.<br><samp>Cellular Respiration</samp><wbr><samp>ATP</samp><wbr><samp>Cells</samp></td>
 			</tr>
 			<tr id='centromere' class='dna cells'>
 				<td>Centromere</td>
@@ -233,15 +254,19 @@
 			</tr>
 			<tr id='cohesin' class='protein cell_cycle mitosis cells'>
 				<td>Cohesin</td>
-				<td>The protein located on the ends of a double-chromatid chromosome that connect the two chromatid ens together. During anaphase of the cell cycle, when the chromosome is split apart, the cohesin releases the two ends to allow the two sister chromatids to be split apart.<br><samp>Protein</samp><samp>Cell Cycle</samp><samp>Mitosis</samp></td>
+				<td>The protein located on the ends of a double-chromatid chromosome that connect the two chromatid ens together. During anaphase of the cell cycle, when the chromosome is split apart, the cohesin releases the two ends to allow the two sister chromatids to be split apart.<br><samp>Protein</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='cytokinesis' class='mitotic_stage cell_cycle mitosis cells'>
 				<td>Cytokinesis</td>
 				<td>The sixth and final substage of the mitotic stage of the cell cycle in which a cleavage furrow forms that eventually pinches the cell into two genetically identical daughter cells.<br><samp>Mitotic Stage<samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
-			<tr id='electron_trasnsport_chain_cellular_respiration,etc_cellular respiration' class='cellular_respiration atp cells'>
-				<td>Electron Transport Chain (Cellular Respiration)</td>
-				<td>The electron transport chain is located on the inner membrane of the mitochondria and is responsible for using electrons as an energy source to fuel the pumping of hydrogen ions (H<sup>+</sup>) against its electrochemical gradient. This proton motive force is then used to power oxidative phosphorylation.<br><samp>Cellular Respiration</samp><samp>ATP</samp><samp>Cells</samp></td>
+			<tr id='electron_trasnsport_chain,etc' class='cellular_respiration photosynthesis light_dependent_reactions atp cells'>
+				<td>Electron Transport Chain</td>
+				<td>The electron transport chain is located on the inner membrane of the mitochondria (cellular respiration) or the membrane of a thylakoid (photosynthesis) and is responsible for using electrons as an energy source to fuel the pumping of hydrogen ions (H<sup>+</sup>) against its electrochemical gradient. This proton motive force is then used to power oxidative phosphorylation.<br><samp>Cellular Respiration</samp><samp>Photosynthesis</samp><samp>Light-Dependent Reactions</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='fermentation' class='fermentation atp cells'>
+				<td>Fermentation</td>
+				<td>The cellular process that uses glucose to produce two ATP. The glucose goes through glycolysis to become two pyruvate. The two NADH produced during glycolysis is then oxidized back into NAD<sup>+</sup> by converting the pyruvate into either lactic acid or alcohol. Fermentation occurs in organisms with insufficient oxygen or with the inability to carry out aerobic cellular respiration.<br><samp>Fermentation</samp><samp>ATP</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='gap_1_of_interphase,g1_of_interphase' class='interphase cell_cycle mitosis cells'>
 				<td>Gap 1 of Interphase</td>
@@ -265,7 +290,15 @@
 			</tr>
 			<tr id='krebs_cycle,citric_acid_cycle,tricarboxylic_acid_cycle,tca_cycle' class='cellular_respiration atp cells'>
 				<td>Krebs Cycle</td>
-				<td>The third process in cellular respiration in which acetyl-CoA goes through a series of chemical reactions resulting in 2CO<sub>2</sub>, 3NADH, and FADH<sub>2</sub>. The NADH and FADH<sub>2</sub> are taken to the electron transport chain to use in oxidative phosphorylation. Also referred to as the citric acid cycle or tricarboxylic acid (TCA) cycle.<br><samp>Cellular Respir&shyation</samp><samp>ATP</samp><samp>Cells</samp></td>
+				<td>The third process in cellular respiration in which acetyl-CoA goes through a series of chemical reactions resulting in 2CO<sub>2</sub>, 3NADH, and FADH<sub>2</sub>. The NADH and FADH<sub>2</sub> are taken to the electron transport chain to use in oxidative phosphorylation. Also referred to as the citric acid cycle or tricarboxylic acid (TCA) cycle.<br><samp>Cellular Respiration</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='light_dependent_reactions' class='light_dependent_reactions photosynthesis cells'>
+				<td>Light-Dependent Reactions</td>
+				<td>The processes that occur on the surface of a thylakoid membrane that use light energy to excite electrons that go through photosystems I and II as well as the electron transport chain. The light powers the transfer of an electron to a higher electron shell. This electron then falls back down to ground state, releasing energy in the process which powers the creation of a proton motive force.<br><samp>Light-Dependent Reactions</samp><samp>Photosynthesis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='light_independent_reactions,dark_cycle,calvin_cycle' class='light_independent_reactions photosynthesis cells'>
+				<td>Light-Independent Reactions</td>
+				<td>The series of reactions that occur in the stroma of the chloroplast. The three processes are carbon fixation, reduction, and regeneration. Also referred to as the Calvin cycle and the dark cycle.<br><samp>Light-Independent Reactions</samp><samp>Photosynthesis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='meiosis' class='cells'>
 				<td>Meiosis</td>
@@ -279,6 +312,22 @@
 				<td>Mitotic Stage</td>
 				<td>A stage of the cell cycle with six substages, Prophase, Prometaphase, Metaphase, Anaphase, Teleophase and Cytokinesis, that is responsible for the DNA separation and splitting of the cell in the cell cycle.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
+			<tr id='oxidative_phosphorylation,oxphos' class='cellular_respiration atp cells'>
+				<td>Oxidative Phosphorylation</td>
+				<td>The process used by ATP synthase to produce ATP. The energy produced by the proton motive force (created from the oxidation of NADH and FADH<sub>2</sub>) is used to combine ADP and a phosphate group to produce ATP.<br><samp>Cellular Respiration</samp><samp>ATP</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='photosynthesis' class='photosynthesis cells'>
+				<td>Photosynthesis</td>
+				<td>The cellular process that converts light energy from sunlight into chemical energy in the form of glucose, which is then used by cellular respiration to produce ATP for the cell. It consists of two sections: the light-dependent reactions and the light-independent reactions. The simplified chemical formula for photosynthesis is 6CO<sub>2</sub> + 6H<sub>2</sub>O + energy &#8594; C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub>.<br><samp>Photosynthesis</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='photosystem_1,ps_1,ps1,photosystem_i,ps_i,psi' class='light_dependent_reactions photosynthesis protein cells'>
+				<td>Photosystem I</td>
+				<td>The second protein complex of the light-dependent reactions of photosynthesis. The electron received from the electron transport chain absorbs more light energy to excite it again. The electron is then used to reduce NADP<sup>+</sup> to NADPH, which goes to the light-independent reactions along with the ATP produced from the electron transport cycle.<br><samp>Light-Dependent Reactions</samp><samp>Photosynthesis</samp><samp>Protein</samp><samp>Cells</samp></td>
+			</tr>
+			<tr id='photosystem_2,ps_2,ps2,photosystem_ii,ps_ii,psii' class='light_dependent_reactions photosynthesis protein cells'>
+				<td>Photosystem II</td>
+				<td>The first protein complex of the light-dependent reactions of photosynthesis. Water is split to provide electrons that are then excited by light photons absorbed by chlorophyll. The electrons are then passed down the electron transport chain.<br><samp>Light-Dependent Reactions</samp><samp>Photosynthesis</samp><samp>Protein</samp><samp>Cells</samp></td>
+			</tr>
 			<tr id='prometaphase' class='mitotic_stage cell_cycle mitosis cells'>
 				<td>Prometaphase</td>
 				<td>The second substage of the mitotic stage of the cell cycle in which the nuclear envelope disappears and mitotic spindles attach to the kinetochore proteins at the centromeres, pulling them to the middle of the cell.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
@@ -289,7 +338,7 @@
 			</tr>
 			<tr id='proton_morive_force' class='cellular_respiration photosynthesis atp cells'>
 				<td>Proton Motive Force</td>
-				<td></td>
+				<td>An electrochemical gradient between a membrane where one side is more concentrated with protons (H<sup>+</sup>) than the other. Certain proteins in the membrane can use this force to their advantage by letting protons diffuse through while using that energy to power another process like ATP synthesis.<br><samp>Cellular Respiration</samp><samp>Photosynthesis</samp><samp>ATP</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='pyruvate_oxidation' class='cellular_respiration atp cells'>
 				<td>Pyruvate Oxidation</td>
@@ -306,7 +355,7 @@
 		</table>
 	</div>
 	<script	type='text/javascript'>
-	"strict mode";
+		"strict mode";
 		document.getElementById('search').addEventListener('keydown',function(z){
 			var a=this,b=document.getElementById('searchwidth'),c,d,e,f,g,h=a.value;
 			setTimeout(function(){
@@ -332,7 +381,7 @@
 						}
 					}
 				} else if (/^#/.test(c)) {
-					c = c.replace(/ /g, '_').replace(/[^a-z\d_]/g, '').replace(/(?:^_*|_*$)/g,'');
+					c = c.replace(/ |-/g, '_').replace(/[^a-z\d_]/g, '').replace(/(?:^_*|_*$)/g,'');
 					if (!c) {
 						for (e = document.querySelectorAll('tr'), f = e.length - 1; f >= 0; f--) {
 							e[f].style.display = ''
@@ -362,7 +411,7 @@
 				};
 				if(document.querySelector('tr:not([style*=display]):not([style*=none]):not(:first-child)')){document.querySelector('tr:first-child').setAttribute('data-hidden','hidden')}else{document.querySelector('tr:first-child').setAttribute('data-hidden','shown')}
 
-			},0);
+			},3);
 		});
 		!function(){
 			function a(a,b){
@@ -379,6 +428,7 @@
 			document.getElementById('search').dispatchEvent(new Event('keydown'));
 			document.getElementById('searchhelp').addEventListener('mouseenter',a);
 			document.getElementById('searchhelp').addEventListener('focus',a);
+			document.getElementById('searchhelp').addEventListener('touchstart',a)
 			document.getElementById('searchhelp').addEventListener('mouseleave',b);
 			document.getElementById('searchhelp').addEventListener('blur',b);
 		}();
