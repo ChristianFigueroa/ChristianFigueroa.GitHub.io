@@ -12,7 +12,7 @@
 			color: rgba(0,0,0,.87);
 		}
 
-		body>div:first-child {
+		#searchbar {
 			background: #00acc1;
 			color: #fff;
 			text-align: center;
@@ -23,7 +23,7 @@
 			box-shadow: 0 0 20px 5px rgba(0,0,0,.3)
 		}
 
-		body>div:nth-child(2) {
+		#buffer {
 			height: 1.666666666666666em;
 			background: #00acc1;
 			color: #fff;
@@ -58,7 +58,7 @@
 			box-shadow: 0 0 10px 4px rgba(0,0,0,.3);
 		}
 
-		div:first-child>div:nth-child(3) {
+		#placeholder {
 			width: 20ch;
 			font-family: "Open Sans";
 			font-size: 1.3em;
@@ -71,7 +71,7 @@
 			pointer-events: none;
 		}
 
-		div:first-child>div:nth-child(4) {
+		#searchwidth {
 			font-size: 1.3em;
 			font-family: "Open Sans";
 			font-weight: 600;
@@ -149,7 +149,7 @@
 			margin-right: .3em;
 		}
 
-		div:first-child>div:nth-child(2) {
+		#searchhelp {
 			height: 1em;
 			width: 1em;
 			display: inline-block;
@@ -166,11 +166,11 @@
 			transition: box-shadow .1s linear;
 		}
 
-		div:first-child>div:nth-child(2):hover,div:first-child>div:nth-child(2):focus,div:first-child>div:nth-child(2):active {
+		#searchhelp:hover,#searchhelp:focus,#searchhelp:active {
 			box-shadow: 0 0 10px 4px rgba(0,0,0,.3);
 		}
 
-		div:first-child>div:last-child {
+		#searchinfo {
 			position: absolute;
 			top: 3em;
 			background: #DDD;
@@ -190,7 +190,7 @@
 			color: rgba(0,0,0,.87);
 		}
 
-		body>div:nth-child(3) {
+		#cont {
 			overflow-x: auto;
 		}
 
@@ -213,21 +213,25 @@
 	</style>
 </head>
 <body>
-	<div>
+	<div id='searchbar'>
 		<input type='text'>
-		<div tabindex='0'>?</div>
-		<div>Search</div>
-		<div></div>
-		<div>
+		<div id='searchhelp' tabindex='0'>?</div>
+		<div id='placeholder'>Search</div>
+		<div id='searchwidth'></div>
+		<div id='searchinfo'>
 			- Type in any search query to filter the words.<br>- Use a preceding "#" to search by <samp class='f'>tags</samp> (e.g. #dna, #atp).<br>- You can also use /re/ syntax for a regexp search.
 		</div>
 	</div>
-	<div><noscript><style type="text/css">body>div:first-child{display:none}samp:hover{cursor:initial;color:#777;text-decoration:initial}</style>Enable your browser's JavaScipt settings to use the search bar.</noscript></div>
-	<div>
+	<div id='buffer'><noscript><style type="text/css">#searchbar{display:none}samp:hover{cursor:initial;color:#777;text-decoration:initial}</style>Enable your browser's JavaScipt settings to use the search bar.</noscript></div>
+	<div id='cont'>
 		<table>
 			<tr data-hidden='hidden'>
 				<td>No Results</td>
 				<td>Your search did not turn up any results. Check for any misspellings or consider using /re/ syntax for a regexp search.</td>
+			</tr>
+			<tr id='adenosine_triphosphate,atp' class='cellular_respiration fermentation atp cells'>
+				<td>Adenosine Triphospate</td>
+				<td>The cell's main source of energy used to power cellular processes. It is synthesized through cellular respiration and made up of adenine, a nitrogenous base; ribose, a 5-carbon sugar; and three phosphate groups. Also abbreviated as ATP.<br><samp>ATP</samp><samp>Cellular Respiration</samp><samp>Fermentation</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='allele' class='dna genetic_inheritance cells'>
 				<td>Allele</td>
@@ -237,9 +241,9 @@
 				<td>Anaphase</td>
 				<td>Anaphase is the fourth substage of the mitotic stage of the cell cycle in which the chromosomes that were previously lined up in the middle of the cell are severed at their cohesin proteins. This allows the attached spindle fibers to pull the two new single-chromatid chromosomes to their designated half of the cell.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
-			<tr id='adenosine_triphosphate,atp' class='cellular_respiration fermentation atp cells'>
-				<td>Adenosine Triphospate</td>
-				<td>The cell's main source of energy used to power cellular processes. It is synthesized through cellular respiration and made up of adenine, a nitrogenous base; ribose, a 5-carbon sugar; and three phosphate groups. Also abbreviated as ATP.<br><samp>ATP</samp><samp>Cellular Respiration</samp><samp>Fermentation</samp><samp>Cells</samp></td>
+			<tr id='aster' class='cell_cycle mitosis meiosis cells'>
+				<td>Aster</td>
+				<td>The star-like structures made up of small microtubules and centrioles from which mitotic spindles protrude during the mitotic stage of the cell cycle.<br><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Meiosis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='atp_synthase' class='cellular_respiration atp cells'>
 				<td>ATP Synthase</td>
@@ -257,15 +261,15 @@
 				<td>Cellular Respiration</td>
 				<td>The cellular process that converts glucose into ATP, a form of energy more manageable by the cell. There are both aerobic and anaerobic cellular respiration, the former using oxygen as the final electron acceptor in the electron transport chain and the latter using other electronegative elements, such as sulfur. The overall chemical formula for cellular respiration is C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub> &#8594; 6CO<sub>2</sub> + 6H<sub>2</sub>O + energy.<br><samp>Cellular Respiration</samp><wbr><samp>ATP</samp><wbr><samp>Cells</samp></td>
 			</tr>
-			<tr id='centriole' class='organelle cell_cycle mitosis meiosis cells'>
+			<tr id='centriole' class='cell_cycle mitosis meiosis cells'>
 				<td>Centriole</td>
-				<td>The organelle in a cell responsible for the production of mitotic spindles for use in the cell cycle and meiosis.<br><samp>Organelle</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Meiosis</samp><samp>Cells</samp></td>
+				<td>The cylindrical structures located inside the aster during the mitotic stage of the cell cycle. Even though they are involved in the production of mitotic spindles, they are not fully necessary and mitotic spindle production can still happen with their absence.<br><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Meiosis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='centromere' class='dna cells'>
 				<td>Centromere</td>
 				<td>The region of a double-chromatid chromosome where the two chromatids are connected in the middle and where the protein kinetochore is located during the cell cycle.<br><samp>DNA</samp><samp>Cells</samp></td>
 			</tr>
-			<tr id='centrosome' class='organelle cell_cycle mitotic meiosis cells'>
+			<tr id='centrosome' class='organelle cell_cycle mitosis meiosis cells'>
 				<td>Centrosome</td>
 				<td>The structure in a cell that appears during the cell cycle and meiosis and is comprised of centrioles and mitotic spindles.<br><samp>Organelle</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Meiosis</samp><samp>Cells</samp></td>
 			</tr>
@@ -435,7 +439,7 @@
 			</tr>
 			<tr id='telophase' class='mitotic_stage cell_cycle mitosis cells'>
 				<td>Telophase</td>
-				<td>The fifth substage of the mitotic stage of the cell cycle in which the nuclear envelope and the nucleolus reappear as the DNA decompresses from its chromosomal state. Any left over spindle fibers is dissolved.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
+				<td>The fifth substage of the mitotic stage of the cell cycle in which the nuclear envelope and the nucleolus reappear as the DNA decompresses from its chromosomal state. Any left over spindle fibers are dissolved.<br><samp>Mitotic Stage</samp><samp>Cell Cycle</samp><samp>Mitosis</samp><samp>Cells</samp></td>
 			</tr>
 			<tr id='zygote' class='meiosis genetic_inheritance cells'>
 				<td>Zygote</td>
@@ -448,7 +452,7 @@
 			"strict mode";
 			function e(z){
 				z.id=Math.random()
-				var a=this,b=document.querySelector('div:first-child>div:nth-child(4)'),c,d,e,f,g,h=a.value,i=0,j,k,l;
+				var a=this,b=document.getElementById('searchwidth'),c,d,e,f,g,h=a.value,i=0,j,k,l;
 				if(a==window)return;
 				clearInterval(a.i);
 				a.i=setInterval(function(){
@@ -457,7 +461,7 @@
 					if(document.querySelector('input').value==h&&z.isTrusted&&z.type=='keydown')return;
 					clearInterval(a.i);
 					c=a.value.toLowerCase().trim()||'/./';
-					document.querySelector('div:first-child>div:nth-child(3)').style.visibility=a.value?'hidden':'';
+					document.getElementById('placeholder').style.visibility=a.value?'hidden':'';
 					b.innerText=a.value;
 					a.style.width=b.scrollWidth+'px';
 					a.removeAttribute('data-invalid');
@@ -493,11 +497,7 @@
 							})
 						})
 						j.forEach(function(l){
-							if(k.includes(l)){
-								l.style.display='';
-							}else{
-								l.style.display='none'
-							}
+							l.style.display=k.includes(l)?'':'none';
 						})
 					}else if(c[0]=='#'){
 						c=c.substring(1);
@@ -518,15 +518,11 @@
 								return
 							}
 							j.forEach(function(l){
-								if(k.includes(l)){
-									l.style.display='';
-								}else{
-									l.style.display='none';
-								}
+								l.style.display=k.includes(l)?'':'none';
 							})
 						}else{
 							c = c.replace(/ |-/g, '_').replace(/_+/g,'_').replace(/[^a-z\d_]/g, '').replace(/^_|_$/g,'');
-							if (!c) {
+							if(!c) {
 								for (e = document.querySelectorAll('tr'), f = e.length - 1; f >= 0; f--) {
 									e[f].style.display = ''
 								};
@@ -548,11 +544,7 @@
 						};
 						for (e=document.querySelectorAll('tr:not(:first-child)'),f=e.length-1;f>= 0;f--,g=0) {
 							e[f].id.split(',').forEach(function(h){g=g||d.test(h.replace(/_/g,' '))});
-							if(g){
-								e[f].style.display = ''
-							} else {
-								e[f].style.display = 'none'
-							}
+							e[f].style.display=g?'':'none';
 						}
 					}else{
 						c = c.replace(/-| /g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'').replace(/[^a-z\d_]/g, '');
@@ -576,21 +568,21 @@
 			document.querySelector('input').addEventListener('keyup',e);
 			function a(a,b){
 				if(this.t)clearInterval(this.t);
-				document.querySelector('div:first-child>div:last-child').style.display='block';
-				setTimeout(function(){document.querySelector('div:first-child>div:last-child').style.opacity=1},0)
-				a=document.querySelector('div:first-child>div:last-child').getBoundingClientRect().width/2,b=this.getBoundingClientRect();
-				document.querySelector('div:first-child>div:last-child').style.left = ((b.right-b.left)/2+b.left + a > innerWidth ? innerWidth / 2 - a : (b.right-b.left)/2+b.left - a) + 'px';
+				document.getElementById('searchinfo').style.display='block';
+				setTimeout(function(){document.getElementById('searchinfo').style.opacity=1},0)
+				a=document.getElementById('searchinfo').getBoundingClientRect().width/2,b=this.getBoundingClientRect();
+				document.getElementById('searchinfo').style.left = ((b.right-b.left)/2+b.left + a > innerWidth ? innerWidth / 2 - a : (b.right-b.left)/2+b.left - a) + 'px';
 			};
 			function b(){
-				document.querySelector('div:first-child>div:last-child').style.opacity=0;
-				this.t=setTimeout(function(){document.querySelector('div:first-child>div:last-child').style.display='none'},250)
+				document.getElementById('searchinfo').style.opacity=0;
+				this.t=setTimeout(function(){document.getElementById('searchinfo').style.display='none'},250)
 			};
 			e.call(document.querySelector('input'),{});
-			document.querySelector('div:first-child>div:nth-child(2)').addEventListener('mouseenter',a);
-			document.querySelector('div:first-child>div:nth-child(2)').addEventListener('focus',a);
-			document.querySelector('div:first-child>div:nth-child(2)').addEventListener('touchstart',a)
-			document.querySelector('div:first-child>div:nth-child(2)').addEventListener('mouseleave',b);
-			document.querySelector('div:first-child>div:nth-child(2)').addEventListener('blur',b);
+			document.getElementById('searchhelp').addEventListener('mouseenter',a);
+			document.getElementById('searchhelp').addEventListener('focus',a);
+			document.getElementById('searchhelp').addEventListener('touchstart',a)
+			document.getElementById('searchhelp').addEventListener('mouseleave',b);
+			document.getElementById('searchhelp').addEventListener('blur',b);
 			Array.prototype.forEach.call(document.querySelectorAll('samp'),function(a){
 				a.addEventListener('click',function(){
 					document.querySelector('input').value = '#'+a.innerHTML;
