@@ -7,6 +7,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+	<link href='../assets/code.css' rel='stylesheet' type='text/css'>
 	<style>
 		body{
 			background: #f5f5f5;
@@ -116,88 +117,6 @@
 			}
 		}
 
-		div.code {
-			margin: auto;
-			background: #002B36;
-			border-radius: .6em;
-			overflow-x: auto;
-		}
-
-		code {
-			background: #002B36;
-			color: #839496;
-			border-radius: .6em;
-			padding: .2em;
-			position: relative;
-			top: -.15em;
-			font-family: Consolas, Monaco, "Courier New", Courier, monospace;
-			font-size: .8em;
-		}
-
-		div.code > table {
-			border-collapse: collapse;
-			empty-cells: show;
-			table-layout: fixed;
-			font-family: Consolas, Monaco, "Courier New", Courier, monospace;
-		}
-
-		div.code > table tr {
-			line-height: 1.35;
-			display: block;
-			white-space: pre;
-		}
-
-		div.code > table tr:first-child {
-			margin-top: .2em;
-		}
-
-		div.code > table tr:last-child {
-			margin-bottom: .2em;
-		}
-
-		div.code > table td:nth-child(1) {
-			padding-right: .3em;
-			color: #586E75;
-			font-weight: 700;
-		}
-		div.code > table td:nth-child(2) {
-			background-color: #586E75;
-			padding: .75px;
-			border-spacing: 0;
-			border-width: 0;
-		}
-
-		div.code > table td:nth-child(3) {
-			padding-left: .3em;
-			color: #839496;
-		}
-
-		div.code > table span.keyword, code span.keyword {
-			color: #859900;
-		}
-
-		div.code > table span.method, div.code > table span.boolean, code span.method, code span.boolean {
-			color: #b58900;
-		}
-
-		div.code > table span.string, code span.string {
-			color: #2aa198;
-		}
-
-		div.code > table span.objkey, code span.objkey {
-			color: #CCC;
-		}
-
-		div.code > table span.tag, code span.tag {
-			color: #268bd2;
-			font-weight: bold;
-		}
-
-		div.code > table span.comment, code span.comment {
-			color: #586e75;
-			font-style: italic;
-		}
-
 		div.t {
 			border-bottom: .2em solid #00ACC1;
 			font-family: "Roboto Slab", Arial, sans-serif;
@@ -246,7 +165,7 @@
 			box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3), 0 15px 20px 5px rgba(0, 0, 0, 0.2);
 		}
 	</style>
-	<script charset='UTF-8' src='Draggable-Elements.js'></script>
+	<script src='addons_default_script.js'></script>
 </head>
 <body>
 	<noscript><style>#js{display:none}</style></noscript>
@@ -267,7 +186,7 @@
 			<br>
 			<strong>Usage: </strong>Use exactly the same as <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach'>Array.prototype.forEach</a>.
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">querySelectorAll</span>("<span class="string">div</span>").<span class="method">forEach</span>(<span class="tag">function</span> (currElement, index, array) {currElement.<span class="method">doStuff</span>()});</td></tr></table></div>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">querySelectorAll</span>("<span class="string">div</span>").<span class="method">forEach</span>(<span class="declaration">function</span> (currElement, index, array) {<span class='variable'>currElement</span>.<span class="method">doStuff</span>()});</td></tr></table></div>
 		<div id='NodeList_prototype_loop' class='t'><label>NodeList.<wbr>prototype.<wbr>loop &#149; HTMLCollection.<wbr>prototype.<wbr>loop<input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
 			<strong>Type: </strong>Function
@@ -276,8 +195,8 @@
 			<br>
 			<strong>Usage: </strong>Accepts two arguments. The first argument is required and should be the function to be run. The second optional argument is an array of arguments to be passed to the function when run. Two arguments are concatenated to the array, the index of the current element and the entire array.
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">querySelectorAll</span>("<span class="string">div</span>").<span class="method">loop</span>(<span class="tag">function</span> (givenArgument, index, entireArray) {</td></tr><tr><td>   2</td><td></td><td>    if (<span class='keyword'>this</span>.id <span class='tag'>==</span> "<span class='string'>arbitraryID</span>") <span class='keyword'>return</span> index;</td></tr><tr><td>   3</td><td></td><td>}, ["<span class='string'>givenArgument</span>"]);</td></tr></table></div>
-		<p class="info">If <code>[<span class='tag'>div</span><span class='keyword'>#randomID</span>, <span class='tag'>div</span><span class='keyword'>#anotherID</span>, <span class='tag'>div</span><span class='keyword'>#arbitraryID</span>, <span class='tag'>div</span><span class='keyword'>#lastID</span>]</code> were the provided list of elements, the top function call would return 2. The first function call would test <code>"<span class='string'>randomID</span>"</code> against <code>"<span class='string'>arbitraryID</span>"</code>, resolving to <code><span class='keyword'>false</span></code> and not returning anything. The next element would then be tested and again not return anything. The third loop would resolve to <code><span class='keyword'>true</span></code> and return <code>index</code>, which since the index of <code><span class='tag'>div</span><span class='keyword'>#arbitraryID</span></code> in the list is 2, would return 2. The fourth call would not happen since a value had already been returned.</p>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">querySelectorAll</span>("<span class="string">div</span>").<span class="method">loop</span>(<span class="declaration">function</span> (givenArgument, index, entireArray) {</td></tr><tr><td>   2</td><td></td><td>    <span class='keyword'>if</span> (<span class='keyword'>this</span>.id <span class='operator'>==</span> "<span class='string'>arbitraryID</span>") <span class='return'>return</span> <span class='variable'>index</span>;</td></tr><tr><td>   3</td><td></td><td>}, ["<span class='string'>givenArgument</span>"]);</td></tr></table></div>
+		<p class="info">If <code>[<span class='tag'>div</span><span class='keyword'>#randomID</span>, <span class='tag'>div</span><span class='keyword'>#anotherID</span>, <span class='tag'>div</span><span class='keyword'>#arbitraryID</span>, <span class='tag'>div</span><span class='keyword'>#lastID</span>]</code> were the provided list of elements, the top function call would return 2. The first function call would test <code>"<span class='string'>randomID</span>"</code> against <code>"<span class='string'>arbitraryID</span>"</code>, resolving to <code><span class='boolean'>false</span></code> and not returning anything. The next element would then be tested and again not return anything. The third loop would resolve to <code><span class='boolean'>true</span></code> and return <code><span class='variable'>index</span></code>, which since the index of <code><span class='tag'>div</span><span class='keyword'>#arbitraryID</span></code> in the list is 2, would return 2. The fourth call would not happen since a value had already been returned.</p>
 		<div id='Node_prototype_interval' class='t'><label>Node.<wbr>prototype.<wbr>interval<input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
 			<strong>Type: </strong>Function
@@ -286,7 +205,7 @@
 			<br>
 			<strong>Usage: </strong>Accepts five arguments, the first being required, the last four being optional. Argument one should be the function to be run in each call. The second argument is how many milliseconds should be between each function call. Default is 100ms. The third argument is how many times the function should run before being cleared. Set as null or undefined to run forever. Argument 4 should be an array of arguments to be passed to the function, or null/undefined. The fifth and final argument should be a callback function to be run after the interval is cleared. The function to be run in each interval will recieve any arguments defined in argument four, as well as two more arguments: the current iteration (zero-based numbering) and a function that, when called, will clear the interval early (this allows you to end an interval that would normally run indefinitely, or end an interval earlier than intended).
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").<span class="method">interval</span>(<span class="tag">function</span> (index, endEarly) {</td></tr><tr><td>   2</td><td></td><td>    <span class='keyword'>this</span>.style.width <span class='tag'>=</span> index <span class='tag'>+</span> "<span class='string'>%</span>";</td></tr><tr><td>   3</td><td></td><td>    if (index <span class='tag'>==</span> <span class='method'>100</span>) endEarly();</td></tr><tr><td>   4</td><td></td><td>}, <span class='method'>10</span>, <span class='keyword'>null</span>, []);</td></tr></table></div>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").<span class="method">interval</span>(<span class="tag">function</span> (index, endEarly) {</td></tr><tr><td>   2</td><td></td><td>    <span class='keyword'>this</span>.style.width <span class='operator'>=</span> <span class='variable'>index</span> <span class='operator'>+</span> "<span class='string'>%</span>";</td></tr><tr><td>   3</td><td></td><td>    <span class='keyword'>if</span> (<span class='variable'>index</span> <span class='operator'>==</span> <span class='number'>100</span>) <span class='method'>endEarly</span>();</td></tr><tr><td>   4</td><td></td><td>}, <span class='number'>10</span>, <span class='keyword'>null</span>, <span class='tag'>[]</span>);</td></tr></table></div>
 		<p class='info'>In the above example, the function is run 100 times at 10ms between each call. After index == 100, endEarly is called, ending the interval. Each time the function is called, index increases by 1, making <code><span class='keyword'>#arbitraryID</span></code> increase its width by 1% each call. Since the function is run so quickly, it appears like <code><span class='keyword'>#arbitraryID</span></code> is growing in width in a linear fashion. This makes it very easy to animate the growth of <code><span class='keyword'>#arbitraryID</span></code>'s width.</p>
 		<div id='Node_prototype_ael' class='t'><label>Node.<wbr>prototype.<wbr>ael<input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
@@ -296,7 +215,7 @@
 			<br>
 			<strong>Usage: </strong>Use exactly the same as <a href='https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener'>Node.prototype.addEventListener</a>, except replace the string in argument one with an array of strings.
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").<span class="method">ael</span>(["<span class='string'>mousedown</span>", "<span class='string'>touchstart</span>"], <span class="tag">function</span> (event) {event.<span class="method">doStuff</span>()});</td></tr></table></div>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").<span class="method">ael</span>(<span class='tag'>[</span>"<span class='string'>mousedown</span>", "<span class='string'>touchstart</span>"<span class='tag'>]</span>, <span class="declaration">function</span> (event) {<span class='variable'>event</span>.<span class="method">doStuff</span>()});</td></tr></table></div>
 		<p class='info'>The above is exactly the same as applying the function to both "mousedown" and "touchstart" events. No matter if the user is on a touch device or mouse device, the same handler will still be run.</p>
 		<div id='Element_prototype_rect' class='t'><label>Element.<wbr>prototype.<wbr>rect<input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
@@ -316,7 +235,7 @@
 			<br>
 			<strong>Usage: </strong>Call .escape() on any string to make it safe to use for innerHTML.
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").innerHTML <span class="tag">=</span> "<span class='string'>&lt;span style="color:red;"&gt;TEST&lt;/span&gt;</span>".<span class='method'>escape</span>();</td></tr></table></div>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").innerHTML <span class='operator'>=</span> "<span class='string'>&lt;span style="color:red;"&gt;TEST&lt;/span&gt;</span>".<span class='method'>escape</span>();</td></tr></table></div>
 		<p class='info'><code><span class='keyword'>#arbitraryID</span></code>'s innerHTML would display as '&lt;span style="color:red;"&gt;TEST&lt;/span&gt;' instead of as '<span style='color:red'>TEST</span>'.</p>
 		<div id='String_prototype_unescape' class='t'><label>String.<wbr>prototype.<wbr>unescape<input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
@@ -326,7 +245,7 @@
 			<br>
 			<strong>Usage: </strong>Call .unescape() on any string to make it interpretable as HTML.
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").innerHTML <span class="tag">=</span> "<span class='string'>&amp;lt;span style="color:red;"&amp;gt;TEST&amp;lt;/span&amp;gt;</span>".<span class='method'>unescape</span>();</td></tr></table></div>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>document</span>.<span class="method">getElementById</span>("<span class="string">arbitraryID</span>").innerHTML <span class='operator'>=</span> "<span class='string'>&amp;lt;span style="color:red;"&amp;gt;TEST&amp;lt;/span&amp;gt;</span>".<span class='method'>unescape</span>();</td></tr></table></div>
 		<p class='info'><code><span class='keyword'>#arbitraryID</span></code>'s innerHTML would display as '<span style='color:red'>TEST</span>' instead of as '&lt;span style="color:red;"&gt;TEST&lt;/span&gt;'.</p>
 		<div id='window_$' class='t'><label>window.$ <span style='font-style:italic;color:#456;font-family:"Open Sans";font-weight:700'>(or $_)</span><input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
@@ -364,17 +283,17 @@
 			<br>
 			<strong>Description: </strong>Converts the query string of the URL into a JSON object.
 			<br>
-			<strong>Usage: </strong>Accept two arguments: the first determines whether two values for the same key should overwrite the first value, or be kept in an array. The second determines whether the values should be kept in a stringified form, or be evaluated to a different data type*. See below for an example. Both are <code><span class='keyword'>false</span></code> by default. Values should be encoded (using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent'>encodeURIComponent</a>) to prevent characters like '&' or '=' from being interpreted incorrectly.
+			<strong>Usage: </strong>Accept two arguments: the first determines whether two values for the same key should overwrite the first value, or be kept in an array. The second determines whether the values should be kept in a stringified form, or be evaluated to a different data type*. See below for an example. Both are <code><span class='boolean'>false</span></code> by default. Values should be encoded (using <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent'>encodeURIComponent</a>) to prevent characters like '&' or '=' from being interpreted incorrectly.
 		</p>
-		<div class='code'>
+		<div class='code' style='max-height:20em;overflow-y:auto'>
 			<table>
-				<tr><td>   1</td><td></td><td><span class='comment'>// Example URL - https://example.com/thing?object={key:value}&number=3.1415&string=example1&array=[0,1,2]&string="example2"</span></td></tr><tr><td>   2</td><td></td><td></td></tr><tr><td>   3</td><td></td><td><span class="method">parseURLArgs</span>();</td></tr><tr><td>   4</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>   5</td><td></td><td>{</td></tr><tr><td>   6</td><td></td><td>    <span class='objkey'>object</span>: "<span class='string'>{key:value}</span>",</td></tr><tr><td>   7</td><td></td><td>    <span class='objkey'>number</span>: "<span class='string'>3.1415</span>",</td></tr><tr><td>   8</td><td></td><td>    <span class='objkey'>string</span>: "<span class='string'>"example2"</span>",</td></tr><tr><td>   9</td><td></td><td>    <span class='objkey'>array</span>: "<span class='string'>[0,1,2]</span>"</td></tr><tr><td>  10</td><td></td><td>}</td></tr><tr><td>  11</td><td></td><td></td></tr><tr><td>  12</td><td></td><td><span class='method'>parseURLArgs</span>(<span class='keyword'>true</span>);</td></tr><tr><td>  13</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>  14</td><td></td><td>{</td></tr><tr><td>  15</td><td></td><td>    <span class='objkey'>object</span>: <span class='tag'>[</span>"<span class='string'>{key:value}</span>"<span class='tag'>]</span>,</td></tr><tr><td>  16</td><td></td><td>    <span class='objkey'>number</span>: <span class='tag'>[</span>"<span class='string'>3.1415</span>"<span class='tag'>]</span>,</td></tr><tr><td>  17</td><td></td><td>    <span class='objkey'>string</span>: <span class='tag'>[</span>"<span class='string'>example1</span>", "<span class='string'>"example2"</span>"<span class='tag'>]</span>,</td></tr><tr><td>  18</td><td></td><td>    <span class='objkey'>array</span>: <span class='tag'>[</span>"<span class='string'>[0,1,2]</span>"<span class='tag'>]</span></td></tr><tr><td>  19</td><td></td><td>}</td></tr><tr><td>  20</td><td></td><td></td></tr><tr><td>  21</td><td></td><td><span class='method'>parseURLArgs</span>(<span class='keyword'>false</span>, <span class='keyword'>true</span>);</td></tr><tr><td>  22</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>  23</td><td></td><td>{</td></tr><tr><td>  24</td><td></td><td>    <span class='objkey'>object</span>: {</td></tr><tr><td>  25</td><td></td><td>        <span class='objkey'>key</span>: "<span class='string'>value</span>"</td></tr><tr><td>  26</td><td></td><td>    },</td></tr><tr><td>  27</td><td></td><td>    <span class='objkey'>number</span>: <span class='method'>3.1415</span>,</td></tr><tr><td>  28</td><td></td><td>    <span class='objkey'>string</span>: "<span class='string'>example2</span>",</td></tr><tr><td>  29</td><td></td><td>    <span class='objkey'>array</span>: <span class='tag'>[</span><span class='method'>0</span>, <span class='method'>1</span>, <span class='method'>2</span><span class='tag'>]</span></td></tr><tr><td>  30</td><td></td><td>}</td></tr><tr><td>  31</td><td></td><td></td></tr><tr><td>  32</td><td></td><td><span class='method'>parseURLArgs</span>(<span class='keyword'>true</span>, <span class='keyword'>true</span>);</td></tr><tr><td>  33</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>  34</td><td></td><td>{</td></tr><tr><td>  35</td><td></td><td>    <span class='objkey'>object</span>: <span class='tag'>[</span>{</td></tr><tr><td>  36</td><td></td><td>        <span class='objkey'>key</span>: "<span class='string'>value</span>"</td></tr><tr><td>  37</td><td></td><td>    }<span class='tag'>]</span>,</td></tr><tr><td>  38</td><td></td><td>    <span class='objkey'>number</span>: <span class='tag'>[</span><span class='method'>3.1415</span><span class='tag'>]</span>,</td></tr><tr><td>  39</td><td></td><td>    <span class='objkey'>string</span>: <span class='tag'>[</span>"<span class='string'>example1</span>", "<span class='string'>example2</span>"<span class='tag'>]</span>,</td></tr><tr><td>  40</td><td></td><td>    <span class='objkey'>array</span>: <span class='tag'>[[</span><span class='method'>0</span>, <span class='method'>1</span>, <span class='method'>2</span><span class='tag'>]]</span></td></tr><tr><td>  41</td><td></td><td>}</td></tr></table>
+				<tr><td>   1</td><td></td><td><span class='comment'>// Example URL - https://example.com/thing?object={key:value}&number=3.1415&string=example1&array=[0,1,2]&string="example2" </span></td></tr><tr><td>   2</td><td></td><td></td></tr><tr><td>   3</td><td></td><td><span class="method">parseURLArgs</span>();</td></tr><tr><td>   4</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>   5</td><td></td><td>{</td></tr><tr><td>   6</td><td></td><td>    <span class='objkey'>object</span>: "<span class='string'>{key:value}</span>",</td></tr><tr><td>   7</td><td></td><td>    <span class='objkey'>number</span>: "<span class='string'>3.1415</span>",</td></tr><tr><td>   8</td><td></td><td>    <span class='objkey'>string</span>: "<span class='string'>"example2"</span>",</td></tr><tr><td>   9</td><td></td><td>    <span class='objkey'>array</span>: "<span class='string'>[0,1,2]</span>"</td></tr><tr><td>  10</td><td></td><td>}</td></tr><tr><td>  11</td><td></td><td></td></tr><tr><td>  12</td><td></td><td><span class='method'>parseURLArgs</span>(<span class='boolean'>true</span>);</td></tr><tr><td>  13</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>  14</td><td></td><td>{</td></tr><tr><td>  15</td><td></td><td>    <span class='objkey'>object</span>: <span class='tag'>[</span>"<span class='string'>{key:value}</span>"<span class='tag'>]</span>,</td></tr><tr><td>  16</td><td></td><td>    <span class='objkey'>number</span>: <span class='tag'>[</span>"<span class='string'>3.1415</span>"<span class='tag'>]</span>,</td></tr><tr><td>  17</td><td></td><td>    <span class='objkey'>string</span>: <span class='tag'>[</span>"<span class='string'>example1</span>", "<span class='string'>"example2"</span>"<span class='tag'>]</span>,</td></tr><tr><td>  18</td><td></td><td>    <span class='objkey'>array</span>: <span class='tag'>[</span>"<span class='string'>[0,1,2]</span>"<span class='tag'>]</span></td></tr><tr><td>  19</td><td></td><td>}</td></tr><tr><td>  20</td><td></td><td></td></tr><tr><td>  21</td><td></td><td><span class='method'>parseURLArgs</span>(<span class='boolean'>false</span>, <span class='boolean'>true</span>);</td></tr><tr><td>  22</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>  23</td><td></td><td>{</td></tr><tr><td>  24</td><td></td><td>    <span class='objkey'>object</span>: {</td></tr><tr><td>  25</td><td></td><td>        <span class='objkey'>key</span>: "<span class='string'>value</span>"</td></tr><tr><td>  26</td><td></td><td>    },</td></tr><tr><td>  27</td><td></td><td>    <span class='objkey'>number</span>: <span class='method'>3.1415</span>,</td></tr><tr><td>  28</td><td></td><td>    <span class='objkey'>string</span>: "<span class='string'>example2</span>",</td></tr><tr><td>  29</td><td></td><td>    <span class='objkey'>array</span>: <span class='tag'>[</span><span class='method'>0</span>, <span class='method'>1</span>, <span class='method'>2</span><span class='tag'>]</span></td></tr><tr><td>  30</td><td></td><td>}</td></tr><tr><td>  31</td><td></td><td></td></tr><tr><td>  32</td><td></td><td><span class='method'>parseURLArgs</span>(<span class='boolean'>true</span>, <span class='boolean'>true</span>);</td></tr><tr><td>  33</td><td></td><td><span class='comment'>// Returns the following object</span></td></tr><tr><td>  34</td><td></td><td>{</td></tr><tr><td>  35</td><td></td><td>    <span class='objkey'>object</span>: <span class='tag'>[</span>{</td></tr><tr><td>  36</td><td></td><td>        <span class='objkey'>key</span>: "<span class='string'>value</span>"</td></tr><tr><td>  37</td><td></td><td>    }<span class='tag'>]</span>,</td></tr><tr><td>  38</td><td></td><td>    <span class='objkey'>number</span>: <span class='tag'>[</span><span class='method'>3.1415</span><span class='tag'>]</span>,</td></tr><tr><td>  39</td><td></td><td>    <span class='objkey'>string</span>: <span class='tag'>[</span>"<span class='string'>example1</span>", "<span class='string'>example2</span>"<span class='tag'>]</span>,</td></tr><tr><td>  40</td><td></td><td>    <span class='objkey'>array</span>: <span class='tag'>[[</span><span class='method'>0</span>, <span class='method'>1</span>, <span class='method'>2</span><span class='tag'>]]</span></td></tr><tr><td>  41</td><td></td><td>}</td></tr></table>
 		</div>
 		<p class='info'>In the first object, the string key is set to <code>"<span class='string'>"example2"</span>"</code> because the URL has two values for 'string'. The last one is set to <code>"<span class='string'>"example2"</span>"</code>, so it overwrites the original <code>"<span class='string'>example1</span>"</code>. All values are kept in their exact stringified form (hence the surrounding quotes around <code>"<span class='string'>"example2"</span>"</code>).</p>
 		<p class='info' style='margin-top:.4em'>In the second object, every value is kept as an array. With the 'string' key, instead of <code>"<span class='string'>"example2"</span>"</code> overwriting <code>"<span class='string'>example1</span>"</code>, it is added to the end of the array so that every value will appear in the overall object.</p>
 		<p class='info' style='margin-top:.4em'>In the third object, each value is interpreted literally. The first value is interpreted as a JSON object. The second is interpreted as a number. The third remains a string (it's surrounding quotes were parsed to tell the interpreter to parse it as a string). The fourth is interpreted as an array.</p>
 		<p class='info' style='margin-top:.4em'>The fourth object is a combination of the second and third objects. Each value is added to an array and interpreted literally.</p>
-		<p class='info' style='margin-top:.4em;font-size:90%'>*Note that in order for strings to be parsed literally (second argument = <code><span class='keyword'>true</span></code>), <a href='#String_parse'>String.parse</a> must be included in the file.</p>
+		<p class='info' style='margin-top:.4em;font-size:90%'>*Note that in order for strings to be parsed literally (second argument = <code><span class='boolean'>true</span></code>), <a href='#String_parse'>String.parse</a> must be included in the file.</p>
 		<div id='String_parse' class='t'><label>String.parse<input type="checkbox" name='select' value='forEach' checked></label></div>
 		<p class='info'>
 			<strong>Type: </strong>Function
@@ -383,13 +302,22 @@
 			<br>
 			<strong>Usage: </strong>Call String.parse on any string to interpret it as a JavaScript data type. If the value could not be interpreted as any data, it will return in its stringified form (e.g '{key:value}' would be interpreted as an object, but 'randomString' is nothing but a string).
 		</p>
-		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>String</span>.<span class="method">parse</span>("<span class="string">just a string</span>");</td></tr><tr><td>   2</td><td></td><td><span class='comment'>// Would return </span>"<span class='string'>just a string</span>"</td></tr><tr><td>   3</td><td></td><td><span class='keyword'>String</span>.<span class="method">parse</span>("<span class="string">'[quoted,string,that,looks,like,array]'</span>");</td></tr><tr><td>   4</td><td></td><td><span class='comment'>// Even though it would normally be interpreted as an array, the surrounding quotes inside the string force the interpreter to return the value as a string. </span>"<span class='string'>[quoted,string,that,looks,like,array]</span>"</td></tr><tr><td>   5</td><td></td><td><span class='keyword'>String</span>.<span class='method'>parse</span></td></tr></table></div>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='keyword'>String</span>.<span class="method">parse</span>("<span class="string">just a string</span>");</td></tr><tr><td>   2</td><td></td><td><span class='comment'>// Would return </span>"<span class='string'>just a string</span>"</td></tr><tr><td>   3</td><td></td><td><span class='keyword'>String</span>.<span class="method">parse</span>("<span class="string">'[quoted,string,that,looks,like,array]'</span>");</td></tr><tr><td>   4</td><td></td><td><span class='comment'>// Even though it would normally be interpreted as an array, the surrounding quotes inside the string force the interpreter to return the value as a string. </span>"<span class='string'>[quoted,string,that,looks,like,array]</span>"</td></tr><tr><td>   5</td><td></td><td><span class='keyword'>String</span>.<span class='method'>parse</span>("<span class='string'>[actual, 'array']</span>");</td></tr><tr><td>   6</td><td></td><td><span class='comment'>// Returns an actual array since there are no surrounding quotes. Each element in the array is parsed individually. Returns </span><span class='tag'>[</span>"<span class='string'>actual</span>", "<span class='string'>array</span>"<span class='tag'>]</span></td></tr><tr><td>   7</td><td></td><td><span class='keyword'>String</span>.<span class='method'>parse</span>("<span class='string'>[-Infinity, true, /regex/gmi, {key:value}, undefined]</span>");</td></tr><tr><td>   8</td><td></td><td><span class='comment'>// Returns </span><span class='tag'>[</span><span class='number'>-Infinity</span>, <span class='boolean'>true</span>, <span class='regex'>/regex/gmi</span>, {<span class='objkey'>key</span>: "<span class='string'>value</span>"}, <span class='keyword'>undefined</span><span class='tag'>]</span></td></tr><tr><td>   9</td><td></td><td><span class='keyword'>String</span>.<span class='method'>parse</span>("<span class='string'>{objects: work, like arrays: [and, {can:'be'}, inter-nested], inside: each other}</span>");</td></tr><tr><td>  10</td><td></td><td><span class='comment'>// Returns </span>{<span class='objkey'>objects</span>: "<span class='string'>work</span>", "<span class='objkey'>like arrays</span>": <span class='tag'>[</span>"<span class='string'>and</span>", {<span class='objkey'>can</span>: "<span class='string'>be</span>"}, "<span class='string'>inter-nested</span>"<span class='tag'>]</span>, <span class='objkey'>inside</span>: "<span class='string'>each other</span>"}</td></tr></table></div>
 		<p class='info'>The top would return the first &lt;div&gt; element whose class includes "class", exactly the same result as <code><span class='keyword'>document</span>.<span class='method'>querySelector</span>("<span class='string'>div.class</span>");</code>.</p>
+		<div id='Date_prototype_toElapsedString' class='t'><label>Date.prototype.toElapsedString<input type="checkbox" name='select' value='forEach' checked></label></div>
+		<p class='info'>
+			<strong>Type: </strong>Function
+			<br>
+			<strong>Description: </strong>Returns a string describing the amount of time that has passed (or is yet to pass) between the <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date'>Date</a> object and the current time.
+			<br>
+			<strong>Usage: </strong>Accepts one argument: a boolean indicating whether to use the long form of a word ('seconds', 'minutes', 'hours') or the shortened version ('s', 'm', 'h').
+		</p>
+		<div class='code'><table><tr><td>   1</td><td></td><td><span class='new'>new</span> <span class='keyword'>Date</span>("<span class="string">January 1, 2000</span>").<span class='method'>toElapsedString</span>();</td></tr><tr><td>   2</td><td></td><td><span class='new'>new</span> <span class='keyword'>Date</span>("<span class="string">January 1, 3000</span>").<span class='method'>toElapsedString</span>(<span class='boolean'>true</span>);</td></tr><tr><td>   3</td><td></td><td><span class='new'>new</span> <span class='keyword'>Date</span>().<span class='method'>toElapsedString</span>();</td></tr></table></div>
+		<p class='info'>The first call would <span id='nojs'>be formatted as <code>"<span class='string'><i>x</i> years ago</span>"</code> where <span style='color:#CD322F;font-style:italic;position:relative;left:-.15em'>x</span> is the amount of years since January 1, 2000. The second would be formatted as <code>"<span class='string'><i>x</i>y from now</span>"</code> where <span style='color:#CD322F;font-style:italic;position:relative;left:-.15em'>x</span> is the amount of years from now until January 1, 3000.</span><script type="text/javascript">document.getElementById('nojs').innerHTML='return <code>"<span class="string">'+new Date('January1,2000').toElapsedString()+'</span>"</code>. The second call would return <code>"<span class="string">'+new Date('January1,3000').toElapsedString(1)+'</span>"</code>'</script>. The third and final call would return <code>"<span class='string'>now</span>"</code> since no time is passing between the Date and the function call.</p>
 	</div>
 	<h2 id='download'>Download</h2>
 	<div class="container"><p class='info'>Click the download button below to download the script for your own use. There are minified and unminified versions to choose from. After downloading the script, follow the directions in the downloads section to link the script into your HTML document. Head over to the <a href='documentation'>documentation</a> page for instructions on how to use the script, or check out the <a href='demo'>demo</a> page to see all the configurations.</p>
 	<a href='download' style='text-decoration: none' id='dlA'><div id='dlButton'>Download</div></a>
 	</div>
-	<script src='addons_default_script.js'></script>
 </body>
 </html>
