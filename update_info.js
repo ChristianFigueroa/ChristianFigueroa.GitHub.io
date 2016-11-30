@@ -1,5 +1,17 @@
 var UPDATES=[
 	{
+		title: 'JS Addons Script',
+		category: 'JavaScript',
+		description: 'Script containing multiple simple addons to use. Some are just simple shortcuts while some add new functionality entirely.',
+		date: new Date('2016-11-24T19:54:05Z'),
+		link: './JavaScript/addons'
+	},{
+		title: 'New AP Bio Vocabulary Page',
+		category: 'AP Bio',
+		description: 'New page with many vocabulary words pertaining to AP Bio. It has a search bar for filtering words and will be updated once in a while to add more words.',
+		date: new Date('2016-11-16T00:43:32Z'),
+		link: '.AP/Biology/vocabulary'
+	},{
 		title: 'Chapter 19 Flash Cards',
 		category: 'AP World History',
 		description: '10 new flash cards: Investiture Contest, Horse Collars, Hanseatic League, Chivalry, Troubadours, Cathedral Schools, Saint Thomas Aquinas, Eucharist, Relics, Reconquista',
