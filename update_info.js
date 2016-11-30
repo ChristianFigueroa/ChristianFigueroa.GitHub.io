@@ -10,7 +10,7 @@ var UPDATES=[
 		category: 'AP Bio',
 		description: 'New page with many vocabulary words pertaining to AP Bio. It has a search bar for filtering words and will be updated once in a while to add more words.',
 		date: new Date('2016-11-16T00:43:32Z'),
-		link: '.AP/Biology/vocabulary'
+		link: './AP/Biology/vocabulary'
 	},{
 		title: 'Chapter 19 Flash Cards',
 		category: 'AP World History',
