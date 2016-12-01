@@ -6,7 +6,6 @@
 	<title>JS Addons &#183; ChristianFigueroa.GitHub.io</title>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
 	<link href='../assets/code.css' rel='stylesheet' type='text/css'>
 	<style>
 		body{
@@ -158,7 +157,7 @@
 <body>
 	<noscript><style>#js{display:none}</style></noscript>
 	<h1>JS Addons</h1>
-	<h3><a href='#what-is-this'>Info</a><a href='#documentation'>Documentation</a><a href='#download'>Download</a></h3>
+	<h3><a href='#what-is-this'>Info</a><a href='#documentation'>Documentation</a><a href='#view_script'>Download</a></h3>
 	<br>
 	<h2 id='what-is-this'>What is this?</h2>
 	<div class='container'>
@@ -300,9 +299,7 @@
 		<div class='code'><table><tr><td>   1</td><td></td><td><span class='new'>new</span> <span class='keyword'>Date</span>("<span class="string">January 1, 2000</span>").<span class='method'>toElapsedString</span>();</td></tr><tr><td>   2</td><td></td><td><span class='new'>new</span> <span class='keyword'>Date</span>("<span class="string">January 1, 3000</span>").<span class='method'>toElapsedString</span>(<span class='boolean'>true</span>);</td></tr><tr><td>   3</td><td></td><td><span class='new'>new</span> <span class='keyword'>Date</span>().<span class='method'>toElapsedString</span>();</td></tr></table></div>
 		<p class='info'>The first call would <span id='nojs'>be formatted as <code>"<span class='string'><i>x</i> years ago</span>"</code> where <span style='color:#CD322F;font-style:italic;position:relative;left:-.15em'>x</span> is the amount of years since January 1, 2000. The second would be formatted as <code>"<span class='string'><i>x</i>y from now</span>"</code> where <span style='color:#CD322F;font-style:italic;position:relative;left:-.15em'>x</span> is the amount of years from now until January 1, 3000.</span><script type="text/javascript">document.getElementById('nojs').innerHTML='return <code>"<span class="string">'+new Date('January1,2000').toElapsedString()+'</span>"</code>. The second call would return <code>"<span class="string">'+new Date('January1,3000').toElapsedString(1)+'</span>"</code>'</script>. The third and final call would return <code>"<span class='string'>now</span>"</code> since no time is passing between the Date and the function call.</p>
 	</div>
-	<h2 id='download'>Download</h2>
-	<div class="container"><p class='info'>Select the button below to go to the script that includes all the addons listed above.</p>
-	<a href='addons.js' style='text-decoration: none' id='dlA'><div id='dlButton'>View Script</div></a>
-	</div>
+	<h2 id='view_script'>View Script</h2>
+	<div class="container"><p class='info'>Select the button below to view all the addons in a GitHub repository.</p><a href='https://github.com/ChristianFigueroa/JS-Addons' style='text-decoration:none' id='dlA'><div id='dlButton'>View in GitHub</div></a></div>
 </body>
 </html>
