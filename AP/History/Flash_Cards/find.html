@@ -131,7 +131,7 @@
 				shownFlashCards.reverse();
 				document.title=shownFlashCards.map(function(a){return a.title}).join(', ')+' \u00b7 ChristianFigueroa.GitHub.io';
 			}else{
-				if(!args.t||!args.q||!(args.t in [0,1,2])||args.t==0&&!(args.q>=0&&args.q<=FLASHCARDS.PERIODS.length-1)||args.t==1&&!(args.q>=0&&args.q<=FLASHCARDS[''].length))location.replace('view');
+				if(!args.t||!args.q||!(args.t in [0,1,2])||args.t==0&&!(args.q>=0&&args.q<=FLASHCARDS.PERIODS.length-1)||args.t==1&&!(args.q>=0&&args.q<FLASHCARDS[''].length))location.replace('view');
 				document.title=(args.t==0?'':args.t==1?'Chapter ':'"')+(args.t==0?FLASHCARDS.PERIODS[args.q]+' Period':args.t==2?args.q:~args.q?+args.q+1:'All')+(args.t>1?'"':'')+' \u00b7 ChristianFigueroa.GitHub.io';
 				var shownFlashCards=args.t==0?FLASHCARDS.getPeriod(args.q):args.t==1?(~args.q?FLASHCARDS.getChapter(+args.q):FLASHCARDS.getAll()):[];
 				var reg=/\s/g,map=[[/\u00ED/g,'i'],[/\u00FC/g,'u'],[/\u00E7/g,'c']]
