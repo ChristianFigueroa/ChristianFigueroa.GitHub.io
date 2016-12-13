@@ -1,5 +1,11 @@
 var UPDATES=[
 	{
+		title: 'Chapter 21 Flash Cards',
+		category: 'AP World History',
+		description: '!0 new flash cards: Rabban Sauma, John of Montecorvino, Crystallized Sugar, Bubonic Plague, Little Ice Age, Hongwu, Mandarins, Humanist, Emperor Yongle, Prince Henry the Navigator',
+		date: new Date('2016-12-13T05:34:11Z'),
+		link: './AP/History/Flash_Cards/find?t=1&q=20'
+	},{
 		title: 'JS Addons Script',
 		category: 'JavaScript',
 		description: 'Script containing multiple simple addons to use. Some are just simple shortcuts while some add new functionality entirely.',
