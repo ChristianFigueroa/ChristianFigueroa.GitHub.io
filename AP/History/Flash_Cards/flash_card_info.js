@@ -847,10 +847,81 @@
 					chapter: 21,
 					period: PC
 				}
+			],[/*Chapter 22*/],[/*Chapter 23*/],[{
+					title: 'Encomienda',
+					def: 'The system started by the Spanish that allowed encomenderos to enslave Indians in exchange for their protection and instruction in Catholicism. This system was very similar to the feudal system of Europe.',
+					sig: 'This system allowed the conquistadors and Spanish empire as a whole to extract resources from Indian territory and kept the Indians under Spanish rule.',
+					theme: S,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Francisco Pizarro',
+					def: 'Francisco Pizarro was the Spanish conquistador who invaded and conquered Peru and placed it under Spanish rule.',
+					sig: 'His conquest of Peru added more land to Spain\'s region of power in the Americas. They used the Inca mita system to force natives to pay tribute to Spain in the form of labor.',
+					theme: P,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Audiencias',
+					def: 'Audiencias were groups of university-educated lawyers who were sent by the Spanish king to ensure the viceroys in the Americas were following the king\'s orders.',
+					sig: 'Without the audiencias, viceroys would have undoubtedly gone against the Spanish king and tried to start their own empire.',
+					theme: P,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Mestizo',
+					def: 'The child of a Spanish colonist and a native Indian. Intermarrying became common in Iberian colonies because there were more Spanish men than women.',
+					sig: 'Mestizos proved that Indians in Iberian colonies were more accepted and not discriminated against compared to French and English colonies.',
+					theme: S,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Creoles',
+					def: 'Creoles were people who had been born in America to Iberian parents and were second in the social hierarchy only to peninsulares.',
+					sig: 'Creoles were an example of how the social structure was developing in this time period after the colonization of a new region.',
+					theme: S,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Peninsulares',
+					def: 'Peninsulares were people who had migrated from the Iberian peninsula to the Americas. They were at the very top of the social hierarchy.',
+					sig: 'Peninsualres were another example of how the social structure was developing in the Americas after the colonization of the new region.',
+					theme: S,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Manila Galleons',
+					def: 'The Manila Galleons were Spanish ships that sailed across the Pacific Ocean from Mexico to the Philippines. They would stop along the islands on the way to gather resources and trade with locals.',
+					sig: 'The Manila Galleons allowed Spain to transport goods from all the way across the globe and sell in Asian markets. It also provided a more direct route to get silver from the Americas to Europe.',
+					theme: E,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Haciendas',
+					def: 'Haciendas were estates in Spanish America that produced enough agriculture crops and crafts to not only supply itself but also to export for a profit. The haciendas sold to towns, mining districts, and cities.',
+					sig: 'Haciendas required the work of many indigenous people that were first put under the encomienda system and later the repartimiento system.',
+					theme: E,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Engenho',
+					def: 'Sugar plantation mills in Brazil that came to represent all the work and machinery associated with the production of sugar including the people working the plantation and the land of the plantation itself.',
+					sig: 'Engenhos were just one example of the cash crop plantations in Brazil that represented the financial boom going on in that time with the discovery of the Americas.',
+					theme: E,
+					chapter: 24,
+					period: M
+				},{
+					title: 'Indentured Labor',
+					def: 'Indentured slaves got a ride from Europe to Americas to start a new life in exchange for 4 &ndash; 7 years of free labor to a plantation owner.',
+					sig: 'Indentured servants were some of the original European colonists to go to America and provided a workforce for plantation owners. Without them, plantations in America would not have been as successful.',
+					theme: E,
+					chapter: 24,
+					period: M
+				}
 			]
 		],
-		PERIODS:[F,C,PC,E],
-		SKIPPEDCHAPTERS: [11, 12, 16, 17, 19], // Values are actual chapter - 1 (e.g. 0 = Chapter 1)
+		PERIODS:[F,C,PC,M],
+		SKIPPEDCHAPTERS: [11, 12, 16, 17, 19, 21, 22], // Values are actual chapter - 1 (e.g. 0 = Chapter 1)
 		getAll:function(){var b=[];for(var i=0,n=0,l=this[''].length;i<l;i++)b=b.concat(this[''][i]);b.getPeriod=function(a){return FLASHCARDS.getPeriod(a)};b.getChapter=function(a){return FLASHCARDS.getChapter(a)};b.getTitle=function(a){return FLASHCARDS.getTitle(a)};b.getRandom=function(a){return FLASHCARDS.getRandom(a)};return b},getRandom:function(c){function r(){var a=m.floor(m.random()*FLASHCARDS[''].length);return~FLASHCARDS.SKIPPEDCHAPTERS.indexOf(a)?r():a};var a=this[''][c||c==0?c:r()];return a[m.floor(m.random()*a.length)]},getPeriod:function(a){var b=[];for(var i=0,n=0,l=this[''].length;i<l;i++){if(!this[''][i][0])continue;this[''][i][0].period==this.PERIODS[a]?(function(){for(var j=0,k=FLASHCARDS[''][i].length;j<k;j++){b[n]=FLASHCARDS[''][i][j];n++}})():0};b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getChapter=function(a){var b=[],c=this;for(var i=0,n=0;i<c.length;i++){c[i].chapter==a?(function(){b[n]=c[i];n++})():0};b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getTitle=function(a){for(var i=0;i<this.length;i++){if(this[i].title==a)return this[i]}};return b};b.getTitle=function(a){for(var i=0;i<this.length;i++)if(this[i].title==a)return this[i]};return b},getChapter:function(a){var b=[],c=this[''][a];for(var i=0,l=c.length;i<l;i++)b[i]=c[i];b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getTitle=function(a){for(var i=0;i<this.length;i++){if(this[i].title==a)return this[i]}return null};return b},getTitle:function(a){for(var i=0,l=this[''].length;i<l;i++)for(var n=0,k=this[''][i].length;n<k;n++)if(this[''][i][n].title==a)return this[''][i][n];return null}
 	}
 }();
