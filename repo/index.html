@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Christian Figueroa's Cydia Repo &#183; ChristianFigueroa.GitHub.io</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
+	<style>
+		@font-face {
+			font-family: 'BPreplay';
+			font-style: italic;
+			font-weight: 700;
+			src: local('BPreplay Bold Italic'),
+				 local('BPreplay-BoldItalic'),
+				 url('https://ChristianFigueroa.github.io/assets/BPreplay-BoldItalics.woff2') format('woff2'),
+				 url('/assets/BPreplay-BoldItalics.woff') format('woff'),
+				 url('/assets/BPreplay-BoldItalics.ttf') format('truetype');
+		}
+
+		body,html {
+			margin: 0;
+			background: #DDD;
+		}
+
+		nav {
+			background: #CCC;
+			text-align: center;
+			padding: 1vw 0;
+		}
+
+		#co {
+			background: #00acc1;
+			border-radius: 50%;
+			width: 15.5vw;
+			height: 15.5vw;
+			display: inline-block;
+			text-align: initial;
+			vertical-align: top;
+			box-shadow: 0 0 .5em .2em rgba(0,0,0,.3)
+		}
+
+		#ci {
+			background: #CCC;
+			border-radius: 50%;
+			height: 13vw;
+			width: 13vw;
+			position: relative;
+			top: 1.25vw;
+			left: 1.25vw;
+			box-shadow: 0 0 .5em .2em rgba(0,0,0,.3) inset;
+		}
+
+		img {
+			width: 11vw;
+			height: 11vw;
+			position: relative;
+			top: 1vw;
+			left: 1vw;
+		}
+
+		nav span {
+			font-family: "BPreplay", Consolas, monospace;
+			font-weight: 700;
+			font-style: italic;
+			font-size: 12vw;
+			margin-left: .3em;
+			color: #456;
+		}
+
+		#cont {
+			background: #DDD;
+			font-family: "Open Sans", Arial, sans-serif;
+			text-align: center;
+			padding-top: 1em;
+			color: rgba(0,0,0,.87);
+		}
+
+		#cont>span {
+			font-size: 2.2em;
+			font-weight: 600;
+		}
+
+		#cont>a {
+			text-decoration: none;
+			color: initial;
+		}
+
+		#cont>a:hover>div {
+			background-color: #CCC;
+		}
+
+		#cont>a>div {
+			padding: .5em 5%;
+			text-align: left;
+			color: rgba(0,0,0,.87);
+		}
+
+		#cont>a>div h2 {
+			border-bottom: .2em solid #00acc1;
+			text-align: left;
+			font-size: 2em;
+			font-family: "Roboto Slab", Arial, sans-serif;
+			margin: 0;
+		}
+
+		#cont>a>div:first-of-type {
+			margin-top: 1.66em;
+		}
+
+		#cont div.i {
+			font-family: "Roboto Slab", Arial, sans-serif;
+			display: inline-block;
+			font-size: 1.25em
+		}
+
+		#cont div.i:not(:first-of-type):before {
+			content: '\00b7\00a0';
+		}
+
+		#cont>a>div div:not(.i) {
+			font-size: 1.2em;
+			text-align: justify;
+			margin-top: .1em;
+		}
+
+		@media (max-width: 500px) {
+			nav {
+				padding: 3vw 0;
+				height: 40vw;
+			}
+
+			#co {
+				width: 60vw;
+				height: 60vw;
+				box-shadow: 0 0 1em .4em rgba(0,0,0,.3);
+			}
+
+			#ci {
+				width: 50vw;
+				height: 50vw;
+				top: 5vw;
+				left: 5vw;
+				box-shadow: 0 0 1em .4em rgba(0,0,0,.3) inset;
+			}
+
+			img {
+				width: 45vw;
+				height: 45vw;
+				top: 2.5vw;
+				left: 2.5vw;
+			}
+
+			nav span {
+				font-size: 15vw;
+				margin: 0;
+			}
+
+			#cont {
+				padding-top: 36vw;
+			}
+
+			#cont>span {
+				font-size: 1.5em;
+			}
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<div>
+			<div id='co'>
+				<div id='ci'>
+					<img src='/assets/cydia.svg'>
+				</div>
+			</div>
+			<span>Cydia Repo</span>
+		</div>
+	</nav>
+	<div id='cont'>
+		<span>This page is for my personal <a target="_blank" href='https://cydia.saurik.com'>Cydia</a> repository that includes some themes and stuff that I've made.</span>
+		<a href='cydia://url/https://cydia.saurik.com/api/share#?source=http://christianfigueroa.github.io/repo/'>
+			<div>
+				<h2>Open Repo in Cydia</h2>
+				<div>Click here to open my repo in Cydia. If you are not on an iDevice, or do not have the Cydia application installed on your iDevice, this link will lead to nothing.</div>
+			</div>
+		</a>
+		<a href='/cydia/package'>
+			<div>
+				<h2>Browse Packages</h2>
+				<div class='i'>Two packages available</div>
+				<div>Browse all the packages currently available on my repo.</div>
+			</div>
+		</a>
+	</div>
+</body>
+</html>
