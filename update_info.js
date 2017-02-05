@@ -106,5 +106,6 @@ var UPDATES=[
 var SVGS={
 	'AP World History': '<div class="updateicon svg-spartan"></div>',
 	'AP Bio': '<div class="updateicon svg-dna"></div>',
-	'JavaScript': '<div class="updateicon svg-js"></div>'
+	'JavaScript': '<div class="updateicon svg-js"></div>',
+	'Cydia': '<div class="updateicon svg-cydia"></div>'
 };
