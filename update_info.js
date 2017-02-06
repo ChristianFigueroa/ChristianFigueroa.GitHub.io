@@ -1,8 +1,32 @@
 var UPDATES=[
 	{
+		title: 'Added Chapter 24 Timeline Events',
+		category: 'AP World History',
+		description: 'Added more events to the history timeline all the way up to around year 1750. Also, the interface on the page has been updated.',
+		date: new Date('2017-02-06T06:25:55Z'),
+		link: './AP/History/Timeline'
+	},{
+		title: 'Keptic v1.1',
+		category: 'Cydia',
+		description: 'Updated Keptic to v1.1 - Touch interaction added to show multiple pages of information',
+		date: new Date('2017-02-03T07:00:43Z'),
+		link: './cydia/package/Keptic'
+	},{
+		title: 'Chapter 24 Flash Cards',
+		category: 'AP World History',
+		description: '10 new flash cards: Encomienda, Francisco Pizarro, Audiencias, Mestizo, Creoles, Peninsulares, Manila Galleons, Haciendas, Engenho, Indentured Labor',
+		date: new Date('2017-02-01T06:38:53Z'),
+		link: './AP/History/Flash_Cards/find?t=1&q=23'
+	},{
+		title: 'Created Cydia Repository',
+		category: 'Cydia',
+		description: 'My personal cydia repository for hosting themes and other stuff you can install for jailbroken iOS devices. The only package on there at the moment is a lock screen theme named Keptic.',
+		date: new Date('2017-01-30T10:19:59Z'),
+		link: './repo/'
+	},{
 		title: 'Chapter 21 Flash Cards',
 		category: 'AP World History',
-		description: '!0 new flash cards: Rabban Sauma, John of Montecorvino, Crystallized Sugar, Bubonic Plague, Little Ice Age, Hongwu, Mandarins, Humanist, Emperor Yongle, Prince Henry the Navigator',
+		description: '10 new flash cards: Rabban Sauma, John of Montecorvino, Crystallized Sugar, Bubonic Plague, Little Ice Age, Hongwu, Mandarins, Humanist, Emperor Yongle, Prince Henry the Navigator',
 		date: new Date('2016-12-13T05:34:11Z'),
 		link: './AP/History/Flash_Cards/find?t=1&q=20'
 	},{
