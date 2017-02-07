@@ -1,5 +1,11 @@
 var UPDATES=[
 	{
+		title: 'Chapter 25 Flash Cards',
+		category: 'AP World History',
+		description: '10 new flash cards: Asante, King Nzinga, Fulani, Antonian Movement, Atlantic Slave Trade, Triangular Trade, Middle Passage, Cash Crop, Olaudah Equiano, Saint Domingue',
+		date: new Date('2017-02-07T08:07:08Z'),
+		link: './AP/History/Flash_Cards/find?t=1&q=24'
+	},{
 		title: 'Added Chapter 24 Timeline Events',
 		category: 'AP World History',
 		description: 'Added more events to the history timeline all the way up to around year 1750. Also, the interface on the page has been updated.',
