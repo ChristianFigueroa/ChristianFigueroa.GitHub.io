@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang='en-US'>
+<html lang='en'>
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
 	<title>History Flash Cards &#183; ChristianFigueroa.GitHub.io</title>
+	<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91403443-1', 'auto');
+	 	ga('send', 'pageview');</script>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
@@ -231,69 +237,76 @@
 	</div>
 	
 	<script type="text/javascript">
-	"use strict";
-	var previewFive=[FLASHCARDS.getRandom(),FLASHCARDS.getRandom(),FLASHCARDS.getRandom(),FLASHCARDS.getRandom(),FLASHCARDS.getRandom()]
-	FLASHCARDS[''].forEach(function(a,b){if(~FLASHCARDS.SKIPPEDCHAPTERS.indexOf(b))return;$id('findSelectQ2').innerHTML+='<option value='+b+'>Chapter '+(b+1)+'</option>'})
-	$id('preview').innerHTML='<span class="period">Period: '+previewFive[0].period+'</span><span class="chapter"> Chapter: <span class="number">'+previewFive[0].chapter+'</span></span><div class="title">'+previewFive[0].title+'</div>'
-	$id('preview').change=function(a){
-		var el=$$('div.prevPageSelector.selected'),ind=Array.prototype.indexOf.call($('div.prevPageSelector'),el),a=a||a==0?a:(ind+1)%5;
-		if(a==ind)return;
-		var b=document.createElement('div'),c=$id('preview').rect.left,z=previewFive[a];
-		b.id='previewAnim';
-		b.innerHTML='<span class="period">Period: '+z.period+'</span><span class="chapter">Chapter: <span class="number">'+z.chapter+'</span></span><div class="title">'+z.title+'</div>';
-		if(a!=0&&ind!=4&&ind<a){
-			b.css({left:window.innerWidth+c+'px',position:'absolute',top:0,opacity:0})
-			$id('previewCont').appendChild(b)
-			b.interval(function(a){
-				this.css({left:window.innerWidth-a/30*window.innerWidth-3+c+'px',opacity:a/15-1});
-				// Constantly changes background color to update any unpainted areas where the card gets cut off and stays in the background
-				// Both values create the same color on the blue background, so there's no noticeable change, but still forces the document to update
-				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
-			},10,30,[],function(){var a=this;a.id='preview';a.change=$id('preview').change;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';a.css({position:'relative',left:0,opacity:1})},5)})
-			$id('preview').interval(function(a){
-				this.css({left:-a/30*window.innerWidth-1+'px',opacity:-a/15+1});
-				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
-			},10,30,[],function(){var a=this;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';$id('previewCont').removeChild(a)},3)})
-		}else{
-			b.css({left:c-window.innerWidth+'px',position:'absolute',top:0,opacity:0})
-			$id('previewCont').appendChild(b)
-			b.interval(function(a){
-				this.css({left:c-window.innerWidth+a/30*window.innerWidth+'px',opacity:a/15-1});
-				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
-			},10,30,[],function(){var a=this;a.id='preview';a.change=$id('preview').change;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';a.css({position:'relative',left:0,opacity:1})},5)})
-			$id('preview').interval(function(a){
-				this.css({left:a/30*window.innerWidth+1+'px',opacity:-a/15+1});
-				$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
-			},10,30,[],function(){var a=this;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';$id('previewCont').removeChild(a)},3)})
+	!function(){
+		"use strict";
+		var previewFive=[],queue;
+		for (var i = 4; i >= 0; i--) {
+			for(var temp=FLASHCARDS.getRandom();~previewFive.indexOf(temp);temp=FLASHCARDS.getRandom()){};
+			previewFive[i]=temp;
 		}
-	}
-	$('div.prevPageSelector').forEach(function(el){el.ael(['click'],function(e){$id('preview').change(Array.prototype.indexOf.call($('div.prevPageSelector'),e.target)%5);this.removeAttribute('data-h');this.t=0;$$('div.prevPageSelector.selected').className='prevPageSelector';e.target.className+=' selected'});el.ael(['mouseover','mousemove'],function(){this.setAttribute('data-h',1)});el.ael(['mouseout','mouseleave','touchend','touchcancel'],function(){this.removeAttribute('data-h')})});
-	setInterval(function(){var el=$$('div.prevPageSelector.selected');el.t=el.t?(el.t+1)%65:1;if(!el.t){$id('preview').change();el.className='prevPageSelector';$id('previewPageCont').children[(Array.prototype.indexOf.call($('div.prevPageSelector'),el)+1)%5].className+=' selected';$$('div.prevPageSelector.selected').t=0}},100);
-	window.addEventListener('resize',function(){
-		var a=$id('bodyContainer'),b=(Math.floor(Math.min(360,a.rect.width*.94))*2+window.innerWidth*.03);
-		a.style.paddingLeft=a.rect.width>b?(function(){$('.bodySection')[1].style.marginLeft='';return(a.rect.width-b)/2+'px'})():(function(){$('.bodySection')[1].style.marginLeft='0';return(a.rect.width-Math.floor(Math.min(360,a.rect.width*.94)))/2+'px'})();
-	})
-	window.dispatchEvent(new Event('resize'))
-	$id('findSelectT').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/t=\d/,'t='+this.value);$id('findPseudoSelectT').innerText='By: '+this.options[this.selectedIndex].innerHTML;
-		if(this.value==0){
-			$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+$id('findSelectQ1').value);
-			$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display='block';
-			$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display=$id('findInput').style.display='none';
-		}else if(this.value==1){
-			$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+$id('findSelectQ2').value);
-			$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display=$id('findInput').style.display='none';
-			$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display='block';
-		}else{
-			$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+encodeURIComponent($id('findInput').value||$id('findInput').placeholder))
-			$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display=$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display='none';
-			$id('findInput').style.display='block';
+		FLASHCARDS[''].forEach(function(a,b){if(~FLASHCARDS.SKIPPEDCHAPTERS.indexOf(b))return;$id('findSelectQ2').innerHTML+='<option value='+b+'>Chapter '+(b+1)+'</option>'})
+		$id('preview').innerHTML='<span class="period">Period: '+previewFive[0].period+'</span><span class="chapter"> Chapter: <span class="number">'+previewFive[0].chapter+'</span></span><div class="title">'+previewFive[0].title+'</div>'
+		$id('preview').change=function(a){
+			queue=null;
+			var el=$$('div.prevPageSelector.selected'),ind=Array.prototype.indexOf.call($('div.prevPageSelector'),el),a=a||a==0?a:(ind+1)%5;
+			if(a==ind||$id('previewAnim'))return!0;
+			var b=document.createElement('div'),c=$id('preview').rect.left,z=previewFive[a];
+			b.id='previewAnim';
+			b.innerHTML='<span class="period">Period: '+z.period+'</span><span class="chapter">Chapter: <span class="number">'+z.chapter+'</span></span><div class="title">'+z.title+'</div>';
+			if(a!=0&&ind!=4&&ind<a){
+				b.css({left:window.innerWidth+c+'px',position:'absolute',top:0,opacity:0})
+				$id('previewCont').appendChild(b)
+				b.interval(function(a){
+					this.css({left:window.innerWidth-a/30*window.innerWidth-3+c+'px',opacity:a/15-1});
+					// Constantly changes background color to update any unpainted areas where the card gets cut off and stays in the background
+					// Both values create the same color on the blue background, so there's no noticeable change, but still forces the document to update
+					$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+				},10,30,[],function(){var a=this;a.change=$id('preview').change;a.id='preview';setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';a.css({position:'relative',left:0,opacity:1});if(queue){$('.prevPageSelector')[queue-1].dispatchEvent(new Event('click'));a.change(queue-1)}},5)})
+				$id('preview').interval(function(a){
+					this.css({left:-a/30*window.innerWidth-1+'px',opacity:-a/15+1});
+					$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+				},10,30,[],function(){var a=this;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';if(a.parentNode==$id('previewCont'))$id('previewCont').removeChild(a)},3)})
+			}else{
+				b.css({left:c-window.innerWidth+'px',position:'absolute',top:0,opacity:0})
+				$id('previewCont').appendChild(b)
+				b.interval(function(a){
+					this.css({left:c-window.innerWidth+a/30*window.innerWidth+'px',opacity:a/15-1});
+					$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+				},10,30,[],function(){var a=this;a.id='preview';a.change=$id('preview').change;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';a.css({position:'relative',left:0,opacity:1});if(queue){$('.prevPageSelector')[queue-1].dispatchEvent(new Event('click'));a.change(queue-1)}},5)})
+				$id('preview').interval(function(a){
+					this.css({left:a/30*window.innerWidth+1+'px',opacity:-a/15+1});
+					$id('previewCont').style.backgroundColor=['rgba(255,255,255,0.3)','#4DC5D4'][Math.floor(Math.random()*2)];
+				},10,30,[],function(){var a=this;setTimeout(function(){$id('previewCont').style.background='rgb(77, 197, 212)';$id('previewCont').removeChild(a)},3)})
+			}
 		}
-	})
-	$id('findSelectQ1').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/q=\d/,'q='+this.value);$id('findPseudoSelectQ1').innerText=this.options[this.selectedIndex].innerHTML})
-	$id('findSelectQ2').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/q=\d\d?/,'q='+this.value);$id('findPseudoSelectQ2').innerText=this.options[this.selectedIndex].innerHTML})
-	$id('findInput').ael(['input'],function(){var a=FLASHCARDS.getRandom().title;if(!this.value)this.placeholder=a.unescape();$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+encodeURIComponent(this.value||a.unescape()))})
-	$('select').forEach(function(a){a.ael(['keydown','keyup','input'],function(){if(this.id=='findSelectT'){this.dispatchEvent(new Event('change'))}else{$id(this.id.replace('Select','PseudoSelect')).innerText=this.options[this.selectedIndex].innerHTML}})});
-	$$('.bodySection').ael(['keypress'],function(a){if(a.keyCode==13||a.which==13)$id('a-find').click()});
+		$('div.prevPageSelector').forEach(function(el){el.ael(['click'],function(e){if($id('preview').change(Array.prototype.indexOf.call($('div.prevPageSelector'),e.target)%5))return queue=Array.prototype.indexOf.call($('div.prevPageSelector'),e.target)%5+1;this.removeAttribute('data-h');this.t=0;$$('div.prevPageSelector.selected').className='prevPageSelector';e.target.className+=' selected'});el.ael(['mouseover','mousemove'],function(){this.setAttribute('data-h',1)});el.ael(['mouseout','mouseleave','touchend','touchcancel'],function(){this.removeAttribute('data-h')})});
+		setInterval(function(){var el=$$('div.prevPageSelector.selected');el.t=el.t?(el.t+1)%65:1;if(!el.t){$id('preview').change();el.className='prevPageSelector';$id('previewPageCont').children[(Array.prototype.indexOf.call($('div.prevPageSelector'),el)+1)%5].className+=' selected';$$('div.prevPageSelector.selected').t=0}},100);
+		window.addEventListener('resize',function(){
+			var a=$id('bodyContainer'),b=(Math.floor(Math.min(360,a.rect.width*.94))*2+window.innerWidth*.03);
+			a.style.paddingLeft=a.rect.width>b?(function(){$('.bodySection')[1].style.marginLeft='';return(a.rect.width-b)/2+'px'})():(function(){$('.bodySection')[1].style.marginLeft='0';return(a.rect.width-Math.floor(Math.min(360,a.rect.width*.94)))/2+'px'})();
+		})
+		window.dispatchEvent(new Event('resize'))
+		$id('findSelectT').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/t=\d/,'t='+this.value);$id('findPseudoSelectT').innerText='By: '+this.options[this.selectedIndex].innerHTML;
+			if(this.value==0){
+				$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+$id('findSelectQ1').value);
+				$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display='block';
+				$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display=$id('findInput').style.display='none';
+			}else if(this.value==1){
+				$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+$id('findSelectQ2').value);
+				$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display=$id('findInput').style.display='none';
+				$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display='block';
+			}else{
+				$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+encodeURIComponent($id('findInput').value||$id('findInput').placeholder))
+				$id('findPseudoSelectQ1').style.display=$id('findSelectQ1').style.display=$id('findPseudoSelectQ2').style.display=$id('findSelectQ2').style.display='none';
+				$id('findInput').style.display='block';
+			}
+		})
+		$id('findSelectQ1').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/q=\d/,'q='+this.value);$id('findPseudoSelectQ1').innerText=this.options[this.selectedIndex].innerHTML})
+		$id('findSelectQ2').ael(['change'],function(){$id('a-find').href=$id('a-find').href.replace(/q=\d\d?/,'q='+this.value);$id('findPseudoSelectQ2').innerText=this.options[this.selectedIndex].innerHTML})
+		$id('findInput').ael(['input'],function(){var a=FLASHCARDS.getRandom().title;if(!this.value)this.placeholder=a.unescape();$id('a-find').href=$id('a-find').href.replace(/q=.+$/,'q='+encodeURIComponent(this.value||a.unescape()))})
+		$('select').forEach(function(a){a.ael(['keydown','keyup','input'],function(){if(this.id=='findSelectT'){this.dispatchEvent(new Event('change'))}else{$id(this.id.replace('Select','PseudoSelect')).innerText=this.options[this.selectedIndex].innerHTML}})});
+		$$('.bodySection').ael(['keypress'],function(a){if(a.keyCode==13||a.which==13)$id('a-find').click()});
+	}();
 	</script>
 </body>
 </html>
