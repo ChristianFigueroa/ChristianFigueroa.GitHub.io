@@ -918,6 +918,78 @@
 					chapter: 24,
 					period: M
 				}
+			],[
+				{
+					title: 'Asante',
+					def: 'One of the groups of people that developed a powerful regional kingdom after the fall of the Songhay empire in Africa.',
+					sig: 'After the fall of the Songhay empire, a large power vacuum allowed smaller regional kingdoms like the Asante to develop. This provided a great amount of diversity in Africa.',
+					theme: P,
+					chapter: 25,
+					period: M
+				},{
+					title: 'King Nzinga',
+					def: 'One of the Kongolese kings who converted to Christianity to improve relations with Christian Europeans and was so extreme that he sometimes didn\'t eat so that he could study Christianity.',
+					sig: 'The conversion of the Kongolese helped their relationship with the Europeans. Their strong allies allowed them to prosper as an empire.',
+					theme: R,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Fulani',
+					def: 'A group of herders who established multiple powerful states that practiced the Fulani form of Islam.',
+					sig: 'Many Muslims worried about the Africans who practiced a syncretic form of Islam. They saw their practices as pagan and wanted to fix it. The Fulani spread their form of Islam as a way to oppose the African syncretic Islam.',
+					theme: R,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Antonian Movement',
+					def: 'A religious cult started in Kongo by Dona Beatriz that focused on the improvement of the Kongolese monarchy.',
+					sig: 'Even after Dona Beatriz died, her disciples continued her movement and opposed the Kongolese government. They posed a big problem when 20,000 followers challenged King Pedro.',
+					theme: R,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Atlantic Slave Trade',
+					def: 'The trade network from the fifteenth to the nineteenth century in which Africans sold slaves to the western hemisphere as a source of labor in exchange for European firearms and manufactured goods.',
+					sig: 'This was a big part of history because it lasted so long and was part of the first trade network that interconnected all parts of the world.',
+					theme: E,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Triangular Trade',
+					def: 'The three-part trade network that connected Europe to Africa, to the Americas, and then back again to Europe. Manufactured goods went to Africa, slaves to America, and cash crops to Europe.',
+					sig: 'This had pretty much the same impact as the <a href="find?id=Atlantic%20Slave%20Trade" style="color:#00acc1">Atlantic slave</a> trade except it also incorporated Americs\'s trade with Europe.',
+					theme: E,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Middle Passage',
+					def: 'The trans-Atlantic journey from Africa to Europe in which Africans were transported aboard slave ships in very poor conditions that often killed many passengers from disease.',
+					sig: 'The Middle Passage was responsible for the mass migration of Africans to the Americas. More men were transported since they could work more. This led to a large imbalance between males and females in Africa.',
+					theme: E,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Cash Crop',
+					def: 'Crops grown and sold by the plantations in the Americas as source of money. Examples include tobacco and sugar. Plantations needed a source of labor that slaves would typically be the ones to fill in.',
+					sig: 'Cash crops were the goods taken from the Americas to Europe in the <a href="find?id=Triangular%20Trade" style="color:#00acc1">triangular trade</a>. They were the reason so many Europeans moved to the Americas in the first place.',
+					theme: E,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Olaudah Equiano',
+					def: 'A famous ex-slave who wrote about his experiences as a mistreated slave and who inspired abolitionists to fight against slavery.',
+					sig: 'His efforts strengthened anti-slavery in Europe and were one of the big reasons why many countries began to turn against slavery.',
+					theme: A,
+					chapter: 25,
+					period: M
+				},{
+					title: 'Saint-Dominigue',
+					def: 'A plantation in modern-day Haiti where the only documented slave revolt led to the abolishment of slavery as an institution and the establishment of a new government in the area.',
+					sig: 'This served as an inspiration to other slaves in captivity. Other slaves often had their own revolts against their owners.',
+					theme: A,
+					chapter: 25,
+					period: M
+				}
 			]
 		],
 		PERIODS:[F,C,PC,M],
