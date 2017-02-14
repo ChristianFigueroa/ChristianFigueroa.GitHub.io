@@ -1,5 +1,11 @@
 var UPDATES=[
 	{
+		title: 'New Blocc Theme',
+		category: 'Cydia',
+		description: 'A theme for your jailbroken iDevice that organizes information into one central block.',
+		date: new Date('2017-02-12T07:18:54Z'),
+		link: './cydia/package/Blocc'
+	},{
 		title: 'Chapter 25 Flash Cards',
 		category: 'AP World History',
 		description: '10 new flash cards: Asante, King Nzinga, Fulani, Antonian Movement, Atlantic Slave Trade, Triangular Trade, Middle Passage, Cash Crop, Olaudah Equiano, Saint Domingue',
