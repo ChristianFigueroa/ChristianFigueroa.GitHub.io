@@ -990,6 +990,64 @@
 					chapter: 25,
 					period: M
 				}
+			],[
+				{
+					title: 'Manchu',
+					def: 'The Manchu invaded China from the north while rebels within China sought to overthrow their government. The Manchu took over Beijing and started their own Qing dynasty in place of the Ming.',
+					sig: 'The Manchu were able to use the opportunity to overtake China and greatly expand their empire. They completely changed the government of China.',
+					theme: P,
+					chapter: 26,
+					period: M
+				},{
+					title: 'Quotas',
+					def: 'So I know what a quota is but have no idea how it pertained to China in this time. <a href="https://www.google.com/search?q=Quota+definition#uid_0" style="color:#00acc1">Here\'s</a> the definition.',
+					sig: 'To China\'s government, no idea.',
+					theme: 'Random Word',
+					chapter: 26,
+					period: M
+				},{
+					title: 'Scholar-Bureaucrats',
+					def: 'Government officials who came from the scholar gentry and had to pass civil service exams to be considered. They dominated China\'s political and social life.',
+					sig: 'The civil service exams ensured that most government officials were actually qualified for the job. The scholar-bureaucrats helped make China a prosperous empire.',
+					theme: P,
+					chapter: 26,
+					period: M
+				},{
+					title: 'Chinese Novels',
+					def: 'Chinese novels were frowned upon by scholars but embraced by the public. They depicted lots of horror, conflict, and wonder that the Chinese readily made a part of their popular culture.',
+					sig: 'Some novels in particular provide insight into how the scholar gentry families were organized at the time and other aspects of Chinese culture in that era.',
+					theme: A,
+					chapter: 26,
+					period: M
+				},{
+					title: 'Sengoku',
+					def: 'The period of war in Japan around the sixteenth century where shoguns constantly fought with each other to monopolize power.',
+					sig: 'After this period of war, the Tokugawa established a more unified government and were able to put an end to the constant war.',
+					theme: P,
+					chapter: 26,
+					period: M
+				},{
+					title: 'Bafuku',
+					def: 'The Tokugawa dynasty was originally called the Bafuku ("tent government") since it was meant only as a temporary replacement for the emperor\'s rule.',
+					sig: 'The Tokugawa led Japan for hundreds of years and were able to establish a stable government at a time where Japan had none.',
+					theme: P,
+					chapter: 26,
+					period: M
+				},{
+					title: 'Ukiyo',
+					def: 'The Ukiyo, or "Floating Worlds" were entertainment centers in Tokugawa Japan that offered an escape from society\'s rigid responsibilities.',
+					sig: 'The Ukiyo showed how popular culture was beginning to develop in Japan. The development of Ukiyo led to other entertainment like the <a href="find?id=Kabuki" style="color:#00acc1">Kabuki theater</a> and fictitious books meant to entertain rather than teach.',
+					theme: A,
+					chapter: 26,
+					period: M
+				},{
+					title: 'Kabuki',
+					def: 'A newly-popular type of theater that involved lively scenes with actors that had to improvise to make the play better.',
+					sig: 'Kabuki and bunraku attracted many people looking for entertainment. They represent all the popular culture and entertainment that was developing at this time in Japan.',
+					theme: A,
+					chapter: 26,
+					period: M
+				}
 			]
 		],
 		PERIODS:[F,C,PC,M],
