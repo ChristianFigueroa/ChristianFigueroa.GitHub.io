@@ -1048,6 +1048,71 @@
 					chapter: 26,
 					period: M
 				}
+			],[
+				{
+					title: 'Ghazi',
+					def: 'Ghazi are Muslim religious warriors. Osman and his followers, the Ottomans, sought to become ghazi. They believed they were instruments of Allah who cleansed the earth of polytheism.',
+					sig: 'It was because of Osman and his mission to become a ghazi that the Ottoman empire ended up being such a strong Muslim force throughout much of history.',
+					theme: R,
+					chapter: 27,
+					period: M
+				},{
+					title: 'Devshirme',
+					def: 'The devshirme is the institution that developed in the Ottoman empire where young Christians were kidnapped, converted to Islam, and trained to become an elite group of warriors known as the Janissaries.',
+					sig: 'The Ottoman accomplished two goals with the devshirme: they could discourage Christianity by kidnapping their children, and they built a very strong army that was loyal to the Sultan.',
+					theme: P,
+					chapter: 27,
+					period: M
+				},{
+					title: 'Qizibash',
+					def: 'The qizibash, or "red heads," were Twelver Shiites who were forced to wear distinct red hats with twelve pleats on them in remembrance of the twelve Shiite imams.',
+					sig: 'The propaganda of Twelver Shiism made people very loyal to the emperor. They thought he was a reincarnation of Allah, so they always fought for him and the empire.',
+					theme: R,
+					chapter: 27,
+					period: M
+				},{
+					title: 'Battle of Chaldiran',
+					def: 'The Battle of Chaldiran was the battle where Ottomans attacked the Safavids and won easily since the Safavids didn\'t use any guns.',
+					sig: 'The Ottomans had a huge impact on the Safavid empire. Even though the Ottomans didn\'t overthrow the Safavids entirely, they weakened it greatly.',
+					theme: P,
+					chapter: 27,
+					period: M
+				},{
+					title: 'Divine Faith',
+					def: 'Akbar\'s divine faith was a syncretic faith that mixed Hinduism and Islam and focused on Allah while still portraying the emperor as a divine force.',
+					sig: 'This new faith favored Hinduism and Islam, which were the two main religions in the region. His divine faith allowed him to gather many loyal followers.',
+					theme: R,
+					chapter: 27,
+					period: M
+				},{
+					title: 'The Ruler\'s Mother or Wife',
+					def: 'Idk. This isn\'t even really a vocabulary word, so yeah. I didn\'t find it in the book and the phrase is pretty much the definition in itself.',
+					sig: '.__.',
+					theme: 'Random Phrase',
+					chapter: 27,
+					period: M
+				},{
+					title: 'Millet',
+					def: 'Millet (no \'s\') were religious communities in the Ottoman empire that were full of religious minorities who paid a special tax (see <a style="color:#00acc1" href="find?id=Jizya">jizya</a>) to remain independent.',
+					sig: 'Millet were able to control their own affairs without Ottoman control, despite the fact that they were under Ottoman rule. The Ottoman also benefited because they got money.',
+					theme: P,
+					chapter: 27,
+					period: M
+				},{
+					title: 'Isfahan',
+					def: 'Isfahan is a very decorated city made by Shah Abbas. It\'s inhabitants apparently still boast "Isfahan is half the world." The entire project commissioned the work of multiple architects.',
+					sig: 'Isfahan is just one example of the public works Muslim leaders were willing to put out to boost their prestige. They put huge sums of money into beautifying their empire.',
+					theme: A,
+					chapter: 27,
+					period: M
+				},{
+					title: 'Wahhabi movement',
+					def: 'The Wahhabi movement was a rebellion in Arabia that denounced Ottomans as dangerous religious innovators and proved to be a big problem for the Ottoman government.',
+					sig: 'The Wahhabi movement was just one reason for the decline of many Islam empires in this time period. The rulers themselves and financial issues brought some empires to decline.',
+					theme: P,
+					chapter: 27,
+					period: M
+				}
 			]
 		],
 		PERIODS:[F,C,PC,M],
