@@ -3,10 +3,14 @@
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
-	<title>No JavaScript :(</title>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+	<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91403443-1', 'auto');
+	 	ga('send', 'pageview');</script>
+	<title>Flash Card Finder &#183; ChristianFigueroa.GitHub.io</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat:400|Lato:700' rel='stylesheet' type='text/css'>
 	<style>
 		@font-face {
 			font-family: 'Bitter';
@@ -134,7 +138,7 @@
 				if(!args.t||!args.q||!(args.t in [0,1,2])||args.t==0&&!(args.q>=0&&args.q<=FLASHCARDS.PERIODS.length-1)||args.t==1&&!(args.q>=0&&args.q<FLASHCARDS[''].length))location.replace('view');
 				document.title=(args.t==0?'':args.t==1?'Chapter ':'"')+(args.t==0?FLASHCARDS.PERIODS[args.q]+' Period':args.t==2?args.q:~args.q?+args.q+1:'All')+(args.t>1?'"':'')+' \u00b7 ChristianFigueroa.GitHub.io';
 				var shownFlashCards=args.t==0?FLASHCARDS.getPeriod(args.q):args.t==1?(~args.q?FLASHCARDS.getChapter(+args.q):FLASHCARDS.getAll()):[];
-				var reg=/\s/g,map=[[/\u00ED/g,'i'],[/\u00FC/g,'u'],[/\u00E7/g,'c']]
+				var reg=/\s/g,map=[[/\u00ED/g,'i'],[/\u00FC/g,'u'],[/\u00E7/g,'c'],[/\u00E9/g,'e']]
 				// Used for searching algorithm
 				// Makes certain characters equal others (e.g. T == t, í == i, Ñ == n)
 				String.prototype.searchFunc=function(){var a=this.toString().toLowerCase();a=a.includes('&')?a.unescape():a;a=a.replace(reg,'');map.forEach(function(b){a=a.replace(b[0],b[1])});return a};

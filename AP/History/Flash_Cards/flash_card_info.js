@@ -1113,6 +1113,71 @@
 					chapter: 27,
 					period: M
 				}
+			],[
+				{
+					title: 'The Enlightenment',
+					def: 'The Enlightenment started after Isaac Newton\'s discovery because many people started to take a rational approach to science instead of just accepting "facts" established by other authorities.',
+					sig: 'The Enlightenment sparked many changes in history all around the world. Many revolutions were started because people were starting to go against their established authority.',
+					theme: A,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Philosophes',
+					def: 'Philosophes were prominent intellectuals who advanced the cause of reason. Some philosophes include Voltaire, John Locke, and Rousseau.',
+					sig: 'Philosphes fueled the Enlightenment and gave people the ideas and support to rebel. The philosphes were basically the ones who allowed the Enlightenment to happen.',
+					theme: A,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Ancien R&#233;gime',
+					def: 'The Ancien R&#233;gime was the old French society pre-revolution. The supporters of the French Revolution wanted to get rid of the Ancien R&#233;gime in favor of a new political and social structure.',
+					sig: 'The French Revolution completely got rid of the Ancien R&#233;gime which led to the rise of Napoleon and complete change in the political structure of France.',
+					theme: S,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Estates General',
+					def: 'The Estates General was the way France voted on public affairs. The Estates were composed of the nobility, the clergy, and the bourgeoisie. The voting was very imbalanced in favor of the clergy and nobility.',
+					sig: 'The third Estate eventually broke away from the Estates General and formed the National Assembly. With support from anarchists, the National Assembly started the French Revolution.',
+					theme: P,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Maximilien Robespierre',
+					def: 'Maximilien Robespierre was a radical who came to power during the French Revolution. He was such an extremist that he would publicly execute any person who was suspected of being an enemy of the state.',
+					sig: 'Robespierre was one of the first people to come to power after the deposition of King Louis XVI. He started the Reign of Terror and made matters even worse for the people of France.',
+					theme: P,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Waterloo',
+					def: 'The Battle of Waterloo was where Napoleon was defeated for good. He had already been defeated, but was able to regain his control over France before the Battle of Waterloo.',
+					sig: 'Napoleon was a very successful dictator who already ruled much of Europe before he was defeated. Had he not been defeated, Napoleon may have taken over even more of Europe.',
+					theme: P,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Fran&#231;ois-Dominique Toussaint',
+					def: 'Fran&#231;ois-Dominique Toussaint was the leader of the Haitian Revolution. He learned to read and write and was able to be an effective military leader for the slaves.',
+					sig: 'Fran&#231;ois-Dominique Toussaint was the reason the Haitian Revoltion was so successful. His knowledge helped him pit other forces against each other while building up his own power.',
+					theme: P,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Caudillos',
+					def: 'Caudillos were charismatic strongmen who ruled parts of Brazil after its independence. Even with the change in power, the political structure of Brazil remained very similar to what it had been before.',
+					sig: 'Brazil didn\'t have as big of a revolution as that of America or France. The power only shifted to another party; the political and social structure was very similar.',
+					theme: P,
+					chapter: 28,
+					period: M
+				},{
+					title: 'Elizabeth Canton Stanton',
+					def: 'Elizabeth Canton Stanton was a feminist who started her own movement in the United States, demanding that women receive the same rights as men.',
+					sig: 'Even though women didn\'t immediately get to enjoy the same right as men, the feminist movement sparked the foundations for future gender equality.',
+					theme: S,
+					chapter: 28,
+					period: M
+				}
 			]
 		],
 		PERIODS:[F,C,PC,M],
