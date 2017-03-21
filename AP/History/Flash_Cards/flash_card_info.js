@@ -1120,67 +1120,132 @@
 					sig: 'The Enlightenment sparked many changes in history all around the world. Many revolutions were started because people were starting to go against their established authority.',
 					theme: A,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Philosophes',
 					def: 'Philosophes were prominent intellectuals who advanced the cause of reason. Some philosophes include Voltaire, John Locke, and Rousseau.',
 					sig: 'Philosphes fueled the Enlightenment and gave people the ideas and support to rebel. The philosphes were basically the ones who allowed the Enlightenment to happen.',
 					theme: A,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Ancien R&#233;gime',
 					def: 'The Ancien R&#233;gime was the old French society pre-revolution. The supporters of the French Revolution wanted to get rid of the Ancien R&#233;gime in favor of a new political and social structure.',
 					sig: 'The French Revolution completely got rid of the Ancien R&#233;gime which led to the rise of Napoleon and complete change in the political structure of France.',
 					theme: S,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Estates General',
 					def: 'The Estates General was the way France voted on public affairs. The Estates were composed of the nobility, the clergy, and the bourgeoisie. The voting was very imbalanced in favor of the clergy and nobility.',
 					sig: 'The third Estate eventually broke away from the Estates General and formed the National Assembly. With support from anarchists, the National Assembly started the French Revolution.',
 					theme: P,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Maximilien Robespierre',
 					def: 'Maximilien Robespierre was a radical who came to power during the French Revolution. He was such an extremist that he would publicly execute any person who was suspected of being an enemy of the state.',
 					sig: 'Robespierre was one of the first people to come to power after the deposition of King Louis XVI. He started the Reign of Terror and made matters even worse for the people of France.',
 					theme: P,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Waterloo',
 					def: 'The Battle of Waterloo was where Napoleon was defeated for good. He had already been defeated, but was able to regain his control over France before the Battle of Waterloo.',
 					sig: 'Napoleon was a very successful dictator who already ruled much of Europe before he was defeated. Had he not been defeated, Napoleon may have taken over even more of Europe.',
 					theme: P,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Fran&#231;ois-Dominique Toussaint',
 					def: 'Fran&#231;ois-Dominique Toussaint was the leader of the Haitian Revolution. He learned to read and write and was able to be an effective military leader for the slaves.',
 					sig: 'Fran&#231;ois-Dominique Toussaint was the reason the Haitian Revoltion was so successful. His knowledge helped him pit other forces against each other while building up his own power.',
 					theme: P,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Caudillos',
 					def: 'Caudillos were charismatic strongmen who ruled parts of Brazil after its independence. Even with the change in power, the political structure of Brazil remained very similar to what it had been before.',
 					sig: 'Brazil didn\'t have as big of a revolution as that of America or France. The power only shifted to another party; the political and social structure was very similar.',
 					theme: P,
 					chapter: 28,
-					period: M
+					period: I
 				},{
 					title: 'Elizabeth Canton Stanton',
 					def: 'Elizabeth Canton Stanton was a feminist who started her own movement in the United States, demanding that women receive the same rights as men.',
 					sig: 'Even though women didn\'t immediately get to enjoy the same right as men, the feminist movement sparked the foundations for future gender equality.',
 					theme: S,
 					chapter: 28,
-					period: M
+					period: I
+				}
+			],[
+				{
+					title: 'Industrialization',
+					def: 'The process that started in Great Britain and involved the development of factories & capitalism, the migration of citizens to urban cities, and the mass production of goods.',
+					sig: 'The Industrial Revolution was the start of a new period in history. It marks the beginning of capitalism and the start of new social structures (and beliefs) as well as new cultural practices.',
+					theme: A,
+					chapter: 29,
+					period: I
+				},{
+					title: 'James Watt',
+					def: 'Responsible for the improvement of the steam engine. He found that he could boil water by burning coal and use the steam produced as an energy source to force a piston to turn a wheel.',
+					sig: 'James Watt was one of the key "starters" of the Industrial Revolution. It was because of the steam engine that Industrialization could start in the first place.',
+					theme: A,
+					chapter: 29,
+					period: I
+				},{
+					title: 'George Stephenson',
+					def: 'Responsible for the improvement of the already-improved steam engine. James Watt’s engine used too much coal to be efficient enough for transportation purposes. Stephenson helped fix this by improving the steam engine.',
+					sig: 'George Stephenson was another key component in the beginning of industrialization. He was the reason for the railroad which helped to not only transfer cargo, but also people.',
+					theme: A,
+					chapter: 29,
+					period: I
+				},{
+					title: 'Factory System',
+					def: 'The factory system replaced the putting out system and protoindustrial factories. People moved from the countryside to the cities to go work in factories.',
+					sig: 'As more factories were built, more and more people began to move from the country into the city in search of work. This led to a complete restructuring of society.',
+					theme: S,
+					chapter: 29,
+					period: I
+				},{
+					title: 'Corporations',
+					def: 'Corporations were groups of capitalists that teamed up and acted as one entity, controlling things like businesses, investments in land, labor, and machinery.',
+					sig: 'Corporations were the reason trusts and monopolies developed. This showed just how prominent capitalism was in this new industrial society.',
+					theme: E,
+					chapter: 29,
+					period: I
+				},{
+					title: 'Monopolists',
+					def: 'Monopolists sought to control an entire industry by eliminating all the competition in the industry. The monopolists could then control the prices of their products and reap enormous profits.',
+					sig: 'Monopolies developed as a result of corporations. Some business owners wanted to control entire industries so that they could set their own prices without competition and gain lots of profit.',
+					theme: E,
+					chapter: 29,
+					period: I
+				},{
+					title: 'Demographic Transition',
+					def: 'The decrease in fertility and mortality that occurred during the Industrial Revolution (due to advances in birth control) that led to demographic stability.',
+					sig: 'Even though the population kept growing, it grew at a slower rate. This let countries like Britain concentrate on maintaining the Industrial Revolution instead of worrying about such a massive population.',
+					theme: S,
+					chapter: 29,
+					period: I
+				},{
+					title: 'Middle Class',
+					def: 'The middle class arose during the Industrial Revolution and was comprised mostly of professionals, small business owners, factory managers, etc.',
+					sig: 'A huge gap developed between the middle and working class. The rich continually got richer while the poor continually got poorer. This led to poor conditions for the workers.',
+					theme: S,
+					chapter: 29,
+					period: I
+				},{
+					title: 'Communist Manifesto',
+					def: 'The Communist Manifesto was written by Karl Marx and outlines Marx’s belief in how societies should be run. He argued that private property should be shared with the community and capitalism in its entirety should be eliminated.',
+					sig: 'Communism was a new social belief system that gained some support at the time, but not enough for the supposed communist revolution to take place.',
+					theme: S,
+					chapter: 29,
+					period: I
 				}
 			]
 		],
-		PERIODS:[F,C,PC,M],
+		PERIODS:[F,C,PC,M,I],
 		SKIPPEDCHAPTERS: [11, 12, 16, 17, 19, 21, 22], // Values are actual chapter - 1 (e.g. 0 = Chapter 1)
 		getAll:function(){var b=[];for(var i=0,n=0,l=this[''].length;i<l;i++)b=b.concat(this[''][i]);b.getPeriod=function(a){return FLASHCARDS.getPeriod(a)};b.getChapter=function(a){return FLASHCARDS.getChapter(a)};b.getTitle=function(a){return FLASHCARDS.getTitle(a)};b.getRandom=function(a){return FLASHCARDS.getRandom(a)};return b},getRandom:function(c){function r(){var a=m.floor(m.random()*FLASHCARDS[''].length);return~FLASHCARDS.SKIPPEDCHAPTERS.indexOf(a)?r():a};var a=this[''][c||c==0?c:r()];return a[m.floor(m.random()*a.length)]},getPeriod:function(a){var b=[];for(var i=0,n=0,l=this[''].length;i<l;i++){if(!this[''][i][0])continue;this[''][i][0].period==this.PERIODS[a]?(function(){for(var j=0,k=FLASHCARDS[''][i].length;j<k;j++){b[n]=FLASHCARDS[''][i][j];n++}})():0};b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getChapter=function(a){var b=[],c=this;for(var i=0,n=0;i<c.length;i++){c[i].chapter==a?(function(){b[n]=c[i];n++})():0};b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getTitle=function(a){for(var i=0;i<this.length;i++){if(this[i].title==a)return this[i]}};return b};b.getTitle=function(a){for(var i=0;i<this.length;i++)if(this[i].title==a)return this[i]};return b},getChapter:function(a){var b=[],c=this[''][a];for(var i=0,l=c.length;i<l;i++)b[i]=c[i];b.getRandom=function(){return this[m.floor(m.random()*this.length)]||null};b.getTitle=function(a){for(var i=0;i<this.length;i++){if(this[i].title==a)return this[i]}return null};return b},getTitle:function(a){for(var i=0,l=this[''].length;i<l;i++)for(var n=0,k=this[''][i].length;n<k;n++)if(this[''][i][n].title==a)return this[''][i][n];return null}
 	}
