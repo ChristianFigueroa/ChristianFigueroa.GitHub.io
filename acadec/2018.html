@@ -423,12 +423,12 @@
                     sectionSelect.classList.remove('inactive');
                     var subject = this.id,
                         sections = ({
-                            art: [1,2,3,4,5],
+                            art: ['Art Fundamentals', 'Southern and Eastern Africa', 'Central Africa', 'Western Africa', 'Contemporary African Art'],
                             econ: ['Microeconomics', 'Macroeconomics', 'African Economics'],
                             lit: ['Things Fall Apart', 'Other Works of Literature'],
                             math: ['Interest and Probability', 'Polygons and 2D Geometry', 'Circles and 3D Geometry', 'Differential Calculus'],
-                            music: [1,2,3,4],
-                            science: [1, 'HIV & AIDS', 'Malaria', 'Ebola'],
+                            music: ['Musical Concepts and the African Region', 'Traditional Music', 'Modern Music', 'Current Issues'],
+                            science: ['Overview of Infectious Disease', 'HIV & AIDS', 'Malaria', 'Ebola'],
                             sosci: ['Human Origins and Africa as a Whole', 'Early Civilzations', 'African Religion', 'Slavery and Imperialism', 'Independence in West Africa']
                         })[subject];
                     while (sectionSelect.lastElementChild) sectionSelect.removeChild(sectionSelect.lastElementChild);
@@ -438,7 +438,7 @@
                         div._section = sections[i]
                         div.setAttribute('role', 'button');
                         div.tabIndex = 0;
-                        div.innerText = typeof sections[i] == 'string' ? sections[i] : 'Section ' + sections[i];
+                        div.innerText = sections[i];
                         sectionSelect.appendChild(div);
                         div.addEventListener('keyup', function(e) {
                             if (e.keyCode == 13 || e.keyCode == 32) {
