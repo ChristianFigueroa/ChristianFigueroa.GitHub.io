@@ -2580,7 +2580,7 @@
                         "provide the rationale for higher interest rates",
                         "set the standard price elasticity"
                     ],
-                    "j": "Positive economics attempts to make predictions about how changes in certain metric swill impact the overall system."
+                    "j": "Positive economics attempts to make predictions about how changes in certain metrics will impact the overall system."
                 },{
                     "q": "The use of economic analysis to guide decisions about what should occur is known as",
                     "a": [
@@ -3160,7 +3160,7 @@
                         "$0.25",
                         "$1.00"
                     ],
-                    "j": "Marginal cost is calculated by dividing the increased incurred costs by the number of additional units. Mary Ann wants to produce 200 additional bags (350 &ndash; 150) for an additional $50 in costs. The marginal cost to produce these bags is $0.50. "
+                    "j": "Marginal cost is calculated by dividing the increased incurred costs by the number of additional units. Mary Ann wants to produce 200 additional bags (350 &#150; 150) for an additional $50 in costs. The marginal cost to produce these bags is $0.50. "
                 },{
                     "q": "Assume a market is subject to diminishing returns to scale. What happens as output increases?",
                     "a": [
@@ -3841,7 +3841,7 @@
                         "(Real GDP)/(Inflation Rate) x 100",
                         "Net Imports + (Investment Spending)/(Nominal GDP)",
                         "(Real GDP)/100 + Total Revenue",
-                        "(Total Revenue)/(Total Savings) &ndash; Nominal GDP"
+                        "(Total Revenue)/(Total Savings) &#150; Nominal GDP"
                     ],
                     "j": "The GDP deflator is a metric that calculated price inflation. It is calculated as 100 x (Nominal GDP)/(Real GDP)."
                 },{
@@ -3985,7 +3985,7 @@
                     ],
                     "j": "Banks facilitate the purchases of goods and services through offering checking accounts."
                 },{
-                    "q": "Assume a society has a closed economy. Which variable equals 0 in the expression Y = C + I + G + NX ?",
+                    "q": "Assume a society has a closed economy. Which variable equals 0 in the expression Y&nbsp;= C&nbsp;+&nbsp;I&nbsp;+&nbsp;G&nbsp;+&nbsp;NX ?",
                     "a": [
                         "NX",
                         "G",
@@ -4445,7 +4445,7 @@
                     ],
                     "j": "Short-run inflexibility of prices is the leading cause of most recessions. Prices take time to adjust to shocks to aggregate demand."
                 },{
-                    "q": "In the equation M x V = P x Y, Y represents",
+                    "q": "In the equation M&nbsp;x&nbsp;V&nbsp;= P&nbsp;x&nbsp;Y, Y represents",
                     "a": [
                         "real GDP",
                         "velocity of money",
@@ -4453,7 +4453,7 @@
                         "price level",
                         "federal funds rate"
                     ],
-                    "j": "In the equation M x V = P x Y, Y represents real GDP. This equation states price times real GDP is equal to the velocity of money times the quantity of money."
+                    "j": "In the equation M&nbsp;x&nbsp;V&nbsp;= P&nbsp;x&nbsp;Y, Y represents real GDP. This equation states price times real GDP is equal to the velocity of money times the quantity of money."
                 },{
                     "q": "Which type of good is counted in consumption spending?",
                     "a": [
@@ -4513,7 +4513,7 @@
                         "by the total of all M1 currency",
                         "by the rate of firm investment"
                     ],
-                    "j": "Similarly to other goods, he value of money in an economy is determined according to the interaction of supply and demand."
+                    "j": "Similarly to other goods, the value of money in an economy is determined according to the interaction of supply and demand."
                 },{
                     "q": "What is the reciprocal of the reserve ratio?",
                     "a": [
@@ -4976,7 +4976,7 @@
                         "collapse of the Mande Empire",
                         "FESMAN 1"
                     ],
-                    "j": "The Bantu migrations of 1000 <small>BCE</small> &ndash; 300 <small>CE</small> spread iron-smelting technology in Africa."
+                    "j": "The Bantu migrations of 1000 <small>BCE</small> &#150; 300 <small>CE</small> spread iron-smelting technology in Africa."
                 },{
                     "q": "Which of the following African kingdom's wealth derived from taxing the slave trade?",
                     "a": [
@@ -7544,12 +7544,12 @@
                     "q": "Phoebe flips five coins. How much more likely is she to get three tails than three heads?",
                     "a": [
                         "0",
-                        "1 / 3",
-                        "3 / 32",
-                        "1 / 32",
-                        "1 / 16"
+                        "$\\frac{01|1}{01|3}$",
+                        "$\\frac{01|3}{02|32}$",
+                        "$\\frac{01|1}{02|32}$",
+                        "$\\frac{01|1}{02|16}$"
                     ],
-                    "j": "There is a nCr(5,&nbsp;3)&nbsp;/&nbsp;32&nbsp;= 5&nbsp;/&nbsp;16 chance of getting three tails in five coin flips, as there are 2<sup>5</sup> possibile outcomes, and of those coin flips, we are choosing three to be tails. Using this same technique, there is also a nCr(5,&nbsp;3)&nbsp;/&nbsp;32&nbsp;= 5&nbsp;/&nbsp;16 chance of getting three heads. So it is equally likely to flip three heads out of five as it is to flip three tails."
+                    "j": "There is a $\\frac{09|nCr(5, 3)}{02|32}$&nbsp;= $\\frac{01|5}{02|16}$ chance of getting three tails in five coin flips, as there are 2<sup>5</sup> possibile outcomes, and of those coin flips, we are choosing three to be tails. Using this same technique, there is also a $\\frac{09|nCr(5, 3)}{02|32}$&nbsp;= $\\frac{01|5}{02|16}$ chance of getting three heads. So it is equally likely to flip three heads out of five as it is to flip three tails."
                 }
             ],
             "Polygons and 2D Geometry": [
@@ -7562,17 +7562,17 @@
                         "3 &#183; sqrt(26)",
                         "5 &#183; sqrt(17)"
                     ],
-                    "j": "A Pythagorean triple made up of <i>a</i>, <i>b</i>, and <i>c</i> must satisfy <i>a</i><sup>2</sup>&nbsp;+&nbsp;<i>b</i><sup>2</sup>&nbsp;=&nbsp;<i>c</i><sup>2</sup>. If we let <i>a</i>&nbsp;=&nbsp;8 and <i>c</i>&nbsp;=&nbsp;17, then it naturally follows that b&nbsp;=&nbsp;15."
+                    "j": "A Pythagorean triple made up of <i>a</i>, <i>b</i>, and <i>c</i> must satisfy <i>a</i><sup>2</sup>&nbsp;+&nbsp;<i>b</i><sup>2</sup>&nbsp;=&nbsp;<i>c</i><sup>2</sup>. If we let <i>a</i>&nbsp;=&nbsp;8 and <i>c</i>&nbsp;=&nbsp;17, then it naturally follows that <i>b</i>&nbsp;=&nbsp;15."
                 },{
-                    "q": "What is the midpoint of the points (5,5) and (13,&ndash;13)?",
+                    "q": "What is the midpoint of the points (5,5) and (13,&#150;13)?",
                     "a": [
-                        "(9,&ndash;4)",
+                        "(9,&#150;4)",
                         "(9,5)",
-                        "(9,&ndash;6)",
-                        "(11,&ndash;4)",
-                        "(11,&ndash;6)"
+                        "(9,&#150;6)",
+                        "(11,&#150;4)",
+                        "(11,&#150;6)"
                     ],
-                    "j": "By the formula for finding midpoints, the midpoint of (5,5) and (13,&ndash;13) is ((5&nbsp;+&nbsp;13)&nbsp;/&nbsp;2,(5&nbsp;&#150;&nbsp;13)&nbsp;/&nbsp;2)&nbsp;= (9,&#150;4)."
+                    "j": "By the formula for finding midpoints, the midpoint of (5,5) and (13,&#150;13) is ($\\frac{05|5 + 3}{01|2}$,$\\frac{10|5 &#150; 3}{01|2}$)&nbsp;= (9,&#150;4)."
                 },{
                     "q": "What is the sum of the measure of the interior angles of a dodecahedron?",
                     "a": [
@@ -7595,20 +7595,30 @@
                         "90 &#183; sqrt(3) + 36",
                         "138"
                     ],
-                    "j": "The surface area of a pyramid is the sum of the base area and the area of the triangular faces. The area of the triangle is given by one-half of the product of the base of the triangle given by the side length of the base, and the height of the triangle, given by sqrt((<i>b</i>&nbsp;/&nbsp;2)<sup>2</sup>&nbsp;+&nbsp;<i>h</i><sup>2</sup>), where <i>b</i> is the side length of the base and <i>h</i> is the height of the triangle. This quantity is often called the slant height. The slant height of a pyramid with side length 12 and height 8 is 10, and so the area of a single triangular base is 10&nbsp;&#183;&nbsp;12&nbsp;/&nbsp;2&nbsp;= 60. The base area is 12&nbsp;&#183;&nbsp;12&nbsp;= 144, so the total surface area is 60&nbsp;&#183;&nbsp;4&nbsp;+&nbsp;144&nbsp;= 384."
+                    "j": "The surface area of a pyramid is the sum of the base area and the area of the triangular faces. The area of the triangle is given by one-half of the product of the base of the triangle given by the side length of the base, and the height of the triangle, given by sqrt(($\\frac{08|<i>b</i>}{01|2}$)<sup>2</sup>&nbsp;+&nbsp;<i>h</i><sup>2</sup>), where <i>b</i> is the side length of the base and <i>h</i> is the height of the triangle. This quantity is often called the slant height. The slant height of a pyramid with side length 12 and height 8 is 10, and so the area of a single triangular base is $\\frac{12|10 &#183; 12}{01|2}$&nbsp;= 60. The base area is 12&nbsp;&#183;&nbsp;12&nbsp;= 144, so the total surface area is 60&nbsp;&#183;&nbsp;4&nbsp;+&nbsp;144&nbsp;= 384."
                 }
             ],
             "Differential Calculus": [
                 {
                     "q": "Which of the following functions is discontinuous?",
                     "a": [
-                        "<i>f</i>&#8202;(<i>x</i>) = 1 / <i>x</i>",
+                        "<i>f</i>&#8202;(<i>x</i>) = $\\frac{01|1}{08|<i>x</i>}$",
                         "<i>f</i>&#8202;(<i>x</i>) = sin(<i>x</i>)",
                         "<i>f</i>&#8202;(<i>x</i>) = e<sup><i>x</i></sup>",
                         "<i>f</i>&#8202;(<i>x</i>) = <i>x</i>",
                         "<i>f</i>&#8202;(<i>x</i>) = 0"
                     ],
-                    "j": "As <i>x</i> approaches 0, the function <i>f</i>&#8202;(<i>x</i>)&nbsp;= 1&nbsp;/&nbsp;<i>x</i> does not have a limit that agrees with <i>f</i>&#8202;(0), as <i>f</i>&#8202;(0) does not exist. So, the function is discontinuous."
+                    "j": "As <i>x</i> approaches 0, the function <i>f</i>&#8202;(<i>x</i>)&nbsp;= $\\frac{01|1}{08|<i>x</i>}$ does not have a limit that agrees with <i>f</i>&#8202;(0), as <i>f</i>&#8202;(0) does not exist. So, the function is discontinuous."
+                },{
+                    "q": "Which of the following is the mathematical definition of the first derivative?",
+                    "a": [
+                        "$\\lim{08|<i>h</i>}{08|<i>x</i>}\\frac{58|<i>f</i>&#8202;(<i>h</i>) &#150; <i>f</i>&#8202;(<i>x</i>)}{24|<i>h</i> &#150; <i>x</i>}$",
+                        "$\\lim{08|<i>h</i>}{01|0}\\frac{58|<i>f</i>&#8202;(<i>h</i>) &#150; <i>f</i>&#8202;(<i>x</i>)}{24|<i>h</i> &#150; <i>x</i>}$",
+                        "$\\lim{08|<i>h</i>}{01|0}\\frac{58|<i>f</i>&#8202;(<i>h</i>) &#150; <i>f</i>&#8202;(<i>x</i>)}{08|<i>x</i>}$",
+                        "$\\lim{08|<i>h</i>}{08|<i>x</i>}\\frac{25|<i>f</i>&#8202;(<i>h</i>)}{24|<i>h</i> &#150; <i>x</i>}$",
+                        "$\\lim{08|<i>h</i>}{08|<i>x</i>}$<i>f</i>&#8202;(<i>h</i>) &#150; <i>f</i>(<i>x</i>)"
+                    ],
+                    "j": "A derivative is often referred to as the limit of a difference quotient as it measures the change in the function over an arbitrarily small change in <i>x</i>. One way to express this is $\\lim{08|<i>h</i>}{08|<i>x</i>}\\frac{58|<i>f</i>&#8202;(<i>h</i>) &#150; <i>f</i>&#8202;(<i>x</i>)}{24|<i>h</i> &#150; <i>x</i>}$."
                 }
             ]
         },
