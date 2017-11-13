@@ -1,0 +1,763 @@
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>Academic Decathlon 2017&ndash;2018: Africa</title>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91403443-1', 'auto');
+	 	ga('send', 'pageview');</script>
+    <style type="text/css">
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        html, body {
+            margin: 0;
+            background: #ddd;
+        }
+
+        #header {
+            background: #eee;
+            padding: 4vh 8vw;
+        }
+
+        h1, h2, h3 {
+            color: #345;
+            text-align: center;
+            font-family: "Passion One", Arial, sans-serif;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 13vmin;
+        }
+
+        h2 {
+            font-size: 10vmin;
+        }
+
+        h3 {
+            font-size: 8vmin;
+            margin-top: .5em;
+        }
+
+        .select_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #ddd;
+            padding: 4em 6em;
+        }
+
+        .inactive {
+            display: none;
+            opacity: 0;
+        }
+
+        .select {
+            background: #10bcd1;
+            padding: .3em .5em;
+            font-family: "Passion One", Arial, sans-serif;
+            color: #fff;
+            font-size: 2.3em;
+            border-radius: .4em;
+            box-shadow: .1em .2em #009cb1;
+            margin: .2em;
+            position: relative;
+            cursor: pointer;
+            flex-grow: 1;
+            flex-basis: 1px;
+            text-align: center;
+        }
+
+        .select:focus, .select:hover {
+            box-shadow: .05em .1em #008ca1;
+            top: .1em;
+            left: .05em;
+            background: #00acc1;
+        }
+
+        .fadeout {
+            animation: fadeout 0.35s ease-out;
+        }
+
+        .fadein {
+            animation: fadein 0.35s ease-out;
+        }
+
+        #test {
+            background: #ddd;
+            min-height: 100vh;
+            z-index: 1;
+        }
+
+        #question_container {
+            background: #fff;
+            font-family: "Passion One", Arial, sans-serif;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        #question_display {
+            text-align: center;
+            font-size: 4.5em;
+            max-width: 80vw;
+        }
+
+        #answers {
+            padding: 2.5em 10vw;
+        }
+
+        .answer {
+            background: #fff;
+            color: #1b1b1b;
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 2em;
+            padding: .3em .4em;
+            border-radius: .3em;
+            box-shadow: .1em .2em #ccc;
+            margin-bottom: .4em;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+        }
+
+        .answer:last-child {
+            margin-bottom: initial;
+        }
+
+        .answer:focus, .answer:hover {
+            box-shadow: .05em .1em #bbb;
+            top: .1em;
+            left: .05em;
+            background: #eee;
+        }
+
+        .answer.correct {
+            background: #60ff60;
+            box-shadow: .05em .1em #30cc30;
+            color: #345;
+            top: .1em;
+            left: .05em;
+        }
+
+        .answer.incorrect {
+            background: #ff6040;
+            box-shadow: 0.05em .1em #cc3020;
+            top: .1em;
+            left: .05em;
+        }
+
+        .noclick {
+            pointer-events: none;
+        }
+
+        #next {
+            padding: 0 10vw;
+        }
+
+        #next div {
+            background: #10bcd1;
+            padding: .3em .4em;
+            font-family: "Passion One", Arial, sans-serif;
+            color: #fff;
+            font-size: 2em;
+            border-radius: .4em;
+            box-shadow: .1em .2em #009cb1;
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #next div:hover, #next div:focus {
+            box-shadow: .05em .1em #008ca1;
+            top: .1em;
+            left: .05em;
+            background: #00acc1;
+        }
+
+        #justification {
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 1.75em;
+            padding: 0 8vw 1.5rem;
+            text-align: center;
+            color: #181818
+        }
+
+        #progress {
+            padding: 1em 10vw;
+            font-family: "Passion One", Arial, sans-serif;
+        }
+
+        #progress_bar {
+            background: #eee;
+            font-size: 1.75em;
+            text-align: center;
+            border-radius: .8rem;
+            box-shadow: .1em .2em #bbb;
+            position: relative;
+            padding: .2em;
+        }
+
+        #progress_text {
+            color: #345;
+            text-align: center;
+        }
+
+        #timer {
+            padding: 1em 10vw .5em;
+            text-align: center;
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 1.75em;
+            color: #181818;
+        }
+
+        #result_svg {
+            height: 50vmin;
+            width: 60vmin;
+            margin: auto;
+            display: block;
+        }
+
+        #result_header {
+            background: #eee;
+            padding: 3em 0;
+        }
+
+        #result_text {
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 10vmax;
+            text-align: center;
+            margin-top: .2em;
+        }
+
+        #result_review {
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 3em;
+            margin: .5em 0 0;
+            text-align: center;
+            background: #ccc;
+            box-shadow: 0 -.1em .2em 0 #888;
+        }
+
+        #missed_questions {
+            background: #ddd;
+        }
+
+        #missed_questions div {
+            font-size: 90%;
+        }
+
+        #missed_questions .question {
+            background: #fff;
+            color: #181818;
+            padding: .4em 0;
+        }
+
+        #missed_questions .incorrect {
+            background: #ff6040;
+            color: #1b1b1b;
+            font-size: 80%;
+            padding: .1em;
+        }
+
+        #missed_questions .correct {
+            background: #60ff60;
+            color: #345;
+            font-size: 80%;
+            padding: .1em;
+        }
+
+        #missed_questions .question_container {
+            margin: 0 auto .8em;
+            box-shadow: 0 .15em .2em 0 #888;
+        }
+
+        #again {
+            padding: 0 10vw;
+            margin: 1.5em 0 3em;
+        }
+
+        #again_button {
+            background: #10bcd1;
+            padding: .3em .4em;
+            font-family: "Passion One", Arial, sans-serif;
+            color: #fff;
+            font-size: 2em;
+            border-radius: .4em;
+            box-shadow: .1em .2em #009cb1;
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #again_button:hover, #again_button:focus {
+            box-shadow: .05em .1em #008ca1;
+            top: .1em;
+            left: .05em;
+            background: #00acc1;
+        }
+
+        @media (max-width: 750px) {
+            .select_container {
+                padding: 2em 10vw;
+            }
+
+            #question_container {
+                font-size: 85%
+            }
+        }
+
+        @media (max-width: 600px) {
+            .select_container {
+                font-size: 75%;
+            }
+
+            #question_container {
+                font-size: 75%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            #question_container {
+                font-size: 65%;
+            }
+        }
+
+        /* Variables on the math test are slanted too much to the left */
+        /* This shifts them over so they don't look smooshed into their adjacent character */
+        body[data-subject=math] #test i, body[data-subject=math] #result_review i {
+            position: relative;
+            left: -.07em;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Passion+One:400" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="header">
+        <h1>Academic Decathlon</h1>
+        <h2>2017&ndash;2018</h2>
+        <h2>Africa</h2>
+        <h3>Practice Quizzes</h3>
+    </div>
+    <div id="subject_select" class="select_container">
+        <div class="subject select" id="art" role="button" tabindex="0">Art</div>
+        <div class="subject select" id="econ" role="button" tabindex="0">Economics</div>
+        <div class="subject select" id="lit" role="button" tabindex="0">Literature</div>
+        <div class="subject select" id="math" role="button" tabindex="0">Mathematics</div>
+        <div class="subject select" id="music" role="button" tabindex="0">Music</div>
+        <div class="subject select" id="science" role="button" tabindex="0">Science</div>
+        <div class="subject select" id="sosci" role="button" tabindex="0">Social Science</div>
+    </div>
+    <div id="section_select" class="select_container inactive"></div>
+    <div id="test" class="inactive">
+        <div id="question_container">
+            <div id="question_display"></div>
+        </div>
+        <div id="answers"></div>
+        <div id="justification" class="inactive"></div>
+        <div id="next"></div>
+        <div id="progress">
+            <div id="progress_bar">
+                <div id="progress_text"></div>
+            </div>
+        </div>
+        <div id="timer">
+            <div id="timer_text"></div>
+        </div>
+    </div>
+    <div id="results" class="inactive">
+        <div id="result_header">
+            <svg id="result_svg" viewBox="-10 0 120 100"></svg>
+        </div>
+        <div id="result_text"></div>
+        <div id="again">
+            <div id="again_button" role="button" tabindex="0">Take Another Test</div>
+        </div>
+        <div id="result_review">
+            Missed Questions
+            <div id="missed_questions"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            "use strict";
+            var selectors = document.querySelectorAll('.subject.select');
+            for (var i = 0; i < selectors.length; i++) {
+                selectors[i].addEventListener('keyup', function(e) {
+                    if (e.keyCode == 13 || e.keyCode == 32) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.dispatchEvent(new MouseEvent('click'));
+                    }
+                });
+                selectors[i].addEventListener('click', function() {
+                    var subjectSelect = document.getElementById('subject_select');
+                    subjectSelect.classList.add('inactive');
+                    var sectionSelect = document.getElementById('section_select');
+                    sectionSelect.classList.remove('inactive');
+                    var subject = this.id,
+                        sections = ({
+                            art: [1,2,3,4,5],
+                            econ: ['Microeconomics', 'Macroeconomics', 'African Economics'],
+                            lit: ['Things Fall Apart', 'Other Works of Literature'],
+                            math: ['Interest and Probability', 'Polygons and 2D Geometry', 'Circles and 3D Geometry', 'Differential Calculus'],
+                            music: [1,2,3,4],
+                            science: [1, 'HIV & AIDS', 'Malaria', 'Ebola'],
+                            sosci: ['Human Origins and Africa as a Whole', 'Early Civilzations', 'African Religion', 'Slavery and Imperialism', 'Independence in West Africa']
+                        })[subject];
+                    while (sectionSelect.lastElementChild) sectionSelect.removeChild(sectionSelect.lastElementChild);
+                    for (var i = 0; i < sections.length; i++) {
+                        var div = document.createElement('div');
+                        div.classList.add('section', 'select');
+                        div._section = sections[i]
+                        div.setAttribute('role', 'button');
+                        div.tabIndex = 0;
+                        div.innerText = typeof sections[i] == 'string' ? sections[i] : 'Section ' + sections[i];
+                        sectionSelect.appendChild(div);
+                        div.addEventListener('keyup', function(e) {
+                            if (e.keyCode == 13 || e.keyCode == 32) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                this.dispatchEvent(new MouseEvent('click'));
+                            }
+                        });
+                        div.addEventListener('click', function() {
+                            createTest(subject, this._section)
+                        });
+                    }
+                    var div = document.createElement('div');
+                    div.classList.add('section', 'select');
+                    div.setAttribute('role', 'button');
+                    div.tabIndex = 0;
+                    div.innerText = 'Mixed'
+                    sectionSelect.appendChild(div);
+                    div.addEventListener('keyup', function(e) {
+                        if (e.keyCode == 13 || e.keyCode == 32) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.dispatchEvent(new MouseEvent('click'));
+                        }
+                    });
+                    div.addEventListener('click', function() {
+                        createTest(subject, -1)
+                    });
+                    div = document.createElement('div');
+                    div.classList.add('section', 'select');
+                    div.setAttribute('role', 'button');
+                    div.tabIndex = 0;
+                    div.innerText = 'Go Back';
+                    sectionSelect.appendChild(div);
+                    div.addEventListener('keyup', function(e) {
+                        if (e.keyCode == 13 || e.keyCode == 32) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.dispatchEvent(new MouseEvent('click'));
+                        }
+                    });
+                    div.addEventListener('click', function() {
+                        while (sectionSelect.lastElementChild) {
+                            sectionSelect.removeChild(sectionSelect.lastElementChild)
+                        }
+                        sectionSelect.classList.add('inactive');
+                        subjectSelect.classList.remove('inactive');
+                        subjectSelect.firstElementChild.focus();
+                    });
+                    sectionSelect.firstElementChild.focus();
+                });
+            }
+
+            function createTest(subject, section) {
+                if (!window.QUESTION_DATA) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'questions.json');
+                    xhr.addEventListener('readystatechange', function() {
+                        if (this.readyState == 4) {
+                            window.QUESTION_DATA = JSON.parse(this.response);
+                            createTest(subject, section);
+                        }
+                    })
+                    xhr.send();
+                    return;
+                }
+
+                var data = window.QUESTION_DATA[2018][subject],
+                    questions = [];
+                if (section == -1) {
+                    for (var i in data) {
+                        questions = questions.concat(data[i]);
+                    }
+                } else {
+                    questions = questions.concat(data[section])
+                }
+                for (var i = questions.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = questions[i];
+                    questions[i] = questions[j];
+                    questions[j] = temp;
+                }
+                questions = questions.slice(0,subject == 'math' ? 35 : 50);
+                var sectionSelect = document.getElementById('section_select'),
+                    subjectSelect = document.getElementById('subject_select'),
+                    header = document.getElementById('header'),
+                    test = document.getElementById('test');
+                sectionSelect.classList.add('fadeout');
+                subjectSelect.classList.add('fadeout');
+                header.classList.add('fadeout');
+                setTimeout(function() {
+                    sectionSelect.classList.add('inactive');
+                    sectionSelect.classList.remove('fadeout');
+                    subjectSelect.classList.add('inactive');
+                    subjectSelect.classList.remove('fadeout');
+                    header.classList.add('inactive');
+                    header.classList.remove('fadeout');
+                    setTimeout(function() {
+                        document.body.setAttribute('data-subject', subject);
+                        test.classList.remove('inactive');
+                        test.classList.add('fadein');
+                        initTest(questions);
+                    }, 150);
+                }, 350);
+            }
+
+            function initTest(questions) {
+                var current = 0,
+                    questionDisplay = document.getElementById('question_display'),
+                    answerDisplay = document.getElementById('answers'),
+                    next = document.getElementById('next'),
+                    justification = document.getElementById('justification'),
+                    timer = document.getElementById('timer_text'),
+                    progressBar = document.getElementById('progress_bar'),
+                    progressText = document.getElementById('progress_text'),
+                    totaltime = 0,
+                    clockRunning = false,
+                    clockTime = setInterval(function() {
+                        if (clockRunning) {
+                            var spanned = performance.now() - starttime + totaltime,
+                                minutes = Math.floor(spanned / 60000).toString(),
+                                seconds = Math.floor(spanned / 1000 % 60).toString();
+                            timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                        }
+                    }, 250),
+                    starttime = 0,
+                    wrongAnswers = [];
+                function show(question) {
+                    answerDisplay.classList.remove('noclick');
+                    starttime = performance.now();
+                    clockRunning = true;
+                    if (current == 0) starttime += 350;
+                    if (next.firstElementChild) next.removeChild(next.firstElementChild);
+                    justification.classList.add('inactive');
+                    progressText.innerText = current + 1 + ' / ' + questions.length;
+                    progressBar.style.background = 'linear-gradient(to right, #60ff60 0%, #60ff60 ' + current / questions.length * 100 + '%, #eee ' + current / questions.length * 100 + '%, #eee 100%)';
+                    questionDisplay.innerHTML = question.q
+                    var answers = question.a.slice();
+                    for (var i = 4; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var temp = answers[i];
+                        answers[i] = answers[j];
+                        answers[j] = temp;
+                    }
+                    while (answerDisplay.lastElementChild) {
+                        answerDisplay.removeChild(answerDisplay.lastElementChild);
+                    }
+                    for (var i = 4; i >= 0; i--) {
+                        var div = document.createElement('div');
+                        div.classList.add('answer');
+                        div.setAttribute('role', 'button');
+                        div.tabIndex = 0;
+                        div.innerHTML = answers[i];
+                        div.correct = answers[i] == question.a[0];
+                        div.addEventListener('keyup', function(e) {
+                            if (e.keyCode == 13 || e.keyCode == 32) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                this.dispatchEvent(new MouseEvent('click'));
+                            }
+                        });
+                        div.addEventListener('click', function() {
+                            totaltime += performance.now() - starttime;
+                            clockRunning = false;
+                            var minutes = Math.floor(totaltime / 60000).toString(),
+                                seconds = Math.floor(totaltime / 1000 % 60).toString();
+                            timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                            var siblings = this.parentNode.children;
+                            if (this.correct) {
+                                this.classList.add('correct');
+                            }
+                            else {
+                                for (var i = 0; i < siblings.length; i++) {
+                                    if (siblings[i].correct) {
+                                        siblings[i].classList.add('correct');
+                                    }
+                                }
+                                this.classList.add('incorrect');
+                                wrongAnswers.push([question, this.innerHTML]);
+                            }
+                            for (var i = 0; i < siblings.length; i++) {
+                                siblings[i].classList.add('noclick');
+                                siblings[i].tabIndex = -1;
+                                siblings[i].removeAttribute('role');
+                            }
+                            answerDisplay.classList.add('noclick');
+                            justification.innerHTML = question.j
+                            justification.classList.remove('inactive');
+                            current++;
+                            var nextBtn = document.createElement('div');
+                            nextBtn.setAttribute('role', 'button');
+                            nextBtn.tabIndex = 0;
+                            if (current < questions.length) {
+                                nextBtn.innerText = 'Next Question';
+                                nextBtn.addEventListener('click', function() {
+                                    window.scrollY = document.documentElement.scrollTop = document.body.scrollTop = 0;
+                                    show(questions[current]);
+                                    answerDisplay.firstElementChild.focus();
+                                });
+                            } else {
+                                nextBtn.innerText = 'Finish Test';
+                                nextBtn.addEventListener('click', function() {
+                                    var test = document.getElementById('test'),
+                                        results = document.getElementById('results'),
+                                        svg = document.getElementById('result_svg'),
+                                        angle = (questions.length - wrongAnswers.length) / questions.length * Math.PI * 2;
+                                    svg.innerHTML = '<ellipse cx="50" cy="50" rx="50" ry="50" fill="#ccc">';
+                                    if (angle > Math.PI) {
+                                        var arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                                        arc.setAttribute('d', 'M50 100A50 50 0 0 0 50 0');
+                                        arc.setAttribute('fill', '#00acc1');
+                                        svg.appendChild(arc)
+                                        arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                                        arc.setAttribute('d', 'M' + (Math.sin(angle) * 50 + 50) + ' ' + (Math.cos(angle) * -50 + 50) + 'A50 50 0 1 0 ' + (Math.sin(angle) * -50 + 50) + ' ' + (Math.cos(angle) * 50 + 50) + 'L50 50Z');
+                                        arc.setAttribute('fill', '#00acc1');
+                                        svg.appendChild(arc)
+                                    } else {
+                                        var arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                                        arc.setAttribute('d', 'M' + (Math.sin(angle) * 50 + 50) + ' ' + (Math.cos(angle) * -50 + 50) + 'A50 50 0 0 0 50 0L50 50Z');
+                                        arc.setAttribute('fill', '#00acc1');
+                                        svg.appendChild(arc);
+                                    }
+                                    svg.innerHTML += '<ellipse cx="50" cy="50" rx="42" ry="42" fill="#eee"/>';
+                                    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                                    text.innerHTML = Math.round(((questions.length - wrongAnswers.length) / questions.length) * 100);
+                                    text.setAttribute('font-size', 65);
+                                    text.setAttribute('font-family', '"Passion One", Arial, sans-serif');
+                                    text.setAttribute('text-anchor', 'middle');
+                                    text.setAttribute('x', 50);
+                                    text.setAttribute('y', 69);
+                                    svg.appendChild(text);
+                                    var resultText = document.getElementById('result_text'),
+                                        minutes = Math.floor(totaltime / 60000).toString(),
+                                        seconds = Math.floor(totaltime / 1000 % 60).toString(),
+                                        review = document.getElementById('result_review'),
+                                        missed = document.getElementById('missed_questions');
+                                    resultText.innerHTML = (questions.length - wrongAnswers.length) + ' of ' + questions.length + ' Correct<br><span style="font-size:.9em">' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + '</span>';
+                                    if (wrongAnswers.length) {
+                                        review.classList.remove('inactive');
+                                        while (missed.lastElementChild) missed.removeChild(missed.lastElementChild);
+                                        for (var i = 0; i < wrongAnswers.length; i++) {
+                                            var container = document.createElement('div');
+                                            container.classList.add('question_container');
+                                            var question = document.createElement('div');
+                                            question.classList.add('question');
+                                            question.innerHTML = wrongAnswers[i][0].q;
+                                            container.appendChild(question);
+                                            var incorrect = document.createElement('div');
+                                            incorrect.classList.add('incorrect');
+                                            incorrect.innerHTML = wrongAnswers[i][1]
+                                            container.appendChild(incorrect);
+                                            var correct = document.createElement('div');
+                                            correct.classList.add('correct');
+                                            correct.innerHTML = wrongAnswers[i][0].a[0];
+                                            container.appendChild(correct);
+                                            missed.appendChild(container);
+                                        }
+                                    } else {
+                                        review.classList.add('inactive');
+                                    }
+                                    test.classList.remove('fadein');
+                                    test.classList.add('fadeout');
+                                    setTimeout(function() {
+                                        test.classList.add('inactive');
+                                        test.classList.remove('fadeout');
+                                        setTimeout(function() {
+                                            results.classList.remove('inactive');
+                                            results.classList.add('fadein');
+                                            again.focus();
+                                            setTimeout(function() {
+                                                results.classList.remove('fadein');
+                                            })
+                                        }, 150);
+                                    }, 350);
+                                })
+                            }
+                            nextBtn.addEventListener('keyup', function(e) {
+                                if (e.keyCode == 13 || e.keyCode == 32) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    this.dispatchEvent(new MouseEvent('click'));
+                                }
+                            });
+                            next.appendChild(nextBtn);
+                            nextBtn.focus();
+                        });
+                        answerDisplay.appendChild(div);
+                    }
+                }
+                show(questions[current]);
+            }
+
+            var again = document.getElementById('again');
+            again.addEventListener('keyup', function(e) {
+                if (e.keyCode == 13 || e.keyCode == 32) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.dispatchEvent(new MouseEvent('click'));
+                }
+            });
+            again.addEventListener('click', function() {
+                var subjectSelect = document.getElementById('subject_select'),
+                    header = document.getElementById('header'),
+                    results = document.getElementById('results');
+                results.classList.add('fadeout');
+                setTimeout(function() {
+                    results.classList.add('inactive');
+                    results.classList.remove('fadeout');
+                    setTimeout(function() {
+                        document.body.removeAttribute('data-subject');
+                        subjectSelect.classList.remove('inactive');
+                        header.classList.remove('inactive');
+                        subjectSelect.classList.add('fadein');
+                        header.classList.add('fadein');
+                        setTimeout(function() {
+                            subjectSelect.classList.remove('fadein');
+                            header.classList.remove('fadein');
+                        }, 350);
+                    }, 150);
+                }, 350);
+            });
+        })();
+    </script>
+</body>
+</html>
