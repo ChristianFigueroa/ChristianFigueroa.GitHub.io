@@ -1,7 +1,7 @@
 {
     "2018": {
         "art": {
-            "1": [
+            "Art Fundamentals": [
                 {
                     "q": "A fine art textbook is LEAST likely to include a chapter on",
                     "a": [
@@ -506,7 +506,7 @@
                     "j": "Alexander Calder created mobiles which could be moved by wind. He hung forms from wire to make the mobiles."
                 }
             ],
-            "2": [
+            "Southern and Eastern Africa": [
                 {
                     "q": "Which fraction of the earth's land mass does Africa occupy?",
                     "a": [
@@ -1009,7 +1009,7 @@
                     "j": "The selected lyre can be understood to have human characteristics, also known as being anthropomorphic. The British Museum describes it as having \"two 'eyes', a 'nose' and outstretched 'arms'&mdash;and when played it has a 'voice.'\""
                 }
             ],
-            "3": [
+            "Central Africa": [
                 {
                     "q": "Which PRIMARY geographical feature defines Central Africa?",
                     "a": [
@@ -1512,7 +1512,7 @@
                     "j": "The Royal Palace of Foumban has Islamic flourishes. The structure resembles a medieval chateau."
                 }
             ],
-            "4": [
+            "Western Africa": [
                 {
                     "q": "Which PRIMARY geographical feature characterized Western Africa?",
                     "a": [
@@ -2015,7 +2015,7 @@
                     "j": "The selected kente cloth features flat orange squares of fabric toward the top of the illustration. They create a horizontal emphasis, distinct from the rest of the cloth."
                 }
             ],
-            "5": [
+            "Contemporary African Art": [
                 {
                     "q": "The postcolonial era is MOST contemporary with",
                     "a": [
@@ -7613,7 +7613,7 @@
             ]
         },
         "music": {
-            "1": [
+            "Musical Concepts and the African Region": [
                 {
                     "q": "Which African region is also known as the Maghreb?",
                     "a": [
@@ -8116,7 +8116,7 @@
                     "j": "Qu'ranic recitation is expected to sound different every time. It features extensive use of melismatic singing."
                 }
             ],
-            "2": [
+            "Traditional Music": [
                 {
                     "q": "How does the Hausa court determine musicians' status?",
                     "a": [
@@ -9119,7 +9119,7 @@
                     "j": "\"Let us go away from the blamers\" is a lyric in Umm Kulthum's \"El Ward Gamil.\" This song originally appeared in a film."
                 }
             ],
-            "3": [
+            "Modern Music": [
                 {
                     "q": "Which song popularized Cuban music on the international stage?",
                     "a": [
@@ -9622,7 +9622,7 @@
                     "j": "Hammer, the beatmaker in \"Kwame Nkrumah, bases his pattern on a gankogui pattern from <i>Gahu.</i>"
                 }
             ],
-            "4": [
+            "Current Issues": [
                 {
                     "q": "Musical conversation is also known as",
                     "a": [
@@ -10127,7 +10127,7 @@
             ]
         },
         "science": {
-            "1": [
+            "Overview of Infectious Disease": [
                 {
                     "q": "Which of the following diseases is communicable?",
                     "a": [
