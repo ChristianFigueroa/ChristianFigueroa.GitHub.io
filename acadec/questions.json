@@ -1542,9 +1542,9 @@
                         "sandstorm",
                         "hurricane"
                     ],
-                    "j": "Droughts likely caused the Nok to migrate in 3000 BCE Their new region had monsoons, which helped prevent droughts."
+                    "j": "Droughts likely caused the Nok to migrate in 3000 <small>BCE</small> Their new region had monsoons, which helped prevent droughts."
                 },{
-                    "q": "In 400 <small><small>BCE</small></small>, the Nok first encountered",
+                    "q": "In 400 <small>BCE</small>, the Nok first encountered",
                     "a": [
                         "iron",
                         "tin",
@@ -10157,7 +10157,7 @@
                         "Ancient Carthage",
                         "the Mali Empire"
                     ],
-                    "j": "The bubonic plague contributed to the collapse of China's Han dynasty in 160 CE, and may have accelerated the fall of the Roman Empire as well in 476 CE."
+                    "j": "The bubonic plague contributed to the collapse of China's Han dynasty in 160 <small>CE</small>, and may have accelerated the fall of the Roman Empire as well in 476 <small>CE</small>."
                 },{
                     "q": "Why has the development of antivirals lagged behind the development of antibiotics?",
                     "a": [
@@ -12206,7 +12206,7 @@
                     "spoiled food",
                     "animal spirits"
                   ],
-                  "j": "<i>Nei Ching</i>, written in China in 2700 BCE, is the oldest known medical book. It blamed malaria's symptoms on three demons carrying a hammer, pail of water, and stove, respectively."
+                  "j": "<i>Nei Ching</i>, written in China in 2700 <small>BCE</small>, is the oldest known medical book. It blamed malaria's symptoms on three demons carrying a hammer, pail of water, and stove, respectively."
                 },{
                   "q": "Why is malaria transmission often higher during the rainy season?",
                   "a": [
@@ -12466,7 +12466,7 @@
                     "wormwood",
                     "Plasmodium"
                   ],
-                  "j": "In the second century BCE, Chinese physicians began to use the Qinghao plant to treat malaria. The plant was later found to contain artemisinin, a powerful antimalarial compound that is used to this day."
+                  "j": "In the second century <small>BCE</small>, Chinese physicians began to use the Qinghao plant to treat malaria. The plant was later found to contain artemisinin, a powerful antimalarial compound that is used to this day."
                 },{
                   "q": "How many malaria deaths occurred in 2015?",
                   "a": [
@@ -13298,13 +13298,13 @@
                 },{
                     "q": "Which of the following statements CORRECTLY describes the Bantu language group?",
                     "a": [
-                        "The Bantu expansion dates from 1000 B.C.E.",
+                        "The Bantu expansion dates from 1000 <small>BCE</small>.",
                         "It belongs to the Nilo-Saharan language family.",
                         "It includes approximately 2,600 languages.",
                         "It expanded from the present-day border of Nigeria and Ghana.",
                         "It spread from its origins to the north and west."
                     ],
-                    "j": "The Bantu language expansion began around 1000 B.C.E. near the present-day border of Nigeria and Cameroon, with the languages spreading to the south and east over time. Today, there are approximately 1,600 languages, which are part of the Niger-Congo language group."
+                    "j": "The Bantu language expansion began around 1000 <small>BCE</small> near the present-day border of Nigeria and Cameroon, with the languages spreading to the south and east over time. Today, there are approximately 1,600 languages, which are part of the Niger-Congo language group."
                 },{
                     "q": "Swahili originated among East Africans who",
                     "a": [
@@ -13683,7 +13683,7 @@
                     "a": [
                         "Upper Egypt conquered Lower Egypt ",
                         "oil paintings have been popular since ancient times",
-                        "the Great Pyramids date from after 1000 B.C.E.",
+                        "the Great Pyramids date from after 1000 <small>BCE</small>",
                         "organized religion had limited power in ancient Egypt",
                         "the ancient Egyptian state was highly decentralized"
                     ],
@@ -13701,13 +13701,13 @@
                 },{
                     "q": "Which of the following pairs CORRECTLY matches a period of ancient Egyptian history and the year of origin?",
                     "a": [
-                        "Old Kingdom; 2686 B.C.E.",
-                        "Middle Kingdom; 2160 B.C.E.",
-                        "New Kingdom; 1069 B.C.E.",
-                        "Ptolemaic Period; 30 B.C.E.",
-                        "Roman Period; 30 C.E."
+                        "Old Kingdom; 2686 <small>BCE</small>",
+                        "Middle Kingdom; 2160 <small>BCE</small>",
+                        "New Kingdom; 1069 <small>BCE</small>",
+                        "Ptolemaic Period; 30 <small>BCE</small>",
+                        "Roman Period; 30 <small>CE</small>"
                     ],
-                    "j": "The Old Kingdom, which represented ancient Egypt's first centralized government, ran from 2686 B.C.E. until 2160 B.C.E."
+                    "j": "The Old Kingdom, which represented ancient Egypt's first centralized government, ran from 2686 <small>BCE</small> until 2160 <small>BCE</small>."
                 },{
                     "q": "During which dynasty did monumental building in Egypt peak?",
                     "a": [
@@ -13717,7 +13717,7 @@
                         "Dynasty VI",
                         "Dynasty V"
                     ],
-                    "j": "Egyptian monumental building peaked between 2600 and 2500 B.C.E., during Dynasty IV."
+                    "j": "Egyptian monumental building peaked between 2600 and 2500 <small>BCE</small>, during Dynasty IV."
                 },{
                     "q": "Egyptians regarded the earliest pharaohs as incarnations of",
                     "a": [
@@ -13789,7 +13789,7 @@
                     ],
                     "j": "The Hyksos brought a variety of Asian technologies to ancient Egypt during the Second Intermediate Period, including military chariots, olive trees, textile manufactures, musical instruments, and bronze metallurgy."
                 },{
-                    "q": "Around 1550 BCE, several Egyptian armies invaded",
+                    "q": "Around 1550 <small>BCE</small>, several Egyptian armies invaded",
                     "a": [
                         "the Fertile Crescent",
                         "the Levant",
@@ -13893,11 +13893,11 @@
                     "a": [
                         "They were primarily Muslim.",
                         "They were also known as the Sosso.",
-                        "They were key enemies of the Ghanaians prior to 1042 CE.",
-                        "They lost control of multiple key transshipment points in 1042 CE.",
+                        "They were key enemies of the Ghanaians prior to 1042 <small>CE</small>.",
+                        "They lost control of multiple key transshipment points in 1042 <small>CE</small>.",
                         "The Ghanaians ruled them for over 50 years."
                     ],
-                    "j": "The Sanhaja Berbers were a Muslim group who became enemies of the Ghanaians in 1042 C.E. and ruled them for approximately 50 years."
+                    "j": "The Sanhaja Berbers were a Muslim group who became enemies of the Ghanaians in 1042 <small>CE</small> and ruled them for approximately 50 years."
                 },{
                     "q": "Before founding the Malian empire, the Malinke people were PRIMARILY",
                     "a": [
@@ -13917,7 +13917,7 @@
                         "\"he who conquers\"",
                         "\"heritage of the griot\""
                     ],
-                    "j": "Mali, or \"Mallel\", means \"where the king resides\". It first appeared in Arabic literature in the 800s C.E."
+                    "j": "Mali, or \"Mallel\", means \"where the king resides\". It first appeared in Arabic literature in the 800s <small>CE</small>."
                 },{
                     "q": "Which of the following themes is LEAST relevant to <i>The Epic of Sundiata</i>?",
                     "a": [
@@ -14340,9 +14340,9 @@
                         "formation of the first Islamic congregation",
                         "Muslim conquest of Mecca"
                     ],
-                    "j": "The Muslims migrated to Yathrib in 622 C.E. They renamed it Medina, or the City of the Prophet."
+                    "j": "The Muslims migrated to Yathrib in 622 <small>CE</small>. They renamed it Medina, or the City of the Prophet."
                 },{
-                    "q": "After 750 CE, the Umayyads maintained control of a caliphate in",
+                    "q": "After 750 <small>CE</small>, the Umayyads maintained control of a caliphate in",
                     "a": [
                         "Spain",
                         "the Arabian Peninsula",
@@ -14350,7 +14350,7 @@
                         "Egypt",
                         "Libya"
                     ],
-                    "j": "While the Abassids overthrew the Umayyads in Mecca in 750 C.E., the Umayyads maintained control of a separate caliphate in Spain."
+                    "j": "While the Abassids overthrew the Umayyads in Mecca in 750 <small>CE</small>, the Umayyads maintained control of a separate caliphate in Spain."
                 },{
                     "q": "Which of the following statements regarding the Shia is FALSE?",
                     "a": [
@@ -14358,7 +14358,7 @@
                         "They followed Muhammad's cousin Ali.",
                         "Their earliest caliphs were known as Imams.",
                         "Iran is the primary Shia-majority country.",
-                        "Since 941 C.E., the spiritual leaders of the Shia have been known as Ayatollahs."
+                        "Since 941 <small>CE</small>, the spiritual leaders of the Shia have been known as Ayatollahs."
                     ],
                     "j": "The Shia originated as followers of Muhammad's cousin Ali and believed that only descendants of Ali and Muhammad's daughter Fatimah could be caliph."
                 },{
@@ -14380,7 +14380,7 @@
                         "\"Imam\"",
                         "\"caliph\""
                     ],
-                    "j": "Around 613 C.E., the Ethiopian Negus, or king, offered sanctuary to Muslims fleeing persecution in Mecca."
+                    "j": "Around 613 <small>CE</small>, the Ethiopian Negus, or king, offered sanctuary to Muslims fleeing persecution in Mecca."
                 },{
                     "q": "The case of Bilal ibn Rabah PRIMARILY offers evidence of the",
                     "a": [
@@ -14396,11 +14396,11 @@
                     "a": [
                         "It is Africa's oldest university.",
                         "It is Africa's oldest mosque.",
-                        "It was founded in 1070 C.E.",
+                        "It was founded in 1070 <small>CE</small>.",
                         "It remains the academic home of Shia Islam.",
                         "Sunni Muslims founded it."
                     ],
-                    "j": "Al-Azhar is Africa's oldest university and second oldest mosque. Shia Muslims founded it in 970 C.E."
+                    "j": "Al-Azhar is Africa's oldest university and second oldest mosque. Shia Muslims founded it in 970 <small>CE</small>."
                 },{
                     "q": "Ibn Khaldun is BEST known as a(n)",
                     "a": [
@@ -14510,7 +14510,7 @@
                         "East Africa",
                         "North America"
                     ],
-                    "j": "The Abbasid Revolution of 750 C.E. led to a new round of Islamic expansion toward Asia, which subsequently spread to East Africa by way of Indian Ocean traders."
+                    "j": "The Abbasid Revolution of 750 <small>CE</small> led to a new round of Islamic expansion toward Asia, which subsequently spread to East Africa by way of Indian Ocean traders."
                 },{
                     "q": "The word \"Swahili\" comes from the Arabic word for",
                     "a": [
@@ -14575,14 +14575,14 @@
                     "q": "Which of the following statements regarding the Nicene Creed is FALSE?",
                     "a": [
                         "It determined that God the Son lived a finite life.",
-                        "It was created in 325 C.E.",
+                        "It was created in 325 <small>CE</small>.",
                         "Catholics and Protestants adhere to it.",
                         "It settled questions about the nature of Jesus of Nazareth.",
                         "It concluded that God the Father begot Jesus."
                     ],
                     "j": "The Nicene Creed that God the Father begot Jesus, meaning that God the Son was as eternal as God the Father."
                 },{
-                    "q": "To which of the following regions had Christianity spread by 300 C.E.?",
+                    "q": "To which of the following regions had Christianity spread by 300 <small>CE</small>?",
                     "a": [
                         "Syria",
                         "Armenia",
@@ -14590,7 +14590,7 @@
                         "Ireland",
                         "Iraq"
                     ],
-                    "j": "Christianity, which began in the areas immediately surrounding the Mediterranean, had spread to Armenia, Britain, Ireland, and Iraq by 300 C.E."
+                    "j": "Christianity, which began in the areas immediately surrounding the Mediterranean, had spread to Armenia, Britain, Ireland, and Iraq by 300 <small>CE</small>."
                 },{
                     "q": "Which outcome did the Council of Chalcedon have?",
                     "a": [
@@ -14600,9 +14600,9 @@
                         "It concluded that Jesus' human and divine natures are fully united.",
                         "It identified the location of the Ark of the Covenant."
                     ],
-                    "j": "In 451 C.E., the Council of Chalcedon concluded that the Monophysites were heretics for their views regarding the nature of Jesus."
+                    "j": "In 451 <small>CE</small>, the Council of Chalcedon concluded that the Monophysites were heretics for their views regarding the nature of Jesus."
                 },{
-                    "q": "Which group invaded Egypt in 640 C.E.?",
+                    "q": "Which group invaded Egypt in 640 <small>CE</small>?",
                     "a": [
                         "the Muslims",
                         "the Copts",
@@ -14610,7 +14610,7 @@
                         "the Abyssinians",
                         "the Monophysites"
                     ],
-                    "j": "The Muslims invaded Egypt in 640 C.E., reducing the degree to which the Orthodox Christians could persecute the Copts."
+                    "j": "The Muslims invaded Egypt in 640 <small>CE</small>, reducing the degree to which the Orthodox Christians could persecute the Copts."
                 },{
                     "q": "The Ark of the Covenant houses the",
                     "a": [
