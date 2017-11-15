@@ -410,6 +410,8 @@
     <script type="text/javascript">
         (function() {
             "use strict";
+            history.replaceState(null, '');
+            var clockTime, totaltime, wrongAnswers, current;
             var selectors = document.querySelectorAll('.subject.select');
             for (var i = 0; i < selectors.length; i++) {
                 selectors[i].addEventListener('keyup', function(e) {
@@ -525,6 +527,8 @@
                     questions[j] = temp;
                 }
                 questions = questions.slice(0,subject == 'math' ? 35 : 50);
+                history.pushState({questions: questions, subject: subject}, subject);
+
                 var sectionSelect = document.getElementById('section_select'),
                     subjectSelect = document.getElementById('subject_select'),
                     header = document.getElementById('header'),
@@ -548,27 +552,27 @@
                 }, 350);
             }
 
-            function initTest(questions) {
-                var current = 0,
-                    questionDisplay = document.getElementById('question_display'),
+            function initTest(questions, index, wrong, elapsedTime) {
+                var questionDisplay = document.getElementById('question_display'),
                     answerDisplay = document.getElementById('answers'),
                     next = document.getElementById('next'),
                     justification = document.getElementById('justification'),
                     timer = document.getElementById('timer_text'),
                     progressBar = document.getElementById('progress_bar'),
                     progressText = document.getElementById('progress_text'),
-                    totaltime = 0,
                     clockRunning = false,
-                    clockTime = setInterval(function() {
-                        if (clockRunning) {
-                            var spanned = performance.now() - starttime + totaltime,
-                                minutes = Math.floor(spanned / 60000).toString(),
-                                seconds = Math.floor(spanned / 1000 % 60).toString();
-                            timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-                        }
-                    }, 50),
-                    starttime = 0,
-                    wrongAnswers = [];
+                    starttime = 0;
+                wrongAnswers = wrong || [];
+                totaltime = elapsedTime || 0;
+                current = index || 0
+                clockTime = setInterval(function() {
+                    if (clockRunning) {
+                        var spanned = performance.now() - starttime + totaltime,
+                            minutes = Math.floor(spanned / 60000).toString(),
+                            seconds = Math.floor(spanned / 1000 % 60).toString();
+                        timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                    }
+                }, 50)
                 function show(question) {
                     answerDisplay.classList.remove('noclick');
                     starttime = performance.now();
@@ -596,16 +600,27 @@
                         div.tabIndex = 0;
                         div.innerHTML = texToHTML(answers[i]);
                         div.correct = answers[i] == question.a[0];
+                        div.addEventListener('keydown', function(e) {
+                            if (e.keyCode == 32) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                            }
+                            if (!this.finished) {
+                                if (e.keyCode == 37 || e.keyCode == 38) (this.previousElementSibling || answerDisplay.lastElementChild).focus();
+                                else if (e.keyCode == 39 || e.keyCode == 40) (this.nextElementSibling || answerDisplay.firstElementChild).focus();
+                            }
+                        });
                         div.addEventListener('keyup', function(e) {
                             if (e.keyCode == 13 || e.keyCode == 32) {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                this.dispatchEvent(new MouseEvent('click'));
+                                (this.finished ? document.getElementById('next').firstElementChild : this).dispatchEvent(new MouseEvent('click'));
                             }
                         });
                         div.addEventListener('click', function() {
                             totaltime += performance.now() - starttime;
                             clockRunning = false;
+                            this.finished = true;
                             var minutes = Math.floor(totaltime / 60000).toString(),
                                 seconds = Math.floor(totaltime / 1000 % 60).toString();
                             timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
@@ -630,6 +645,7 @@
                             answerDisplay.classList.add('noclick');
                             justification.innerHTML = texToHTML(question.j);
                             justification.classList.remove('inactive');
+                            if (typeof justification.scrollIntoView == 'function') justification.scrollIntoView({behavior: 'smooth'});
                             current++;
                             var nextBtn = document.createElement('div');
                             nextBtn.setAttribute('role', 'button');
@@ -639,7 +655,6 @@
                                 nextBtn.addEventListener('click', function() {
                                     window.scrollY = document.documentElement.scrollTop = document.body.scrollTop = 0;
                                     show(questions[current]);
-                                    answerDisplay.firstElementChild.focus();
                                 });
                             } else {
                                 nextBtn.innerText = 'Finish Test';
@@ -726,10 +741,10 @@
                                 }
                             });
                             next.appendChild(nextBtn);
-                            nextBtn.focus();
                         });
                         answerDisplay.appendChild(div);
                     }
+                    answerDisplay.firstElementChild.focus();
                 }
                 show(questions[current]);
             }
@@ -743,25 +758,62 @@
                 }
             });
             again.addEventListener('click', function() {
-                var subjectSelect = document.getElementById('subject_select'),
-                    header = document.getElementById('header'),
-                    results = document.getElementById('results');
-                results.classList.add('fadeout');
-                setTimeout(function() {
-                    results.classList.add('inactive');
-                    results.classList.remove('fadeout');
+                history.back();
+                history.replaceState(null, '');
+            });
+
+            window.addEventListener('popstate', function(e) {
+                if (e.state == null) {
+                    clearInterval(clockTime);
+                    var subjectSelect = document.getElementById('subject_select'),
+                        header = document.getElementById('header'),
+                        results = document.getElementById('results'),
+                        test = document.getElementById('test');
+                    results.classList.add('fadeout');
+                    test.classList.add('fadeout');
                     setTimeout(function() {
-                        document.body.removeAttribute('data-subject');
-                        subjectSelect.classList.remove('inactive');
-                        header.classList.remove('inactive');
-                        subjectSelect.classList.add('fadein');
-                        header.classList.add('fadein');
+                        results.classList.add('inactive');
+                        results.classList.remove('fadeout');
+                        test.classList.add('inactive');
+                        test.classList.remove('fadeout');
                         setTimeout(function() {
-                            subjectSelect.classList.remove('fadein');
-                            header.classList.remove('fadein');
-                        }, 350);
-                    }, 150);
-                }, 350);
+                            document.body.removeAttribute('data-subject');
+                            subjectSelect.classList.remove('inactive');
+                            header.classList.remove('inactive');
+                            subjectSelect.classList.add('fadein');
+                            header.classList.add('fadein');
+                            setTimeout(function() {
+                                subjectSelect.classList.remove('fadein');
+                                header.classList.remove('fadein');
+                            }, 350);
+                        }, 150);
+                    }, 350);
+                } else if (e.state) {
+                    var sectionSelect = document.getElementById('section_select'),
+                        subjectSelect = document.getElementById('subject_select'),
+                        header = document.getElementById('header'),
+                        test = document.getElementById('test');
+                    sectionSelect.classList.add('fadeout');
+                    subjectSelect.classList.add('fadeout');
+                    header.classList.add('fadeout');
+                    setTimeout(function() {
+                        sectionSelect.classList.add('inactive');
+                        subjectSelect.classList.add('inactive');
+                        header.classList.add('inactive');
+                        setTimeout(function() {
+                            sectionSelect.classList.remove('fadeout');
+                            subjectSelect.classList.remove('fadeout');
+                            header.classList.remove('fadeout');
+                            document.body.setAttribute('data-subject', e.state.subject);
+                            test.classList.remove('inactive');
+                            test.classList.add('fadein');
+                            setTimeout(function() {
+                                test.classList.remove('fadein');
+                            }, 350);
+                            initTest(e.state.questions, current, wrongAnswers, totaltime);
+                        }, 150);
+                    }, 350);
+                }
             });
 
             var numLength = 3;
