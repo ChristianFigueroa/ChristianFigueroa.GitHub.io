@@ -1,4 +1,5 @@
 {
+	"comment": "Each `q' property is the object's question. Each `a' array is the list of answers for that question. Only the first string in the array is the correct answer. The `j' is the justification for the answer.",
 	"2018": {
 		"art": {
 			"Art Fundamentals": [
@@ -99,7 +100,7 @@
 						"They cultivated valuable resources.",
 						"They created exotic, pagan art.",
 						"They had very low populations.",
-						"They had very low populations.",
+						"They had weak military.",
 						"They often declared war on neighboring civilizations."
 					],
 					"j": "The Mesopotamian civilizations between the Tigris and Euphrates rivers often faces invasion because they lacked natural barriers, like mountains and deserts."
@@ -110,7 +111,7 @@
 						"They both encouraged loyalty to the city-state.",
 						"Their empires peaked at the same time.",
 						"They both created art primarily featuring animals.",
-						"They both promoted atheism withing their empires."
+						"They both promoted atheism within their empires."
 					],
 					"j": "Both the Sumerians and Babylonians had \"Neo\" cultures, where they reestablished after a period of defeat. The Neo-Sumerians defeated the Guti and the Neo Babylonians defeated the Assyrians."
 				},{
@@ -225,7 +226,7 @@
 					],
 					"j": "Nomadic Germanic people of the early medieval period created notable metalwork. These works were abstract, decorative, geometric, and portable."
 				},{
-					"q": "Giotto di Bondone's artorks did NOT use",
+					"q": "Giotto di Bondone's artworks did NOT use",
 					"a": [
 						"linear perspective",
 						"overlapping figures",
@@ -447,7 +448,7 @@
 				},{
 					"q": "Which of the following colors is the MOST intense?",
 					"a": [
-						"red <div style='display:inline-block;background:red;height:.8em;width:.8em'></div>",
+						"red",
 						"green",
 						"orange",
 						"purple",
@@ -463,7 +464,7 @@
 						"asymmetric balance",
 						"approximate symmetry"
 					],
-					"j": "A motif created a pattern. Patterns create a movement known as rhythm."
+					"j": "A motif creates a pattern. Patterns create a movement known as rhythm."
 				},{
 					"q": "Which of the following techniques do artists use for shading?",
 					"a": [
@@ -716,7 +717,7 @@
 						"South Africa",
 						"Namibia"
 					],
-					"j": "The Great Bantu Migration originated in present-day Chad and Cameroon around 1000 <small>BCE</small>"
+					"j": "The Great Bantu Migration originated in present-day Chad and Cameroon around 1000 <small>BCE</small>."
 				},{
 					"q": "Which of the following statements BEST describes the Great Bantu migration's timing?",
 					"a": [
@@ -1349,7 +1350,7 @@
 						"fair leadership",
 						"great wealth"
 					],
-					"j": "Images of African kings tend to emphasize his head and his hand. The head represent s good fortune, while the hand represents a man's power to do things."
+					"j": "Images of African kings tend to emphasize his head and his hand. The head represents good fortune, while the hand represents a man's power to do things."
 				},{
 					"q": "During the Renaissance, Europeans used ivory",
 					"a": [
@@ -3120,7 +3121,7 @@
 						"finance expenditures",
 						"time expenditures"
 					],
-					"j": "Accounting costs only include actual monetary expenditures and no not account for time and other resource opportunity costs."
+					"j": "Accounting costs only include actual monetary expenditures and do not account for time and other resource opportunity costs."
 				},{
 					"q": "Felix sells 400 watches at $$400 each. Each watch costs $$90 to make. What is Felix's total revenue?",
 					"a": [
@@ -3300,7 +3301,7 @@
 						"take on debt",
 						"fund lobbying firms"
 					],
-					"j": "Cartels are firms that cooperate together tin order to exhibit monopolist behavior on a market."
+					"j": "Cartels are firms that cooperate together in order to exhibit monopolist behavior on a market."
 				},{
 					"q": "Which of the following organizations is a cartel?",
 					"a": [
@@ -4576,7 +4577,7 @@
 						"Central and South America",
 						"Sub-Saharan Africa"
 					],
-					"j": "North America has a large land mass. It is 24.7 million km^2."
+					"j": "North America has a large land mass. It is 24.7 million km<sup>2</sup>."
 				},{
 					"q": "Which of the following factors MOST contributes to limited opportunities for agricultural intensification in Africa?",
 					"a": [
@@ -5033,7 +5034,7 @@
 		"lit": {
 			"Things Fall Apart": [
 				{
-					"q": "<i>Things Fall Apart <i>is widely considered to be a classic in both African studies and",
+					"q": "<i>Things Fall Apart </i>is widely considered to be a classic in both African studies and",
 					"a": [
 						"Anglophone literature",
 						"oral storytelling",
@@ -5081,7 +5082,7 @@
 						"Ikemefuna's sister",
 						"Reverend James Smith"
 					],
-					"j": "The sequel to <i>Things Fall Apart </i>tells the story of Okonkwo's grandson, Obi Okonkwo."
+					"j": "The sequel to <i>Things Fall Apart</i> (<i>No Longer at Ease</i>) tells the story of Okonkwo's grandson, Obi Okonkwo."
 				},{
 					"q": "Chinua Achebe's novel <i>A Man of the People</i> is BEST described as",
 					"a": [
@@ -5591,7 +5592,7 @@
 						"<i>iyi-owa</i>",
 						"<i>umuada</i>"
 					],
-					"j": "Ezinma's family and community view her as an <i>ogbanje</i> because she is sickly."
+					"j": "Ezinma's family and community view her as an <i>ogbanje</i> because she is sickly. Her <i>iyi-owa</i> is what lets her maintain a connection to the spitit world."
 				},{
 					"q": "Mr. Brown's approach to proselytization in <i>Things Fall Apart</i> is BEST described as",
 					"a": [
@@ -6894,7 +6895,7 @@
 						"<i>A Place in the World</i>",
 						"<i>A Letter to Lynda</i>"
 					],
-					"j": "Funso Aiyejina won the 2000 Commonwealth Writers' Prize for his first short story collection <i>The Legend of the Anthills and Other Stories</i>."
+					"j": "Funso Aiyejina won the 2000 Commonwealth Writers' Prize for his first short story collection <i>The Legend of the Rockhills and Other Stories</i>."
 				},{
 					"q": "What kind of text did Funso Aiyejina publish in 2004?",
 					"a": [
@@ -7590,6 +7591,16 @@
 						"$\\frac{03|100}{05|9,999}$"
 					],
 					"j": "There are $\\binom{02|52}{01|5}$ possible five card hands. To get two pairs, we first choose two ranks with $\\binom{02|13}{01|2}$ and then choose two cards from both of this ranks with $\\binom{01|4}{01|2}\\binom{01|4}{01|2}$. We then choose one rank from the remaining eleven with $\\binom{02|11}{01|1}$, and choose one of those four cards with $\\binom{01|4}{01|1}$. So the overall probability is $\\frac{96|$$\\binom{02|13}{01|2}\\binom{01|4}{01|2}\\binom{01|4}{01|2}\\binom{02|11}{01|1}\\binom{01|4}{01|1}$$}{23|$$\\binom{02|52}{01|5}$$}$, which simplifies to $\\frac{03|198}{05|4,165}$."
+				},{
+					"q": "In how many many ways can a five-member group be selected from ten girls and ten boys if at least half of them must be girls.",
+					"a": [
+						"7,752",
+						"120",
+						"1,000",
+						"5,000",
+						"6,610"
+					],
+					"j": "There are three possible group types: one with three girls and two boys, one with gour girls and one boy, and with five girls. Using the multiplication principle and the definition of combinations, the amount of possible groups is $\\binom{02|10}{01|3}\\binom{02|10}{01|2}$&nbsp;+&nbsp;$\\binom{02|10}{01|4}\\binom{02|10}{01|1}$&nbsp;+&nbsp;$\\binom{02|10}{01|5}\\binom{02|10}{01|0}$&nbsp;= 7,752."
 				}
 			],
 			"Polygons and 2D Geometry": [
@@ -7673,7 +7684,7 @@
 						"South Africa",
 						"East Africa"
 					],
-					"j": "North Africa is also known as the Maghreb, an Arabic term \"west.\""
+					"j": "North Africa is also known as the Maghreb, an Arabic term meaning \"west.\""
 				},{
 					"q": "Which river is the fourth longest river in Africa?",
 					"a": [
@@ -7835,7 +7846,7 @@
 					],
 					"j": "Many African countries established national music groups, such as the ballet and the opera, after becoming independent in the mid-twentieth century."
 				},{
-					"q": "What PRIMARY role does spirit possession in African religions?",
+					"q": "What PRIMARY role does spirit possession play in African religions?",
 					"a": [
 						"helping believers communicate with the dead",
 						"facilitating self-forgiveness of believers ",
@@ -7951,7 +7962,7 @@
 						"three parts",
 						"five parts ",
 						"six parts",
-						"two parts"
+						"one part"
 					],
 					"j": "Binary beats can be divided into either two or four parts."
 				},{
@@ -8058,9 +8069,9 @@
 					"q": "With which group is the hosho associated?",
 					"a": [
 						"Shona",
-						"Shona",
-						"Berber",
 						"Akan",
+						"Berber",
+						"Fula",
 						"Yoruba"
 					],
 					"j": "The hosho is a Shona gourd rattle. It is used to mark time in an ensemble."
@@ -8350,11 +8361,11 @@
 				},{
 					"q": "How many beats compose the FIRST rhythmic cycle of \"Konkoba\"?",
 					"a": [
-						"15",
+						"12",
 						"13",
 						"11",
 						"17",
-						"19"
+						"15"
 					],
 					"j": "There are two main rhythmic cycles in Toumani Diabate's \"Konkoba.\" The first cycle has twelve beats."
 				},{
@@ -8420,13 +8431,13 @@
 				},{
 					"q": "Which note is consistently struck on the offbeats of \"Moussolou\"?",
 					"a": [
-						"d'",
-						"e",
-						"a'",
-						"b",
-						"c'"
+						"D'",
+						"E",
+						"A'",
+						"B",
+						"C'"
 					],
-					"j": "A high d' is played on each offbeat of Oumou Sangare's wassoulou song \"Moussolou.\""
+					"j": "A high D' is played on each offbeat of Oumou Sangare's wassoulou song \"Moussolou.\""
 				},{
 					"q": "A jembe ensemble also features",
 					"a": [
@@ -8578,7 +8589,7 @@
 					],
 					"j": "Hugh Tracey recorded \"Kalagala Ebwembe\" at the Buganda royal court in 1952."
 				},{
-					"q": "In \"Kalagala Ebwembe\" the Omuanzi",
+					"q": "In \"Kalagala Ebwembe\" the Omunazi",
 					"a": [
 						"starts the song",
 						"introduces the mixer pattern",
@@ -8586,7 +8597,7 @@
 						"harmonizes the main melody",
 						"slows the song down"
 					],
-					"j": "\"Kalagala Ebwembe\" is an entaala song. It opens with the Omuanzi playing the <i>okunaga.</i>"
+					"j": "\"Kalagala Ebwembe\" is an entaala song. It opens with the Omunazi playing the <i>okunaga.</i>"
 				},{
 					"q": "The music of \"Kalagala Ebwembe\" does NOT",
 					"a": [
@@ -8624,7 +8635,7 @@
 						"Mande working class",
 						"Logooli middle class",
 						"Yoruba upper class",
-						"Shone working class"
+						"Shona working class"
 					],
 					"j": "Akhwani Safaa was an independent music club founded to perform for members of the Arab elite."
 				},{
@@ -8748,7 +8759,7 @@
 					],
 					"j": "The BaBenzele are a pygmy group in Central Africa. The recording of \"Hindewhu Solo\" features a member of this group."
 				},{
-					"q": "Which song did Watermelon Man excerpt\"?",
+					"q": "Which song did \"Watermelon Man\" excerpt?",
 					"a": [
 						"\"Hindewhu Solo\"",
 						"\"El Ward Gamil\"",
@@ -8771,7 +8782,7 @@
 					"q": "Which of the following songs does \"Hindewhu Solo\" MOST resemble?",
 					"a": [
 						"\"Song of Rejoicing after Returning from a Hunt\"",
-						"\"Wimowe\"",
+						"\"Mbube\"",
 						"\"Sai (Kwassa Kwassa)\"",
 						"\"N'Dobine\"",
 						"\"El Ward Gamil\""
@@ -9269,7 +9280,7 @@
 						"Many African countries did not permit record sales.",
 						"Record companies reported inflated sales figures."
 					],
-					"j": "Twentieth-century music sales figures in Africa in the cannot be used as an accurate indicator of artists' popularity. Many recordings were released on cassette and pirated."
+					"j": "Twentieth-century music sales figures in Africa cannot be used as an accurate indicator of artists' popularity. Many recordings were released on cassette and pirated."
 				},{
 					"q": "Jean \"Ty-Jean\" Acron drummed in",
 					"a": [
@@ -14657,11 +14668,11 @@
 				},{
 					"q": "Relative to sub-Saharan Africans, the average annual income of Europeans in the 1990s was approximately",
 					"a": [
-						"five times larger",
+						"forty times larger",
 						"ten times larger",
-						"fifty times larger",
+						"sixty times larger",
 						"one hundred times larger",
-						"three times larger"
+						"six times larger"
 					],
 					"j": "According to the Organization of African Unity, while the average annual income of Europeans is approximately $$20,000, those living in sub-Saharan Africa earn only about $$500 on an annual basis."
 				},{
