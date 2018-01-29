@@ -237,7 +237,7 @@
             box-shadow: .1em .2em #bbb;
         }
 
-        #next_question:hover, #next_question     {
+        #next_question:hover, #next_question:focus {
             box-shadow: .05em .1em #008ca1;
             top: .1em;
             left: .05em;
@@ -269,9 +269,10 @@
         #justification {
             font-family: "Passion One", Arial, sans-serif;
             font-size: 1.75em;
-            padding: 0 8vw 1.5rem;
+            padding: 0 8vw 2rem;
             text-align: center;
             color: #181818
+            margin-top: -.5rem;
         }
 
         #progress {
@@ -356,7 +357,8 @@
         #missed_questions .question {
             background: #fff;
             color: #181818;
-            padding: .4em;
+            padding: .4em 1.4em;
+            position: relative;
         }
 
         #missed_questions .incorrect {
@@ -375,7 +377,17 @@
 
         #missed_questions .question_container {
             margin: 0 auto .8em;
+            box-shadow: 0 .15em .2em 0 #888,
+                0 -.15em .2em 0 #888;
+        }
+
+        #missed_questions .question_container:first-child {
             box-shadow: 0 .15em .2em 0 #888;
+        }
+
+        #missed_questions .question_number {
+            position: absolute;
+            right: calc(100% - 1.4em);
         }
 
         #again {
@@ -728,9 +740,14 @@
                 clockTime = setInterval(function() {
                     if (clockRunning) {
                         var spanned = performance.now() - starttime + totaltime,
-                            minutes = Math.floor(spanned / 60000).toString(),
+                            hours = Math.floor(spanned / 60000 / 60).toString(),
+                            minutes = Math.floor(spanned / 60000 % 60).toString(),
                             seconds = Math.floor(spanned / 1000 % 60).toString();
-                        timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                        timer.innerText = (+hours ? hours + ':' : '') + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                        if (spanned - totaltime > 180000) {
+                            clockRunning = false;
+                            timer.innerText += ' (Paused)';
+                        }
                     }
                 }, 50)
                 function show(question) {
@@ -776,12 +793,13 @@
                             text.setAttribute('y', 69);
                             svg.appendChild(text);
                             var resultText = document.getElementById('result_text'),
-                                minutes = Math.floor(totaltime / 60000).toString(),
+                                hours = Math.floor(totaltime / 60000 / 60).toString(),
+                                minutes = Math.floor(totaltime / 60000 % 60).toString(),
                                 seconds = Math.floor(totaltime / 1000 % 60).toString(),
                                 millisecs = Math.floor(totaltime % 1000).toString(),
                                 review = document.getElementById('result_review'),
                                 missed = document.getElementById('missed_questions');
-                            resultText.innerHTML = (current - wrongAnswers.length) + ' of ' + current + ' Correct<br><span style="font-size:.9em">' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + '.' + (millisecs < 10 ? '00' + millisecs : millisecs < 100 ? '0' + millisecs : millisecs) + '</span>';
+                            resultText.innerHTML = (current - wrongAnswers.length) + ' of ' + current + ' Correct<br><span style="font-size:.9em">' + (+hours ? hours + ':' : '') + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + '.' + (millisecs < 10 ? '00' + millisecs : millisecs < 100 ? '0' + millisecs : millisecs) + '</span>';
                             if (wrongAnswers.length) {
                                 review.classList.remove('inactive');
                                 while (missed.lastElementChild) missed.removeChild(missed.lastElementChild);
@@ -790,7 +808,7 @@
                                     container.classList.add('question_container');
                                     var question = document.createElement('div');
                                     question.classList.add('question');
-                                    question.innerHTML = wrongAnswers[i][0].q;
+                                    question.innerHTML = '<div class="question_number">' + (questions.indexOf(wrongAnswers[i][0]) + 1) + '.</div>' + texToHTML(wrongAnswers[i][0].q);
                                     container.appendChild(question);
                                     var incorrect = document.createElement('div');
                                     incorrect.classList.add('incorrect');
@@ -868,12 +886,13 @@
                             }
                         });
                         div.addEventListener('click', function() {
-                            totaltime += performance.now() - starttime;
+                            totaltime += Math.min(performance.now() - starttime, 180000);
                             clockRunning = false;
                             this.finished = true;
-                            var minutes = Math.floor(totaltime / 60000).toString(),
+                            var hours = Math.floor(totaltime / 60000 / 60).toString(),
+                                minutes = Math.floor(totaltime / 60000 % 60).toString(),
                                 seconds = Math.floor(totaltime / 1000 % 60).toString();
-                            timer.innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                            timer.innerText = (+hours ? hours + ':' : '') + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
                             var siblings = this.parentNode.children;
                             if (this.correct) {
                                 this.classList.add('correct');
@@ -943,12 +962,13 @@
                                     text.setAttribute('y', 69);
                                     svg.appendChild(text);
                                     var resultText = document.getElementById('result_text'),
-                                        minutes = Math.floor(totaltime / 60000).toString(),
+                                        hours = Math.floor(totaltime / 60000 / 60).toString(),
+                                        minutes = Math.floor(totaltime / 60000 % 60).toString(),
                                         seconds = Math.floor(totaltime / 1000 % 60).toString(),
                                         millisecs = Math.floor(totaltime % 1000).toString(),
                                         review = document.getElementById('result_review'),
                                         missed = document.getElementById('missed_questions');
-                                    resultText.innerHTML = (questions.length - wrongAnswers.length) + ' of ' + questions.length + ' Correct<br><span style="font-size:.9em">' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + '.' + (millisecs < 10 ? '00' + millisecs : millisecs < 100 ? '0' + millisecs : millisecs) + '</span>';
+                                    resultText.innerHTML = (questions.length - wrongAnswers.length) + ' of ' + questions.length + ' Correct<br><span style="font-size:.9em">' + (+hours ? hours + ':' : '') + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + '.' + (millisecs < 10 ? '00' + millisecs : millisecs < 100 ? '0' + millisecs : millisecs) + '</span>';
                                     if (wrongAnswers.length) {
                                         review.classList.remove('inactive');
                                         while (missed.lastElementChild) missed.removeChild(missed.lastElementChild);
@@ -957,7 +977,7 @@
                                             container.classList.add('question_container');
                                             var question = document.createElement('div');
                                             question.classList.add('question');
-                                            question.innerHTML = wrongAnswers[i][0].q;
+                                            question.innerHTML = '<div class="question_number">' + (questions.indexOf(wrongAnswers[i][0]) + 1) + '.</div>' + texToHTML(wrongAnswers[i][0].q);
                                             container.appendChild(question);
                                             var incorrect = document.createElement('div');
                                             incorrect.classList.add('incorrect');
