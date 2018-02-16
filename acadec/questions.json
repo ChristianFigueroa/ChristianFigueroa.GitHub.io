@@ -8362,9 +8362,9 @@
 					"q": "How many beats compose the FIRST rhythmic cycle of &#8220;Konkoba?\"",
 					"a": [
 						"12",
-						"13",
 						"11",
-						"17",
+						"13",
+						"14",
 						"15"
 					],
 					"j": "There are two main rhythmic cycles in Toumani Diabate's &#8220;Konkoba.\" The first cycle has twelve beats."
@@ -8617,7 +8617,7 @@
 						"tree whistle",
 						"qaanuun"
 					],
-					"j": "The main instrument in &#8220;Kalagala Ebwembe\" is the entaala, a type of xylophone."
+					"j": "The main instrument in &#8220;Kalagala Ebwembe\" is the entaala, a type of xylophone. It's also called an amadinda outside of the royal court."
 				},{
 					"q": "Which of the following instruments does a takht ensemble include?",
 					"a": [
@@ -8627,7 +8627,7 @@
 						"kazoo",
 						"sitar"
 					],
-					"j": "The nay is a type of flute commonly found in takht ensembles. These ensembles helped develop the taarab style."
+					"j": "The nay is a type of flute commonly found in takht ensembles, along with &#145;uds (lutes), qaanuun (dulcimers), violins, and riqqs (tambourines). These ensembles helped develop the taarab style."
 				},{
 					"q": "For what audience did Akhwani Safaa sing?",
 					"a": [
@@ -8811,9 +8811,9 @@
 				},{
 					"q": "Which pitch does the second whistle in &#8220;Hindewhu Solo\" play?",
 					"a": [
-						"F-sharp",
+						"F&#9839;",
 						"E",
-						"A-flat",
+						"A&#9837;",
 						"C",
 						"D"
 					],
@@ -8827,7 +8827,7 @@
 						"aerophone",
 						"idiophone"
 					],
-					"j": "The mbira belongs to the lamellophone instrument family. They consist of lamellae."
+					"j": "The mbira belongs to the lamellophone instrument family. They consist of lamellae (prongs or tines)."
 				},{
 					"q": "How can a musician increase the resonance of a mbira?",
 					"a": [
@@ -9127,7 +9127,7 @@
 						"teaching method used for lamellophones",
 						"Yoruban musical vocabulary"
 					],
-					"j": "Tarab is the main goal of an Arab musical performance. Umm Kulthum infuse poetry with tarab."
+					"j": "Tarab is the main goal of an Arab musical performance. Umm Kulthum infused poetry with tarab."
 				},{
 					"q": "&#8220;El Ward Gamil\" originally appeared in a(n)",
 					"a": [
@@ -9167,7 +9167,7 @@
 						"rhythmic interlude",
 						"ray solo"
 					],
-					"j": "Umm Kulthum's &#8220;EL Ward Gamil\" opens with an orchestral introduction played in unison."
+					"j": "Umm Kulthum's &#8220;El Ward Gamil\" opens with an orchestral introduction played in unison."
 				},{
 					"q": "Which of the following lyrics does &#8220;El Ward Gamil\" feature?",
 					"a": [
@@ -9178,6 +9178,76 @@
 						"&#8220;here I am, executioner, I have freedom\""
 					],
 					"j": "&#8220;Let us go away from the blamers\" is a lyric in Umm Kulthum's &#8220;El Ward Gamil.\" This song originally appeared in a film."
+				},{
+					"q": "Which of the following was NOT a subclass of the Mande artisan social class?",
+					"a": [
+						"farmers",
+						"blacksmiths",
+						"leatherworkers",
+						"verbal and musical artisans",
+						"orators"
+					],
+					"j": "There are four subclasses in the Mande artisan class (<i>nyamakala</i>): blacksmiths (<i>numu</i>), leatherworkers (<i>garanke</i>), verbal and musical artisans (<i>jeli</i> or <i>jali</i>), and orators of genealogies and the Quran (<i>fune</i>)."
+				},{
+					"q": "Music from the kamalengoni PRIMARILY attracted what type of singers?",
+					"a": [
+						"female",
+						"religious",
+						"wealthy",
+						"hunters",
+						"young"
+					],
+					"j": "The kamalengoni (youth harp) primarily attracted female singers and gained popularity in the 1980s. Oumou Sangare features a kamalengoni in &#8220;Moussolou.\""
+				},{
+					"q": "Jembe drums are PRIMARILY associated with what group of people?",
+					"a": [
+						"blacksmiths",
+						"leatherworkers",
+						"hunters",
+						"farmers",
+						"jelis"
+					],
+					"j": "Jembe drums had no hereditary restriction (non-jelis can play them). They are associated with blacksmiths since they would have been the ones to make the iron tools for making the drum."
+				},{
+					"q": "Why was Buganda royal court music not heard from 1966 to 1993?",
+					"a": [
+						"The Buganda kingship was temporarily disrupted by a military coup.",
+						"Looting and destroying during British colonialism had made Bugandan instruments virtually nonexistent.",
+						"The thirty-fifth Bugandan kabaka had gotten rid of the royal court when he was made king.",
+						"Another music style became more popular.",
+						"It was outlawed by Europeans that remained after independence."
+					],
+					"j": "The Bugandan kingship had been overtaken in a coup by Milton Obote in 1966. The kingship (and the royal court) was finally restored in 1993 with the thirty-sixth kabaka."
+				},{
+					"q": "How many slats is the omukoonezi player allowed to play on the amadinda xylophone?",
+					"a": [
+						"2",
+						"1",
+						"3",
+						"4",
+						"5"
+					],
+					"j": "The omukoonezi is responsible for binding the parts of the first two players and can only play the top two slats of the xylophone."
+				},{
+					"q": "Which two materials are being extracted from and leading to conflicts in the Democratic Republic of the Congo?",
+					"a": [
+						"Cobalt and Coltan",
+						"Cobalt and Silicon",
+						"Coltan and Platinum",
+						"Silicon and Gold",
+						"Platinum and Cobalt"
+					],
+					"j": "Cobalt and Coltan are both used in electronics and are in high demand today, which has led some to clear forests in the DRC to mine more of the two minerals."
+				},{
+					"q": "Which of the following is NOT the name of a group of pygmies?",
+					"a": [
+						"Akan",
+						"Efe",
+						"Bongo",
+						"Mbuti",
+						"Twa"
+					],
+					"j": "The Efe, Asua, and Mbuti pygmies are the Eastern group, the Aka, Baka, and Bongo are the Western, and the Twa are the Southern. The Akan people, however, live in Ghana."
 				}
 			],
 			"Modern Music": [
@@ -9330,7 +9400,7 @@
 						"<i>Sai</i>",
 						"<i>Live!</i>"
 					],
-					"j": "Youssou N'Dour collaborated with British rock star Peter Gabriel on the album <i>So.</i>"
+					"j": "Youssou N'Dour collaborated with British rock star Peter Gabriel on the album <i>So</i>."
 				},{
 					"q": "Which musical group performs on &#8220;N'Dobine?\"",
 					"a": [
@@ -9482,7 +9552,7 @@
 					],
 					"j": "The Afrika Shrine refers to the courtyard of the Empire Hotel where afrobeat musician Fela Kuti performed."
 				},{
-					"q": "&#8220;I.T.T\"'s vocalist also sang in",
+					"q": "The vocalist of &#8220;I.T.T.\" also sang in",
 					"a": [
 						"&#8220;Coffin for the Head of State\"",
 						"&#8220;Kwame Nkrumah\"",
@@ -9490,9 +9560,9 @@
 						"&#8220;Rais Lebled\"",
 						"&#8220;Segala\""
 					],
-					"j": "Fela Kuti sang both &#8220;I.T.T\" and &#8220;Coffin for the Head of State.\" He is known for the afrobeat style."
+					"j": "Fela Kuti sang both &#8220;I.T.T.\" and &#8220;Coffin for the Head of State.\" He is known for the afrobeat style."
 				},{
-					"q": "The song &#8220;I.T.T\" condemns",
+					"q": "The song &#8220;I.T.T.\" condemns",
 					"a": [
 						"business corruption",
 						"political betrayal",
@@ -9550,7 +9620,7 @@
 						"family traditions",
 						"political loyalty"
 					],
-					"j": "Many African missionary groups used brass bands to introduce the concept of industrial time to African peoples."
+					"j": "Many African missionary groups used brass bands to introduce the concept of industrial time (measured by clocks) to African peoples."
 				},{
 					"q": "The Salvation Army's music was characterized by their",
 					"a": [
@@ -9681,6 +9751,76 @@
 						"<i>Kete</i>"
 					],
 					"j": "Hammer, the beatmaker in &#8220;Kwame Nkrumah,\" bases his pattern on a gankogui pattern from <i>Gahu.</i>"
+				},{
+					"q": "When did British record executives create the &#8220;world music\" genre?",
+					"a": [
+						"1980s",
+						"1950s",
+						"1960s",
+						"1990s",
+						"2000s"
+					],
+					"j": "In an effort to better market their catalogs of international music recordings, British record executives created the &#8220;world music\" genre in the 1980s."
+				},{
+					"q": "<i>Le vie est belle</i> (1987) is a film that has what type of basic plot?",
+					"a": [
+						"rags to riches",
+						"the quest",
+						"comedy",
+						"tragedy",
+						"overcoming the monster"
+					],
+					"j": "<i>Le vie est belle</i> is a rags-to-riches story that follows a Zairean singer and stars Papa Wembe, who also provided the music for the film."
+				},{
+					"q": "What does &#8220;Sai\" translate to in Lingala?",
+					"a": [
+						"&#8220;joy\"",
+						"&#8220;music\"",
+						"&#8220;love\"",
+						"&#8220;passion\"",
+						"&#8220;party\""
+					],
+					"j": "&#8220;Sai\" means &#8220;joy\" in the Lingala language. It's the name of Kanda Bongo Man's and Yancomba &#8220;Diblo\" Dibala's sixth album."
+				},{
+					"q": "The listening example &#8220;N'Dobine\" was recorded in which city?",
+					"a": [
+						"Buenos Aires, Argentina",
+						"Lima, Peru",
+						"Bogot&#225;, Columbia",
+						"Santiago, Chile",
+						"Quito, Ecuador"
+					],
+					"j": "&#8220;N'Dobine\" was recorded at a live concert in Buenos Aires on October 15, 1988. It was the final night of Amnesty International's <i>Human Rights Now!</i> six week tour."
+				},{
+					"q": "What was the original name of Fela Kuti's band?",
+					"a": [
+						"Koola Lobitos",
+						"Nigeria 70",
+						"Afrika 70",
+						"Super Etoile de Dakar",
+						"James Brown Band"
+					],
+					"j": "Fela's original band's name was Koola Lobitos. After touring (and getting stranded in) the U.S., he returned to Nigeria and changed the name to Nigeria 70 (and later to Afrika 70)."
+				},{
+					"q": "Which of the following countries is NOT a major rap center today?",
+					"a": [
+						"Nigeria",
+						"Ghana",
+						"Senegal",
+						"Kenya",
+						"South Africa"
+					],
+					"j": "Ghana, Senegal, Kenya, Tanzania, and South Africa are all major rap centers today."
+				},{
+					"q": "Which of the following is NOT a major element of hip hop?",
+					"a": [
+						"turntables",
+						"rappers",
+						"deejays",
+						"breakdancers",
+						"graffiti"
+					],
+					"j": "There were four elements intertwined in hip hop when it started: deejaying, emceeing (rapping), breakdancing, and graffiti tagging."
 				}
 			],
 			"Current Issues": [
@@ -9723,7 +9863,7 @@
 						"by holding it on the knee",
 						"by placing it in a gourd"
 					],
-					"j": "The gungon is a Dagbamba bass drum that can be made to buzz by stretching a leather chord across the skin."
+					"j": "The gungon is a Dagbamba bass drum that can be made to buzz by stretching a leather chord across the skin to make it sound like a snare drum."
 				},{
 					"q": "Which of the following instruments is a gourd rattle?",
 					"a": [
@@ -9753,7 +9893,7 @@
 						"melodically focused",
 						"melismatically vocal"
 					],
-					"j": "The atsimevu musician in an Ewe drumming ensemble has the greats freedom to improvise during a performance."
+					"j": "The atsimevu musician in an Ewe drumming ensemble has the great freedom to improvise during a performance."
 				},{
 					"q": "African tuning systems are MOST comparable to",
 					"a": [
@@ -9843,7 +9983,7 @@
 						"Lagos",
 						"Cairo"
 					],
-					"j": "The Organization of African Unity was the first Pan-African political organization including the former colonies. It was founded in Addis Ababa."
+					"j": "The Organization of African Unity was the first Pan-African political organization including the former colonies. It was founded in Addis Ababa, Ethiopia."
 				},{
 					"q": "Which of the following countries did NOT participate in FESMAN?",
 					"a": [
@@ -9873,7 +10013,7 @@
 						"modern instrumental music",
 						"choral and solo singing"
 					],
-					"j": "Senegal won the gold medal in drama at the First Pan-African Cultural Festival in Algiers."
+					"j": "Senegal won the gold medal in drama at the First Pan-African Cultural Festival in Algiers. Guinea won gold with its national ballet."
 				},{
 					"q": "Which kind of music did Sun Ra and his Arkestra perform?",
 					"a": [
@@ -10123,7 +10263,7 @@
 						"Umm Kulthum",
 						"Astrud Gilberto"
 					],
-					"j": "Salif Keita released &#8220;Tekere\" on his fifth album with Mango Records. It draw on Malian bala styles."
+					"j": "Salif Keita released &#8220;Tekere\" on his fifth album with Mango Records. It draws on Malian bala styles."
 				},{
 					"q": "&#8220;Tekere is BEST described as a",
 					"a": [
@@ -10184,6 +10324,66 @@
 						"Willie Colon"
 					],
 					"j": "Luaka Bop is a record label specializing in Brazilian music owned by David Byrne."
+				},{
+					"q": "By 2002, how many African nations had joined the African Union?",
+					"a": [
+						"53",
+						"54",
+						"21",
+						"34",
+						"22"
+					],
+					"j": "Fifty-three African nations were a part of the African Union by 2002. South Sudan became the fifty-fourth member in 2011."
+				},{
+					"q": "Where was the First Pan-African Conference held?",
+					"a": [
+						"London",
+						"Dakar",
+						"Paris",
+						"New York",
+						"Lagos"
+					],
+					"j": "The First Pan-African Conference was held in London in 1900 as a response to the Berlin Conference."
+				},{
+					"q": "What language did the FESMAN acronym come from?",
+					"a": [
+						"French",
+						"Wolof",
+						"English",
+						"Akan",
+						"Yoruba"
+					],
+					"j": "FESMAN 1 was held in Senegal, a French-speaking country. FESMAN stands for Festival Mondiale des Arts N&#233;gres."
+				},{
+					"q": "The Second World Black and African Festival of Arts and Culture (FESTAC) was the successor of which other music festival?",
+					"a": [
+						"First World Festival of Negro Arts",
+						"First Pan-African Cultural Festival",
+						"First World Black and African Festival of Arts and Culture",
+						"First World Black Arts Festival",
+						"First World Festival of Pan-African Arts and Culture"
+					],
+					"j": "FESTAC (Lagos, 1977) was considered a successor of the First World Festival of Negro Arts (FESMAN) (Dakar, 1966)."
+				},{
+					"q": "What percent of FESMAN 3 performances were national ensembles?",
+					"a": [
+						"7%",
+						"25%",
+						"13%",
+						"37%",
+						"30%"
+					],
+					"j": "Only 7% of the performances at FESMAN 3 were national ensembles, compared to the 25% at the original FESMAN 1. The drop shows the loss of relevance national ensembles had comapred to immediate post-colonial times."
+				},{
+					"q": "Which of the following is NOT a Rastafari practice?",
+					"a": [
+						"calling for their return to Uganda",
+						"practicing a vegetarian diet",
+						"letting their hair grow out",
+						"using marijuana for spiritual purposes",
+						"rejecting materialism"
+					],
+					"j": "Rastas call for their return to Ethiopia (Zion), where Haile Selassie I was crowned as emperor."
 				}
 			]
 		},
