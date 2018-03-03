@@ -113,7 +113,7 @@
 						"They both created art primarily featuring animals.",
 						"They both promoted atheism within their empires."
 					],
-					"j": "Both the Sumerians and Babylonians had &#8220;Neo\" cultures, where they reestablished after a period of defeat. The Neo-Sumerians defeated the Guti and the Neo Babylonians defeated the Assyrians."
+					"j": "Both the Sumerians and Babylonians had &#8220;Neo\" cultures, where they reestablished after a period of defeat. The Neo-Sumerians defeated the Guti and the Neo-Babylonians defeated the Assyrians."
 				},{
 					"q": "Which of the following statements ACCURATELY describes Tutankhamun's burial mask?",
 					"a": [
@@ -505,6 +505,16 @@
 						"pottery"
 					],
 					"j": "Alexander Calder created mobiles which could be moved by wind. He hung forms from wire to make the mobiles."
+				},{
+					"q": "Slip is used in the creation of",
+					"a": [
+						"pottery",
+						"collages",
+						"sculptures",
+						"mobiles",
+						"paintings"
+					],
+					"j": "Slip is liquid clay used to join two pieces of solid clay. It's used to create slab-built pots."
 				}
 			],
 			"Southern and Eastern Africa": [
@@ -771,13 +781,13 @@
 				},{
 					"q": "Which type of patterning occurs on the back of the selected Lydenburg Head?",
 					"a": [
-						"crosshatching",
+						"cross hatching",
 						"hatching",
 						"herringbone",
 						"chevron",
 						"checkerboard"
 					],
-					"j": "The back of the selected Lydenburg Head has panels of crosshatching decoration. The front has hatching in various directions."
+					"j": "The back of the selected Lydenburg Head has panels of cross hatching decoration. The front has hatching in various directions."
 				},{
 					"q": "How were the facial features of the selected Lydenburg Head created?",
 					"a": [
@@ -1511,6 +1521,36 @@
 						"pillars"
 					],
 					"j": "The Royal Palace of Foumban has Islamic flourishes. The structure resembles a medieval chateau."
+				},{
+					"q": "During a ritual, the <i>nkondi</i> would wear a hat made of",
+					"a": [
+						"straw",
+						"wood",
+						"stone",
+						"fiber",
+						"leaves"
+					],
+					"j": "Both the priest and the <i>nkondi</i> would wear a straw hat and a beard during a ritual."
+				},{
+					"q": "Reliquaries are LEAST likely to have remains from what type of person?",
+					"a": [
+						"hunters",
+						"artists",
+						"fertile women",
+						"village founders",
+						"warriors"
+					],
+					"j": "Reliquaries held the remains of important people, like leaders, courageous warriors, village founders, artists or superior craft workers, and especially fertile women."
+				},{
+					"q": "Reliquaries are used in which type of event?",
+					"a": [
+						"initiation rituals",
+						"weddings",
+						"circumcision ceremonies",
+						"judicial hearings",
+						"seasonal festivals"
+					],
+					"j": "Along with being used to communicate with ancestors, reliquaries were also used in initiation rituals to introduce the youth to the ancestors."
 				}
 			],
 			"Western Africa": [
@@ -1741,7 +1781,7 @@
 						"Oni",
 						"Orishanla",
 						"Ogun",
-						"Oba"
+						"Olodumare"
 					],
 					"j": "According to Yoruba mythology, the god Oduduwa created the land on which the Ife established. Oduduwa also became the ancestor of the first Yoruba king."
 				},{
@@ -2014,6 +2054,26 @@
 						"black"
 					],
 					"j": "The selected kente cloth features flat orange squares of fabric toward the top of the illustration. They create a horizontal emphasis, distinct from the rest of the cloth."
+				},{
+					"q": "Which of the following articles of clothing appear on the six figures on the selected Nok sculpture?",
+					"a": [
+						"necklace",
+						"belt",
+						"bracelet",
+						"shoes",
+						"mask"
+					],
+					"j": "Each of the six figures on the selected Nok sculpture are wearing beaded necklaces."
+				},{
+					"q": "Traces of which color can be found on <i>Brass Head</i>?",
+					"a": [
+						"red",
+						"gold",
+						"silver",
+						"blue",
+						"green"
+					],
+					"j": "<i>Brass Head</i> has visible traces of red and black paint on its crown, and red and white paint on its face."
 				}
 			],
 			"Contemporary African Art": [
@@ -2517,6 +2577,16 @@
 						"the United Kingdom"
 					],
 					"j": "El Anatsui was born in 1944 in Ghana. He continues to work in the country today."
+				},{
+					"q": "What is the title of the series to which <i>Felix in Exile</i> belongs?",
+					"a": [
+						"<i>Drawings for Projection</i>",
+						"<i>Drawings for Redemption</i>",
+						"<i>Drawings for Justice</i>",
+						"<i>Drawings for Equality</i>",
+						"<i>Drawings for Acceptance</i>"
+					],
+					"j": "<i>Felix in Exile</i> is the fifth film in a nine-part animation series titled <i>Drawings for Projection</i>."
 				}
 			]
 		},
