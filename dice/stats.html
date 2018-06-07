@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title>Dice Statistics</title>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-91403443-1', 'auto');
+        ga('send', 'pageview');</script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto|Share+Tech+Mono" rel="stylesheet" type="text/css">
+    <style>
+        html, body {
+            margin: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .theme_light {
+            background-color: #FFF;
+        }
+
+        .theme_dark {
+            background-color: #234;
+        }
+
+        .window {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .window.active {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #results.active {
+            display: block;
+        }
+
+        .theme_light #results {
+            background: #FFF;
+        }
+
+        .theme_dark #input,
+        .theme_dark #loading {
+            background: #192A3B;
+        }
+
+        #input_container,
+        #loading_container {
+            padding: 1em;
+            width: 48em;
+            min-width: calc(50vw - 2em);
+            max-width: calc(95vw - 2em);
+            margin: auto;
+            border-radius: 1em;
+        }
+
+        .theme_light #input_container,
+        .theme_light #loading_container {
+            box-shadow: 0 0 0 1px #DDD,
+                0 0 .5em 0 #CCC;
+        }
+
+        .theme_dark #input_container,
+        .theme_dark #loading_container {
+            box-shadow: 0 0 0 1px #567,
+                0 0 .5em 0 #567;
+            background-color: #234;
+        }
+
+        #input_text,
+        #loading_text {
+            font-family: "Roboto Slab", sans-serif;
+            text-align: center;
+            width: calc(100% - 2em);
+            padding: .2em 1em;
+            margin: 0 auto 1em;
+            font-size: 1.5em;
+        }
+
+        .theme_light #input_text,
+        .theme_light #loading_text {
+            color: #345;
+        }
+
+        .theme_dark #input_text,
+        .theme_dark #loading_text {
+            color: #BCD;
+        }
+
+        #input {
+            border-width: 1px;
+            border-style: solid;
+            width: 31.2em;
+            min-width: calc(50vw - 2.4em);
+            max-width: calc(95vw - 2.4em);
+            padding: .3em .4em;
+            font-family: "Share Tech Mono", Consolas, Monaco, Andale Mono, "Courier New", Courier, monospace;
+            margin: auto;
+            border-radius: .25em;
+            font-size: 1.25em;
+        }
+
+        #loading_bar_container {
+            border-width: 1px;
+            border-style: solid;
+            width: 40em;
+            min-width: calc(50vw - 2em);
+            max-width: calc(95vw - 2em);
+            margin: auto;
+            border-radius: .25em;
+        }
+
+        .theme_light #loading_bar_container {
+            border-color: #DDD;
+        }
+
+        .theme_dark #loading_bar_container {
+            border-color: #567;
+        }
+
+        #loading_bar {
+            height: 1.5em;
+            background-color: #03A9D4;
+            width: 0;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: Roboto, sans-serif;
+            font-size: 1em;
+            position: relative;
+            outline: 0;
+            border-radius: .25em;
+            border-style: solid;
+            border-width: 1px;
+            padding: .2em .5em;
+        }
+
+        .theme_light button {
+            color: #345;
+            background: #FFF;
+            border-color: #DDD;
+        }
+
+        .theme_light button:hover,
+        .theme_light button:focus {
+            background-color: #F0F0F0;
+        }
+
+        .theme_dark button {
+            color: #FFF;
+            background: #234;
+            border-color: #567;
+        }
+
+        .theme_dark button:hover,
+        .theme_dark button:focus {
+            background-color: #456;
+        }
+
+        .theme_light button:active,
+        .theme_dark button:active,
+        button.main {
+            background-color: #03A9D4;
+            border-color: #0288D1;
+            color: #FFF;
+        }
+
+        button.main:hover,
+        button.main:focus,
+        button.main:active {
+            background-color: #0288D1;
+            border-color: #1565C0;
+        }
+
+        #submit,
+        #cancel {
+            display: block;
+            margin: auto;
+            font-size: 1.3em;
+            margin-top: .7em;
+        }
+
+        span.ws_sp,
+        span.ws_tb {
+            display: inline-block;
+            white-space: pre;
+        }
+
+        span.ws_sp {
+            width: 1ch;
+        }
+
+        span.ws_tb {
+            width: 4ch;
+        }
+
+        span.ws_sp:before {
+            content: "·";
+            position: absolute;
+        }
+
+        span.ws_tb:before {
+            content: "····";
+            position: absolute;
+        }
+
+        #error_text {
+            display: none;
+            font-family: Roboto, sans-serif;
+            font-size: 1.1em;
+            text-align: center;
+            margin: .3em 0 0;
+        }
+
+        .theme_light #error_text {
+            color: #F00;
+        }
+
+        .theme_dark #error_text {
+            color: #FF4D4D;
+        }
+
+        #results_up,
+        #results_down {
+            height: 50%;
+            width: 100%;
+        }
+
+        #results_up {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(50vh - 1px);
+        }
+
+        .theme_light #results_up {
+            border-bottom: 1px solid #707070;
+        }
+
+        .theme_dark #results_up {
+            border-bottom: 1px solid #909090;
+        }
+
+        #prob_container {
+            min-width: 17em;
+            max-width: 17em;
+            padding: 1.5em 1em;
+            font-family: Roboto, sans-serif;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .theme_light #prob_container,
+        .theme_light #stats {
+            color: #345;
+        }
+
+        .theme_dark #prob_container,
+        .theme_dark #stats {
+            color: #BCD;
+        }
+
+        #prob_total,
+        #prob_hover {
+            display: none;
+            vertical-align: middle;
+        }
+
+        #prob_total {
+            font-size: 1.25em;
+        }
+
+        #prob_total_text {
+            font-size: 1.25em;
+        }
+
+        #prob_of_text,
+        #prob_extra {
+            font-size: 1.5em;
+        }
+
+        #prob_total_num,
+        #prob_percent {
+            font-size: 3em;
+        }
+
+        #graph {
+            margin: auto;
+            position: relative;
+        }
+
+        #graph.error div {
+            display: none;
+        }
+
+        #graph.success::before {
+            content: "";
+        }
+
+        #graph::before {
+            content: "Loading graph...";
+            position: absolute;
+            font-family: Roboto, sans-serif;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        #graph.error::before {
+            content: "Graph too large to display";
+            font-size: 7vh;
+        }
+
+        .theme_light #graph::before {
+            color: #999;
+        }
+
+        .theme_dark #graph::before {
+            color: #789;
+        }
+
+        #results_down {
+            font-family: Roboto, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            justify-content: space-around;
+        }
+
+        .modebar {
+            display: none !important;
+        }
+
+        #stats_container {
+            width: calc(100% - 19em);
+            min-width: 50vw;
+            flex-grow: 1;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .theme_light #stats_container {
+            box-shadow: -1px -1px 0 0 #707070;
+        }
+
+        .theme_dark #stats_container {
+            box-shadow: -1px -1px 0 0 #909090;
+        }
+
+        #stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 1em;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        #stats div {
+            width: 16em;
+            padding: .1em .3em;
+        }
+
+        #new {
+            margin: auto;
+            font-size: 1.25em;
+            margin-bottom: 1em;
+        }
+
+        #stats_container table {
+            height: 100%;
+        }
+    </style>
+    <script type='text/javascript' src='dieroller.js'></script>
+    <script type='text/javascript' src='syntax.js'></script>
+    <script type='text/javascript' src='plotly.min.js'></script>
+</head>
+<body>
+    <div id='input_win' class='window'>
+        <div id='input_container'>
+            <div id='input_text'>Enter a roll to get the statistics of.</div>
+            <div id='input' contenteditable='true'></div>
+            <div id='error_text'>The roll you entered contains errors.</div>
+            <button id='submit'>Submit</button>
+        </div>
+    </div>
+    <div id='loading' class='window'>
+        <div id='loading_container'>
+            <div id='loading_text'>Calculating total&hellip;</div>
+            <div id='loading_bar_container'>
+                <div id='loading_bar'></div>
+            </div>
+            <button id='cancel'>Cancel</button>
+        </div>
+    </div>
+    <div id='results' class='window'>
+        <div id='results_up'>
+            <div id='graph' style='height:90%;width:calc(100% - 5vw)'></div>
+        </div>
+        <div id='results_down'>
+            <div id='prob_container'>
+                <div id='prob_total'>
+                    <div id='prob_total_num'></div>
+                    <div id='prob_total_text'>total possibilities</div>
+                </div>
+                <div id='prob_hover'>
+                    <div id='prob_of_text'></div>
+                    <div id='prob_percent'></div>
+                    <div id='prob_extra'></div>
+                </div>
+            </div>
+            <div id='stats_container'>
+                <table>
+                    <td>
+                        <div id='stats'></div>
+                        <button id='new' class='main'>Analyze another roll</button>
+                    </td>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript'>
+        !function() {
+            "use strict";
+            document.body.className = "theme_" + dieroller.theme.type;
+
+            var probTotalText = document.getElementById("prob_total_text"),
+                probTotalNum = document.getElementById("prob_total_num"),
+                loadingText = document.getElementById("loading_text"),
+                probPercent = document.getElementById("prob_percent"),
+                probOfText = document.getElementById("prob_of_text"),
+                loadingBar = document.getElementById("loading_bar"),
+                errorText = document.getElementById("error_text"),
+                probTotal = document.getElementById("prob_total"),
+                probHover = document.getElementById("prob_hover"),
+                probExtra = document.getElementById("prob_extra"),
+                inputWin = document.getElementById("input_win"),
+                loading = document.getElementById("loading"),
+                results = document.getElementById("results"),
+                submit = document.getElementById("submit"),
+                stats = document.getElementById("stats"),
+                input = document.getElementById("input"),
+                graph = document.getElementById("graph"),
+                worker, distribution, distributionArray;
+
+            input.style.backgroundColor = dieroller.theme.background || "";
+            input.style.color = dieroller.theme.text || "";
+            input.style.borderColor = dieroller.theme.separator || "";
+
+            document.getElementById("new").addEventListener("click", function() {
+                loading.className = "window";
+                results.className = "window";
+                inputWin.className = "window active";
+                location.replace("#");
+                input.innerText = "";
+                input.isInvalid = false;
+                input.focus();
+            });
+
+            input.addEventListener("input", function() {
+                var selection = document.getSelection();
+                this.selectionDirection = "forward";
+
+                if (!this.innerText || !this.firstChild || this.firstChild.nodeName == "BR") {
+                    this.selectionStart = this.selectionEnd = 0;
+                } else if (selection.anchorNode.parentNode == this) {
+                    this.selectionStart = this.selectionEnd = selection.anchorOffset;
+                } else {
+                    var anchorOffset = selection.anchorOffset,
+                        anchorNode = selection.anchorNode;
+
+                    if (anchorNode.parentNode.parentNode.parentNode == this) {
+                        anchorNode.parentNode.parentNode.insertBefore(anchorNode, anchorNode.parentNode);
+                        anchorNode.parentNode.removeChild(anchorNode.nextSibling);
+                    }
+
+                    while (anchorNode.parentNode.firstChild != anchorNode) {
+                        anchorOffset += anchorNode.previousSibling.data.length;
+                        anchorNode.data = anchorNode.previousSibling.data + anchorNode.data;
+                        anchorNode.parentNode.removeChild(anchorNode.previousSibling);
+                    }
+
+                    anchorNode = selection.anchorNode;
+                    if (anchorNode.nodeName == "SPAN") anchorNode = anchorNode.firstChild;
+
+                    var totalOffset = 0;
+                    for (var i = Array.prototype.indexOf.call(this.children, anchorNode.parentNode) - 1; i >= 0; i--) {
+                        totalOffset += this.children[i].innerText.length;
+                    }
+                    this.selectionStart = this.selectionEnd = totalOffset + anchorOffset;
+                }
+
+                this.value = this.innerText.replace(/ /g, "\u00A0").replace(/\n/g, "");
+
+                var oldCharLength = parseInt(this.style.width.substring(12)),
+                    newCharLength = Math.max.apply(Math, this.value.split("\n").map(function(line) {
+                    return line.length;
+                }));
+
+                this.innerText = "";
+                var roll = syntax.parse(this.value),
+                    renderedText = syntax.render(roll);
+                this.isInvalid = roll.invalid;
+                if (roll.invalid) {
+                    errorText.innerText = "The roll you entered contains errors.";
+                } else if (!this.value.trim()) {
+                    errorText.innerText = "The roll you entered cannot be empty.";
+                } else {
+                    errorText.style.display = "";
+                }
+                while (renderedText.firstChild) {
+                    this.appendChild(renderedText.firstChild);
+                }
+
+                var range = document.createRange();
+                if (!this.firstChild) {
+                    this.appendChild(document.createTextNode(""));
+                    range.setStart(this.firstChild, 0);
+                    range.setEnd(this.firstChild, 0);
+                } else {
+                    for (var i = 0, offset = 0; i < this.children.length && offset + this.children[i].innerText.length < this.selectionStart; offset += this.children[i++].innerText.length) {}
+                    range.setStart(this.children[i].firstChild, this.selectionStart - offset);
+                    for (var i = 0, offset = 0; offset + this.children[i].innerText.length < this.selectionEnd && i < this.children.length; offset += this.children[i++].innerText.length) {}
+                    range.setEnd(this.children[i].firstChild, this.selectionEnd - offset);
+                }
+                selection.removeAllRanges();
+                selection.addRange(range);
+            });
+
+            input.addEventListener("keydown", function(e) {
+                if (e.key == "Enter" || e.keyCode == 13) {
+                    submit.click();
+                    e.preventDefault();
+                }
+            });
+
+            submit.addEventListener("click", function() {
+                if (input.isInvalid) {
+                    errorText.innerText = "The roll you entered contains errors.";
+                    errorText.style.display = "block";
+                } else if (!input.value.trim()) {
+                    errorText.innerText = "The roll you entered cannot be empty.";
+                    errorText.style.display = "block";
+                } else {
+                    if (decodeURIComponent(location.hash.substring(1)) == input.value) run();
+                    location.replace("#" + input.value);
+                }
+            });
+
+            document.getElementById("cancel").addEventListener("click", function() {
+                if (worker) worker.terminate();
+                loading.className = "window";
+                results.className = "window";
+                inputWin.className = "window active";
+                location.replace("#");
+                input.innerText = "";
+                input.isInvalid = false;
+                input.focus();
+            });
+
+            // If the page is loaded with a hash already pointing to a roll, start immediately
+            // evaluating it without prompting for an input.
+            if (location.hash.substring(1)) {
+                run();
+            } else {
+                inputWin.className = "window active";
+            }
+
+            // If the hash changes in the URL, treat it as a new input to evaluate.
+            window.addEventListener("hashchange", run);
+            function run() {
+                // This is where the evaluating starts. If the URL has anything in its hash, it
+                // should evaluate it.
+                if (location.hash.substring(1)) {
+                    var roll = syntax.parse(decodeURIComponent(location.hash.substring(1)));
+                    if (!roll.invalid) {
+                        inputWin.className = "window";
+                        results.className = "window";
+                        loading.className = "window active";
+                        roll = syntax.parse(syntax.reform(roll));
+                        roll = roll.filter(function(token) {
+                            return token.type != "whitespace";
+                        });
+
+                        if (roll.length) {
+                            var totalText;
+                            loadingText.innerText = "Calculating total\u2026";
+                            loadingBar.style.width = "";
+
+                            if (worker) worker.terminate();
+                            worker = new Worker("stats.js");
+                            worker.addEventListener("message", checkNumberListener);
+                            worker.postMessage({
+                                roll: roll,
+                                savedRolls: dieroller.savedRolls,
+                                functionNames: dieroller.functionNames
+                            });
+
+                            function checkNumberListener(e) {
+                                totalText = Plotly.d3.format(",.4s")(e.data);
+                                loadingText.innerText = "0 of " + totalText + " possibilities checked";
+                                loadingBar.style.width = "";
+                                worker.removeEventListener("message", checkNumberListener);
+                                worker.addEventListener("message", progressListener);
+                            }
+
+                            function progressListener(e) {
+                                if (e.data.done) {
+                                    worker.terminate();
+                                    worker = null;
+
+                                    loadingText.innerText = Plotly.d3.format(".4s")(e.data.progress) + " of " + totalText + " possibilities checked";
+                                    loadingBar.style.width = "100%";
+
+                                    inputWin.className = "window";
+                                    loading.className = "window";
+                                    results.className = "window active";
+
+                                    probTotalNum.innerText = totalText;
+                                    probTotalText.innerText = "total possibilit" + (e.data.total == "1" ? "y" : "ies");
+                                    probHover.style.display = "";
+                                    probTotal.style.display = "block";
+
+                                    distribution = e.data.distribution;
+                                    distributionArray = [];
+                                    for (var key in distribution) {
+                                        distributionArray = distributionArray.concat(new Array(+distribution[key]).fill(key));
+                                    }
+
+                                    var _stats = {};
+
+                                    graph.className = "";
+                                    Plotly.purge(graph);
+                                    setTimeout(function() {
+                                        newGraph(e.data.distribution, e.data.total);
+                                    }, 10);
+
+                                    var sortedKeys = Object.keys(distribution).sort(function(a, b) {
+                                        return a - b;
+                                    });
+                                    _stats.Minimum = +sortedKeys[0];
+                                    _stats.Maximum = +sortedKeys[sortedKeys.length - 1];
+                                    _stats.Midrange = (_stats.Minimum + _stats.Maximum) / 2;
+                                    _stats.Range = _stats.Maximum - _stats.Minimum;
+                                    _stats.Sum = Plotly.d3.round(distributionArray.reduce(function(a, b) {
+                                        return +a + +b;
+                                    }, 0), 4);
+                                    _stats["Mean (μ)"] = Plotly.d3.round(_stats.Sum / e.data.total, 4);
+                                    _stats.Median = Plotly.d3.round((function() {
+                                        var mid = (distributionArray.length - 1) / 2;
+                                        if (mid == Math.floor(mid)) return +distributionArray[mid];
+                                        return (+distributionArray[Math.floor(mid)] + +distributionArray[Math.ceil(mid)]) / 2;
+                                    })(), 4);
+                                    _stats.Mode = (function() {
+                                        var max = 0, modes;
+                                        for (var key in distribution) {
+                                            if (distribution[key] > max) {
+                                                max = +distribution[key];
+                                                modes = [+key];
+                                            } else if (distribution[key] == max) {
+                                                modes.push(+key);
+                                            }
+                                        }
+                                        return modes.sort(function(a, b) {
+                                            return a - b;
+                                        });
+                                    })();
+                                    _stats["Variance (σ²)"] = (function() {
+                                        var squares = [];
+                                        for (var i = distributionArray.length - 1; i >= 0; i--) {
+                                            squares.push(Math.pow(distributionArray[i] - _stats["Mean (μ)"], 2));
+                                        }
+                                        return Plotly.d3.round(squares.reduce(function(a, b) {
+                                            return a + b
+                                        }) / squares.length, 4);
+                                    })();
+                                    _stats["Standard Deviation (σ)"] = Plotly.d3.round(Math.sqrt(_stats["Variance (σ²)"]), 4);
+
+                                    var nameList = ["Minimum", "Midrange", "Maximum", "Range", "Mean (μ)" ,"Median", "Mode", "Sum", "Variance (σ²)", "Standard Deviation (σ)"];
+                                    stats.innerHTML = "";
+                                    for (var i = 0; i < 10; i++) {
+                                        var div = document.createElement("div");
+                                        if (Array.isArray(_stats[nameList[i]])) {
+                                            var str = "", j = 0, n = 0;
+                                            while (n < 42 && _stats[nameList[i]][j]) {
+                                                var current = _stats[nameList[i]][j];
+                                                current = Plotly.d3.format(",")(current);
+                                                if (", " + current > 42) break;
+                                                str += ", " + current;
+                                                n += current.length + 2;
+                                                j++;
+                                            }
+                                            if (!str) {
+                                                str = ", " + _stats[nameList[0]];
+                                                j = 1;
+                                            }
+                                            if (j != _stats[nameList[i]].length) {
+                                                str += " + " + (_stats[nameList[i]].length - j) + " more";
+                                            }
+                                            str = str.substring(2);
+                                            div.innerText = nameList[i] + " = " + str;
+                                        } else {
+                                            div.innerText = nameList[i] + " = " + Plotly.d3.format(",")(_stats[nameList[i]]);
+                                        }
+                                        stats.appendChild(div);
+                                    }
+                                } else {
+                                    var progressStr = Plotly.d3.format("s")(e.data.progress);
+                                    progressStr = progressStr.replace(/^(\d+)(?=M|B|T|q|Q|s|S)/, "$1.0").replace(/(\.\d+)(?=M|B|T|q|Q|s|S)/, "$100").replace(/(\.\d{3})\d+/, "$1");
+                                    loadingText.innerText = progressStr + " of " + totalText + " possibilities checked";
+                                    loadingBar.style.width = e.data.progress / e.data.total * 100 + "%";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener("resize", function() {
+                Plotly.Plots.resize(graph);
+            });
+
+            // This function creates a new graph from a distribution JSON object.
+            function newGraph(dist, possibilities) {
+                var keys = Object.keys(dist).sort(function(a,b) {
+                        return a - b;
+                    }),
+                    x = keys.map(function(a) {
+                        return +a;
+                    }),
+                    y = [];
+                for (var i = Math.ceil(+keys[0]), l = +keys[keys.length - 1]; i <= l; i++) {
+                    x.push(i);
+                }
+                x = x.filter(function(number, index) {
+                    return x.indexOf(number) == index;
+                }).sort(function(a, b) {
+                    return a - b;
+                }).map(function(number) {
+                    return Plotly.d3.round(number, 4);
+                });
+                for (var i = 0, l = x.length; i < l; i++) {
+                    y.push(dist[x[i]] || "0");
+                }
+                var color1 = dieroller.theme.type == "light" ? "#000" : "#FFF",
+                    color2 = dieroller.theme.type == "light" ? "#BCD" : "#89A";
+
+                try {
+                    Plotly.plot(graph, [{
+                        x: x,
+                        y: y,
+                        type: "bar",
+                        marker: {
+                            color: "#03A9D4"
+                        }
+                    }], {
+                        margin: {
+                            t: 5,
+                            r: 25,
+                            b: 24,
+                            l: 40
+                        },
+                        font: {
+                            family: "Roboto, sans-serif",
+                            size: 14
+                        },
+                        paper_bgcolor: "transparent",
+                        plot_bgcolor: "transparent",
+                        xaxis: {
+                            tickcolor: color1,
+                            tickfont: {
+                                color: color1
+                            },
+                            tickformat: ",.4r",
+                            linecolor: color1,
+                            fixedrange: true
+                        },
+                        yaxis: {
+                            tickcolor: color1,
+                            tickfont: {
+                                color: color1
+                            },
+                            linecolor: color1,
+                            tickformat: ".4s",
+                            gridcolor: color2,
+                            fixedrange: true
+                        },
+                        bargap: 0
+                    });
+                    graph.className += " success";
+                    if (!graph.hoverable) {
+                        graph.hoveringBar = null;
+                        graph.on("plotly_hover", function(e) {
+                            probOfText.innerText = "Probability of Rolling " + e.points[0].x;
+                            var percent = Plotly.d3.round(e.points[0].y / possibilities * 100, 3);
+                            probPercent.innerText = e.points[0].y == possibilities ? "100%" :
+                                e.points[0].y == 0 ? "0%" :
+                                percent == 100 ? ">99.999%" :
+                                percent == 0 ? "<0.001%" :
+                                percent + "%";
+                            probExtra.innerText = Plotly.d3.format(",")(e.points[0].y) + " / " + Plotly.d3.format(",")(possibilities);
+                            probTotal.style.display = "";
+                            probHover.style.display = "block";
+                            graph.hoveringBar = document.querySelector(".point path[data-x-value=\"" + e.points[0].x + "\"]");
+                            if (graph.hoveringBar) graph.hoveringBar.style.fill = "#0091BC";
+                        });
+                        graph.on("plotly_unhover", function() {
+                            if (graph.hoveringBar) graph.hoveringBar.style.fill = "#03A9D4";
+                            graph.hoveringBar = null;
+                            probHover.style.display = "";
+                            probTotal.style.display = "block";
+                        });
+                        document.addEventListener("mouseup", function(e) {
+                            if (graph.hoveringBar) graph.hoveringBar.style.fill = "#03A9D4";
+                            graph.hoveringBar = null;
+                            probHover.style.display = "";
+                            probTotal.style.display = "block";
+                        });
+                    }
+                } catch (e) {
+                    graph.className = "error";
+                }
+            }
+        }();
+    </script>
+</body>
+</html>
