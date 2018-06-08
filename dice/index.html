@@ -3,7 +3,19 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>Die Roller &#183; Create, Edit, and Save Custom Dice Rolls</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/dice/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/dice/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/dice/favicon-16x16.png">
+    <link rel="manifest" href="/dice/site.webmanifest">
+    <link rel="mask-icon" href="/dice/safari-pinned-tab.svg" color="#00aba9">
+    <link rel="shortcut icon" href="/dice/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Die Roller">
+    <meta name="application-name" content="Die Roller">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="/dice/browserconfig.xml">
+    <meta name="theme-color" content="#fafafa">
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -21,6 +33,7 @@
             height: 100vh;
             width: 100%;
             font-size: 0;
+            display: flex;
         }
 
         #main > * {
@@ -704,6 +717,10 @@
         }
 
         @media (max-aspect-ratio: 1/1) {
+            #main {
+                flex-direction: column;
+            }
+
             #left {
                 width: calc(100% - 2em);
                 height: calc(50% - 3em);
@@ -739,9 +756,9 @@
             #slider_y {
                 display: block;
                 position: absolute;
-                top: calc(50% - .2em - .5px);
+                top: calc(50vh - 1vh - .5px);
                 left: 0;
-                height: .4em;
+                height: 2vh;
                 width: 100%;
                 cursor: ns-resize;
                 z-index: 1;
@@ -1039,10 +1056,10 @@
                     document.getSelection().removeAllRanges();
                 } else if (sliderY.activated) {
                     var percent = Math.max(15, Math.min(85, Math.round(e.clientY / window.innerHeight * 10000) / 100));
-                    sliderY.style.top = "calc(" + percent + "% - 0.2em - 0.5px)";
-                    left.style.height = "calc(" + percent + "% - 3em)";
+                    sliderY.style.top = "calc(" + percent - 1 + "vh - 0.5px)";
+                    left.style.height = "calc(" + percent + "vh - 3em)";
                     left.style.width = "";
-                    right.style.height = 100 - percent + "%";
+                    right.style.height = 100 - percent + "vh";
                     right.style.width = "";
                     document.getSelection().removeAllRanges();
                 }
@@ -1057,11 +1074,13 @@
                     right.style.height = "";
                     document.getSelection().removeAllRanges();
                 } else if (sliderY.activated) {
+                    e.stopPropagation();
+                    e.preventDefault();
                     var percent = Math.max(15, Math.min(85, Math.round(e.touches[0].clientY / window.innerHeight * 10000) / 100));
-                    sliderY.style.top = "calc(" + percent + "% - 0.2em - 0.5px)";
-                    left.style.height = "calc(" + percent + "% - 3em)";
+                    sliderY.style.top = "calc(" + (percent - 1) + "vh - 0.5px)";
+                    left.style.height = "calc(" + percent + "vh - 3em)";
                     left.style.width = "";
-                    right.style.height = 100 - percent + "%";
+                    right.style.height = 100 - percent + "vh";
                     right.style.width = "";
                     document.getSelection().removeAllRanges();
                 }
@@ -1491,7 +1510,7 @@
                         }
                     });
                     var extra = document.createElement("button");
-                    extra.innerText = "\u2BC6";
+                    extra.innerText = "\u25BC";
                     extra.className = "extra_menu";
                     extra.addEventListener("keydown", function(e) {
                         if (e.key == "ArrowLeft" || e.key == 37) {
