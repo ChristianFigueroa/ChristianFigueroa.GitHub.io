@@ -41,7 +41,9 @@ if (self.localStorage) {
                 "color": "#7A3E9D"
             },
             "operator": {},
-            "whitespace": {}
+            "whitespace": {
+                "color": "#AA3731"
+            }
         },
         "Atom Dark": {
             "name": "Atom Dark",
@@ -539,7 +541,7 @@ dieroller.eval = function eval(tokens) {
 	if (tokens.invalid) return "inevaluable";
 
 	// The tokens are simplified beforehand.
-	tokens = syntax.parse(syntax.reform(tokens));
+	tokens = syntax.normalize(tokens);
 
 	// Since whitespace tokens only get in the way, they are removed completely before
 	// anything.
@@ -718,13 +720,13 @@ dieroller.eval = function eval(tokens) {
 			var max = tokens[i].value.substring(1),
 				sum = 0;
 
-			for (var n = +(tokens[i - 1].type == "number" ? tokens[i - 1].value : "1"); n > 0; n--) {
+			for (var n = Math.abs(tokens[i - 1].type == "number" ? tokens[i - 1].value : "1"); n > 0; n--) {
 				sum += Math.floor(max * Math.random()) + 1;
 			}
 
 			tokens.splice(tokens[i - 1].type == "number" ? i - 1 : i, tokens[i - 1].type == "number" ? 2 : 1, {
 				type: "number",
-				value: sum.toString()
+				value: (tokens[i - 1].value[0] == "-" ? "-" : "") + sum.toString()
 			});
 		}
 	}
@@ -799,7 +801,7 @@ dieroller.min = function min(tokens) {
 
     if (dieroller.mincache[reformed]) return dieroller.mincache[reformed];
 
-	tokens = syntax.parse(reformed);
+	tokens = syntax.normalize(tokens);
 
 	// Named tokens are read and replaced similar to how they are in `dieroller.eval'.
 	// except the whole array of tokens is iterated over a bunch of times until all
@@ -875,7 +877,7 @@ dieroller.max = function min(tokens) {
 
     if (dieroller.maxcache[reformed]) return dieroller.maxcache[reformed];
 
-	tokens = syntax.parse(reformed);
+	tokens = syntax.normalize(tokens);
 
 	while (true) {
 		var doBreak = true;

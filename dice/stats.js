@@ -27,7 +27,7 @@ self.addEventListener("message", function(e) {
         if (doBreak) break;
     }
 
-    // Now, dice rolls inside a function call are expanded (e.g. "max(2d20)"" becomes
+    // Now, dice rolls inside a function call are expanded (e.g. "max(2d20)" becomes
     // "max(d20, d20)").
     for (var i = 0; i < roll.length; i++) {
         if (roll[i].type == "group open" && roll[i].fromFunction && roll[i + 3] &&
@@ -63,16 +63,22 @@ self.addEventListener("message", function(e) {
     // a multiplier is changed to addition (e.g. "3d4" => "(d4 + d4 + d4)").
     for (var i = 0; i < roll.length; i++) {
         if (roll[i].type == "dice roll" && roll[i - 1] && roll[i - 1].type == "number") {
-            var n = 0;
-            var args = Array.from({length: +roll[i - 1].value * 2 - 1}, function() {
+            var n = 0,
+                operator = roll[i - 1].value[0] == "-" ? "-" : "+";
+            var args = Array.from({length: Math.abs(roll[i - 1].value) * 2 - 1}, function() {
                 n++;
                 return n % 2 ? {
                     type: "dice roll",
                     value: roll[i].value
                 } : {
                     type: "operator",
-                    value: "+"
+                    value: operator
                 };
+            });
+            if (roll[i - 1].value[0] == "-") args.unshift({
+                type: "operator",
+                value: "-",
+                isMinus: true
             });
             var closeParen = {
                 type: "group close",

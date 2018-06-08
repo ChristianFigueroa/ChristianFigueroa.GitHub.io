@@ -819,7 +819,7 @@ syntax.reform = function reform(tokens, trackOperators) {
     for (var i = 0; i < tokens.length; i++) {
         var token = tokens[i];
 
-        if (trackOperators && token.type == "operator") return true;
+        if (trackOperators && token.type == "operator" && !token.isMinus) return true;
 
         if (token.type == "number") {
             // The number is simplified to convert stuff like "007" => "7" and ".030" => ".03"
@@ -865,8 +865,14 @@ syntax.reform = function reform(tokens, trackOperators) {
                 });
             }
             string += "d" + token.value.substring(1);
-        } else if (token.type == "operator" && !token.isMinus) {
-            string += " " + token.value + " ";
+        } else if (token.type == "operator") {
+            if (token.isMinus) {
+                if (tokens[i - 1] && tokens[i - 1].type == "operator" && tokens[i - 1].isMinus) {
+                    string = string.substring(0, string.length - 1);
+                    tokens.splice(i - 1, 2);
+                    i -= 2;
+                } else string += "-";
+            } else string += " " + token.value + " ";
         } else if (token.type == "group open") {
             // Each opening parenthesis matches with its closing parenthesis and finds all the
             // tokens in between the two. Then that sub-array of tokens is reformed by itself.
@@ -881,10 +887,30 @@ syntax.reform = function reform(tokens, trackOperators) {
                 var index = tokens.indexOf(token.closer),
                     inner = tokens.slice(i + 1, index);
 
-                if (syntax.reform(inner, true)) {
+                // If `trackOperators' is true, it only cares about operators at the top level. Any
+                // operators inside a set of parentheses don't count because they won't be affected
+                // if the outer parentheses are removed. That lets it realize "(((1 + 1)))"" can be
+                // simplified to just "(1 + 1)" since only the innermost set of parentheses need to
+                // stay there.
+                if (trackOperators) {
+                    i = index;
+                    continue;
+                }
+
+                // If the current opening parentheses is the first token, and the matching closing
+                // token is the last token, then the parentheses can be removed because there is
+                // nothing outside of them. That lets it realize that "(1 + 1)" is really equal to
+                // just "1 + 1".
+                if (i == 0 && index == tokens.length - 1) {
+                    tokens.splice(index, 1);
+                    tokens.splice(i, 1);
+                    i--;
+                } else if (syntax.reform(inner, true)) {
                     string += "(";
                 } else {
                     tokens.splice(index, 1);
+                    tokens.splice(i, 1);
+                    i--;
                 }
             }
         } else if (token.type == "group close") {
@@ -915,6 +941,166 @@ syntax.reform = function reform(tokens, trackOperators) {
     return trackOperators ? false : string;
 }
 
+syntax.normalize = function normalize(tokens, trackOperators) {
+    // This function normalizes an array of tokens. It prettifies the tokens like
+    // `syntax.reform', but it ensures that the meaning of the tokens remains the same.
+    // Imagine you have two named rolls: "name" and "2 * name" (both are technically
+    // valid names). Now, imagine you type "2name", which would translate to: you want
+    // twice the result of "name". Before that gets evaluated though, it gets pretti-
+    // fied into "2 * name" so that the die roller knows what to do with that preceding
+    // "2". But, now if you re-parse the prettified string, it'll get converted to your
+    // other named token "2 * name", instead of being treated as twice the result of
+    // "name". Obviously, it's stupid to name rolls like that, but just in case you
+    // really want to, this function will fix it. This function still normalizes a
+    // group of tokens (e.g. adding the "*" operator after that "2"), but it ensures
+    // named tokens stay their correct names. It'll return another group of tokens.
+
+    tokens = tokens.slice();
+    for (var i = 0, l = tokens.length - 1; i < l; i++) {
+        if (tokens[i].isCloser) continue;
+        var token = {}
+        for (var key in tokens[i]) {
+            if (key == "closer") {
+                token.closer = {
+                    type: "group close",
+                    value: ")",
+                    isCloser: true
+                };
+                tokens.splice(tokens.indexOf(tokens[i].closer), 1, token.closer);
+            } else token[key] = tokens[i][key];
+        }
+        tokens[i] = token;
+    }
+
+    for (var i = 0; i < tokens.length; i++) {
+        if (tokens[i].type == "whitespace") tokens.splice(i, 1);
+    }
+
+    for (var i = 0; i < tokens.length; i++) {
+        var token = tokens[i];
+
+        if (trackOperators && token.type == "operator" && !token.isMinus) return true;
+
+        if (token.type == "number") {
+            while (token.value[0] == "0") token.value = token.value.substring(1);
+            if (~token.value.indexOf(".")) {
+                while (token.value[token.value.length - 1] == "0") token.value = token.value.substring(0, token.value.length - 1);
+            }
+            if (token.value[token.value.length - 1] == ".") token.value = token.value.substring(0, token.value.length - 1);
+            if (token.value == "") token.value = "0";
+            if (token.value[0] == ".") token.value = "0" + token.value;
+            if (tokens[i + 1] && tokens[i + 1].type == "operator" && tokens[i + 1].value == "*" &&
+                tokens[i + 2] && tokens[i + 2].type == "dice roll") {
+                tokens.splice(i + 1, 1);
+            } else if (tokens[i + 1] && (tokens[i + 1].type == "group open" || tokens[i + 1].type == "named")) {
+                tokens.splice(i + 1, 0, {
+                    type: "operator",
+                    value: "*"
+                });
+            }
+
+            while (tokens[i - 1] && tokens[i - 1].type == "operator" && tokens[i - 1].isMinus) {
+                if (token.value[0] == "-") token.value = token.value.substring(1);
+                else token.value = "-" + token.value;
+                tokens.splice(i - 1, 1);
+                i--;
+            }
+
+            if ((token.value == "0" || ~token.value.indexOf(".")) && tokens[i + 1] && tokens[i + 1].type == "dice roll") {
+                tokens.splice(i + 1, 0, {
+                    type: "operator",
+                    value: "*"
+                });
+            }
+        } else if (token.type == "dice roll") {
+            if (!tokens[i - 1] || tokens[i - 1].type != "number") {
+                tokens.splice(i, 0, {
+                    type: "number",
+                    value: "1"
+                });
+                i++;
+            }
+            if (tokens[i + 1] && tokens[i + 1].type == "group open") {
+                tokens.splice(i + 1, 0, {
+                    type: "operator",
+                    value: "*"
+                });
+            }
+        } else if (token.type == "operator") {
+            if (token.isMinus) {
+                if (tokens[i - 1] && tokens[i - 1].type == "operator" & tokens[i - 1].isMinus) {
+                    tokens.splice(i - 1, 2);
+                    i -= 2;
+                    continue;
+                }
+                if (tokens[i + 1].type == "number") {
+                    tokens[i + 1] = {
+                        type: "number",
+                        value: tokens[i + 1].value[0] == "-" ? tokens[i + 1].value.substring(1) : "-" + tokens[i + 1].value
+                    };
+                    tokens.splice(i, 1);
+                    i--;
+                } else if (tokens[i + 1].type == "dice roll") {
+                    tokens.splice(i, 1, {
+                        type: "number",
+                        value: "-1"
+                    });
+                }
+            } else {
+                tokens.splice(i, 1, {
+                    type: "whitespace",
+                    value: " "
+                }, token, {
+                    type: "whitespace",
+                    value: " "
+                });
+                i += 2;
+            }
+        } else if (token.type == "group open") {
+            if (!token.fromFunction) {
+                var index = tokens.indexOf(token.closer),
+                    inner = tokens.slice(i + 1, index);
+
+                if (trackOperators) {
+                    i = index;
+                    continue;
+                }
+
+                if (!syntax.normalize(inner, true) || (i == 0 && index == tokens.length - 1)) {
+                    tokens.splice(index, 1);
+                    tokens.splice(i, 1);
+                    i--;
+                }
+            }
+        } else if (token.type == "group close") {
+            if (tokens[i + 1] && tokens[i + 1].type == "group open") {
+                tokens.splice(i + 1, 0, {
+                    type: "operator",
+                    value: "*"
+                });
+            }
+        } else if (token.type == "named" || token.type == "function") {
+            if (token.type == "named") {
+                if (tokens[i + 1] && tokens[i + 1].type == "group open") {
+                    tokens.splice(i + 1, 0, {
+                        type: "operator",
+                        value: "*"
+                    });
+                }
+            }
+            token.value = token.refer;
+        } else if (token.type == "arg separ") {
+            tokens.splice(i + 1, 0, {
+                type: "whitespace",
+                value: " "
+            });
+            i++;
+        }
+    }
+
+    return trackOperators ? false : tokens;
+}
+
 syntax.render = function render(tokens) {
     // This function turns an array of tokens (from `syntax.parse') into an HTML elem-
     // ent. Each token is color coded to act as highlighting.
@@ -937,6 +1123,13 @@ syntax.render = function render(tokens) {
             tokens.splice.apply(tokens, [i, 1].concat(expanded));
             i += expanded.length;
             continue;
+        }
+
+        if (token.type == "operator" && token.isMinus) {
+            token = {
+                type: "number",
+                value: "-"
+            };
         }
 
         var span = document.createElement("span");

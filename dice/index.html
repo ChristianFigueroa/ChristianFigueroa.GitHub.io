@@ -836,7 +836,7 @@
                         <div class='modal_body'>
                             <div>
                                 <input id='save_name' placeholder='Name'>
-                                <div id='save_name_error'>That name is already being used.</div>
+                                <div id='save_name_error'></div>
                                 <div id='save_input_text'>Enter a text definition for what to roll for.</div>
                                 <div id='save_input' contenteditable='true' specllcheck='false'></div>
                                 <div id='save_stats'></div>
@@ -1255,7 +1255,7 @@
                     var min = dieroller.min(roll), max = dieroller.max(roll);
                     saveModalStats.innerHTML = "Minimum: " + min + ", Midrange: " + (+min + +max) / 2 + ", Maximum: " + max;
                     saveModalSaveBtn.disabled = saveModalName.isInvalid;
-                    saveModalMoreStats.disabled = saveModalName.isInvalid;
+                    saveModalMoreStats.disabled = false;
                     this.isInvalid = false;
                 }
             });
@@ -1283,22 +1283,44 @@
             });
             saveModalName.addEventListener("input", function() {
                 var normalizedNamed = this.value.trim().replace(/\s+/g, "\u00A0");
-                if (normalizedNamed in dieroller.savedRolls && saveModal.editing != normalizedNamed) {
+                // Some names can't be used. Names that are already being taken obviously can't be-
+                // cause a name can only refer to one roll. But the name also can't look to close
+                // to a die roll. For example, a name like "d20" isn't allowed because whenever a
+                // d20 is rolled, that definition will be called instead of actually rolling a d20.
+                // To test if the name is too similar, it's parsed as a die roll string. If it does
+                // not return invalid, the string is is too close and the name is invalid.
+                var rolls = dieroller.savedRolls;
+                dieroller.savedRolls = {};
+                var parsed = syntax.parse(normalizedNamed);
+                dieroller.savedRolls = rolls;
+
+                if (!normalizedNamed) {
                     this.className = "invalid";
                     saveModalSaveBtn.disabled = true;
-                    saveModalMoreStats.disabled = true;
                     saveModalNameError.style.display = "block";
+                    saveModalNameError.innerText = "The name can't be empty.";
+                    this.isInvalid = true;
+                } else if (normalizedNamed in dieroller.savedRolls && saveModal.editing != normalizedNamed) {
+                    this.className = "invalid";
+                    saveModalSaveBtn.disabled = true;
+                    saveModalNameError.style.display = "block";
+                    saveModalNameError.innerText = "That name is already being used.";
+                    this.isInvalid = true;
+                } else if (!parsed.invalid) {
+                    this.className = "invalid";
+                    saveModalSaveBtn.disabled = true;
+                    saveModalNameError.style.display = "block";
+                    saveModalNameError.innerText = "That name is too close to a regular die roll.";
                     this.isInvalid = true;
                 } else {
                     this.className = "";
                     saveModalSaveBtn.disabled = saveModalInput.isInvalid;
-                    saveModalMoreStats.disabled = saveModalInput.isInvalid;
                     saveModalNameError.style.display = "";
                     this.isInvalid = false;
                 }
             });
             document.addEventListener("keydown", function(e) {
-                if ((e.key == "Escape" || e.keyCode == 27) && saveModal.className == "modal active") {
+                if (e.key == "Escape" || e.keyCode == 27) {
                     (document.querySelector(".modal.active") || {}).className = "modal";
                 }
             });
@@ -1307,7 +1329,7 @@
             });
             document.getElementById("new_save").addEventListener("click", function() {
                 saveModalName.value = "Roll " + (Object.keys(dieroller.savedRolls).length + 1);
-                saveModalName.style.color = "";
+                saveModalName.className = "";
                 saveModalNameError.style.display = "";
                 saveModalSaveBtn.disabled = false;
                 saveModalMoreStats.disabled = false;
@@ -1342,7 +1364,7 @@
                             answer = document.createElement("div"),
                             stats = document.createElement("div");
                         answer.appendChild(document.createTextNode((unrounded == result ? "=" : "\u2248") + " " + result));
-                        div.appendChild(syntax.render(syntax.parse(syntax.reform(roll))));
+                        div.appendChild(syntax.render(syntax.normalize(roll)));
                         div.appendChild(document.createElement("br"));
                         div.appendChild(answer);
                         stats.innerHTML = "<a href='/dice/stats#" + encodeURIComponent(syntax.reform(roll).replace(/\s/g, " ")) + "' target='_blank'>Statistics</a>";
@@ -1481,7 +1503,7 @@
                         rollingText.appendChild(document.createTextNode("Rolling " + this.parentNode.referName + ":"));
                         answer.appendChild(document.createTextNode("= " + result));
                         div.appendChild(rollingText);
-                        div.appendChild(syntax.render(syntax.parse(syntax.reform(roll))));
+                        div.appendChild(syntax.render(syntax.normalize(roll)));
                         div.appendChild(document.createElement("br"));
                         div.appendChild(answer);
                         stats.innerHTML = "<a href='/dice/stats#" + encodeURIComponent(syntax.reform(roll).replace(/\s/g, " ")) + "' target='_blank'>Statistics</a>";
@@ -1560,7 +1582,7 @@
                         var name = this.parentNode.parentNode.parentNode.referName,
                             roll = syntax.parse(dieroller.savedRolls[name]);
                         saveModalName.value = name;
-                        saveModalName.style.color = "";
+                        saveModalName.className = "";
                         saveModalNameError.style.display = "";
                         saveModalSaveBtn.disabled = false;
                         saveModalMoreStats.disabled = false;
