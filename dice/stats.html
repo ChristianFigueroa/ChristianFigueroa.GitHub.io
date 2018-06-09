@@ -568,7 +568,7 @@
                     errorText.style.display = "block";
                 } else {
                     if (decodeURIComponent(location.hash.substring(1)) == input.value) run();
-                    location.replace("#" + input.value);
+                    location.replace("#" + encodeURIComponent(input.value));
                 }
             });
 
@@ -757,8 +757,6 @@
                     return x.indexOf(number) == index;
                 }).sort(function(a, b) {
                     return a - b;
-                }).map(function(number) {
-                    return Plotly.d3.round(number, 4);
                 });
                 for (var i = 0, l = x.length; i < l; i++) {
                     y.push(dist[x[i]] || "0");
@@ -792,7 +790,7 @@
                             tickfont: {
                                 color: color1
                             },
-                            tickformat: ",.4r",
+                            tickformat: ",.5r",
                             linecolor: color1,
                             fixedrange: true
                         },
@@ -812,7 +810,8 @@
                     if (!graph.hoverable) {
                         graph.hoveringBar = null;
                         graph.on("plotly_hover", function(e) {
-                            probOfText.innerText = "Probability of Rolling " + e.points[0].x;
+                            var digits = Plotly.d3.format(",")(e.points[0].x).match(/^-?\d+/)[0];
+                            probOfText.innerText = "Probability of a" + (digits[0] == "8" || digits == "11" || digits == "18" ? "n " : " ") + Plotly.d3.format(",")(e.points[0].x);
                             var percent = Plotly.d3.round(e.points[0].y / possibilities * 100, 3);
                             probPercent.innerText = e.points[0].y == possibilities ? "100%" :
                                 e.points[0].y == 0 ? "0%" :

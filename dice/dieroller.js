@@ -538,7 +538,7 @@ dieroller.eval = function eval(tokens) {
 	// until it reaches one final answer.
 
 	// If any of the tokens are invalid, it can't be parsed.
-	if (tokens.invalid) return "inevaluable";
+	if (tokens.invalid) return "undefined";
 
 	// The tokens are simplified beforehand.
 	tokens = syntax.normalize(tokens);
@@ -637,7 +637,14 @@ dieroller.eval = function eval(tokens) {
 				) {
 					var multiplicand = args[0].type == "number" ? args[1].type == "dice roll" ? [args[1]] :
 						args.slice(2, args.length) : args.slice(0, args.length - 2);
-					for (var n = +(args[0].type == "number" ? args[0].value : args[args.length - 1].value), args = []; n > 0; n--) {
+                    if (args[0].type == "number" ? args[0].value[0] == "-" : args[args.length - 1].value[0] == "-") {
+                        multiplicand.unshift({
+                            type: "operator",
+                            value: "-",
+                            isMinus: true
+                        });
+                    }
+					for (var n = Math.abs(args[0].type == "number" ? args[0].value : args[args.length - 1].value), args = []; n > 0; n--) {
 						args.push(multiplicand);
 					}
 				} else {
@@ -751,10 +758,17 @@ dieroller.eval = function eval(tokens) {
 			});
 			i--;
 		} else if (tokens[i].type == "operator" && tokens[i].value == "/") {
-			tokens.splice(i - 1, 3, {
-				type: "number",
-				value: (tokens[i - 1].value / tokens[i + 1].value).toString()
-			});
+            if (tokens[i + 1].value == "0") {
+                tokens.splice(i - 1, 3, {
+                    type: "number",
+                    value: "NaN"
+                });
+            } else {
+                tokens.splice(i - 1, 3, {
+                    type: "number",
+                    value: (tokens[i - 1].value / tokens[i + 1].value).toString()
+                });
+            }
 			i--;
 		} else if (tokens[i].type == "operator" && tokens[i].value == "%") {
 			tokens.splice(i - 1, 3, {
@@ -784,159 +798,5 @@ dieroller.eval = function eval(tokens) {
 		}
 	}
 
-	return tokens[0] ? tokens[0].value : "inevaluable";
+	return tokens[0] ? tokens[0].value : "undefined";
 }
-
-dieroller.min = function min(tokens) {
-	// Given an array of tokens from `syntax.parse', this function evaluates the minim-
-	// um possible value (it assumes all dice rolls will be 1). It expands all the
-	// named tokens by replacing them with their definition, and does so until all of
-	// them have been expanded. After that, it replaces all dice rolls with their mul-
-	// tiplier (e.g. 4d6 becomes just 4) since each dice roll is counted as just 1
-	// (e.g. 4d6 => 4 * 1d6 => 4 * 1 = 4). After everything has been converted to plain
-	// numbers, it's evaluated using `dieroller.eval'.
-	if (tokens.invalid) return null;
-
-    var reformed = syntax.reform(tokens);
-
-    if (dieroller.mincache[reformed]) return dieroller.mincache[reformed];
-
-	tokens = syntax.normalize(tokens);
-
-	// Named tokens are read and replaced similar to how they are in `dieroller.eval'.
-	// except the whole array of tokens is iterated over a bunch of times until all
-	// named tokens (even those in the definitions of other named tokens) have been
-	// expanded.
-	while (true) {
-		var doBreak = true;
-		for (var i = 0; i < tokens.length; i++) {
-			if (tokens[i].type == "named") {
-				doBreak = false;
-				var replacement = dieroller.savedRolls[tokens[i].refer],
-					closingParen = {
-						type: "group close",
-						value: ")"
-					};
-				tokens.splice.apply(tokens, [i, 1, {
-					type: "group open",
-					value: "(",
-					closer: closingParen
-				}].concat(syntax.parse(dieroller.savedRolls[tokens[i].refer])).concat(closingParen));
-			}
-		}
-		if (doBreak) break;
-	}
-
-	// In some cases, a plain dice roll can't just be evaluated. For example, if you
-	// have "max(2d20)", it should really be read as "max(1d20, 1d20)". In this case,
-	// the context of the dice roll matters and it can't just be changed into a 2.
-	for (var i = 0; i < tokens.length; i++) {
-		if (tokens[i].type == "group open" && tokens[i].fromFunction && tokens[i + 3] &&
-			tokens[i + 1].type == "number" && tokens[i + 2].type == "dice roll" && tokens[i + 3].type == "group close") {
-			var n = 0;
-            var args = Array.from({length: +tokens[i + 1].value * 2 - 1}, function() {
-                n++;
-                return n % 2 ? {
-                    type: "number",
-                    value: "1"
-                } : {
-                    type: "arg separ",
-                    value: ","
-                };
-            });
-			tokens.splice.apply(tokens, [i + 1, 2].concat(args));
-		}
-	}
-
-	// Now all named tokens should have been expanded. All that's left that need to be
-	// evaluated is dice rolls.
-	for (var i = 0; i < tokens.length; i++) {
-		if (tokens[i].type == "dice roll") {
-			var previous = tokens[i - 1];
-			if (previous.type == "number") {
-				tokens.splice(i, 1);
-			} else {
-				tokens.splice(i, 1, {
-					type: "number",
-					value: "1"
-				});
-			}
-		}
-	}
-
-	dieroller.mincache[reformed] = dieroller.eval(tokens);
-    return dieroller.mincache[reformed];
-}
-
-dieroller.max = function min(tokens) {
-	// This function is like `dieroller.min' except each dice roll is replaced by its
-	// maximum value.
-	if (tokens.invalid) return null;
-
-    var reformed = syntax.reform(tokens);
-
-    if (dieroller.maxcache[reformed]) return dieroller.maxcache[reformed];
-
-	tokens = syntax.normalize(tokens);
-
-	while (true) {
-		var doBreak = true;
-		for (var i = 0; i < tokens.length; i++) {
-			if (tokens[i].type == "named") {
-				doBreak = false;
-				var replacement = dieroller.savedRolls[tokens[i].refer],
-					closingParen = {
-						type: "group close",
-						value: ")"
-					};
-				tokens.splice.apply(tokens, [i, 1, {
-					type: "group open",
-					value: "(",
-					closer: closingParen
-				}].concat(syntax.parse(dieroller.savedRolls[tokens[i].refer])).concat(closingParen));
-			}
-		}
-		if (doBreak) break;
-	}
-
-	for (var i = 0; i < tokens.length; i++) {
-		if (tokens[i].type == "group open" && tokens[i].fromFunction && tokens[i + 3] &&
-			tokens[i + 1].type == "number" && tokens[i + 2].type == "dice roll" && tokens[i + 3].type == "group close") {
-			var n = 0;
-            var args = Array.from({length: +tokens[i + 1].value * 2 - 1}, function() {
-                n++;
-                return n % 2 ? {
-                    type: "number",
-                    value: tokens[i + 2].value.substring(1)
-                } : {
-                    type: "arg separ",
-                    value: ","
-                };
-			});
-			tokens.splice.apply(tokens, [i + 1, 2].concat(args));
-		}
-	}
-
-	for (var i = 0; i < tokens.length; i++) {
-		if (tokens[i].type == "dice roll") {
-			var previous = tokens[i - 1];
-			if (previous.type == "number") {
-				tokens.splice(i - 1, 2, {
-					type: "number",
-					value: (previous.value * tokens[i].value.substring(1)).toString()
-				});
-			} else {
-				tokens.splice(i, 1, {
-					type: "number",
-					value: tokens[i].value.substring(1)
-				});
-			}
-		}
-	}
-
-	dieroller.maxcache[reformed] = dieroller.eval(tokens);
-    return dieroller.maxcache[reformed];
-}
-
-dieroller.mincache = {};
-dieroller.maxcache = {};

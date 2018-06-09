@@ -58,6 +58,13 @@ self.addEventListener("message", function(e) {
     possibilities = possibilities.toString();
     self.postMessage(possibilities);
 
+    // Any whitespace the tokens might have is removed now.
+    for (var i = roll.length - 1; i >= 0; i--) {
+        if (roll[i].type == "whitespace") {
+            roll.splice(i, 1);
+        }
+    }
+
 
     // The total number of possibilities has been figured out. Now, each dice roll with
     // a multiplier is changed to addition (e.g. "3d4" => "(d4 + d4 + d4)").
@@ -89,6 +96,13 @@ self.addEventListener("message", function(e) {
                 value: "(",
                 closer: closeParen
             }].concat(args).concat(closeParen));
+        }
+    }
+
+    // Whitespace is removed next.
+    for (var i = roll.length - 1; i >= 0; i--) {
+        if (roll[i].type == "whitespace") {
+
         }
     }
 
@@ -170,7 +184,7 @@ self.addEventListener("message", function(e) {
                 // At this point, all dice rolls have been changed to a static number and the whole
                 // roll can be parsed.
                 var result = evaluate(tokens);
-                result = (Math.round(result * 10e7) / 10e7).toString();
+                result = (Math.round(result * 10e4) / 10e4).toString();
                 distribution[result] = (distribution[result] || 0) + 1;
                 done++;
 
@@ -311,10 +325,17 @@ self.addEventListener("message", function(e) {
                 });
                 i--;
             } else if (tokens[i].type == "operator" && tokens[i].value == "/") {
-                tokens.splice(i - 1, 3, {
-                    type: "number",
-                    value: (tokens[i - 1].value / tokens[i + 1].value).toString()
-                });
+                if (tokens[i + 1].value == "0") {
+                    tokens.splice(i - 1, 3, {
+                        type: "number",
+                        value: "NaN"
+                    });
+                } else {
+                    tokens.splice(i - 1, 3, {
+                        type: "number",
+                        value: (tokens[i - 1].value / tokens[i + 1].value).toString()
+                    });
+                }
                 i--;
             } else if (tokens[i].type == "operator" && tokens[i].value == "%") {
                 tokens.splice(i - 1, 3, {
