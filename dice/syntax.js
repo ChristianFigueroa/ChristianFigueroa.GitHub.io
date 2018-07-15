@@ -146,10 +146,11 @@ syntax.parse = function parse(str) {
 
                 // Look for opening parenthesis
                 if (str[0] == "(") {
+                    var last = lastToken() || {};
                     tokens.push({
                         type: "group open",
                         value: "(",
-                        fromFunction: (lastToken() || {}).type == "function"
+                        fromFunction: last.type == "function" ? last : false
                     });
                     str = str.substring(1);
                     scope = "start";
@@ -208,7 +209,7 @@ syntax.parse = function parse(str) {
 
                 // Look for a comma character, as long they are inside of a set of parentheses and
                 // those parentheses are from a function call.
-                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction && lastToken().type != "arg separ") {
+                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction && !~dieroller.functionNames.single.indexOf(groupOpeners[groupOpeners.length - 1].fromFunction.refer) && lastToken().type != "arg separ") {
                     tokens.push({
                         type: "arg separ",
                         value: ","
@@ -294,10 +295,11 @@ syntax.parse = function parse(str) {
 
                 // Look for opening parenthesis
                 if (str[0] == "(") {
+                    var last = lastToken() || {};
                     tokens.push({
                         type: "group open",
                         value: "(",
-                        fromFunction: lastToken().type == "function"
+                        fromFunction: last.type == "function" ? last : false
                     });
                     str = str.substring(1);
                     scope = "start";
@@ -355,7 +357,7 @@ syntax.parse = function parse(str) {
 
                 // Look for a comma character, as long they are inside of a set of parentheses and
                 // those parentheses are from a function call.
-                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction) {
+                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction && !~dieroller.functionNames.single.indexOf(groupOpeners[groupOpeners.length - 1].fromFunction.refer)) {
                     tokens.push({
                         type: "arg separ",
                         value: ","
@@ -474,10 +476,11 @@ syntax.parse = function parse(str) {
 
                 // Look for opening parenthesis
                 if (str[0] == "(") {
+                    var last = lastToken() || {};
                     tokens.push({
                         type: "group open",
                         value: "(",
-                        fromFunction: lastToken().type == "function"
+                        fromFunction: last.type == "function" ? last : false
                     });
                     str = str.substring(1);
                     scope = "start";
@@ -539,7 +542,7 @@ syntax.parse = function parse(str) {
 
                 // Look for a comma character, as long they are inside of a set of parentheses and
                 // those parentheses are from a function call.
-                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction) {
+                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction && !~dieroller.functionNames.single.indexOf(groupOpeners[groupOpeners.length - 1].fromFunction.refer)) {
                     // Since a comma completely closes separates one set of tokens from another, if the
                     // previous set ended in an operator, it is marked as invalid.
                     lastToken().type = "invalid";
@@ -629,10 +632,11 @@ syntax.parse = function parse(str) {
 
                 // Look for opening parenthesis
                 if (str[0] == "(") {
+                    var last = lastToken() || {};
                     tokens.push({
                         type: "group open",
                         value: "(",
-                        fromFunction: lastToken().type == "function"
+                        fromFunction: last.type == "function" ? last : false
                     });
                     str = str.substring(1);
                     scope = "start";
@@ -662,7 +666,7 @@ syntax.parse = function parse(str) {
 
                 // Look for a comma character, as long they are inside of a set of parentheses and
                 // those parentheses are from a function call.
-                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction) {
+                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction && !~dieroller.functionNames.single.indexOf(groupOpeners[groupOpeners.length - 1].fromFunction.refer)) {
                     tokens.push({
                         type: "arg separ",
                         value: ","
@@ -704,10 +708,11 @@ syntax.parse = function parse(str) {
 
                 // Look for opening parenthesis
                 if (str[0] == "(") {
+                    var last = lastToken() || {};
                     tokens.push({
                         type: "group open",
                         value: "(",
-                        fromFunction: lastToken().type == "function"
+                        fromFunction: last.type == "function" ? last : false
                     });
                     str = str.substring(1);
                     scope = "start";
@@ -737,7 +742,7 @@ syntax.parse = function parse(str) {
 
                 // Look for a comma character, as long they are inside of a set of parentheses and
                 // those parentheses are from a function call.
-                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction) {
+                if (str[0] == "," && groupOpeners.length && groupOpeners[groupOpeners.length - 1].fromFunction && !~dieroller.functionNames.single.indexOf(groupOpeners[groupOpeners.length - 1].fromFunction.refer)) {
                     tokens.push({
                         type: "arg separ",
                         value: ","
@@ -1163,6 +1168,7 @@ syntax.render = function render(tokens) {
                         this.closer.span.style[key.substring(10)] = "";
                     }
                 }
+                this.closer.span.style.color = theme.text;
                 for (var key in theme["group close"]) {
                     this.closer.span.style[key] = theme["group close"][key];
                 }
@@ -1182,6 +1188,7 @@ syntax.render = function render(tokens) {
                         this.opener.span.style[key.substring(10)] = "";
                     }
                 }
+                this.opener.span.style.color = theme.text;
                 for (var key in theme["group open"]) {
                     this.opener.span.style[key] = theme["group open"][key];
                 }

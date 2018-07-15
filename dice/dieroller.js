@@ -3,7 +3,8 @@ var dieroller = self.dieroller || {};
 if (self.localStorage) {
     dieroller.savedRolls = JSON.parse(localStorage["saved_die_rolls"] || "{}");
 
-    dieroller.functionNames = ['min','max','minimum','maximum','dropLowest','loseLowest','keepLowest','saveLowest','dropHighest','loseHighest','keepHighest','saveHighest'];
+    dieroller.functionNames = ["min","max","minimum","maximum","dropLowest","loseLowest","keepLowest","saveLowest","dropHighest","loseHighest","keepHighest","saveHighest","abs","round","floor","ceil","ceiling","sign","trunc","truncate","int","integer"];
+    dieroller.functionNames.single = ["abs","round","floor","ceil","ceiling","sign","trunc","truncate","int","integer"];
 
     dieroller.themes = {
         "Alabaster": {
@@ -609,7 +610,7 @@ dieroller.eval = function eval(tokens) {
 			// to "max(1d4, 1d4, 1d4, 1d4)". That way, it's taking the maximum of the four
 			// rolls instead of the sum. You can still do something like "max(max(4d4), 1d4)"
 			// to get a combination of the two (it'll basically be "max(5d4)" in this case.
-			if (args.length == 1) {
+			if (args.length == 1 && !~dieroller.functionNames.single.indexOf(tokens[i].refer)) {
 				args = args[0];
 				if (
 					(
@@ -657,6 +658,52 @@ dieroller.eval = function eval(tokens) {
 			}
 
 			switch (tokens[i].refer) {
+                case "abs":
+                    tokens.splice(i, index - i + 1, {
+                        type: "number",
+                        value: (args[0][0] == "-" ? args[0].substring(1) : args[0]).toString()
+                    });
+                    break;
+
+                case "round":
+                    tokens.splice(i, index - i + 1, {
+                        type: "number",
+                        value: Math.round(args[0]).toString()
+                    });
+                    break;
+
+                case "ceil":
+                case "ceiling":
+                    tokens.splice(i, index - i + 1, {
+                        type: "number",
+                        value: Math.ceil(args[0]).toString()
+                    });
+                    break;
+
+                case "floor":
+                    tokens.splice(i, index - i + 1, {
+                        type: "number",
+                        value: Math.floor(args[0]).toString()
+                    });
+                    break;
+
+                case "sign":
+                    tokens.splice(i, index - i + 1, {
+                        type: "number",
+                        value: Math.sign(args[0]).toString()
+                    });
+                    break;
+
+                case "trunc":
+                case "truncate":
+                case "int":
+                case "integer":
+                    tokens.splice(i, index - i + 1, {
+                        type: "number",
+                        value: Math.trunc(args[0]).toString()
+                    });
+                    break;
+
 				case "max":
 				case "maximum":
 				case "keepHighest":

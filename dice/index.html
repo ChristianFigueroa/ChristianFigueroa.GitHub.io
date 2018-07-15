@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/dice/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/dice/favicon-16x16.png">
     <link rel="manifest" href="/dice/site.webmanifest">
-    <link rel="mask-icon" href="/dice/safari-pinned-tab.svg" color="#00aba9">
+    <link rel="mask-icon" href="/dice/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="/dice/favicon.ico">
     <meta name="apple-mobile-web-app-title" content="Die Roller">
     <meta name="application-name" content="Die Roller">
@@ -94,6 +94,11 @@
             cursor: default;
             clear: right;
             position: relative;
+            overflow-wrap: break-word;
+        }
+
+        #history > div > div {
+            max-width: 100%;
         }
 
         #custom {
@@ -717,7 +722,7 @@
         }
 
         span.hide {
-            opacity: .3;
+            opacity: .45;
         }
 
         @media (max-aspect-ratio: 1/1) {
@@ -1358,7 +1363,7 @@
                     this.value = this.value || "";
 
                     var roll = syntax.parse(this.value.replace(/\t/g, "    ").replace(/\s/g, "\u00A0"));
-                    if (this.value.trim()) {
+                    if (this.value.trim() && !roll.invalid) {
                         pastEntries.push(this.innerHTML);
                         currentEntry = pastEntries.length;
                         var result = dieroller.eval(roll);
@@ -1389,6 +1394,7 @@
 
                         this.innerText = "";
                         this.value = "";
+                        this.style.width = 0;
                     }
                 } else if ((e.key == "ArrowUp" || e.keyCode == 38) && currentEntry != 0) {
                     e.preventDefault();
@@ -1646,15 +1652,19 @@
             }
 
             function getMinMax(tokens, parent, roundTo, undefText, queueCallback) {
-                var reformed = syntax.reform(tokens),
+                var reformed = JSON.stringify(syntax.normalize(tokens)),
                     minElement = parent.children[0],
                     midElement = parent.children[1],
                     maxElement = parent.children[2];
 
-                if (minMaxCache[reformed]) {
-                    minElement.innerText = minMaxCache[reformed][0] == undefined ? undefText : minMaxCache[reformed][0];
-                    midElement.innerText = minMaxCache[reformed][1] == undefined ? undefText : minMaxCache[reformed][1];
-                    maxElement.innerText = minMaxCache[reformed][2] == undefined ? undefText : minMaxCache[reformed][2];
+                if (reformed in minMaxCache) {
+                    if (minMaxCache[reformed]) {
+                        minElement.innerText = minMaxCache[reformed][0] == undefined ? undefText : minMaxCache[reformed][0];
+                        midElement.innerText = minMaxCache[reformed][1] == undefined ? undefText : minMaxCache[reformed][1];
+                        maxElement.innerText = minMaxCache[reformed][2] == undefined ? undefText : minMaxCache[reformed][2];
+                    } else {
+                        parent.innerText = "Stats took too long";
+                    }
                     if (queueCallback) queueCallback();
                     return;
                 }
@@ -1697,6 +1707,7 @@
                         currentWorker.terminate();
                         if (currentWorker == worker) worker = null;
                         parent.innerText = "Stats took too long";
+                        minMaxCache[reformed] = false;
                         if (queueCallback) queueCallback();
                     } else if (now - currentWorker.progressTime > 300) {
                         currentWorker.progressTime = now;
@@ -1749,6 +1760,8 @@
 
                     var roll = argument[0], possibilities = 1;
 
+
+                    // Expand named tokens
                     while (true) {
                         var doBreak = true;
                         for (var i = 0; i < roll.length; i++) {
@@ -1769,6 +1782,7 @@
                         if (doBreak) break;
                     }
 
+                    // Expand grouped arguments (e.g. max(2d20) => max(d20, d20))
                     for (var i = 0; i < roll.length; i++) {
                         if (roll[i].type == "group open" && roll[i].fromFunction && roll[i + 3] &&
                             roll[i + 1].type == "number" && roll[i + 2].type == "dice roll" && roll[i + 3].type == "group close") {
@@ -1788,9 +1802,18 @@
                         }
                     }
 
-                    for (var i = roll.length - 1; i >= 0; i--) {
-                        if (roll[i].type == "dice roll") {
-                            possibilities *= roll[i - 1] && roll[i - 1].type == "number" ? Math.pow(roll[i].value.substring(1), +roll[i - 1].value) : roll[i].value.substring(1);
+
+                    // If this roll has already been calculated before and is in the cache, it's poss-
+                    // ibilities is set to 0 so that it'll have precedence over other rolls. That makes
+                    // sure the user doesn't have to wait for a stats evaluation before cached results
+                    // are shown.
+                    if (JSON.stringify(syntax.normalize(roll)) in minMaxCache) {
+                        possibilities = 0;
+                    } else {
+                        for (var i = roll.length - 1; i >= 0; i--) {
+                            if (roll[i].type == "dice roll") {
+                                possibilities *= roll[i - 1] && roll[i - 1].type == "number" ? Math.pow(roll[i].value.substring(1), +roll[i - 1].value) : roll[i].value.substring(1);
+                            }
                         }
                     }
 
@@ -1808,7 +1831,6 @@
 
                 getMinMax.apply(window, getMinMax.queue[0]);
             }
-            window.g=startMinMaxQueue
 
             updateSaves();
         }();

@@ -30,21 +30,30 @@ self.addEventListener("message", function(e) {
     // Now, dice rolls inside a function call are expanded (e.g. "max(2d20)" becomes
     // "max(d20, d20)").
     for (var i = 0; i < roll.length; i++) {
-        if (roll[i].type == "group open" && roll[i].fromFunction && roll[i + 3] &&
+        if (roll[i].type == "group open" && roll[i].fromFunction && !~dieroller.functionNames.single.indexOf(roll[i].fromFunction.refer) && roll[i + 3] &&
             roll[i + 1].type == "number" && roll[i + 2].type == "dice roll" && roll[i + 3].type == "group close") {
 
-            var n = 0;
-            var args = Array.from({length: +roll[i + 1].value * 2 - 1}, function() {
-                n++;
-                return n % 2 ? {
+            var argTokens = [],
+                negative = roll[i + 1].value[0] == "-";
+            for (var n = Math.abs(roll[i + 1].value); n > 0; n--) {
+                if (negative) {
+                    argTokens.push({
+                        type: "operator",
+                        value: "-",
+                        isMinus: true
+                    });
+                }
+                argTokens.push({
                     type: "dice roll",
                     value: roll[i + 2].value
-                } : {
+                });
+                argTokens.push({
                     type: "arg separ",
                     value: ","
-                };
-            });
-            roll.splice.apply(roll, [i + 1, 2].concat(args));
+                })
+            }
+            argTokens.pop();
+            roll.splice.apply(roll, [i + 1, 2].concat(argTokens));
         }
     }
 
@@ -185,7 +194,7 @@ self.addEventListener("message", function(e) {
                 // roll can be parsed.
                 var result = evaluate(tokens);
                 result = (Math.round(result * 10e4) / 10e4).toString();
-                distribution[result] = (distribution[result] || 0) + 1;
+                if (result != "NaN") distribution[result] = (distribution[result] || 0) + 1;
                 done++;
 
                 if (done % 5000 == 0) {
@@ -249,6 +258,52 @@ self.addEventListener("message", function(e) {
                 }
 
                 switch (tokens[i].refer) {
+                    case "abs":
+                        tokens.splice(i, index - i + 1, {
+                            type: "number",
+                            value: args[0][0] == "-" ? args[0].substring(1) : args[0]
+                        });
+                        break;
+
+                    case "round":
+                        tokens.splice(i, index - i + 1, {
+                            type: "number",
+                            value: Math.round(args[0])
+                        });
+                        break;
+
+                    case "ceil":
+                    case "ceiling":
+                        tokens.splice(i, index - i + 1, {
+                            type: "number",
+                            value: Math.ceil(args[0])
+                        });
+                        break;
+
+                    case "floor":
+                        tokens.splice(i, index - i + 1, {
+                            type: "number",
+                            value: Math.floor(args[0])
+                        });
+                        break;
+
+                    case "sign":
+                        tokens.splice(i, index - i + 1, {
+                            type: "number",
+                            value: Math.sign(args[0]).toString()
+                        });
+                        break;
+
+                    case "trunc":
+                    case "truncate":
+                    case "int":
+                    case "integer":
+                        tokens.splice(i, index - i + 1, {
+                            type: "number",
+                            value: Math.trunc(args[0]).toString()
+                        });
+                        break;
+
                     case "max":
                     case "maximum":
                     case "keepHighest":

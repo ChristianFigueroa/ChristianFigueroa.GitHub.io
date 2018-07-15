@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/dice/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/dice/favicon-16x16.png">
     <link rel="manifest" href="/dice/site.webmanifest">
-    <link rel="mask-icon" href="/dice/safari-pinned-tab.svg" color="#00aba9">
+    <link rel="mask-icon" href="/dice/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="/dice/favicon.ico">
     <meta name="apple-mobile-web-app-title" content="Die Roller">
     <meta name="application-name" content="Die Roller">
@@ -703,10 +703,10 @@
                                         var div = document.createElement("div");
                                         if (Array.isArray(_stats[nameList[i]])) {
                                             var str = "", j = 0, n = 0;
-                                            while (n < 42 && _stats[nameList[i]][j]) {
+                                            while (n < 42 && _stats[nameList[i]].length > j) {
                                                 var current = _stats[nameList[i]][j];
                                                 current = Plotly.d3.format(",")(current);
-                                                if (", " + current > 42) break;
+                                                if (current.length + 2 > 42) break;
                                                 str += ", " + current;
                                                 n += current.length + 2;
                                                 j++;
