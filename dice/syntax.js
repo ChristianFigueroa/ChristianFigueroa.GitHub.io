@@ -962,6 +962,7 @@ syntax.normalize = function normalize(tokens, trackOperators) {
 
     tokens = tokens.slice();
     for (var i = 0, l = tokens.length - 1; i < l; i++) {
+        if (tokens[i].span) delete tokens[i].span;
         if (tokens[i].isCloser) continue;
         var token = {}
         for (var key in tokens[i]) {
