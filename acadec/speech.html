@@ -420,17 +420,17 @@
                 }
             });
 
-            listener("#type_prepared_btn, #type_impromptu_btn", "click", function() {
+            listener("#type_prepared_btn, #type_impromptu_btn", ["click", "touchstart"], function() {
                 form.type.className = this.value;
                 formValues.type = this.value;
             });
 
-            listener("#timeDisp_cards_btn, #timeDisp_exact_btn", "click", function() {
+            listener("#timeDisp_cards_btn, #timeDisp_exact_btn", ["click", "touchstart"], function() {
                 form.timeDisp.className = this.value;
                 formValues.timeDisp = this.value;
             });
 
-            listener("#endSpeech", "click", function() {
+            listener("#endSpeech", ["click", "touchstart"], function() {
                 if (this.innerText == "End speech") {
                     screens.speech.classList.remove("active");
                     screens.setup.classList.add("active");
@@ -450,7 +450,7 @@
                 }
             });
 
-            listener("#startDialog button", "click", function() {
+            listener("#startDialog button", ["click", "touchstart"], function() {
                 document.getElementById("startDialog").style.display = "none";
                 document.getElementById("speechTextDialog").style.display = "";
                 var start = speechStartTime = performance.now();
@@ -506,7 +506,7 @@
                 }, 10);
             });
 
-            listener("#impromptu_start", "click", function() {
+            listener("#impromptu_start", ["click", "touchstart"], function() {
                 var topics = [Math.floor(Math.random() * impromptuTopics.length)];
                 do {var rand = Math.floor(Math.random() * impromptuTopics.length)} while (~topics.indexOf(rand));
                 topics.push(rand);
@@ -554,15 +554,21 @@
                 impromptuStart.focus();
             }
 
-            function listener(elems, type, listener) {
+            function listener(elems, types, listener) {
                 if (typeof elems == "string") {
                     elems = document.querySelectorAll(elems);
                 } else if (!Array.isArray(elems)) {
                     elems = [elems];
                 }
 
+                if (!Array.isArray(types)) {
+                    types = [types];
+                }
+
                 for (var i = elems.length - 1; i >= 0; i--) {
-                    elems[i].addEventListener(type, listener);
+                    for (var j = types.length - 1; j >= 0; j--) {
+                        elems[i].addEventListener(types[j], listener);
+                    }
                 }
             }
         }();
