@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title>Acadec Speech Practice</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/acadec/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/acadec/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/acadec/favicon-16x16.png">
+    <link rel="manifest" href="/acadec/site.webmanifest">
+    <link rel="mask-icon" href="/acadec/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/acadec/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Acadec Tests">
+    <meta name="application-name" content="Acadec Tests">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/acadec/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-91403443-1', 'auto');
+        ga('send', 'pageview');</script>
+    <style>
+        html, body {
+            margin: 0;
+            font-family: Roboto, Arial;
+            font-weight: 500;
+            background: #FAFAFA;
+        }
+
+        h1 {
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+            font-size: 14vmin;
+            margin: 0;
+            text-align: center;
+            margin: 1vmin;
+        }
+
+        button {
+            font-family: inherit;
+            background: #10BCD1;
+            box-shadow: .5vmin 1vmin #009CB1;
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+            font-size: 6vmin;
+            border-radius: .3em;
+            padding: .2em .4em;
+            color: white;
+            border: 0;
+            position: relative;
+            cursor: pointer;
+            margin: 0 .75rem;
+            outline: none;
+        }
+
+        button:hover, button:focus {
+            background: #00ACC1;
+            box-shadow: .25vmin .5vmin #008CA1;
+            top: .5vmin;
+            left: .25vmin;
+            z-index: 1;
+        }
+
+        button:hover:before, button:focus:before {
+            content: " ";
+            height: 100%;
+            width: 100%;
+            padding: .25vmin 0 0 .5vmin;
+            top: -.5vmin;
+            left: -.25vmin;
+            border-radius: inherit;
+            position: absolute;
+            z-index: 1;
+        }
+
+        legend {
+            text-align: center;
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+            font-size: 1.75em;
+            color: #345;
+        }
+
+        #setup {
+            color: #345;
+        }
+
+        fieldset {
+            color: #000;
+            border-color: #345;
+            border-style: solid;
+            padding: .5em .75em;
+            width: calc(100vw - 5em - 8px);
+            margin: auto;
+        }
+
+        fieldset:not(:first-of-type) {
+            margin-top: .5em;
+        }
+
+        fieldset button {
+            font-size: 1.6em;
+        }
+
+        fieldset > :nth-last-child(2), fieldset > :last-child {
+            margin: .7em .75rem .2em;
+            font-size: 1.3em;
+        }
+
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .flex > button {
+            flex-basis: 1px;
+            white-space: nowrap;
+            text-align: center;
+            flex-grow: 1;
+            margin-top: .2em;
+            margin-bottom: .2em;
+        }
+
+        .flex > div {
+            flex-basis: 50%;
+            max-width: calc(100vw - 5rem - 8px);
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        #timeDisp_cards_info, #timeDisp_exact_info {
+            text-align: center;
+        }
+
+        #form_type.prepared #type_impromptu_info,
+        #form_type.impromptu #type_prepared_info,
+        #form_timeDisp.cards #timeDisp_exact_info,
+        #form_timeDisp.exact #timeDisp_cards_info {
+            display: none;
+        }
+
+        #form_type.prepared #type_impromptu_btn,
+        #form_type.impromptu #type_prepared_btn,
+        #form_timeDisp.cards #timeDisp_exact_btn,
+        #form_timeDisp.exact #timeDisp_cards_btn {
+            background: #B2C5C7;
+            box-shadow: .5vmin 1vmin #94B3B8;
+            color: #345;
+        }
+
+        #form_type.prepared #type_impromptu_btn:hover,
+        #form_type.impromptu #type_prepared_btn:hover,
+        #form_type.prepared #type_impromptu_btn:focus,
+        #form_type.impromptu #type_prepared_btn:focus,
+        #form_timeDisp.cards #timeDisp_exact_btn:hover,
+        #form_timeDisp.exact #timeDisp_cards_btn:hover,
+        #form_timeDisp.cards #timeDisp_exact_btn:focus,
+        #form_timeDisp.exact #timeDisp_cards_btn:focus {
+            background: #A2B5B7;
+            box-shadow: .25vmin .5vmin #84A3A8;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        #impromptuPrep.active {
+            display: flex;
+        }
+
+        #startDialog, #speechTextDialog {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #startDialog td, #speechTextDialog td {
+            vertical-align: center;
+            text-align: center;
+        }
+
+        #startDialog td div, #speechTextDialog td div {
+            display: inline-block;
+        }
+
+        #startDialog td div {
+            background: white;
+            border-radius: .4em;
+            font-size: 6vmin;
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+            box-shadow: .5vmin 1vmin rgba(0,0,0,.3);
+            padding: .35em .7em calc(.35em + 1vmin);
+            max-width: 70%;
+        }
+
+        #speechText {
+            font-size: 13vmin;
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+            color: white;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #okayToStop {
+            display: none;
+            color: white;
+            font-size: 10vmin;
+            position: absolute;
+            bottom: .4em;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+        }
+
+        #form_next {
+            display: block;
+            width: calc(100% - .8em - 1.5rem);
+            margin: 1rem 1.5rem;
+        }
+
+        #impromptu_topics.instructions {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: space-around;
+            background: #78909C;
+            color: #FFF;
+            font-size: 1.6em;
+        }
+
+        #impromptu_topics table {
+            height: 100%;
+            width: 100%;
+        }
+
+        #impromptu_topics:not(.instructions) div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background: #78909C;
+            padding: 0 1em;
+        }
+
+        #impromptu_topics.instructions div {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        #impromptu_topics div table {
+            height: 10em;
+            padding: 0 1em;
+            width: 15em;
+            font-size: 1.6em;
+            background: #FFF;
+            margin: 2vmin 1vmin;
+            cursor: default;
+            box-shadow: 0 0 2.5em 0em rgba(96, 125, 139, .2) inset,
+                .5vmin 1vmin rgba(0,0,0,.3);
+        }
+
+        #impromptu_topics div td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #impromptu_timer {
+            font-family: "Passion One", Arial;
+            font-weight: 400;
+            font-size: 3em;
+            text-align: center;
+            padding: .5em 1em;
+        }
+
+        #impromptu_timer_container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 6.6em;
+        }
+
+        #impromptuPrep {
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #impromptuPrep > :last-child {
+            height: calc(9.6vmin + 3rem);
+        }
+
+        #impromptu_start {
+            margin: 1.5rem;
+            width: calc(100% - .8em - 1.5rem);
+        }
+
+        #impromptu_start:hover, #impromptu_start:focus {
+            margin: 1.5rem 1.5rem calc(1.5rem - .5vmin);
+        }
+
+        #endSpeech {
+            position: absolute;
+            top: 0;
+            margin: 1rem;
+            width: calc(100% - 2rem);
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Passion+One:400,700">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:500,700">
+</head>
+<body>
+    <div id="setup" class="screen active">
+        <h1>Acadec Speech</h1>
+        <form id="form">
+            <fieldset id="form_type" class="prepared">
+                <legend>Speech Type</legend>
+                <div id="type_container" class="flex">
+                    <button id="type_prepared_btn" type="button" value="prepared">Prepared</button>
+                    <button id="type_impromptu_btn" type="button" value="impromptu">Impromptu</button>
+                </div>
+                <div class="flex" id="type_prepared_info">
+                    <div>Prepare Time: 0 minutes</div>
+                    <div>Delivery Time: 3&hairsp;&frac12;&ndash;4 minutes</div>
+                </div>
+                <div class="flex" id="type_impromptu_info">
+                    <div>Prepare Time: 1 minute</div>
+                    <div> Delivery Time: 1&hairsp;&frac12;&ndash;2 minutes</div>
+                </div>
+            </fieldset>
+            <fieldset id="form_timeDisp" class="cards">
+                <legend>Time Display</legend>
+                <div id="timeDisp_container" class="flex">
+                    <button id="timeDisp_cards_btn" type="button" value="cards">Cards</button>
+                    <button id="timeDisp_exact_btn" type="button" value="exact">Exact</button>
+                </div>
+                <p id="timeDisp_cards_info">You will only get three warning of how many seconds you have left to talk (at 1 minute, 30 seconds, and 0 seconds). On the real day, the judges will only hold up those three cards to inform you.</p>
+                <p id="timeDisp_exact_info">A timer will be shown on the screen to indicate how much time has passed. On the real speech day, you will NOT have access to the exact time, just the three cards they will show you.</p>
+            </fieldset>
+            <button type="submit" id="form_next">Next</button>
+        </form>
+    </div>
+    <div id="impromptuPrep" class="screen">
+        <div id="impromptu_topics"></div>
+        <div id="impromptu_timer_container">
+            <div id="impromptu_timer"></div>
+        </div>
+        <div>
+            <button id="impromptu_start">Start</button>
+        </div>
+    </div>
+    <div id="speech" class="screen">
+        <table id="startDialog">
+            <td>
+                <div>
+                    <p>Press Start when you're ready to&nbsp;begin.</p>
+                    <button>Start</button>
+                </div>
+            </td>
+        </table>
+        <table id="speechTextDialog">
+            <td>
+                <div id="speechText"></div>
+            </td>
+        </table>
+        <button id="endSpeech">I'm done</button>
+        <div id="okayToStop">(You can stop now)</div>
+    </div>
+    <script type="text/javascript">
+        !function() {
+            "use strict";
+            var form = {
+                type: document.getElementById("form_type"),
+                timeDisp: document.getElementById("form_timeDisp")
+            };
+            var formValues = {
+                type: "prepared",
+                timeDisp: "cards"
+            };
+            var screens = {
+                setup: document.getElementById("setup"),
+                impromptuPrep: document.getElementById("impromptuPrep"),
+                speech: document.getElementById("speech")
+            };
+            var speechText = document.getElementById("speechText");
+            var okayToStop = document.getElementById("okayToStop");
+            var impromptuTimer = document.getElementById("impromptu_timer");
+            var impromptuTopics = null;
+            var speechInterval = null;
+            var speechStartTime = null;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "impromptu.json");
+            xhr.addEventListener("readystatechange", function() {
+                if (this.readyState == 4) {
+                    impromptuTopics = JSON.parse(this.responseText);
+                }
+            });
+            xhr.send();
+
+            listener("#form", "submit", function(e) {
+                e.preventDefault();
+                if (formValues.type == "prepared") {
+                    screens.setup.classList.remove("active");
+                    startSpeech();
+                } else {
+                    screens.setup.classList.remove("active");
+                    startImpromptu();
+                }
+            });
+
+            listener("#type_prepared_btn, #type_impromptu_btn", "click", function() {
+                form.type.className = this.value;
+                formValues.type = this.value;
+            });
+
+            listener("#timeDisp_cards_btn, #timeDisp_exact_btn", "click", function() {
+                form.timeDisp.className = this.value;
+                formValues.timeDisp = this.value;
+            });
+
+            listener("#endSpeech", "click", function() {
+                if (this.innerText == "End speech") {
+                    screens.speech.classList.remove("active");
+                    screens.setup.classList.add("active");
+                    this.innerText = "I'm done";
+                } else {
+                    var ms = performance.now() - speechStartTime;
+                    clearInterval(speechInterval);
+                    var s = Math.round((ms / 1000) % 60).toString();
+                    var m = Math.round((ms / 1000) / 60).toString();
+                    ms = Math.round(ms % 1000).toString();
+                    speechText.innerHTML = (ms <= 60 * 60 * 1000) ? "Final Time: <span style='display:inline-block;width:1em'>" + ("00" + m).substring(m.length) + "</span>:<span style='display:inline-block;width:1em'>" + ("00" + s).substring(s.length) + "</span>.<span style='display:inline-block;width:1.5em'>" + ("000" + ms).substring(ms.length) + "</span>" : "Final Time: &gt;1 hour";
+                    speechText.fontSize = "13vmin";
+                    speechInterval = null;
+                    speechStartTime = null;
+                    this.innerText = "End speech";
+                    this.focus();
+                }
+            });
+
+            listener("#startDialog button", "click", function() {
+                document.getElementById("startDialog").style.display = "none";
+                document.getElementById("speechTextDialog").style.display = "";
+                var start = speechStartTime = performance.now();
+                var endSpeech = document.getElementById("endSpeech");
+                endSpeech.style.display = "";
+                endSpeech.focus()
+                var interval = speechInterval = setInterval(function() {
+                    var elapsed = performance.now() - start;
+                    var oneMinLeft = formValues.type == "prepared" ? 3 * 60 * 1000 : 60 * 1000;
+                    var thirtySecLeft = formValues.type == "prepared" ? 3.5 * 60 * 1000 : 90 * 1000;
+                    var done = formValues.type == "prepared" ? 4 * 60 * 1000 : 120 * 1000;
+                    var text = "";
+                    okayToStop.style.display = "";
+
+                    if (oneMinLeft <= elapsed && elapsed <= oneMinLeft + 2000) {
+                        if (elapsed < oneMinLeft + 400 || (oneMinLeft + 600 < elapsed && elapsed < oneMinLeft + 1000) || oneMinLeft + 1200 < elapsed) {
+                            text = "1 minute";
+                            screens.speech.style.background = "#FBC02D";
+                            speechText.style.fontSize = "16vmin";
+                        }
+                    } else if (thirtySecLeft <= elapsed && elapsed <= thirtySecLeft + 1900) {
+                        if (elapsed < thirtySecLeft + 400 || (thirtySecLeft + 600 < elapsed && elapsed < thirtySecLeft + 1000) || thirtySecLeft + 1200 < elapsed) {
+                            text = "30 seconds";
+                            screens.speech.style.background = "#4CAF50";
+                            speechText.style.fontSize = "16vmin";
+                        }
+                    } else if (done <= elapsed && elapsed <= done + 1900) {
+                        if (elapsed < done + 400 || (done + 600 < elapsed && elapsed < done + 1000) || done + 1200 < elapsed) {
+                            text = "TIME";
+                            screens.speech.style.background = "#F44336";
+                            speechText.style.fontSize = "16vmin";
+                        }
+                    } else if (formValues.timeDisp == "exact") {
+                        var ms = elapsed;
+                        var s = Math.floor((ms / 1000) % 60).toString();
+                        var m = Math.floor((ms / 1000) / 60).toString();
+                        ms = Math.floor((ms / 10) % 100).toString();
+                        text = "<span style='display:inline-block;width:1em'>0" + m + "</span>:<span style='display:inline-block;width:1em'>" + ("00" + s).substring(s.length) + "</span>.<span style='display:inline-block;width:1em'>" + ("00" + ms).substring(ms.length) + "</span>";
+                        speechText.style.fontSize = "13vmin";
+                    } else if (formValues.timeDisp == "cards" && elapsed < done) {
+                        text = "*Pretend some old ladies are judging you right now\u00A0:)*"
+                        speechText.style.fontSize = "8vmin";
+                    } else if (formValues.timeDisp == "cards" && done <= elapsed) {
+                        text = "Alright dude, you're done. Wrap it up."
+                        speechText.style.fontSize = "8vmin";
+                    }
+
+                    if (thirtySecLeft < elapsed && elapsed < done) {
+                        okayToStop.style.display = "block";
+                    }
+
+                    speechText.innerHTML = text;
+                }, 10);
+            });
+
+            listener("#impromptu_start", "click", function() {
+                var topics = [Math.floor(Math.random() * impromptuTopics.length)];
+                do {var rand = Math.floor(Math.random() * impromptuTopics.length)} while (~topics.indexOf(rand));
+                topics.push(rand);
+                do {var rand = Math.floor(Math.random() * impromptuTopics.length)} while (~topics.indexOf(rand));
+                topics.push(rand);
+                topics = topics.map(function(a) {
+                    return impromptuTopics[a];
+                });
+                document.getElementById("impromptu_topics").classList.remove("instructions");
+                document.getElementById("impromptu_topics").innerHTML = "<div><table><td>" + topics[0] + "</td></table><table><td>" + topics[1] + "</td></table><table><td>" + topics[2] + "</td></table</div>";
+                document.getElementById("impromptu_start").style.display = "none";
+                impromptuTimer.parentNode.style.display = "";
+                impromptuTimer.innerHTML = "<td>60 seconds</td>";
+                var start = performance.now();
+                var interval = setInterval(function() {
+                    var elapsed = 60 - Math.floor((performance.now() - start) / 1000)
+                    impromptuTimer.innerHTML = "<td>" + elapsed + " second" + (elapsed == 1 ? "" : "s") + "</td>";
+                    if (!elapsed) {
+                        impromptuTimer.parentNode.style.display = "none";
+                        document.getElementById("impromptu_start").style.display = "none";
+                        clearInterval(interval);
+                        screens.impromptuPrep.classList.remove("active");
+                        startSpeech();
+                    }
+                }, 10);
+            });
+
+            function startSpeech() {
+                document.getElementById("startDialog").style.display = "";
+                document.getElementById("speechTextDialog").style.display = "none";
+                document.getElementById("endSpeech").style.display = "none";
+                speechText.innerText = "";
+                screens.speech.style.background = "#78909C";
+                screens.speech.classList.add("active");
+                document.querySelector("#startDialog button").focus();
+            }
+
+            function startImpromptu() {
+                document.getElementById("impromptu_topics").innerHTML = "<div>You'll have one minute to choose a prompt (out of three) and write notes down on a notecard to use during the speech.</div>";
+                impromptuTimer.parentNode.style.display = "none";
+                var impromptuStart = document.getElementById("impromptu_start");
+                impromptuStart.style.display = "";
+                document.getElementById("impromptu_topics").classList.add("instructions");
+                screens.impromptuPrep.classList.add("active");
+                impromptuStart.focus();
+            }
+
+            function listener(elems, type, listener) {
+                if (typeof elems == "string") {
+                    elems = document.querySelectorAll(elems);
+                } else if (!Array.isArray(elems)) {
+                    elems = [elems];
+                }
+
+                for (var i = elems.length - 1; i >= 0; i--) {
+                    elems[i].addEventListener(type, listener);
+                }
+            }
+        }();
+    </script>
+</body>
+</html>
