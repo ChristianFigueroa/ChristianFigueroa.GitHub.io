@@ -444,9 +444,9 @@
                 } else {
                     var ms = performance.now() - speechStartTime;
                     clearInterval(speechInterval);
-                    var s = Math.round((ms / 1000) % 60).toString();
-                    var m = Math.round((ms / 1000) / 60).toString();
-                    ms = Math.round(ms % 1000).toString();
+                    var s = Math.floor((ms / 1000) % 60).toString();
+                    var m = Math.floor((ms / 1000) / 60).toString();
+                    ms = Math.floor(ms % 1000).toString();
                     speechText.innerHTML = (ms <= 60 * 60 * 1000) ? "Final Time: <span style='white-space:nowrap'><span style='display:inline-block;width:1em'>" + ("00" + m).substring(m.length) + "</span>:<span style='display:inline-block;width:1em'>" + ("00" + s).substring(s.length) + "</span>.<span style='display:inline-block;width:1.5em'>" + ("000" + ms).substring(ms.length) + "</span></span>" : "Final Time: <span style='white-space:nowrap'>&gt;1 hour</span>";
                     speechText.fontSize = "13vmin";
                     speechInterval = null;
