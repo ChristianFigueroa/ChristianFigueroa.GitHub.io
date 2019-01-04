@@ -27,6 +27,7 @@
             font-family: Roboto, Arial;
             font-weight: 500;
             background: #FAFAFA;
+            height: 100%;
         }
 
         h1 {
@@ -165,6 +166,7 @@
 
         .screen {
             display: none;
+            height: 100%;
         }
 
         .screen.active {
@@ -176,8 +178,8 @@
         }
 
         #startDialog, #speechTextDialog {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
         }
 
         #startDialog td, #speechTextDialog td {
@@ -263,6 +265,7 @@
             height: 10em;
             padding: 0 1em;
             width: 15em;
+            max-width: calc(100vw - 2rem - 2vmin);
             font-size: 1.6em;
             background: #FFF;
             margin: 2vmin 1vmin;
@@ -293,7 +296,6 @@
         }
 
         #impromptuPrep {
-            height: 100vh;
             flex-direction: column;
         }
 
@@ -420,17 +422,21 @@
                 }
             });
 
-            listener("#type_prepared_btn, #type_impromptu_btn", ["click", "touchstart"], function() {
+            listener("button", "touchstart", function() {
+                this.focus();
+            });
+
+            listener("#type_prepared_btn, #type_impromptu_btn", "click", function() {
                 form.type.className = this.value;
                 formValues.type = this.value;
             });
 
-            listener("#timeDisp_cards_btn, #timeDisp_exact_btn", ["click", "touchstart"], function() {
+            listener("#timeDisp_cards_btn, #timeDisp_exact_btn", "click", function() {
                 form.timeDisp.className = this.value;
                 formValues.timeDisp = this.value;
             });
 
-            listener("#endSpeech", ["click", "touchstart"], function() {
+            listener("#endSpeech", "click", function() {
                 if (this.innerText == "End speech") {
                     screens.speech.classList.remove("active");
                     screens.setup.classList.add("active");
@@ -441,7 +447,7 @@
                     var s = Math.round((ms / 1000) % 60).toString();
                     var m = Math.round((ms / 1000) / 60).toString();
                     ms = Math.round(ms % 1000).toString();
-                    speechText.innerHTML = (ms <= 60 * 60 * 1000) ? "Final Time: <span style='display:inline-block;width:1em'>" + ("00" + m).substring(m.length) + "</span>:<span style='display:inline-block;width:1em'>" + ("00" + s).substring(s.length) + "</span>.<span style='display:inline-block;width:1.5em'>" + ("000" + ms).substring(ms.length) + "</span>" : "Final Time: &gt;1 hour";
+                    speechText.innerHTML = (ms <= 60 * 60 * 1000) ? "Final Time: <span style='white-space:nowrap'><span style='display:inline-block;width:1em'>" + ("00" + m).substring(m.length) + "</span>:<span style='display:inline-block;width:1em'>" + ("00" + s).substring(s.length) + "</span>.<span style='display:inline-block;width:1.5em'>" + ("000" + ms).substring(ms.length) + "</span></span>" : "Final Time: <span style='white-space:nowrap'>&gt;1 hour</span>";
                     speechText.fontSize = "13vmin";
                     speechInterval = null;
                     speechStartTime = null;
@@ -450,7 +456,7 @@
                 }
             });
 
-            listener("#startDialog button", ["click", "touchstart"], function() {
+            listener("#startDialog button", "click", function() {
                 document.getElementById("startDialog").style.display = "none";
                 document.getElementById("speechTextDialog").style.display = "";
                 var start = speechStartTime = performance.now();
@@ -506,7 +512,7 @@
                 }, 10);
             });
 
-            listener("#impromptu_start", ["click", "touchstart"], function() {
+            listener("#impromptu_start", "click", function() {
                 var topics = [Math.floor(Math.random() * impromptuTopics.length)];
                 do {var rand = Math.floor(Math.random() * impromptuTopics.length)} while (~topics.indexOf(rand));
                 topics.push(rand);
