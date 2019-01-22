@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>Academic Decathlon 2017&ndash;2018: Africa</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/acadec/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/acadec/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/acadec/favicon-16x16.png">
+    <link rel="manifest" href="/acadec/site.webmanifest">
+    <link rel="mask-icon" href="/acadec/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/acadec/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Acadec Tests">
+    <meta name="application-name" content="Acadec Tests">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/acadec/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91403443-1', 'auto');
+	 	ga('send', 'pageview');</script>
+    <script type="text/javascript" src="/fontTeX/fonttex.js" async></script>
+    <style type="text/css">
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        html, body {
+            margin: 0;
+            background: #ccc;
+        }
+        .header {
+            background: #eee;
+            padding: 4vh 8vw;
+        }
+        h1, h2, h3 {
+            color: #345;
+            text-align: center;
+            font-family: "Passion One", Arial, sans-serif;
+            margin: 0;
+            line-height: 1.3;
+        }
+        h1 {
+            font-size: 13vmin;
+        }
+        h2 {
+            font-size: 10vmin;
+        }
+        h3 {
+            font-size: 8vmin;
+            margin-top: .5em;
+        }
+        .screen {
+            overflow-x: hidden;
+        }
+        .selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #ccc;
+            padding: 4em 6em;
+            box-shadow: 0 1.3em 0.6em -1em #888 inset;
+        }
+        #subjectFocusSelector {
+            background: #eee;
+            width: 100%;
+            font-size: 2.3em;
+            font-family: "Passion One", Arial, sans-serif;
+            border-radius: .4em;
+            box-shadow: .1em .2em #aaa;
+            color: #345;
+        }
+        .subjectFocusSelectorSelection {
+            cursor: pointer;
+        }
+        #subjectFocusSelectorAllOption {
+            padding: .3em .6em;
+            border-top-right-radius: inherit;
+            border-top-left-radius: inherit;
+            background: #546E7A;
+            color: white;
+        }
+        #subjectFocusSelectorAllOption:hover, #subjectFocusSelectorAllOption:focus {
+            background: #647E8A;
+        }
+        .subjectFocusSelectorSelection td:first-child {
+            padding-left: .6em;
+            vertical-align: top;
+            width: 1em;
+        }
+        .subjectFocusSelectorSelection td:last-child {
+            padding-right: .6em;
+        }
+        tr.subjectFocusSelectorSelection:first-child {
+            box-shadow: 0 .125em #7CBBD7 inset;
+        }
+        tr.subjectFocusSelectorSelection:first-child:focus, tr.subjectFocusSelectorSelection:first-child:hover {
+            box-shadow: 0 .125em #6CABC7 inset;
+        }
+        #subjectFocusSelector img {
+            height: .7em;
+        }
+        #subjectFocusSelectorOthers {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: inherit;
+        }
+        #subjectFocusSelectorOthers > :first-child td {
+            padding-top: .3em;
+        }
+        #subjectFocusSelectorOthers > :last-child td {
+            padding-bottom: .175em;
+        }
+        #subjectFocusSelectorOthers > :last-child {
+            border-bottom-right-radius: inherit;
+            border-bottom-left-radius: inherit;
+        }
+        #subjectFocusSelectorOthers > :last-child :first-child {
+            border-bottom-left-radius: inherit;
+        }
+        #subjectFocusSelectorOthers > :last-child :last-child {
+            border-bottom-right-radius: inherit;
+        }
+        .subjectFocusSelectorSelection:focus, .subjectFocusSelectorSelection:hover {
+            background: #ddd;
+        }
+        .inactive {
+            display: none;
+            opacity: 0;
+        }
+        [role=button] {
+            background: #10bcd1;
+            padding: .3em .5em;
+            font-family: "Passion One", Arial, sans-serif;
+            color: #fff;
+            font-size: 2.3em;
+            border-radius: .4em;
+            box-shadow: .1em .2em #009cb1;
+            margin: .2em;
+            position: relative;
+            cursor: pointer;
+            flex-grow: 1;
+            text-align: center;
+            outline: 0;
+        }
+        [role=button]:not(.disabled):focus, [role=button]:not(.disabled):hover {
+            box-shadow: .05em .1em #008ca1;
+            top: .1em;
+            left: .05em;
+            background: #00acc1;
+            z-index: 1;
+        }
+        [role=button]:not(.disabled):focus:before, [role=button]:not(.disabled):hover:before {
+            content: ' ';
+            height: 100%;
+            width: 100%;
+            padding: .1em 0 0 .05em;
+            top: -.1em;
+            left: -.05em;
+            border-radius: inherit;
+            position: absolute;
+            z-index: -1;
+        }
+        [role=button].disabled {
+            background: #54868c;
+            box-shadow: .1em .2em #36747c;
+            cursor: not-allowed;
+        }
+        #nextToTest {
+            margin: 0 0 1em 0;
+        }
+        .fadeout {
+            animation: fadeout 0.35s ease-out;
+        }
+        .fadein {
+            animation: fadein 0.35s ease-out;
+        }
+        .fadein, .fadeout {
+            animation-fill-mode: forwards;
+        }
+        #test {
+            background: #ddd;
+            min-height: 100vh;
+            z-index: 1;
+            hyphens: auto;
+        }
+        #question_container {
+            background: #fff;
+            font-family: "Passion One", Arial, sans-serif;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            cursor: default;
+        }
+        #question_container:focus {
+            box-shadow: 0 0 20vh 0em rgba(0,172,193,.2) inset;
+            color: #00838F;
+            outline: 0;
+        }
+        #question_display {
+            text-align: center;
+            font-size: 4.5em;
+            max-width: 80vw;
+        }
+        #answers {
+            padding: 2.5em 10vw;
+            box-shadow: 0 1.3em 0.6em -1em #888 inset;
+        }
+        .answer, .answer.disabled {
+            background: #fff;
+            color: #1b1b1b;
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 2em;
+            padding: .3em .4em;
+            border-radius: .3em;
+            box-shadow: .1em .2em #ccc;
+            margin-bottom: .4em;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            outline: 0;
+        }
+        .answer.disabled {
+            cursor: default;
+        }
+        .answer:last-child {
+            margin-bottom: initial;
+        }
+        .answer:not(.disabled):focus, .answer:not(.disabled):hover {
+            box-shadow: .05em .1em #bbb;
+            top: .1em;
+            left: .05em;
+            background: #eee;
+            z-index: 1;
+        }
+        .answer:not(.disabled):focus:before, .answer:not(.disabled):hover:before {
+            content: ' ';
+            height: 100%;
+            width: 100%;
+            padding: .1em 0 0 .05em;
+            top: -.1em;
+            left: -.05em;
+            border-radius: inherit;
+            position: absolute;
+            z-index: -1;
+        }
+        .answer.disabled.correct {
+            background: #60ff60;
+            box-shadow: .05em .1em #30cc30;
+            color: #345;
+            top: .1em;
+            left: .05em;
+        }
+        .answer.disabled.incorrect {
+            background: #ff6040;
+            box-shadow: 0.05em .1em #cc3020;
+            top: .1em;
+            left: .05em;
+        }
+        .noclick {
+            pointer-events: none;
+        }
+        #next, #quit {
+            padding: .3em .4em;
+            margin: 0 10vw .2em;
+        }
+        #justification {
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 1.75em;
+            padding: 0 8vw 2rem;
+            text-align: center;
+            color: #181818
+            margin-top: -.5rem;
+        }
+        #progress {
+            padding: .8rem 10vw;
+            font-family: "Passion One", Arial, sans-serif;
+        }
+        #progress_bar, #correct_bar {
+            background: #eee;
+            font-size: 1.75em;
+            text-align: center;
+            border-radius: .8rem;
+            box-shadow: .1em .2em #bbb;
+            position: relative;
+            padding: .2em;
+        }
+        #progress_text, #correct_text {
+            color: #345;
+            text-align: center;
+        }
+        #correct_bar {
+            margin-top: .4em;
+        }
+        #timer {
+            padding: 1em 10vw .5em;
+            text-align: center;
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 1.75em;
+            color: #181818;
+        }
+        #timer_clock {
+            height: 1em;
+            vertical-align: middle;
+        }
+        #timer_text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        #result_svg {
+            height: 50vmin;
+            width: 60vmin;
+            margin: auto;
+            display: block;
+        }
+        #result_header {
+            background: #eee;
+            padding: 3em 0 2em;
+            box-shadow: 0 .3em .6em 0 #888;
+        }
+        #result_text {
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 7vmax;
+            text-align: center;
+            margin-top: .2em;
+        }
+        #result_review {
+            font-family: "Passion One", Arial, sans-serif;
+            font-size: 3em;
+            margin: .5em 0 0;
+            text-align: center;
+            background: #eee;
+            box-shadow: 0 -.1em .2em 0 #888;
+            hyphens: auto;
+        }
+        #missed_questions {
+            background: #607D8B;
+            padding: .8rem 0;
+        }
+        #missed_questions table {
+            font-size: 2rem;
+            table-layout: fixed;
+            width: calc(100% - 5vw);
+            border-collapse: collapse;
+            background: #fff;
+            margin: .4em 2.5vw;
+            border-radius: .55em;
+        }
+        #missed_questions table:first-child {
+            margin-top: 0;
+        }
+        #missed_questions table:last-child {
+            margin-bottom: 0;
+        }
+        #missed_questions .question {
+            color: #181818;
+            padding: .4em 1.4em;
+            position: relative;
+        }
+        #missed_questions .incorrect {
+            color: #1b1b1b;
+            font-size: 1.8rem;
+            padding: .4em;
+            border-radius: .5em;
+            box-shadow: 0 0 0 10em #ff6242 inset;
+            border: .3em solid transparent;
+            border-top: 0;
+            border-left-width: .6em;
+        }
+        #missed_questions .correct {
+            color: #345;
+            font-size: 1.8rem;
+            padding: .4em;
+            border-radius: .5em;
+            box-shadow: 0 0 0 10em #60ff60 inset;
+            border: .3em solid transparent;
+            border-top: 0;
+            border-right-width: .6em;
+        }
+        #missed_questions .question_container {
+            margin: 0 auto .8em;
+            box-shadow: 0 .15em .2em 0 #888,
+                0 -.15em .2em 0 #888;
+        }
+        #missed_questions .question_container:first-child {
+            box-shadow: 0 .15em .2em 0 #888;
+        }
+        #missed_questions .question_number {
+            position: absolute;
+            right: calc(100% - 1.4em);
+        }
+        #again {
+            padding: 0 10vw;
+            margin: 1.5em 0 1.7em;
+        }
+        #again_button {
+            background: #10bcd1;
+            padding: .3em .4em;
+            font-family: "Passion One", Arial, sans-serif;
+            color: #fff;
+            font-size: 2em;
+            border-radius: .4em;
+            box-shadow: .1em .2em #009cb1;
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+            outline: 0;
+        }
+        #again_button:hover, #again_button:focus {
+            box-shadow: .05em .1em #008ca1;
+            top: .1em;
+            left: .05em;
+            background: #00acc1;
+            z-index: 1;
+        }
+        #again_button:hover:before, #again_button:focus:before {
+            content: ' ';
+            height: 100%;
+            width: 100%;
+            padding: .1em 0 0 .05em;
+            top: -.1em;
+            left: -.05em;
+            border-radius: inherit;
+            position: absolute;
+            z-index: -1;
+        }
+        @media (max-width: 750px) {
+            .selector {
+                padding: 2em 10vw;
+            }
+            #question_container {
+                font-size: 85%
+            }
+        }
+        @media (max-width: 600px) {
+            .selector {
+                font-size: 75%;
+            }
+            #question_container {
+                font-size: 75%;
+            }
+        }
+        @media (max-width: 400px) {
+            #question_container {
+                font-size: 65%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Passion+One:400,700" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="subject_select" class="screen inactive">
+        <div class="header">
+            <h1>Academic Decathlon</h1>
+            <h2>2018&ndash;2019</h2>
+            <h2>The Sixties</h2>
+            <h3>Practice Quizzes</h3>
+        </div>
+        <div class="selector">
+            <div class="subject selection" id="artSelection" role="button" tabindex="0">Art</div>
+            <div class="subject selection" id="econSelection" role="button" tabindex="0">Economics</div>
+            <div class="subject selection" id="litSelection" role="button" tabindex="0">Literature</div>
+            <div class="subject selection" id="mathSelection" role="button" tabindex="0">Mathematics</div>
+            <div class="subject selection" id="musicSelection" role="button" tabindex="0">Music</div>
+            <div class="subject selection" id="scienceSelection" role="button" tabindex="0">Science</div>
+            <div class="subject selection" id="sosciSelection" role="button" tabindex="0">Social&nbsp;Science</div>
+        </div>
+    </div>
+    <div id="test_select" class="screen inactive">
+        <div class="header">
+            <h1 id="test_select_subject">Subject</h1>
+        </div>
+        <div class="selector">
+            <div id="nextToTest" role="button" tabindex="0" class="disabled">Start Test</div>
+            <div id="subjectFocusSelector">
+                <div id="subjectFocusSelectorAllOption" class="subjectFocusSelectorSelection" data-checked="true">
+                    <img id="subjectFocusSelectorAllOptionCheckbox" src="checkbox.dark.all.svg"> All
+                </div>
+                <table id="subjectFocusSelectorOthers" data-selected="0"></table>
+            </div>
+        </div>
+    </div>
+    <div id="test" class="inactive">
+        <div id="question_container" tabindex="0">
+            <div id="question_display"></div>
+        </div>
+        <div id="answers"></div>
+        <div id="justification"></div>
+        <div id="next" role="button" tabindex="0">Next Question</div>
+        <div id="quit" role="button" tabindex="0">Quit Test</div>
+        <div id="progress">
+            <div id="progress_bar">
+                <div id="progress_text"></div>
+            </div>
+            <div id="correct_bar">
+                <div id="correct_text"></div>
+            </div>
+        </div>
+        <div id="timer">
+            <svg id="timer_clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+                <path fill="#AAA" d="M28.2,3.5c0,0,2.2,1.1,3.7,1.8c1.5,0.7,4.1,1.1,6,1.3c1.9,0.2,4.8,0.1,4.8,0.1l1.3-3.2L29.5,0.3L28.2,3.5z"/>
+                <path fill="#CCC" d="M43.9,3.5c-0.6-0.5-1.5-1.2-2.8-1.8c-0.8-0.4-3.8-1.4-7.7-1.7c-1.8-0.1-4,0.3-4,0.3l-1.3,3.2
+                    c1.6-0.3,3-0.3,4-0.3c4.4,0,7.1,1.4,7.7,1.7c1.2,0.6,2.1,1.3,2.8,1.8C43.1,5.6,43.5,4.6,43.9,3.5z"/>
+                <path fill="#BBB" d="M33.4,4.4c0,0-0.7,1.3-0.9,3.6c-0.1,1.4-0.3,3-0.5,4.9l3.9,0.4c0-1.1,0-2.5,0.2-4.1c0.2-1.6,0.6-3,1-4.1
+                    C36.5,4.6,35,3.9,33.4,4.4z"/>
+                <path fill="#AAA" d="M56.1,26.6c-3-0.5-6-1-9-1.5c-2.2-2.4-4.4-4.8-6.5-7.2c0.4-1.8,0.8-3.5,1.3-5.3C47.3,15.7,53.8,22.4,56.1,26.6
+                    z"/>
+                <path fill="#AAA" d="M8.1,46.4c-1.2,0-2.4,0.1-3.6,0.1c1.2,1.7,5.6,6.3,7.9,7.6c0-1.2,0.1-2.4,0.1-3.6C11,49.1,9.5,47.8,8.1,46.4z"
+                    />
+                <path fill="#AAA" d="M38.4,13.6c-5.5-0.5-22.1,4.3-25.7,7.9S2.6,43.1,8.9,51.1c2.5,3.1,10.8,8.3,16.1,8.8
+                    c6.3,0.6,22.8-1.8,25.9-5.5c3.4-4.1,7.4-19,7-22.6C57,23.6,45.8,14.9,38.4,13.6z"/>
+                <path fill="#CCC" d="M34.2,9.4c-5.5-0.5-22.1,4.3-25.7,7.9S-1.6,38.9,4.7,46.9c2.5,3.1,10.8,8.3,16.1,8.8
+                    c6.3,0.6,22.8-1.8,25.9-5.5c3.4-4.1,7.4-19,7-22.6C52.8,19.4,41.5,10.7,34.2,9.4z"/>
+                <path fill="#F5F5F5" d="M32.4,15.8c-4-0.3-16.2,3.1-18.9,5.8s-7.4,15.9-2.8,21.7c1.8,2.3,7.9,6.1,11.8,6.5c4.6,0.5,16.7-1.3,19-4
+                    c2.5-3,5.4-13.9,5.1-16.6C46.1,23.1,37.8,16.8,32.4,15.8z"/>
+                <polygon fill="#F00" points="24.7,33.8 27.9,32.8 38.2,42 26.5,37.3"/>
+                <path fill="#666" d="M24.7,33.7c0.6,1.4,1.2,2.7,1.8,4.1c1.2-0.9,2.4-1.8,3.5-2.6c0.8-6.6,1.6-13.2,2.4-19.7
+                    C29.9,21.5,27.3,27.6,24.7,33.7z"/>
+            </svg>
+            <div id="timer_text"></div>
+        </div>
+    </div>
+    <div id="results" class="inactive">
+        <div id="result_header">
+            <svg id="result_svg" viewBox="-10 0 120 100"></svg>
+            <div id="result_text"></div>
+        </div>
+        <div id="again">
+            <div id="again_button" role="button" tabindex="0">Take Another Test</div>
+        </div>
+        <div id="result_review">
+            Missed Questions
+            <div id="missed_questions"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        !function(){
+            "use strict";
+
+            var questions = {};
+            var screen = {
+                subjectSelect: document.getElementById("subject_select"),
+                testSelect: document.getElementById("test_select"),
+                test: document.getElementById("test"),
+                results: document.getElementById("results")
+            }
+            var allSelection = document.getElementById("subjectFocusSelectorAllOption");
+            var otherSelections = document.getElementById("subjectFocusSelectorOthers");
+            var nextToTest = document.getElementById("nextToTest");
+            var questionText = document.getElementById("question_display");
+            var answerContainer = document.getElementById("answers");
+            var timerText = document.getElementById("timer_text");
+            var justification = document.getElementById("justification");
+            var nextBtn = document.getElementById("next");
+            var quitBtn = document.getElementById("quit");
+            var progressBar = document.getElementById("progress_bar");
+            var progressText = document.getElementById("progress_text");
+            var correctBar = document.getElementById("correct_bar");
+            var correctText = document.getElementById("correct_text");
+            var againBtn = document.getElementById("again_button");
+            var questionContainer = document.getElementById("question_container");
+            var wrongAnswers = null;
+            var questionIndex = null;
+            var questionsAnswered = null;
+            var chosenSubject = null;
+            var testQs = null;
+            var fontTeXConfiged = false;
+            var testTime = null;
+            var timerPaused = false;
+            var questionStartTime = null;
+            var updateTimer = null;
+            var pauseTime = 180e3; // three minutes
+
+            function hashChange() {
+                var hash = decodeURIComponent(location.hash.substring(1));
+
+                if (hash[0] != "/") {
+                    history.replaceState("", "", "#/" + hash.replace(/\s+/g, ""));
+                    hashChange();
+                    return;
+                } else if (/\s+/g.test(hash)) {
+                    history.replaceState("", "", "#" + hash.replace(/\s+/g, ""));
+                    hashChange();
+                    return;
+                }
+
+                hash = hash.substring(1);
+
+                if (!hash) {
+                    chosenSubject = null;
+                    displayScreen(screen.subjectSelect);
+                    document.getElementById("artSelection").focus();
+                    return;
+                }
+
+                var subject = hash.match(/^(?:Art|Economics|Literature|Mathematics|Music|Science|SocialScience)/);
+
+                if (subject) {
+                    chosenSubject = subject = subject[0];
+                    displayScreen(screen.testSelect);
+                    displaySubjectSelect(subject, true);
+                    nextToTest.focus();
+                    fetchSubject(subject).then(function() {
+                        displaySubjectSelect(subject);
+
+                        hash = hash.substring(subject.length + 1);
+                        if (hash && !isNaN(parseInt(hash)) && parseInt(hash) >= 0) {
+                            var index = 0;
+                            var indexes = [];
+                            otherSelections.setAttribute("data-selected", hash);
+                            var state = hash.replace(/^\d+/, "").substring(1);
+                            var testID = hash = parseInt(hash);
+                            while (hash) {
+                                if (hash & 1) {
+                                    indexes.push(index);
+                                }
+                                hash >>= 1;
+                                index += 1;
+                            }
+                            var elems = document.querySelectorAll("#subjectFocusSelectorOthers tr");
+                            var all = [];
+                            for (var i = elems.length - 1; i >= 0; i--) {
+                                all[i] = indexes.includes(i);
+                                elems[i].setAttribute("data-checked", all[i]);
+                                elems[i].firstElementChild.firstElementChild.src = "checkbox.light." + (all[i] ? "all" : "none") + ".svg";
+                            }
+                            var none = all.every(function(a) {return !a});
+                            all = all.every(function(a) {return a});
+                            allSelection.setAttribute("data-checked", all);
+                            allSelection.firstElementChild.src = "checkbox.dark." + (all ? "all" : none ? "none" : "some") + ".svg";
+                            nextToTest.classList[none ? "add" : "remove"]("disabled");
+
+                            if (state) {
+                                history.back();
+                            } else {
+                                history.replaceState("", "", "#/" + subject + "/" + testID);
+                            }
+                        } else {
+                            history.replaceState("", "", "#/" + subject);
+                            allSelection.setAttribute("data-checked", "true");
+                            allSelection.firstElementChild.src = "checkbox.dark.all.svg";
+                            nextToTest.classList.remove("disabled");
+                        }
+                    }, function() {
+                        displaySubjectSelect("err");
+                    });
+                } else {
+                    subject = hash.toLowerCase().match(/^(?:art|economics|literature|mathematics|music|science|socialscience|econ|lit|math|sci|sosci)(?=\/|$)/);
+
+                    if (!subject) {
+                        history.replaceState("", "", "#/");
+                        hashChange();
+                        return;
+                    }
+                    switch (subject[0]) {
+                        case "art":
+                            history.replaceState("", "", "#/Art/" + hash.substring(4));
+                            hashChange();
+                            break;
+
+                        case "economics":
+                        case "econ":
+                            history.replaceState("", "", "#/Economics/" + hash.substring(subject[0].length + 1));
+                            hashChange();
+                            return;
+
+                        case "literature":
+                        case "lit":
+                            history.replaceState("", "", "#/Literature/" + hash.substring(subject[0].length + 1));
+                            hashChange();
+                            break;
+
+                        case "mathematics":
+                        case "math":
+                            history.replaceState("", "", "#/Mathematics/" + hash.substring(subject[0].length + 1));
+                            hashChange();
+                            break;
+
+                        case "music":
+                            history.replaceState("", "", "#/Music/" + hash.substring(6));
+                            hashChange();
+                            break;
+
+                        case "science":
+                        case "sci":
+                            history.replaceState("", "", "#/Science/" + hash.substring(subject[0].length + 1));
+                            hashChange();
+                            break;
+
+                        case "socialscience":
+                        case "sosci":
+                            history.replaceState("", "", "#/SocialScience/" + hash.substring(subject[0].length + 1));
+                            hashChange();
+                            break;
+                    }
+                    return;
+                }
+            }
+
+            window.addEventListener("hashchange", hashChange);
+            if (!location.hash) {
+                history.replaceState("", "", "#/");
+            }
+            hashChange();
+
+            var currSubject = -1;
+            function fetch() {
+                if (++currSubject < 7) {
+                    fetchSubject(
+                        ["Art", "Economics", "Literature", "Mathematics", "Music", "Science", "SocialScience"][currSubject]
+                    ).then(fetch, function() {
+                        currSubject--;
+                        setTimeout(fetch, 5000);
+                    });
+                }
+            }
+            fetch();
+
+
+
+            for (var elems = document.querySelectorAll("#subject_select .selector .selection"), i = 0; i < 7; i++) {
+                elems[i].addEventListener("click", function() {
+                    history.pushState("", "", "#/" + this.id.substring(0, this.id.length - 9));
+                    hashChange();
+                });
+                elems[i].addEventListener("keydown", function(e) {
+                    if (e.keyCode == 40 || e.which == 40 || e.key == "ArrowDown" || e.code == "ArrowDown" || e.keyCode == 39 || e.which == 39 || e.key == "ArrowRight" || e.code == "ArrowRight") {
+                        (this.nextElementSibling || this.parentNode.firstElementChild).focus();
+                    } else if (e.keyCode == 38 || e.which == 38 || e.key == "ArrowUp" || e.code == "ArrowUp" || e.keyCode == 37 || e.which == 37 || e.key == "ArrowLeft" || e.code == "ArrowLeft") {
+                        (this.previousElementSibling || this.parentNode.lastElementChild).focus();
+                    }
+                });
+            }
+
+            for (var elems = document.querySelectorAll("[role=button],#subjectFocusSelectorAllOption"), i = elems.length - 1; i >= 0; i--) {
+                elems[i].setAttribute("tabindex", 0);
+                elems[i].addEventListener("keydown", preventEvent("Space", "Enter", " ", 32, 13));
+                elems[i].addEventListener("keyup", btnKeyBoardClick);
+            }
+
+            allSelection.addEventListener("click", function() {
+                if (this.getAttribute("data-checked") == "true") {
+                    this.setAttribute("data-checked", "false");
+                    this.firstElementChild.src = "checkbox.dark.none.svg";
+                    otherSelections.setAttribute("data-selected", 0);
+                    for (var elems = otherSelections.children, i = elems.length - 1; i >= 0; i--) {
+                        elems[i].setAttribute("data-checked", "false");
+                        elems[i].firstElementChild.firstElementChild.src = "checkbox.light.none.svg";
+                        nextToTest.classList.add("disabled");
+                    }
+                    history.replaceState("", "", "#/" + chosenSubject + "/0");
+                } else {
+                    this.setAttribute("data-checked", "true");
+                    this.firstElementChild.src = "checkbox.dark.all.svg";
+                    otherSelections.setAttribute("data-selected", (0b1 << questions[chosenSubject].n.length) - 1);
+                    for (var elems = otherSelections.children, i = elems.length - 1; i >= 0; i--) {
+                        elems[i].setAttribute("data-checked", "true");
+                        elems[i].firstElementChild.firstElementChild.src = "checkbox.light.all.svg";
+                        nextToTest.classList.remove("disabled");
+                    }
+                    history.replaceState("", "", "#/" + chosenSubject + "/" + ((0b1 << questions[chosenSubject].n.length) - 1));
+                }
+            });
+            allSelection.addEventListener("keydown", preventEvent("ArrowDown", "ArrowUp", 40, 38));
+            allSelection.addEventListener("keydown", function(e) {
+                if (e.keyCode == 40 || e.which == 40 || e.key == "ArrowDown" || e.code == "ArrowDown") {
+                    document.querySelector("#subjectFocusSelectorOthers tr:first-child").focus();
+                } else if (e.keyCode == 38 || e.which == 38 || e.key == "ArrowUp" || e.code == "ArrowUp") {
+                    document.querySelector("#subjectFocusSelectorOthers tr:last-child").focus();
+                }
+            });
+
+            nextToTest.addEventListener("click", function() {
+                var selection = +otherSelections.getAttribute("data-selected");
+                if (selection) {
+                    var index = 0;
+                    testQs = [];
+                    history.pushState("", "", "#/" + chosenSubject + "/" + selection + "/test");
+                    while (selection) {
+                        if (selection & 1) {
+                            testQs = testQs.concat(questions[chosenSubject].v[index]);
+                        }
+                        selection >>= 1;
+                        index += 1;
+                    }
+                    testQs = randArray(testQs, chosenSubject == "Mathematics" ? 35 : 50);
+                    testTime = 0;
+                    questionsAnswered = 0;
+                    timerText.innerText = "00:00";
+                    wrongAnswers = [];
+                    questionIndex = -1;
+                    showTestQuestion();
+                    progressBar.style.background = "";
+                    correctBar.style.background = "";
+                    correctText.innerText = "No questions have been answered.";
+                }
+            });
+
+            nextBtn.addEventListener("click", showTestQuestion);
+            nextBtn.addEventListener("keydown", preventEvent("Space", "Enter", " ", 32, 13));
+            nextBtn.addEventListener("keyup", btnKeyBoardClick);
+
+            quitBtn.addEventListener("click", function() {
+                if (questionStartTime) testTime += performance.now() - questionStartTime;
+                displayScreen(screen.results);
+                againBtn.focus();
+                if (updateTimer) clearInterval(updateTimer);
+                var missed = document.getElementById("missed_questions");
+                if (wrongAnswers.length) {
+                    missed.innerHTML = "";
+                    for (var i = wrongAnswers.length - 1; i >= 0; i--) {
+                        var table = document.createElement("table");
+                        missed.appendChild(table);
+                        table.innerHTML = "<tbody><tr><td colspan='2' class='question'></td></tr><tr><td class='incorrect'></td><td class='correct'></td></tr></tbody>";
+                        fontTeX.render(wrongAnswers[i].q).in(table.firstElementChild.firstElementChild.firstElementChild);
+                        fontTeX.render(wrongAnswers[i].i).in(table.firstElementChild.lastElementChild.firstElementChild);
+                        fontTeX.render(wrongAnswers[i].c).in(table.firstElementChild.lastElementChild.lastElementChild);
+                    }    
+                } else {
+                    missed.innerHTML = "<table><tr><td style='padding:.4em'>No missed questions! :D</td></tr></table>";
+                }
+                history.replaceState("", "", location.hash.replace("/test", "/results"));
+
+                var angle = (questionsAnswered - wrongAnswers.length) / (questionsAnswered || 1) * 2;
+                document.getElementById("result_svg").innerHTML = "<ellipse cx='50' cy='50' rx='50' ry='50' fill='#ccc'/><path d='M" + (angle > 1 ? "50 100A50 50 0 0 0 50 0' fill='#00acc1'/><path d='M" + (Math.sin(angle * Math.PI) * 50 + 50) + " " + (Math.cos(angle * Math.PI) * -50 + 50) + "A50 50 0 1 0 " + (Math.sin(angle * Math.PI) * -50 + 50) + " " + (Math.cos(angle * Math.PI) * 50 + 50) : (Math.sin(angle * Math.PI) * 50 + 50) + " " + (Math.cos(angle * Math.PI) * -50 + 50) + "A50 50 0 0 0 50 0") + "L50 50Z' fill='#00acc1'/><ellipse cx='50' cy='50' rx='42' ry='42' fill='#eee'/><text font-size='65' font-family='\"Passion One\", Arial, sans-serif' text-anchor='middle' x='50' y='69'>" + Math.round(((questionsAnswered - wrongAnswers.length) / (questionsAnswered || 1)) * 100) + "</text>";
+
+                var mins = Math.floor(testTime / 1000 / 60).toString();
+                var secs = Math.floor(testTime / 1000 % 60).toString();
+                var ms = Math.floor(testTime % 1000).toString();
+
+                document.getElementById("result_text").innerHTML = (questionsAnswered - wrongAnswers.length) + "&hairsp;/&hairsp;" + questionsAnswered + " correct<br>" + "00".substring(mins.length) + mins + ":" + "00".substring(secs.length) + secs + "." + "000".substring(ms.length) + ms;
+
+                console.log(testTime)
+
+                testTime = null;
+                questionStartTime = null;
+                questionIndex = null;
+                wrongAnswers = null;
+                questionsAnswered = null;
+                testQs = null;
+            });
+
+            againBtn.addEventListener("click", function() {
+                displayScreen(screen.subjectSelect);
+                document.getElementById("artSelection").focus();
+                history.go(-2);
+            });
+            againBtn.addEventListener("keydown", preventEvent("Space", "Enter", " ", 32, 13));
+            againBtn.addEventListener("keyup", btnKeyBoardClick);
+
+            questionContainer.addEventListener("keydown", function(e) {
+                if (e.keyCode == 38 || e.which == 38 || e.key == "ArrowUp" || e.code == "ArrowUp") {
+                    answerContainer.lastElementChild.focus();
+                } else if (e.keyCode == 40 || e.which == 40 || e.key == "ArrowDown" || e.code == "ArrowDown") {
+                    answerContainer.firstElementChild.focus();
+                }
+            });
+            questionContainer.addEventListener("keydown", preventEvent("ArrowDown", "ArrowUp", " ", 40, 38, 32));
+
+
+
+            function showTestQuestion() {
+                var index = ++questionIndex;
+                displayScreen(screen.test);
+                if (!fontTeXConfiged) {
+                    fontTeX.render("\\math\\global\\mathchardef\\cdot=\"200B7\\global\\mathchardef\\cdotp=\"600B7\\global\\catcode`\\$=11\\endmath");
+                    fontTeXConfiged = true;
+                }
+                fontTeX.render(testQs[index].q).in(questionText);
+                var answers = randArray(testQs[index].a);
+                var correctAnswer = testQs[index].a[0];
+                answerContainer.innerHTML = "";
+                for (var i = 0; i < 5; i++) {
+                    var div = document.createElement("div");
+                    div.setAttribute("role", "button");
+                    div.classList.add("answer");
+                    div.setAttribute("data-preform", answers[i]);
+                    div.setAttribute("tabindex", 0);
+                    div.addEventListener("keydown", preventEvent("Space", "ArrowDown", "ArrowUp", "Enter", " ", 40, 38, 32, 13));
+                    div.addEventListener("keydown", answerKeyDown);
+                    div.addEventListener("keyup", btnKeyBoardClick);
+                    div.addEventListener("click", answerClick);
+                    answerContainer.appendChild(div);
+                    fontTeX.render(answers[i]).in(div);
+                }
+
+                justification.classList.add("inactive");
+                quitBtn.classList.remove("inactive");
+                nextBtn.classList.add("inactive");
+                progressText.innerText = (index + 1) + " of " + testQs.length;
+                quitBtn.innerText = "Quit Test";
+                answerContainer.firstElementChild.focus();
+
+                updateTimer = setInterval(updateTimerFunc, 250);
+                questionStartTime = performance.now();
+                updateTimerFunc();
+
+                function updateTimerFunc() {
+                    var elapsed = performance.now() - questionStartTime;
+                    if (elapsed > pauseTime) {
+                        testTime += pauseTime;
+                        questionStartTime = null;
+                        timerPaused = true;
+                        clearInterval(updateTimer);
+                    }
+                    var secs = (testTime + (timerPaused ? 0 : performance.now() - questionStartTime)) / 1000;
+                    var mins = Math.floor(secs / 60).toString();
+                    secs = Math.floor(secs % 60).toString();
+                    timerText.innerText = "00".substring(mins.length) + mins + ":" + "00".substring(secs.length) + secs + (timerPaused ? " (Paused)" : "");
+                }
+
+                function answerKeyDown(e) {
+                    if (e.keyCode == 38 || e.which == 38 || e.key == "ArrowUp" || e.code == "ArrowUp") {
+                        (this.previousElementSibling || questionContainer).focus();
+                    } else if (e.keyCode == 40 || e.which == 40 || e.key == "ArrowDown" || e.code == "ArrowDown") {
+                        (this.nextElementSibling || questionContainer).focus();
+                    }
+                }
+
+                function answerClick() {
+                    testTime += performance.now() - questionStartTime;
+                    questionStartTime = null;
+                    timerPaused = false;
+                    questionsAnswered++;
+                    clearInterval(updateTimer);
+                    var secs = testTime / 1000;
+                    var mins = Math.floor(secs / 60).toString();
+                    secs = Math.floor(secs % 60).toString();
+                    timerText.innerText = "00".substring(mins.length) + mins + ":" + "00".substring(secs.length) + secs + (timerPaused ? " (Paused)" : "");
+                    var correct = this.getAttribute("data-preform") == correctAnswer;
+                    if (!correct) {
+                        wrongAnswers.push({
+                            q: testQs[questionIndex].q,
+                            c: correctAnswer,
+                            i: this.getAttribute("data-preform")
+                        });
+                    }
+                    this.classList.add(correct ? "correct" : "incorrect");
+                    for (var i = 0; i < 5; i++) {
+                        var child = this.parentNode.children[i];
+                        if (!correct && child.getAttribute("data-preform") == correctAnswer) {
+                            child.classList.add("correct");
+                        }
+                        child.removeEventListener("click", answerClick);
+                        child.classList.add("disabled");
+                    }
+                    justification.classList.remove("inactive");
+                    fontTeX.render(testQs[index].j).in(justification);
+                    if (questionIndex == testQs.length - 1) {
+                        quitBtn.classList.remove("inactive");
+                        quitBtn.focus();
+                        nextBtn.classList.add("inactive");
+                    } else {
+                        nextBtn.classList.remove("inactive");
+                        nextBtn.focus();
+                        quitBtn.classList.add("inactive");
+                    }
+                    progressBar.style.background = "linear-gradient(to right, #60ff60 0%, #60ff60 " + (index + 1) / testQs.length * 100 + "%, #eee " + (index + 1) / testQs.length * 100 + "%, #eee 100%)";
+                    correctText.innerText = Math.round((1 - wrongAnswers.length / (index + 1)) * 100) + "% correct";
+                    correctBar.style.background = "linear-gradient(to right, #60ff60 0%, #60ff60 " + (1 - wrongAnswers.length / (index + 1)) * 100 + "%, #ff6242 " + (1 - wrongAnswers.length / (index + 1)) * 100 + "%, #ff6242 100%)";
+                    if (questionIndex == testQs.length - 1) quitBtn.innerText = "Finish Test";
+                }
+            }
+
+            function randArray(arr, limit) {
+                arr = arr.slice();
+                for (var i = arr.length - 1; i >= 0; i--) {
+                    var rand = Math.floor(Math.random() * arr.length);
+                    var item = arr[rand];
+                    arr[rand] = arr[i];
+                    arr[i] = item;
+                }
+                if (limit) {
+                    arr = arr.slice(0, limit);
+                }
+                return arr;
+            }
+
+            function preventEvent() {
+                var keys = Array.prototype.slice.call(arguments);
+                return function(e) {
+                    if (keys.includes(e.keyCode) || keys.includes(e.which) || keys.includes(e.key) || keys.includes(e.code)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+
+            function btnKeyBoardClick(e) {
+                if (!this.classList.contains("disabled") && (
+                    e.code == "Enter" || e.key == "Enter" || e.keyCode == 13 || e.which == 13 ||
+                    e.code == "Space" || e.key == "Space" || e.keyCode == 32 || e.which == 32
+                )) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.dispatchEvent(new MouseEvent("click"));
+                }
+            }
+
+            function fetchSubject(subject) {
+                if (questions[subject]) {
+                    return {
+                        then: function(s, e) {
+                            s();
+                        }
+                    }
+                }
+
+                var promise = {
+                    then: function(s, e) {
+                        promise.s = s;
+                        promise.e = e;
+                    }
+                };
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", subject + ".json");
+                xhr.addEventListener("readystatechange", function(e) {
+                    if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
+                        questions[subject] = JSON.parse(this.responseText);
+                        promise.s();
+                    } else if (this.readyState == 4 && this.status >= 300) {
+                        promise.e()
+                    }
+                });
+                xhr.send();
+                return promise;
+            }
+
+            function displaySubjectSelect(subject, waiting) {
+                if (subject == "err") {
+
+                } else {
+                    document.getElementById("test_select_subject").innerText = subject.replace("SocialScience", "Social Science");
+                    if (waiting) {
+
+                    } else {
+                        otherSelections.innerHTML = "";
+                        for (var keys = questions[subject].n, i = keys.length - 1; i >= 0; i--) {
+                            var selection = document.createElement("tr");
+                            selection.className = "subjectFocusSelectorSelection";
+                            selection.innerHTML = '<td><img src="checkbox.light.all.svg"></td><td>' + keys[i] + "</td>";
+                            selection.setAttribute("data-index", 0b1 << i);
+                            selection.setAttribute("data-checked", "true");
+                            selection.setAttribute("tabindex", 0);
+                            selection.addEventListener("keydown", preventEvent("Space", "ArrowDown", "ArrowUp", "Enter", " ", 40, 38, 32, 13));
+                            selection.addEventListener("keyup", btnKeyBoardClick);
+                            selection.addEventListener("keydown", function(e) {
+                                if (e.keyCode == 40 || e.which == 40 || e.key == "ArrowDown" || e.code == "ArrowDown") {
+                                    (this.nextElementSibling || allSelection).focus();
+                                } else if (e.keyCode == 38 || e.which == 38 || e.key == "ArrowUp" || e.code == "ArrowUp") {
+                                    (this.previousElementSibling || allSelection).focus();
+                                }
+                            });
+                            selection.addEventListener("click", function() {
+                                var checked = this.getAttribute("data-checked") == "false";
+                                this.setAttribute("data-checked", checked);
+
+                                this.firstElementChild.firstElementChild.src = checked ? "checkbox.light.all.svg" : "checkbox.light.none.svg"; 
+
+                                var selected = 0;
+                                for (var elems = this.parentNode.querySelectorAll("[data-checked=true]"), j = elems.length - 1; j >= 0; j--) {
+                                    selected += +elems[j].getAttribute("data-index");
+                                }
+
+                                history.replaceState("", "", "#/" + subject + "/" + selected);
+
+                                if (selected == Math.pow(2, keys.length) - 1) {
+                                    allSelection.setAttribute("data-checked", "true");
+                                    allSelection.firstElementChild.src = "checkbox.dark.all.svg";
+                                    nextToTest.classList.remove("disabled");
+                                } else if (selected == 0) {
+                                    allSelection.setAttribute("data-checked", "false");
+                                    allSelection.firstElementChild.src = "checkbox.dark.none.svg";
+                                    nextToTest.classList.add("disabled");
+                                } else {
+                                    allSelection.setAttribute("data-checked", "false");
+                                    allSelection.firstElementChild.src = "checkbox.dark.some.svg";
+                                    nextToTest.classList.remove("disabled");
+                                }
+                                this.parentNode.setAttribute("data-selected", selected);
+                            });
+                            otherSelections.insertBefore(selection, otherSelections.firstElementChild);
+                        }
+                        otherSelections.setAttribute("data-selected", (0b1 << keys.length) - 1);
+                    }
+                }
+            }
+
+            function displayScreen(display) {
+                for (var i = 0; i < 4; i++) {
+                    var currScreen = screen[["subjectSelect", "testSelect", "test", "results"][i]];
+                    if (currScreen == display) {
+                        display.classList.remove("inactive");
+                    } else {
+                        currScreen.classList.add("inactive");
+                    }
+                }
+                document.documentElement.style.background = display == screen.results ? "#607D8B" : "";
+            }
+        }();
+    </script>
+</body>
+</html>
