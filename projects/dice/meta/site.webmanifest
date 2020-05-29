@@ -1,14 +1,18 @@
+---
+title: Die Roller
+projectroot: /projects/dice
+---
 {
-    "name": "Die Roller",
-    "short_name": "Die Roller",
+    "name": "{{ page.title }}",
+    "short_name": "{{ page.title }}",
     "icons": [
         {
-            "src": "/dice/android-chrome-192x192.png",
+            "src": "{{ page.projectroot }}/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/dice/android-chrome-512x512.png",
+            "src": "{{ page.projectroot }}/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }

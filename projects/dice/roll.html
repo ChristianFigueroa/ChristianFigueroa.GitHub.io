@@ -1,0 +1,1074 @@
+---
+title: Die Roller – Roll Any-Sided Dice Online
+projectroot: /projects/dice
+layout: project
+styles:
+  - roll.css
+scripts:
+  - dieroller.js
+  - syntax.js
+fonts:
+  - Metamorphous
+  - Philosopher
+  - Share Tech Mono:
+    - 400
+    - 400i
+webapp: true
+---
+<div id='main'>
+    <div id='left'>
+        <div class='section_header'>
+            <span>Quick Rolls</span>
+        </div>
+        <!--
+            The next element (#general_rolls) is split like this:
+            [[[d2, d4], [d6, d8]], [[d10, d12], [d20, d100]]]
+            That lets it wrap only at places where the table will be one of these dimensions:
+            1x8, 2x4, 4x2, 8x1
+            Which means there won't ever be an empty cell on a line
+         -->
+        <div id='general_rolls' class='roll_flex'>
+            <div class='roll_flex'>
+                <div class='roll_flex'>
+                    <button id='d2_btn' class='roll_btn'>d2</button>
+                    <button id='d4_btn' class='roll_btn'>d4</button>
+                </div>
+                <div class='roll_flex'>
+                    <button id='d6_btn' class='roll_btn'>d6</button>
+                    <button id='d8_btn' class='roll_btn'>d8</button>
+                </div>
+            </div>
+            <div class='roll_flex'>
+                <div class='roll_flex'>
+                    <button id='d10_btn' class='roll_btn'>d10</button>
+                    <button id='d12_btn' class='roll_btn'>d12</button>
+                </div>
+                <div class='roll_flex'>
+                    <button id='d20_btn' class='roll_btn'>d20</button>
+                    <button id='d100_btn' class='roll_btn'>d100</button>
+                </div>
+            </div>
+        </div>
+        <div class='divider'></div>
+        <div class='section_header'>
+            <span>Saved Rolls</span>
+            <button id='new_save'>+ New</button>
+        </div>
+        <div id='saves_container'></div>
+    </div>
+    <div id='slider_x'></div>
+    <div id='slider_y'></div>
+    <div id='right'>
+        <div id='history'>
+            <div id='hist_header'>
+                <button id='clear_history'>Clear History</button>
+                <button id='settings'><img src='assets/settings_light.svg'></button>
+            </div>
+        </div>
+        <div id='customContainer'>
+            <div id='inputSymbol'>
+                <div>&#155;</div>
+            </div>
+            <div id='custom' contenteditable='true' spellcheck='false'></div>
+        </div>
+    </div>
+    <div id='save_modal' class='modal'>
+        <table>
+            <td>
+                <div id='save_modal_window'>
+                    <div class='modal_header'>
+                        <span>Create/Edit Saved Rolls</span>
+                    </div>
+                    <div class='modal_body'>
+                        <div>
+                            <input id='save_name' placeholder='Name'>
+                            <div id='save_name_error'></div>
+                            <div id='save_input_text'>Enter a text definition for what to roll for.</div>
+                            <div id='save_input' contenteditable='true' specllcheck='false'></div>
+                            <div id='save_stats'></div>
+                            <button id='modal_stats'>More statistics</button>
+                        </div>
+                    </div>
+                    <div class='modal_footer'>
+                        <button id='save_modal_cancel'>Cancel</button>
+                        <button id='save_modal_save' class='main'>Save</button>
+                    </div>
+                </div>
+            </td>
+        </table>
+    </div>
+    <div id='prefs_modal' class='modal'>
+        <table>
+            <td>
+                <div id='prefs_modal_window'>
+                    <div class='modal_header'>
+                        <span>Change Color Scheme</span>
+                    </div>
+                    <div class='modal_body'>
+                        <div>
+                            <select id='prefs_modal_select'>
+                                <option value="Alabaster">Alabaster</option>
+                                <option value="Atom Dark">Atom One (Dark)</option>
+                                <option value="Atom Light">Atom One (Light)</option>
+                                <option value="Cobalt">Cobalt</option>
+                                <option value="Dracula">Dracula</option>
+                                <option value="Material Dark">Material (Dark)</option>
+                                <option value="Material Light">Material (Light)</option>
+                                <option value="Monokai">Monokai</option>
+                                <option value="Solarized Dark">Solarized (Dark)</option>
+                                <option value="Solarized Light">Solarized (Light)</option>
+                                <option value="Verdandi Light">Verdandi</option>
+                                <option value="Verdandi Dark"> Verdandi Alter</option>
+                            </select>
+                            <div id='theme_prev'></div>
+                            <div id='license'>Color schemes licensed under the MIT license.</div>
+                        </div>
+                    </div>
+                    <div class='modal_footer'>
+                        <button id='prefs_modal_cancel'>Cancel</button>
+                        <button id='prefs_modal_save' class='main'>Save</button>
+                    </div>
+                </div>
+            </td>
+        </table>
+    </div>
+</div>
+<script type='text/javascript'>
+    !function() {
+        "use strict";
+        var historyDiv = document.getElementById("history"),
+            customInput = document.getElementById("custom"),
+            saveModal = document.getElementById("save_modal"),
+            saveModalSaveBtn = document.getElementById("save_modal_save"),
+            saveModalName = document.getElementById("save_name"),
+            saveModalNameError = document.getElementById("save_name_error"),
+            saveModalInput = document.getElementById("save_input"),
+            saveModalStats = document.getElementById("save_stats"),
+            saveModalMoreStats = document.getElementById("modal_stats"),
+            savesContainer = document.getElementById("saves_container"),
+            sliderX = document.getElementById("slider_x"),
+            sliderY = document.getElementById("slider_y"),
+            left = document.getElementById("left"),
+            right = document.getElementById("right"),
+            prefsModal = document.getElementById("prefs_modal"),
+            prefsModalSelect = document.getElementById("prefs_modal_select"),
+            prefsModalPreview = document.getElementById("theme_prev"),
+            clearHistory = document.getElementById("clear_history"),
+            pastEntries = [],
+            currentEntry = 0,
+            minMaxCache = {},
+            worker, queuedWorker;
+
+        // Here, some styles are set up according to the current theme.
+        document.body.className = "theme_" + (dieroller.theme.type || "light");
+        historyDiv.style.backgroundColor = dieroller.theme.background || "";
+        historyDiv.style.color = dieroller.theme.text || "";
+        customInput.style.backgroundColor = dieroller.theme.background || "";
+        saveModalInput.style.backgroundColor = dieroller.theme.background || "";
+        clearHistory.style.color = dieroller.theme.link || "";
+        saveModalInput.style.borderColor = dieroller.theme.separator || "";
+        customInput.style.color = dieroller.theme.text || "";
+        document.getElementById("settings").firstElementChild.src = "assets/settings_" + dieroller.theme.type + ".svg";
+        document.getElementById("inputSymbol").style.color = dieroller.theme.arrow || "";
+        document.getElementById("customContainer").style.borderColor = dieroller.theme.separator || "";
+
+        [2,4,6,8,10,12,20,100].forEach(function(dn, i, arr) {
+            var button = document.getElementById("d" + dn + "_btn");
+            button.addEventListener("click", function() {
+                var result = dieroller.eval(syntax.parse("d" + dn));
+
+                var div = document.createElement('div'),
+                    answer = document.createElement("div"),
+                    stats = document.createElement("div");
+                answer.appendChild(document.createTextNode("= " + result));
+                div.appendChild(syntax.render(syntax.parse("1d" + dn)));
+                div.appendChild(document.createElement("br"));
+                div.appendChild(answer);
+                stats.innerHTML = "<a href='stats#1d" + dn + "' target='stats'>Statistics</a>";
+                stats.className = "hist_stats_link";
+                stats.style.color = dieroller.theme.link || "";
+                div.appendChild(stats);
+
+                div.addEventListener("mouseenter", function() {
+                    this.style.backgroundColor = dieroller.theme.hover || "";
+                });
+                div.addEventListener("mouseleave", function() {
+                    this.style.backgroundColor = "";
+                });
+
+
+                historyDiv.insertBefore(div, historyDiv.firstElementChild.nextElementSibling);
+            });
+            button.addEventListener("keydown", function(e) {
+                if (e.key == "ArrowDown" || e.key == "ArrowRight" || e.keyCode == 40 || e.keyCode == 39) {
+                    document.getElementById("d" + (arr[i + 1] || arr[0]) + "_btn").focus();
+                } else if (e.key == "ArrowUp" || e.key == "ArrowLeft" || e.keyCode == 38 || e.keyCode == 37) {
+                    document.getElementById("d" + (arr[i - 1] || arr[7]) + "_btn").focus();
+                }
+            });
+        });
+
+        // Now, a bunch of event listeners for buttons and stuff
+        saveModalMoreStats.addEventListener("click", function() {
+            if (this.disabled) return;
+            window.open("stats#" + encodeURIComponent(saveModalInput.innerText.replace(/\s+/g, " ")));
+        });
+        prefsModalSelect.addEventListener("change", function() {
+            var oldTheme = dieroller.theme.name;
+            dieroller.theme = dieroller.themes[this.value];
+            prefsModalPreview.innerHTML = "";
+            prefsModalPreview.style.backgroundColor = dieroller.theme.background || "";
+            prefsModalPreview.style.color = dieroller.theme.text || "";
+            prefsModalPreview.style.borderColor = dieroller.theme.separator || "";
+            dieroller.savedRolls['nameOfASavedRoll'] = dieroller.savedRolls['nameOfASavedRoll'] || null;
+            dieroller.savedRolls['Name\u00A0of\u00A0Another\u00A0Roll'] = dieroller.savedRolls['Name\u00A0of\u00A0Another\u00A0Roll'] || null;
+            prefsModalPreview.appendChild(syntax.render(syntax.parse("2 * (2d8 + 4d6) + 6d8")));
+            prefsModalPreview.appendChild(document.createElement("br"));
+            prefsModalPreview.appendChild(syntax.render(syntax.parse("max(keepLowest(2d8), dropHighest(4d4))")));
+            prefsModalPreview.appendChild(document.createElement("br"));
+            prefsModalPreview.appendChild(syntax.render(syntax.parse("(1 + (2 - 3)) * 4 / 5 % 6")));
+            prefsModalPreview.appendChild(document.createElement("br"));
+            prefsModalPreview.appendChild(syntax.render(syntax.parse("nameOfASavedRoll * Name of Another Roll")));
+            prefsModalPreview.appendChild(document.createElement("br"));
+            var invalid = document.createElement("div"),
+                invalid_text = document.createElement("div");
+            invalid.style.display = invalid_text.style.display = "inline-block";
+            for (var style in dieroller.theme.invalid) {
+                invalid_text.style[style] = dieroller.theme.invalid[style];
+            }
+            invalid_text.appendChild(document.createTextNode("Red Highlighted (Invalid) Text"));
+            invalid.appendChild(invalid_text);
+            prefsModalPreview.appendChild(invalid);
+            prefsModalPreview.appendChild(document.createElement("br"));
+            var answer = document.createElement("div");
+            answer.style.color = dieroller.theme.text || "";
+            answer.appendChild(document.createTextNode("= An Answer"));
+            prefsModalPreview.appendChild(answer);
+            if (dieroller.savedRolls['nameOfASavedRoll'] === null) delete dieroller.savedRolls['nameOfASavedRoll'];
+            if (dieroller.savedRolls['Name\u00A0of\u00A0Another\u00A0Roll'] === null) delete dieroller.savedRolls['Name\u00A0of\u00A0Another\u00A0Roll'];
+            var hoverColor = dieroller.theme.hover || "";
+            for (var i = prefsModalPreview.children.length - 1; i >= 0; i--) {
+                prefsModalPreview.children[i].addEventListener("mouseenter", function() {
+                    this.style.backgroundColor = hoverColor;
+                });
+                prefsModalPreview.children[i].addEventListener("mouseleave", function() {
+                    this.style.backgroundColor = "";
+                });
+            }
+            dieroller.theme = dieroller.themes[oldTheme];
+        });
+        document.getElementById("prefs_modal_save").addEventListener("click", function() {
+            dieroller.theme = dieroller.themes[prefsModalSelect.value];
+            document.body.className = "theme_" + (dieroller.theme.type || "light");
+            historyDiv.style.backgroundColor = dieroller.theme.background || "";
+            historyDiv.style.color = dieroller.theme.text || "";
+            customInput.style.backgroundColor = dieroller.theme.background || "";
+            saveModalInput.style.backgroundColor = dieroller.theme.background || "";
+            saveModalInput.style.borderColor = dieroller.theme.separator || "";
+            clearHistory.style.color = dieroller.theme.link || "";
+            customInput.style.color = dieroller.theme.text || "";
+            document.getElementById("settings").firstElementChild.src = "assets/settings_" + dieroller.theme.type + ".svg";
+            document.getElementById("inputSymbol").style.color = dieroller.theme.arrow || "";
+            document.getElementById("customContainer").style.borderColor = dieroller.theme.separator || "";
+            for (var i = historyDiv.children.length - 1; i >= 1; i--) {
+                var div = historyDiv.children[i].firstElementChild.originalTokens ? historyDiv.children[i].firstElementChild : historyDiv.children[i].children[1];
+                div.parentNode.insertBefore(syntax.render(div.originalTokens), div);
+                div.parentNode.removeChild(div);
+                historyDiv.children[i].lastElementChild.style.color = dieroller.theme.link || "";
+            }
+            localStorage["die_roll_theme"] = prefsModalSelect.value;
+            prefsModal.className = "modal";
+        });
+        document.getElementById("prefs_modal_window").addEventListener("click", function(e) {
+            e.stopPropagation();
+        });
+        prefsModal.addEventListener("click", function() {
+            this.className = "modal";
+        });
+        document.getElementById("prefs_modal_cancel").addEventListener("click", function() {
+            prefsModal.className = "modal";
+        });
+        document.getElementById("settings").addEventListener("click", function() {
+            prefsModalSelect.value = dieroller.theme.name;
+            prefsModalSelect.dispatchEvent(new Event("change"));
+            prefsModal.className = "modal active";
+        });
+        document.addEventListener("mousemove", function(e) {
+            if (sliderX.activated) {
+                var percent = Math.max(15, Math.min(85, Math.round(e.clientX / window.innerWidth * 10000) / 100));
+                sliderX.style.left = "calc(" + percent + "% - 0.2em - 0.5px)";
+                left.style.width = "calc(" + percent + "% - 2em)";
+                left.style.height = "";
+                right.style.width = 100 - percent + "%";
+                right.style.height = "";
+                document.getSelection().removeAllRanges();
+            } else if (sliderY.activated) {
+                var percent = Math.max(15, Math.min(85, Math.round(e.clientY / window.innerHeight * 10000) / 100));
+                sliderY.style.top = "calc(" + percent - 1 + "vh - 0.5px)";
+                left.style.height = "calc(" + percent + "vh - 3em)";
+                left.style.width = "";
+                right.style.height = 100 - percent + "vh";
+                right.style.width = "";
+                document.getSelection().removeAllRanges();
+            }
+        });
+        document.addEventListener("touchmove", function(e) {
+            if (sliderX.activated) {
+                var percent = Math.max(15, Math.min(85, Math.round(e.touches[0].clientX/ window.innerWidth * 10000) / 100));
+                sliderX.style.left = "calc(" + percent + "% - 0.2em - 0.5px)";
+                left.style.width = "calc(" + percent + "% - 2em)";
+                left.style.height = "";
+                right.style.width = 100 - percent + "%";
+                right.style.height = "";
+                document.getSelection().removeAllRanges();
+            } else if (sliderY.activated) {
+                e.stopPropagation();
+                e.preventDefault();
+                var percent = Math.max(15, Math.min(85, Math.round(e.touches[0].clientY / window.innerHeight * 10000) / 100));
+                sliderY.style.top = "calc(" + (percent - 1) + "vh - 0.5px)";
+                left.style.height = "calc(" + percent + "vh - 3em)";
+                left.style.width = "";
+                right.style.height = 100 - percent + "vh";
+                right.style.width = "";
+                document.getSelection().removeAllRanges();
+            }
+        });
+        window.addEventListener("resize", function() {
+            if (window.innerHeight >= window.innerWidth) {
+                left.style.width = "";
+                right.style.width = "";
+                sliderX.style.left = "";
+            } else {
+                left.style.height = "";
+                right.style.height = "";
+                sliderY.style.top = "";
+            }
+        });
+        sliderX.addEventListener("mousedown", function() {
+            this.activated = true;
+        });
+        sliderX.addEventListener("touchstart", function() {
+            this.activated = true;
+        });
+        sliderY.addEventListener("mousedown", function() {
+            this.activated = true;
+        });
+        sliderY.addEventListener("touchstart", function() {
+            this.activated = true;
+        });
+        document.addEventListener("mouseup", function() {
+            sliderX.activated = false;
+            sliderY.activated = false;
+        });
+        document.addEventListener("touchend", function() {
+            sliderX.activated = false;
+            sliderY.activated = false;
+        })
+        clearHistory.addEventListener("click", function() {
+            while (historyDiv.firstElementChild != historyDiv.lastElementChild) {
+                historyDiv.removeChild(historyDiv.lastElementChild);
+            }
+        });
+        saveModalSaveBtn.addEventListener("click", function() {
+            if (this.disabled) return;
+            if (saveModal.editing) {
+                delete dieroller.savedRolls[saveModal.editing];
+            }
+            dieroller.savedRolls[saveModalName.value.replace(/\s+/g, "\u00A0").trim()] = syntax.reform(syntax.parse(saveModalInput.innerText.replace(/ /g, "\u00A0")));
+            localStorage["saved_die_rolls"] = JSON.stringify(dieroller.savedRolls);
+            updateSaves();
+            saveModal.className = "modal";
+        });
+        saveModalInput.addEventListener("keydown", function(e) {
+            if (e.key == "Enter" || e.keyCode == 13) {
+                e.preventDefault();
+                saveModalSaveBtn.click();
+            }
+        });
+        saveModalInput.addEventListener("input", function() {
+            var selection = document.getSelection();
+            this.selectionDirection = "forward";
+
+            if (!this.innerText || !this.firstChild || this.firstChild.nodeName == "BR") {
+                this.selectionStart = this.selectionEnd = 0;
+            } else if (selection.anchorNode.parentNode == this) {
+                this.selectionStart = this.selectionEnd = selection.anchorOffset;
+            } else {
+                var anchorOffset = selection.anchorOffset,
+                    anchorNode = selection.anchorNode;
+
+                // Contenteditable <divs> kind of screw things up because they add <font> elements
+                // inside other elements instead of following the existing pattern.
+                if (anchorNode.parentNode.parentNode.parentNode == this) {
+                    anchorNode.parentNode.parentNode.insertBefore(anchorNode, anchorNode.parentNode);
+                    anchorNode.parentNode.removeChild(anchorNode.nextSibling);
+                }
+
+                while (anchorNode.parentNode.firstChild != anchorNode) {
+                    anchorOffset += anchorNode.previousSibling.data.length;
+                    anchorNode.data = anchorNode.previousSibling.data + anchorNode.data;
+                    anchorNode.parentNode.removeChild(anchorNode.previousSibling);
+                }
+
+                anchorNode = selection.anchorNode;
+                if (anchorNode.nodeName == "SPAN") anchorNode = anchorNode.firstChild;
+
+                var totalOffset = 0;
+                for (var i = Array.prototype.indexOf.call(this.children, anchorNode.parentNode) - 1; i >= 0; i--) {
+                    totalOffset += this.children[i].innerText.length;
+                }
+                this.selectionStart = this.selectionEnd = totalOffset + anchorOffset;
+            }
+
+            this.value = this.innerText.replace(/ /g, "\u00A0").replace(/\n/g, "");
+
+            var oldCharLength = parseInt(this.style.width.substring(12)),
+                newCharLength = Math.max.apply(Math, this.value.split("\n").map(function(line) {
+                return line.length;
+            }));
+
+            this.innerText = "";
+            var roll = syntax.parse(this.value),
+                renderedText = syntax.render(roll);
+            while (renderedText.firstChild) {
+                this.appendChild(renderedText.firstChild);
+            }
+
+            var range = document.createRange();
+            if (!this.firstChild) {
+                this.appendChild(document.createTextNode(""));
+                range.setStart(this.firstChild, 0);
+                range.setEnd(this.firstChild, 0);
+            } else {
+                for (var i = 0, offset = 0; i < this.children.length && offset + this.children[i].innerText.length < this.selectionStart; offset += this.children[i++].innerText.length) {}
+                range.setStart(this.children[i].firstChild, this.selectionStart - offset);
+                for (var i = 0, offset = 0; offset + this.children[i].innerText.length < this.selectionEnd && i < this.children.length; offset += this.children[i++].innerText.length) {}
+                range.setEnd(this.children[i].firstChild, this.selectionEnd - offset);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+
+            var namedRolls = Object.keys(dieroller.savedRolls).sort(function(a, b) {
+                return a.length > b.length;
+            }), normalizedName = saveModalName.value.replace(/\s+/g, "\u00A0").trim();
+            // This function checks to make sure a definition doesn't result in a recursive
+            // loop (i.e. it checks if its definition expands to itself).
+            function checkExpand(name, arr, tokens) {
+                name = name.replace(/\s+/g, "\u00A0").trim();
+                if (~arr.indexOf(name.toLowerCase())) return true;
+                arr = arr.slice();
+                arr.push(name.toLowerCase());
+                if (!dieroller.savedRolls[normalizedName]) {
+                    dieroller.savedRolls[normalizedName] = null;
+                }
+                var tokens = tokens || syntax.parse(dieroller.savedRolls[name]);
+                if (!tokens) {
+                    for (var i = namedRolls.length - 1; i >= 0; i--) {
+                        if (namedRolls[i].toLowerCase() == name.toLowerCase()) {
+                            tokens = syntax.parse(dieroller.savedRolls[namedRolls[i]]);
+                            break;
+                        }
+                    }
+                }
+                if (dieroller.savedRolls[normalizedName] === null) {
+                    delete dieroller.savedRolls[normalizedName];
+                }
+                for (var i = 0, l = tokens.length; i < l; i++) {
+                    if (tokens[i].type == "named") {
+                        var result = checkExpand(tokens[i].value, arr);
+                        if (result) return result;
+                    }
+                }
+            }
+
+            if (roll.invalid) {
+                saveModalStats.innerText = "The definition contains errors."
+                saveModalSaveBtn.disabled = true;
+                saveModalMoreStats.disabled = true;
+                this.isInvalid = true;
+            } else if (!roll.length || roll.every(function(token) {
+                return token.type == "whitespace";
+            })) {
+                saveModalStats.innerText = "The definition cannot be empty."
+                saveModalSaveBtn.disabled = true;
+                saveModalMoreStats.disabled = true;
+                this.isInvalid = true;
+            } else if (checkExpand(saveModalName.value, [], syntax.parse(this.value))) {
+                saveModalStats.innerText = "The definition cannot cycle back to itself."
+                saveModalSaveBtn.disabled = true;
+                saveModalMoreStats.disabled = true;
+                this.isInvalid = true;
+            } else {
+                saveModalStats.innerHTML = "Minimum: <span></span>, Midrange: <span></span>, Maximum: <span></span>";
+                getMinMax(roll, saveModalStats, 10e4);
+                saveModalSaveBtn.disabled = saveModalName.isInvalid;
+                saveModalMoreStats.disabled = false;
+                this.isInvalid = false;
+            }
+        });
+        saveModalName.addEventListener("keydown", function(e) {
+            if (e.key == "Enter" || e.keyCode == 13) {
+                var selection = document.getSelection(),
+                    range = document.createRange();
+                if (saveModalInput.lastElementChild) {
+                    if (saveModalInput.lastElementChild.lastChild) {
+                        range.setStart(saveModalInput.lastElementChild.lastChild, saveModalInput.lastElementChild.lastChild.data.length);
+                        range.setEnd(saveModalInput.lastElementChild.lastChild, saveModalInput.lastElementChild.lastChild.data.length)
+                    } else {
+                        saveModalInput.lastElementChild.appendChild(document.createTextNode(""));
+                        range.setStart(saveModalInput.lastElementChild.lastChild, 0);
+                        range.setEnd(saveModalInput.lastElementChild.lastChild, 0);
+                    }
+                } else {
+                    saveModalInput.appendChild(document.createTextNode(""));
+                    range.setStart(saveModalInput.lastChild, 0);
+                    range.setEnd(saveModalInput.lastChild, 0);
+                }
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        });
+        saveModalName.addEventListener("input", function() {
+            var normalizedNamed = this.value.trim().replace(/\s+/g, "\u00A0");
+            // Some names can't be used. Names that are already being taken obviously can't be-
+            // cause a name can only refer to one roll. But the name also can't look to close
+            // to a die roll. For example, a name like "d20" isn't allowed because whenever a
+            // d20 is rolled, that definition will be called instead of actually rolling a d20.
+            // To test if the name is too similar, it's parsed as a die roll string. If it does
+            // not return invalid, the string is is too close and the name is invalid.
+            var rolls = dieroller.savedRolls;
+            dieroller.savedRolls = {};
+            var parsed = syntax.parse(normalizedNamed);
+            dieroller.savedRolls = rolls;
+
+            if (!normalizedNamed) {
+                this.className = "invalid";
+                saveModalSaveBtn.disabled = true;
+                saveModalNameError.style.display = "block";
+                saveModalNameError.innerText = "The name can't be empty.";
+                this.isInvalid = true;
+            } else if (normalizedNamed in dieroller.savedRolls && saveModal.editing != normalizedNamed) {
+                this.className = "invalid";
+                saveModalSaveBtn.disabled = true;
+                saveModalNameError.style.display = "block";
+                saveModalNameError.innerText = "That name is already being used.";
+                this.isInvalid = true;
+            } else if (!parsed.invalid) {
+                this.className = "invalid";
+                saveModalSaveBtn.disabled = true;
+                saveModalNameError.style.display = "block";
+                saveModalNameError.innerText = "That name is too close to a regular die roll.";
+                this.isInvalid = true;
+            } else {
+                this.className = "";
+                saveModalSaveBtn.disabled = saveModalInput.isInvalid;
+                saveModalNameError.style.display = "";
+                this.isInvalid = false;
+            }
+        });
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "Escape" || e.keyCode == 27) {
+                (document.querySelector(".modal.active") || {}).className = "modal";
+            }
+        });
+        document.getElementById("save_modal_cancel").addEventListener("click", function() {
+            saveModal.className = "modal";
+        });
+        document.getElementById("new_save").addEventListener("click", function() {
+            saveModalName.value = "Roll " + (Object.keys(dieroller.savedRolls).length + 1);
+            saveModalName.className = "";
+            saveModalNameError.style.display = "";
+            saveModalSaveBtn.disabled = false;
+            saveModalMoreStats.disabled = false;
+            saveModalInput.innerHTML = syntax.render(syntax.parse("1d20")).innerHTML;
+            saveModalStats.innerText = "Minimum: 1, Midrange: 10.5, Maximum: 20";
+            saveModal.editing = null;
+            saveModal.className = "modal active";
+            saveModalName.focus();
+        });
+        saveModal.addEventListener("click", function() {
+            this.className = "modal";
+        });
+        document.getElementById("save_modal_window").addEventListener("click", function(e) {
+            e.stopPropagation();
+        });
+        customInput.addEventListener("keydown", function(e) {
+            if (e.key == "Enter" || e.keycode == 13) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.value = this.value || "";
+
+                var roll = syntax.parse(this.value.replace(/\t/g, "    ").replace(/\s/g, "\u00A0"));
+                if (this.value.trim() && !roll.invalid) {
+                    pastEntries.push(this.innerHTML);
+                    currentEntry = pastEntries.length;
+                    var result = dieroller.eval(roll);
+                    var unrounded = (Math.round(result * 10e7) / 10e7).toString();
+                    result = isNaN(result) ? (unrounded = "undefined") : (Math.round(result * 10e6) / 10e6).toString();
+                    if (!isFinite(result)) result = unrounded = result.replace("Infinity", "\u221E");
+
+                    var div = document.createElement('div'),
+                        answer = document.createElement("div"),
+                        stats = document.createElement("div");
+                    answer.appendChild(document.createTextNode((unrounded == result ? "=" : "\u2248") + " " + result));
+                    div.appendChild(syntax.render(syntax.normalize(roll)));
+                    div.appendChild(document.createElement("br"));
+                    div.appendChild(answer);
+                    stats.innerHTML = "<a href='stats#" + encodeURIComponent(syntax.reform(roll).replace(/\s/g, " ")) + "' target='stats'>Statistics</a>";
+                    stats.className = "hist_stats_link";
+                    stats.style.color = dieroller.theme.link || "";
+                    div.appendChild(stats);
+
+                    div.addEventListener("mouseenter", function() {
+                        this.style.backgroundColor = dieroller.theme.hover || "";
+                    });
+                    div.addEventListener("mouseleave", function() {
+                        this.style.backgroundColor = "";
+                    });
+
+                    historyDiv.insertBefore(div, historyDiv.firstElementChild.nextElementSibling);
+
+                    this.innerText = "";
+                    this.value = "";
+                    this.style.width = 0;
+                }
+            } else if ((e.key == "ArrowUp" || e.keyCode == 38) && currentEntry != 0) {
+                e.preventDefault();
+                e.stopPropagation();
+                currentEntry--;
+                this.innerHTML = pastEntries[currentEntry] || "";
+                this.value = this.innerText.replace(/\t/g, "    ").replace(/\s/g, "\u00A0");
+            } else if ((e.key == "ArrowDown" || e.keyCode == 40) && currentEntry < pastEntries.length) {
+                e.preventDefault();
+                e.stopPropagation();
+                currentEntry++;
+                this.innerHTML = pastEntries[currentEntry] || "";
+                this.value = this.innerText.replace(/\t/g, "    ").replace(/\s/g, "\u00A0");
+            }
+        });
+        customInput.addEventListener("input", function() {
+            // The <input>'s width is set dynamically based on how many characters it has on
+            // each of its lines.
+
+            var selection = document.getSelection();
+            this.selectionDirection = "forward";
+
+            if (!this.innerText || !this.firstChild || this.firstChild.nodeName == "BR") {
+                this.selectionStart = this.selectionEnd = 0;
+            } else if (selection.anchorNode.parentNode == this) {
+                this.selectionStart = this.selectionEnd = selection.anchorOffset;
+            } else {
+                var anchorOffset = selection.anchorOffset,
+                    anchorNode = selection.anchorNode;
+
+                // Contenteditable <divs> kind of screw things up because they add <font> elements
+                // inside other elements instead of following the existing pattern.
+                if (anchorNode.parentNode.parentNode.parentNode == this) {
+                    anchorNode.parentNode.parentNode.insertBefore(anchorNode, anchorNode.parentNode);
+                    anchorNode.parentNode.removeChild(anchorNode.nextSibling);
+                }
+
+                while (anchorNode.parentNode.firstChild != anchorNode) {
+                    anchorOffset += anchorNode.previousSibling.data.length;
+                    anchorNode.data = anchorNode.previousSibling.data + anchorNode.data;
+                    anchorNode.parentNode.removeChild(anchorNode.previousSibling);
+                }
+
+                anchorNode = selection.anchorNode;
+                if (anchorNode.nodeName == "SPAN") anchorNode = anchorNode.firstChild;
+
+                var totalOffset = 0;
+                for (var i = Array.prototype.indexOf.call(this.children, anchorNode.parentNode) - 1; i >= 0; i--) {
+                    totalOffset += this.children[i].innerText.length;
+                }
+                this.selectionStart = this.selectionEnd = totalOffset + anchorOffset;
+            }
+
+            this.value = this.innerText.replace(/ /g, "\u00A0");
+
+            var oldCharLength = parseInt(this.style.width.substring(12)),
+                newCharLength = Math.max.apply(Math, this.value.split("\n").map(function(line) {
+                return line.length;
+            }));
+            this.style.width = "calc(.8em + " + (newCharLength - 1) + "ch)";
+            if (newCharLength > oldCharLength && this.selectionEnd == newCharLength) this.parentNode.scrollLeft = this.scrollWidth;
+
+            this.innerText = "";
+            var renderedText = syntax.render(syntax.parse(this.value));
+            while (renderedText.firstChild) {
+                this.appendChild(renderedText.firstChild);
+            }
+
+            var range = document.createRange();
+            if (!this.firstChild) {
+                this.appendChild(document.createTextNode(""));
+                range.setStart(this.firstChild, 0);
+                range.setEnd(this.firstChild, 0);
+            } else {
+                for (var i = 0, offset = 0; i < this.children.length && offset + this.children[i].innerText.length < this.selectionStart; offset += this.children[i++].innerText.length) {}
+                range.setStart(this.children[i].firstChild, this.selectionStart - offset);
+                for (var i = 0, offset = 0; offset + this.children[i].innerText.length < this.selectionEnd && i < this.children.length; offset += this.children[i++].innerText.length) {}
+                range.setEnd(this.children[i].firstChild, this.selectionEnd - offset);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        });
+
+        function updateSaves() {
+            // This function updates the display of all the saved rolls you have.
+
+            savesContainer.innerHTML = "";
+            var names = Object.keys(dieroller.savedRolls).sort();
+
+            for (var i = 0, l = names.length; i < l; i++) {
+                var div = document.createElement("div");
+                div.className = "save";
+                div.referName = names[i];
+                var nameContainer = document.createElement("div"),
+                    name = document.createElement("div"),
+                    stats = document.createElement("div");
+                nameContainer.className = "name";
+                name.innerText = names[i];
+                nameContainer.appendChild(name);
+                stats.innerHTML = "Min <span></span>, Mid <span></span>, Max <span></span>";
+                queueMinMax(
+                    syntax.parse(dieroller.savedRolls[names[i]]),
+                    stats,
+                    10e3,
+                    "undef"
+                );
+                stats.className = "save_stats";
+                nameContainer.appendChild(stats);
+                div.appendChild(nameContainer);
+                savesContainer.appendChild(div);
+                var roll = document.createElement("button");
+                roll.innerText = "Roll";
+                roll.className = "roll_btn";
+                roll.addEventListener("click", function() {
+                    var roll = syntax.parse(dieroller.savedRolls[this.parentNode.referName]),
+                        result = dieroller.eval(roll),
+                        unrounded = (Math.round(result * 10e7) / 10e7).toString();
+                    result = isNaN(result) ? (unrounded = "undefined") : (Math.round(result * 10e6) / 10e6).toString();
+                    if (!isFinite(result)) result = unrounded = result.replace("Infinity", "\u221E");
+
+                    var div = document.createElement('div'),
+                        rollingText = document.createElement("div"),
+                        answer = document.createElement("div"),
+                        stats = document.createElement("div");
+                    rollingText.appendChild(document.createTextNode("Rolling " + this.parentNode.referName + ":"));
+                    answer.appendChild(document.createTextNode(((unrounded == result ? "=" : "\u2248")) + " " + result));
+                    div.appendChild(rollingText);
+                    div.appendChild(syntax.render(syntax.normalize(roll)));
+                    div.appendChild(document.createElement("br"));
+                    div.appendChild(answer);
+                    stats.innerHTML = "<a href='stats#" + encodeURIComponent(syntax.reform(roll).replace(/\s/g, " ")) + "' target='stats'>Statistics</a>";
+                    stats.className = "hist_stats_link";
+                    stats.style.color = dieroller.theme.link || "";
+                    div.appendChild(stats);
+
+                    div.addEventListener("mouseenter", function() {
+                        this.style.backgroundColor = dieroller.theme.hover || "";
+                    });
+                    div.addEventListener("mouseleave", function() {
+                        this.style.backgroundColor = "";
+                    });
+
+                    historyDiv.insertBefore(div, historyDiv.firstElementChild.nextElementSibling);
+                });
+                div.appendChild(roll);
+                roll.addEventListener("keydown", function(e) {
+                    if (e.key == "ArrowRight" || e.key == 39) {
+                        this.nextElementSibling.focus();
+                        this.nextElementSibling.click();
+                    } else if (e.key == "ArrowDown" || e.key == 40) {
+                        (this.parentNode.nextElementSibling || this.parentNode.parentNode.firstElementChild).children[1].focus();
+                    } else if (e.key == "ArrowUp" || e.key == 38) {
+                        (this.parentNode.previousElementSibling || this.parentNode.parentNode.lastElementChild).children[1].focus();
+                    }
+                });
+                var extra = document.createElement("button");
+                extra.innerText = "\u25BC";
+                extra.className = "extra_menu";
+                extra.addEventListener("keydown", function(e) {
+                    if (e.key == "ArrowLeft" || e.key == 37) {
+                        this.previousElementSibling.focus();
+                    } else if (e.key == "ArrowDown" || e.key == 40) {
+                        this.blur();
+                        this.isExpanded = true;
+                        this.lastElementChild.style.display = "block";
+                        this.style.zIndex = 2;
+                        this.firstElementChild.firstElementChild.focus();
+                    } else if (e.key == "ArrowUp" || e.key == 38) {
+                        this.blur();
+                        this.isExpanded = true;
+                        this.lastElementChild.style.display = "block";
+                        this.style.zIndex = 2;
+                        this.firstElementChild.lastElementChild.focus();
+                    }
+                });
+                extra.addEventListener("click", function() {
+                    if (document.activeElement == this.firstElementChild.firstElementChild ||
+                        document.activeElement == this.firstElementChild.lastElementChild) {
+                        this.isExpanded = true;
+                    }
+                    this.isExpanded = !this.isExpanded;
+                    if (this.isExpanded) {
+                        this.firstElementChild.style.display = "block";
+                        this.style.zIndex = 2;
+                    } else {
+                        this.firstElementChild.style.display = "";
+                        this.style.zIndex = "";
+                    }
+                });
+                extra.addEventListener("blur", function() {
+                    if (this.isExpanded || this.firstElementChild.style.display == "block") {
+                        this.isExpanded = false;
+                        this.lastElementChild.style.display = "";
+                        this.style.zIndex = "";
+                    }
+                });
+                div.appendChild(extra);
+                var menu = document.createElement("div");
+                menu.className = "context_menu";
+                var edit = document.createElement("button");
+                edit.innerText = "Edit";
+                edit.addEventListener("click", function(e) {
+                    e.stopPropagation();
+                    var name = this.parentNode.parentNode.parentNode.referName,
+                        roll = syntax.parse(dieroller.savedRolls[name]);
+                    saveModalName.value = name;
+                    saveModalName.className = "";
+                    saveModalNameError.style.display = "";
+                    saveModalSaveBtn.disabled = false;
+                    saveModalMoreStats.disabled = false;
+                    saveModalInput.innerHTML = syntax.render(roll).innerHTML;
+                    saveModalStats.innerHTML = "Minimum: <span></span>, Midrange: <span></span>, Maximum: <span></span>";
+                    getMinMax(roll, saveModalStats, 10e4);
+                    saveModal.editing = name;
+                    saveModal.className = "modal active";
+                    saveModalName.focus();
+                });
+                edit.addEventListener("keydown", function(e) {
+                    if (e.key == "ArrowDown" || e.keyCode == 40) {
+                        this.nextElementSibling.focus();
+                        e.stopPropagation();
+                    } else if (e.key == "ArrowUp" || e.keyCode == 38) {
+                        this.parentNode.parentNode.focus();
+                        e.stopPropagation();
+                    }
+                });
+                edit.addEventListener("blur", function() {
+                    this.parentNode.parentNode.dispatchEvent(new Event("blur"));
+                });
+                var del = document.createElement("button");
+                del.innerText = "Delete";
+                del.addEventListener("click", function(e) {
+                    e.stopPropagation();
+                    delete dieroller.savedRolls[this.parentNode.parentNode.parentNode.referName];
+                    localStorage["saved_die_rolls"] = JSON.stringify(dieroller.savedRolls);
+                    updateSaves();
+                });
+                del.addEventListener("keydown", function(e) {
+                    if (e.key == "ArrowDown" || e.keyCode == 40) {
+                        this.parentNode.parentNode.focus();
+                        e.stopPropagation();
+                    } else if (e.key == "ArrowUp" || e.keyCode == 38) {
+                        this.previousElementSibling.focus();
+                        e.stopPropagation();
+                    }
+                });
+                del.addEventListener("blur", function() {
+                    this.parentNode.parentNode.dispatchEvent(new Event("blur"));
+                });
+                menu.appendChild(edit);
+                menu.appendChild(del);
+                extra.appendChild(menu);
+            }
+            startMinMaxQueue();
+        }
+
+        function getMinMax(tokens, parent, roundTo, undefText, queueCallback) {
+            var reformed = JSON.stringify(syntax.normalize(tokens)),
+                minElement = parent.children[0],
+                midElement = parent.children[1],
+                maxElement = parent.children[2];
+
+            if (reformed in minMaxCache) {
+                if (minMaxCache[reformed]) {
+                    minElement.innerText = minMaxCache[reformed][0] == undefined ? undefText : minMaxCache[reformed][0];
+                    midElement.innerText = minMaxCache[reformed][1] == undefined ? undefText : minMaxCache[reformed][1];
+                    maxElement.innerText = minMaxCache[reformed][2] == undefined ? undefText : minMaxCache[reformed][2];
+                } else {
+                    parent.innerText = "Stats took too long";
+                }
+                if (queueCallback) queueCallback();
+                return;
+            }
+
+            tokens = syntax.normalize(tokens);
+
+            var currentWorker;
+            if (queueCallback) {
+                queuedWorker = currentWorker = new Worker("scripts/stats.js");
+            } else {
+                if (worker) worker.terminate();
+                worker = currentWorker = new Worker("scripts/stats.js");
+            }
+
+            currentWorker.startTime = currentWorker.progressTime = Date.now();
+            currentWorker.progressStep = 0;
+            minElement.innerHTML = midElement.innerHTML = maxElement.innerHTML = "<span class='hide'>···</span>"
+
+            currentWorker.addEventListener("message", function(e) {
+                var now = Date.now();
+                if (e.data.done) {
+                    currentWorker.terminate();
+                    if (currentWorker == worker) worker = null;
+                    var vals = Object.keys(e.data.distribution).sort(function(a, b) {
+                        return a - b;
+                    });
+                    (isNaN(+min + +max) ? "undef" : Math.round((+min + +max) / 2 * 10e3) / 10e3).toString().replace("Infinity", "\u221E")
+                    var min = Math.round(vals[0] * roundTo) / roundTo,
+                        max = Math.round(vals[vals.length - 1] * roundTo) / roundTo,
+                        mid = (min + max) / 2;
+                    min = isNaN(min) ? undefined : min.toString().replace("Infinity", "\u221E");
+                    mid = isNaN(mid) ? undefined : mid.toString().replace("Infinity", "\u221E");
+                    max = isNaN(max) ? undefined : max.toString().replace("Infinity", "\u221E");
+                    minElement.innerText = min == undefined ? undefText : min;
+                    midElement.innerText = mid == undefined ? undefText : mid;
+                    maxElement.innerText = max == undefined ? undefText : max;
+                    minMaxCache[reformed] = [min, mid, max];
+                    if (queueCallback) queueCallback();
+                } else if (e.data.progress % 5e4 == 0 && now - currentWorker.startTime > 30e3) {
+                    currentWorker.terminate();
+                    if (currentWorker == worker) worker = null;
+                    parent.innerText = "Stats took too long";
+                    minMaxCache[reformed] = false;
+                    if (queueCallback) queueCallback();
+                } else if (now - currentWorker.progressTime > 300) {
+                    currentWorker.progressTime = now;
+                    var step = currentWorker.progressStep = (currentWorker.progressStep + 1) % 6;
+                    minElement.innerHTML = midElement.innerHTML = maxElement.innerHTML =
+                        (step == 0 || step == 4 || step == 5 ? "<span class='hide'>·</span>" : "·") +
+                        (step == 0 || step == 1 || step == 5 ? "<span class='hide'>·</span>" : "·") +
+                        (step == 0 || step == 1 || step == 2 ? "<span class='hide'>·</span>" : "·");
+                }
+            });
+            tokens.forEach(function(token) {
+                token.span = undefined;
+            })
+            currentWorker.postMessage({
+                roll: tokens,
+                savedRolls: dieroller.savedRolls,
+                functionNames: dieroller.functionNames
+            });
+        }
+
+        function queueMinMax(tokens, parent, roundTo, undefText) {
+            // This function adds an array of tokens to a queue to get the min and max of. Af-
+            // ter the queue has been filled up, it is sorted according to which will take the
+            // longest to get the stats of. The ones that are shortest are done first. This
+            // function only adds to the queue.
+            if (queuedWorker) {
+                getMinMax.queue = [];
+                queuedWorker.terminate();
+                queuedWorker = null;
+            } else getMinMax.queue = getMinMax.queue || [];
+            getMinMax.queue.push([tokens, parent, roundTo, undefText]);
+        }
+
+        function startMinMaxQueue() {
+            // This function sorts the min/max queue and the tells the getMinMax function to
+            // get started. Instead of sending the data to stats.js to find the total possib-
+            // ilities, that's done here.
+
+            if (!getMinMax.queue.length) return;
+
+            if (queuedWorker) {
+                queuedWorker.terminate();
+                queuedWorker = null;
+            }
+
+            getMinMax.queue.forEach(function(argument) {
+                // This .forEach first adds some innerHTML to each element so that they don't look
+                // empty. After that, the total amount of possibilities is found.
+                argument[1].children[0].innerHTML = argument[1].children[1].innerHTML = argument[1].children[2].innerHTML = "<span class='hide'>···</span>"
+
+                var roll = argument[0], possibilities = 1;
+
+
+                // Expand named tokens
+                while (true) {
+                    var doBreak = true;
+                    for (var i = 0; i < roll.length; i++) {
+                        if (roll[i].type == "named") {
+                            doBreak = false;
+                            var replacement = dieroller.savedRolls[roll[i].refer],
+                                closingParen = {
+                                    type: "group close",
+                                    value: ")"
+                                };
+                            roll.splice.apply(roll, [i, 1, {
+                                type: "group open",
+                                value: "(",
+                                closer: closingParen
+                            }].concat(syntax.parse(dieroller.savedRolls[roll[i].refer])).concat(closingParen));
+                        }
+                    }
+                    if (doBreak) break;
+                }
+
+                // Expand grouped arguments (e.g. max(2d20) => max(d20, d20))
+                for (var i = 0; i < roll.length; i++) {
+                    if (roll[i].type == "group open" && roll[i].fromFunction && roll[i + 3] &&
+                        roll[i + 1].type == "number" && roll[i + 2].type == "dice roll" && roll[i + 3].type == "group close") {
+
+                        var n = 0;
+                        var args = Array.from({length: +roll[i + 1].value * 2 - 1}, function() {
+                            n++;
+                            return n % 2 ? {
+                                type: "dice roll",
+                                value: roll[i + 2].value
+                            } : {
+                                type: "arg separ",
+                                value: ","
+                            };
+                        });
+                        roll.splice.apply(roll, [i + 1, 2].concat(args));
+                    }
+                }
+
+
+                // If this roll has already been calculated before and is in the cache, it's poss-
+                // ibilities is set to 0 so that it'll have precedence over other rolls. That makes
+                // sure the user doesn't have to wait for a stats evaluation before cached results
+                // are shown.
+                if (JSON.stringify(syntax.normalize(roll)) in minMaxCache) {
+                    possibilities = 0;
+                } else {
+                    for (var i = roll.length - 1; i >= 0; i--) {
+                        if (roll[i].type == "dice roll") {
+                            possibilities *= roll[i - 1] && roll[i - 1].type == "number" ? Math.pow(roll[i].value.substring(1), +roll[i - 1].value) : roll[i].value.substring(1);
+                        }
+                    }
+                }
+
+                argument.push(possibilities);
+            });
+            getMinMax.queue = getMinMax.queue.sort(function(args1, args2) {
+                return args1[4] - args2[4];
+            });
+            getMinMax.queue.forEach(function(args) {
+                args[4] = function() {
+                    getMinMax.queue.shift();
+                    if (getMinMax.queue.length) getMinMax.apply(window, getMinMax.queue[0]);
+                }
+            });
+
+            getMinMax.apply(window, getMinMax.queue[0]);
+        }
+
+        updateSaves();
+    }();
+</script>
