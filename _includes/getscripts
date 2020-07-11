@@ -1,3 +1,18 @@
 {% for script in page.scripts %}
-    <script type="text/javascript" src="{{ include.path }}{{ script }}"></script>
+    {% capture name %}{{ script }}{% endcapture %}
+    {% capture path %}{{ include.path }}{% endcapture %}
+    {% assign async = false %}
+    {% if script.first %}
+        {% capture name %}{{ script.first[0] }}{% endcapture %}
+        {% if script.first[1].external %}
+            {% assign path = "" %}
+        {% endif %}
+        {% if script.first[1].async %}
+            {% assign async = true %}
+        {% endif %}
+        {% if script.first[1].path %}
+            {% capture path %}{{ script.first[1].path }}/{% endcapture %}
+        {% endif %}
+    {% endif %}
+    <script type="text/javascript" src="{{ path }}{{ name }}"{% if async %} async{% endif %}></script>
 {% endfor %}

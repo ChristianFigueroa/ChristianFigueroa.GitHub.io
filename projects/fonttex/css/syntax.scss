@@ -1,0 +1,33 @@
+---
+---
+.TeXcode {
+	& > .mathshift {
+		color: #E6DB74;
+	}
+
+	& > .number {
+		color: #AE81FF;
+	}
+
+	& > .operator {
+		color: #F92672;
+	}
+
+	& > .macro {
+		color: #66D9EF;
+	}
+}
+
+.HTMLcode {
+	& > .tag {
+		color: #F92672;
+	}
+
+	& > .attribute {
+		color: #A6E22E;
+	}
+
+	& > .string {
+		color: #E6DB74;
+	}
+}

@@ -304,7 +304,7 @@ webapp: true
                 document.getSelection().removeAllRanges();
             } else if (sliderY.activated) {
                 var percent = Math.max(15, Math.min(85, Math.round(e.clientY / window.innerHeight * 10000) / 100));
-                sliderY.style.top = "calc(" + percent - 1 + "vh - 0.5px)";
+                sliderY.style.top = "calc(" + (percent - 1) + "vh - 0.5px)";
                 left.style.height = "calc(" + percent + "vh - 3em)";
                 left.style.width = "";
                 right.style.height = 100 - percent + "vh";
@@ -314,6 +314,8 @@ webapp: true
         });
         document.addEventListener("touchmove", function(e) {
             if (sliderX.activated) {
+                e.stopPropagation();
+                e.preventDefault();
                 var percent = Math.max(15, Math.min(85, Math.round(e.touches[0].clientX/ window.innerWidth * 10000) / 100));
                 sliderX.style.left = "calc(" + percent + "% - 0.2em - 0.5px)";
                 left.style.width = "calc(" + percent + "% - 2em)";
@@ -363,7 +365,24 @@ webapp: true
         document.addEventListener("touchend", function() {
             sliderX.activated = false;
             sliderY.activated = false;
-        })
+        });
+        sliderX.addEventListener("dblclick", function() {
+            var percent = 50;
+            sliderX.style.left = "calc(50% - 0.2em - 0.5px)";
+            left.style.width = "calc(50% - 2em)";
+            left.style.height = "";
+            right.style.width = "50%";
+            right.style.height = "";
+            document.getSelection().removeAllRanges();
+        });
+        sliderY.addEventListener("dblclick", function() {
+            sliderY.style.top = "calc(49vh - 0.5px)";
+            left.style.height = "calc(50vh - 3em)";
+            left.style.width = "";
+            right.style.height = "50vh";
+            right.style.width = "";
+            document.getSelection().removeAllRanges();
+        });
         clearHistory.addEventListener("click", function() {
             while (historyDiv.firstElementChild != historyDiv.lastElementChild) {
                 historyDiv.removeChild(historyDiv.lastElementChild);

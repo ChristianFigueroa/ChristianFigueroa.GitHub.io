@@ -1,0 +1,73 @@
+---
+---
+{% include animation-keyframes.scss %}
+
+body, html {
+	margin: 0;
+	background-color: #26292C;
+	color: #FFFFFF;
+	min-height: 100%;
+	font-family: Consolas, "Menlo Regular", monospace;
+	font-weight: 400;
+}
+
+.unwritten {
+	color: transparent;
+}
+
+@mixin caret {
+	content: "\00a0";
+	display: inline-block;
+	width: 1px;
+	background-color: currentColor;
+	position: absolute;
+}
+
+.writing_elem {
+	&.writing :first-child:after,
+	&.caret:after {
+		@include caret;
+	}
+
+	&.unaligned:not(.written) :last-child {
+		position: absolute;
+		pointer-events: none;
+		opacity: 0;
+	}
+}
+
+h1, h2, h3 {
+	text-align: center;
+	font-weight: 400;
+	font-size: 3rem;
+}
+
+#name {
+	font-size: 3rem;
+	margin-top: 2em;
+	margin-bottom: .25em;
+}
+
+#email {
+	font-size: 1.5rem;
+	margin-top: .5em;
+	margin-bottom: 0;
+}
+
+#format_1 {
+	display: inline-block;
+}
+
+a {
+	color: #66D9EF;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.text, .link {
+	text-align: center;
+	font-weight: 400;
+	font-size: 1.5rem;
+}

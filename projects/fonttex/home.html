@@ -1,0 +1,507 @@
+---
+title: FontTeX – HTML, font-friendly math equations
+projectroot: /projects/fonttex
+layout: project.fonttex
+styles:
+  - home.css
+  - syntax.css
+scripts:
+  - fonttex.min.js
+  - https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js:
+      external: true
+      async: true
+fonts:
+  - Roboto
+  - Roboto Mono
+  - Roboto Slab:
+    - 700
+    - 400
+---
+<div id="content">
+	<section>
+		<p><span class="logo">FontTeX</span> (or just FontTeX) is a JavaScript library for rendering math equations in HTML using TeX syntax. FontTeX, as its name implies, is focused on working for any arbitrary web font.</p>
+		<p>Webpages can use pretty much any font for displaying content, but typesetting math equations is typically only possible for very specific fonts, usually in a <span style="font-family:serif;">serif font</span> like this: <font-tex style="font-family:serif;">$\frac{25}{16}=1.25^2$</font-tex>. FontTeX works around this by typesetting mathemtics in <i>any</i> web font, including this one (<a href="https://fonts.google.com/specimen/Roboto" target="googlefonts">Roboto</a>): <font-tex>$\frac{25}{16}=1.25^2$</font-tex>.</p>
+		<p>Look at the examples below for different use cases that FontTeX can handle, or jump straight to the <a href="#demo">demo</a>. The font selector only shows a list of <a href="https://fonts.google.com" target="googlefonts">Google Fonts</a>, but FontTeX can handle any other fonts too.</p>
+	</section>
+	<section id="examples">
+		<h2>Examples</h2>
+		<div id="examples-fontcontainer">
+			<label>Font: </label>
+			<select id="examples-fontselect">
+				<option value="">Loading more fonts...</option>
+			</select>
+		</div>
+		<section class="example">
+			<h5 class="description">Fractions</h5>
+			<div class="frame"></div>
+			<div class="input">
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$$</span><!--
+					--><span class="macro">\frac</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="macro">\frac</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">1</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">2</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="macro">\frac</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">3</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">4</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="operator">=</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\frac</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">2</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">3</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="mathshift">$$</span><!--
+				--></span>
+			</div>
+		</section>
+		<section class="example">
+			<h5 class="description">Superscripts & Subscripts</h5>
+			<div class="frame"></div>
+			<div class="input">
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$$</span><!--
+					--><span class="number">1</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">2</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">3</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">4</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="number">5</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">6</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">7</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="number">8</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="number">9</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="mathshift">$$</span><!--
+				--></span>
+				<br>
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$$</span><!--
+					--><span class="macro">\rm</span><!--
+					--><span class="plain">&nbsp;H</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="number">3</span><!--
+					--><span class="plain">O</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="number">4</span><!--
+					--><span class="macro">\&nbsp;</span><!--
+					--><span class="plain">(aq)&nbsp;</span><!--
+					--><span class="macro">\rightleftharpoons</span><!--
+					--><span class="plain">&nbsp;H</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="plain">+</span><!--
+					--><span class="macro">\&nbsp;</span><!--
+					--><span class="plain">(aq)&nbsp;</span><!--
+					--><span class="operator">+</span><!--
+					--><span class="plain">&nbsp;H</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="number">2</span><!--
+					--><span class="plain">PO</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="number">4</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="plain">-</span><!--
+					--><span class="macro">\&nbsp;</span><!--
+					--><span class="plain">(aq)</span><!--
+					--><span class="mathshift">$$</span><!--
+				--></span>
+			</div>
+		</section>
+		<section class="example">
+			<h5 class="description">Fancy operators</h5>
+			<div class="frame"></div>
+			<div class="input">
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$$</span><!--
+					--><span class="macro">\sum</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="plain">n</span><!--
+					--><span class="operator">=</span><!--
+					--><span class="number">0</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="macro">\infty</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="plain">f(x)</span><!--
+					--><span class="mathshift">$$</span><!--
+				--></span>
+				<br>
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$$</span><!--
+					--><span class="macro">\lim</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="plain">x</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\to</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\infty</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\int</span><!--
+					--><span class="operator">_</span><!--
+					--><span class="number">0</span><!--
+					--><span class="operator">^</span><!--
+					--><span class="plain">x</span><!--
+					--><span class="plain">&nbsp;f(x)</span><!--
+					--><span class="mathshift">$$</span><!--
+				--></span>
+			</div>
+		</section>
+		<section class="example">
+			<h5 class="description">Scoped Macro <span style="font-family:'Roboto Mono'">\def</span>s</h5>
+			<div class="frame"></div>
+			<div class="input">
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$</span><!--
+					--><span class="macro">\def</span><!--
+					--><span class="macro">\localMacro</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="plain">localMacro</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\global</span><!--
+					--><span class="macro">\def</span><!--
+					--><span class="macro">\globalMacro</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="plain">globalMacro</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="mathshift">$</span><!--
+				--></span>
+				<br>
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$</span><!--
+					--><span class="macro">\localMacro</span><!--
+					--><span class="mathshift">$</span><!--
+				--></span>
+				is out of scope.
+				<span class="HTMLcode"><!--
+					--><span class="plain">&lt;</span><!--
+					--><span class="tag">br</span><!--
+					--><span class="plain">&gt;</span><!--
+				--></span>
+				But
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$</span><!--
+					--><span class="macro">\globalMacro</span><!--
+					--><span class="mathshift">$</span><!--
+				--></span>
+				works.
+			</div>
+		</section>
+		<section class="example">
+			<h5 class="description">HTML Support</h5>
+			<div class="frame"></div>
+			<div class="input">
+				I'm a
+				<span class="HTMLcode"><!--
+					--><span class="plain">&lt;</span><!--
+					--><span class="tag">span</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="attribute">style</span><!--
+					--><span class="plain">=</span><!--
+					--><span class="string">"color:green"</span><!--
+					--><span class="plain">&gt;</span><!--
+					--><span class="TeXcode"><!--
+						--><span class="mathshift">$</span><!--
+						--><span class="macro">\frac</span><!--
+						--><span class="brace">{</span><!--
+						--><span class="plain">green</span><!--
+						--><span class="brace">}</span><!--
+						--><span class="brace">{</span><!--
+						--><span class="plain">fraction</span><!--
+						--><span class="brace">}</span><!--
+						--><span class="mathshift">$</span><!--
+					--></span><!--
+					--><span class="plain">&lt;/</span><!--
+					--><span class="tag">span</span><!--
+					--><span class="plain">&gt;</span><!--
+				--></span><!--
+				-->.
+				<span class="HTMLcode"><!--
+					--><span class="plain">&lt;</span><!--
+					--><span class="tag">br</span><!--
+					--><span class="plain">&gt;</span><!--
+				--></span>
+				<br>
+				<span class="HTMLcode"><!--
+					--><span class="plain">&lt;</span><!--
+					--><span class="tag">div</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="attribute">style</span><!--
+					--><span class="plain">=</span><!--
+					--><span class="string">"transform:rotate(180deg)"</span><!--
+					--><span class="plain">&gt;</span><!--
+					--><span class="plain">Upside&nbsp;down&nbsp;</span><!--
+					--><span class="TeXcode"><!--
+						--><span class="mathshift">$</span><!--
+						--><span class="macro">\displaystyle</span><!--
+						--><span class="macro">\frac</span><!--
+						--><span class="brace">{</span><!--
+						--><span class="operator">-</span><!--
+						--><span class="plain">b</span><!--
+						--><span class="macro">\pm</span><!--
+						--><span class="macro">\sqrt</span><!--
+						--><span class="plain">{b</span><!--
+						--><span class="operator">^</span><!--
+						--><span class="number">2</span><!--
+						--><span class="operator">-</span><!--
+						--><span class="number">4</span><!--
+						--><span class="plain">ac</span><!--
+						--><span class="brace">}</span><!--
+						--><span class="brace">}</span><!--
+						--><span class="brace">{</span><!--
+						--><span class="number">2</span><!--
+						--><span class="plain">a</span><!--
+						--><span class="brace">}</span><!--
+						--><span class="mathshift">$</span><!--
+					--></span><!--
+					--><span class="plain">&nbsp;formula.&lt;/</span><!--
+					--><span class="tag">div</span><!--
+					--><span class="plain">&gt;</span><!--
+				--></span>
+			</div>
+		</section>
+	</section>
+	<section id="demo">
+		<h2>Demo</h2>
+		<div id="demo-fontcontainer">
+			<label>Font: </label>
+			<select id="demo-fontselect">
+				<option value="">Loading more fonts...</option>
+			</select>
+		</div>
+		<span>edit this</span>
+		<textarea id="demo-input">$\global\def\FontTeX{\mathrm{Font\TeX}}$
+
+\( \FontTeX \) can handle formulas like
+$$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
+</textarea>
+		<span>to get this</span>
+		<div id="demo-output"></div>
+	</section>
+</div>
+<script>
+(function() {
+	"use strict";
+
+	let input = document.getElementById("demo-input");
+	let output = document.getElementById("demo-output");
+
+	let searchObject = {};
+	if (location.search) {
+		let query = location.search.substring(1);
+		let vars = query.split('&');
+		for (let i = vars.length - 1; i >= 0; i--) {
+			let pair = vars[i].split('=');
+			searchObject[decodeURIComponent(pair[0]).toLowerCase()] = decodeURIComponent(pair[1]);
+		}
+		
+		if (searchObject.demotext) {
+			input.value = searchObject.demotext;
+		}
+	}
+
+	// Render logos.
+	fontTeX.parse(String.raw`\(\mathrm{Font\TeX}\)`).renderIn(".logo");
+
+	// Render each example from its input text.
+	let examples = document.getElementsByClassName("example");
+	for (let i = examples.length - 1; i >= 0; i--) {
+		fontTeX.parse(examples[i].children[2].innerText.replace(/\u{00A0}/gu, " ")).renderIn(examples[i].children[1]);
+	}
+
+	let lastInputText = "";
+	input.addEventListener("keydown", reloadOutput);
+	input.addEventListener("keyup", reloadOutput);
+
+	// Reloads the TeX in #demo-output from the text in #demo-input
+	function reloadOutput() {
+		let inputText = input.value;
+		if (inputText != lastInputText) {
+			lastInputText = inputText;
+			fontTeX.parse(inputText).renderIn(output);
+		}
+	}
+	reloadOutput();
+
+	let fontList = null;
+	let fontListFailed = false;
+	let loadedFonts = [];
+
+	// Get a list of Google Fonts alphabetically.
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyB2-kOjbQd_5yX-bXvi6xl67e8kWY4NYew&sort=alpha");
+	xhr.addEventListener("readystatechange", function(e) {
+		if (this.readyState == 4) {
+			if (this.status == 200) {
+				// Only get fonts with a regular variant.
+				fontList = JSON.parse(this.responseText).items.filter(function(font) {
+					return font.variants.includes("regular") && font.subsets.includes("latin");
+				});
+
+				// Fill the font selectors with the list of fonts.
+				let optionsHTML = fontList.map(function(font) {
+					return "<option>" + font.family + "</option>";
+				}).join("");
+				select1.innerHTML = optionsHTML;
+				select2.innerHTML = optionsHTML;
+
+				// Choose Roboto since thats the default font.
+				// Will automatically change the value for `select2`.
+				select1.value = "Roboto";
+				select2.value = "Roboto";
+
+				oldFont = "Roboto";
+
+				chooseNewFont.call(select1);
+			} else {
+				fontListFailed = true;
+				select1.lastElementChild.textContent = "Fonts failed to load";
+				select2.lastElementChild.textContent = "Fonts failed to load";
+			}
+		}
+	});
+	xhr.send();
+
+
+	let select1 = document.getElementById("demo-fontselect");
+	let select2 = document.getElementById("examples-fontselect");
+
+	let oldFont = select1.value;
+
+	// Google Fonts only serves the basic Latin characters by default. Since FontTeX makes heavy
+	// use of math symbols though, like ∞ and ∑, it's worth loading the Mathematical Operators
+	// Unicode block (U+2200–U+22FF) separetly. This makes a string with every character from the
+	// block to add to the `WebFont.load` calls later.
+	let mathematicalOperatorsUnicodeBlock = "";
+	for (let codePoint = 0x2200; codePoint <= 0x22FF; codePoint++) {
+		mathematicalOperatorsUnicodeBlock += String.fromCodePoint(codePoint);
+	}
+
+	function chooseNewFont() {
+		select1.value = this.value;
+		select2.value = this.value;
+		if (this.value) {
+			if (loadedFonts.includes(this.value)) {
+				updateFont(this.value);
+			} else if (WebFont) {
+				output.innerHTML = "<div style='text-align:center'>Loading Font...</div>";
+
+				let successfulRequests = 0;
+				let failedRequests = 0;
+				const totalRequests = 2;
+
+				function checkRequests(font) {
+					if (successfulRequests + failedRequests == totalRequests) {
+						if (successfulRequests) {
+							loadedFonts.push(font);
+							updateFont(font);
+						} else {
+							failToLoadFont();
+						}
+					}
+				}
+
+				try {
+					WebFont.load({
+						google: {
+							families: [`${this.value}:400,400i,700`],
+						},
+						fontactive: function(font) {
+							successfulRequests++;
+							checkRequests(font);
+						},
+						fontinactive: function(font) {
+							failedRequests++;
+							checkRequests(font);
+						},
+						timeout: 5000,
+						classes: false
+					});
+
+					WebFont.load({
+						google: {
+							families: [`${this.value}:400,400i,700`],
+							// Not really sure why, but in my testing, Chrome ignored the `text`
+							// property when the list of characters was more than 158 characters,
+							// so it only fetches the first 158. The rest of the characters inside
+							// the Unicode block are rarely used anyway, so it seems to work out.
+							text: mathematicalOperatorsUnicodeBlock.substring(0,157)
+						},
+						fontactive: function(font) {
+							successfulRequests++;
+							checkRequests(font);
+						},
+						fontinactive: function(font) {
+							failedRequests++;
+							checkRequests(font);
+						},
+						timeout: 5000,
+						classes: false
+					});
+				} catch (e) {
+					failToLoadFont();
+				}
+			} else {
+				failToLoadFont();
+			}
+		}
+	}
+
+	function failToLoadFont() {
+		output.innerHTML = "<div style='text-align:center'>Loading Font...</div>";
+		select1.value = oldFont;
+	}
+
+	select1.addEventListener("change", chooseNewFont);
+	select2.addEventListener("change", chooseNewFont);
+
+	let exampleOutputs = document.getElementsByClassName("frame");
+	function updateFont(font) {
+		for (let i = exampleOutputs.length - 1; i>= 0; i--) {
+			exampleOutputs[i].style.fontFamily = font;
+		}
+
+		output.style.fontFamily = font;
+
+		if (font == "Roboto") {
+			fontTeX.rerender(output);
+		}
+	}
+})();
+</script>

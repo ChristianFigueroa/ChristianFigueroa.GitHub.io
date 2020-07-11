@@ -1,19 +1,17 @@
 title: Christian Figueroa
 email: figgchristian@gmail.com
 description: >-
-  
 baseurl: ""
 url: ""
 social:
-  - instagram:
-    - username: figgchristian
-      link: https://instagram.com/figgchristian
-  - github:
-    - username: ChristianFigueroa
-      link: https://github.com/ChristianFigueroa
-  - linkedin:
-    - username: figgchristian
-      link: https://linkedin.com/in/figgchristian
+  github:
+    username: ChristianFigueroa
+    link: https://github.com/ChristianFigueroa
+  linkedin:
+    username: figgchristian
+    link: https://linkedin.com/in/figgchristian
+collections:
+  - spotlight
 
 # Exclude from processing.
 # The following items will not be processed, by default.
