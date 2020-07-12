@@ -4,4 +4,7 @@ _site
 .jekyll-metadata
 vendor
 **/.DS_Store
-.DS_Store
+**/node_modules
+**/gulpfile.js
+**/package.json
+**/package-lock.json

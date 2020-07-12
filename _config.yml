@@ -12,6 +12,9 @@ social:
     link: https://linkedin.com/in/figgchristian
 collections:
   - spotlight
+exclude:
+  - projects/fonttex/node_modules
+  - vendor
 
 # Exclude from processing.
 # The following items will not be processed, by default.

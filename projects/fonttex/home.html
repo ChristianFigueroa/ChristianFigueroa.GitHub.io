@@ -439,7 +439,9 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 
 				oldFont = "Roboto";
 
-				chooseNewFont.call(select1);
+				if (typeof WebFont == "undefined") {
+					chooseNewFont.call(select1);
+				}
 			} else {
 				fontListFailed = true;
 				select1.lastElementChild.textContent = "Fonts failed to load";
@@ -464,13 +466,24 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 		mathematicalOperatorsUnicodeBlock += String.fromCodePoint(codePoint);
 	}
 
+	function waitForWebFont() {
+		if (typeof WebFont == "undefined") {
+			setTimeout(waitForWebFont, 250);
+		} else {
+			if (fontList.length) {
+				chooseNewFont.call(select1);
+			}
+		}
+	}
+	waitForWebFont();
+
 	function chooseNewFont() {
 		select1.value = this.value;
 		select2.value = this.value;
 		if (this.value) {
 			if (loadedFonts.includes(this.value)) {
 				updateFont(this.value);
-			} else if (WebFont) {
+			} else {
 				output.innerHTML = "<div style='text-align:center'>Loading Font...</div>";
 
 				let successfulRequests = 0;
@@ -528,8 +541,6 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 				} catch (e) {
 					failToLoadFont();
 				}
-			} else {
-				failToLoadFont();
 			}
 		}
 	}
