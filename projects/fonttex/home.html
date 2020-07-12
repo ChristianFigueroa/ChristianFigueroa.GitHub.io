@@ -314,6 +314,57 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 		<span>to get this</span>
 		<div id="demo-output"></div>
 	</section>
+	<section id="usage">
+		<h2>Usage</h2>
+		<div id="download">
+			<a href="./scripts/fonttex.min.js" download>fonttex.min.js</a>
+		</div>
+		<p>To get started, download the script above and drop in this snippet anywhere in your document.</p>
+		<p style="text-align:center;white-space:nowrap;width:100%;overflow-x:auto"><code>
+			<span class="HTMLcode"><!--
+				--><span class="plain">&lt;</span><!--
+				--><span class="tag">script</span><!--
+				--><span class="plain"> </span><!--
+				--><span class="attribute">src</span><!--
+				--><span class="plain">=</span><!--
+				--><span class="string">"path/to/script/fonttex.min.js"</span><!--
+				--><span class="plain">&gt;</span><!--
+				--><span class="plain">&lt;/</span><!--
+				--><span class="tag">script</span><!--
+				--><span class="plain">&gt;</span><!--
+			--></span>
+		</code></p>
+		<p>In your HTML, wrap your TeX code in a <code>
+			<span class="HTMLcode"><!--
+				--><span class="plain">&lt;</span><!--
+				--><span class="tag">font-tex</span><!--
+				--><span class="plain">&gt;</span><!--
+				--><span class="plain">&lt;/</span><!--
+				--><span class="tag">font-tex</span><!--
+				--><span class="plain">&gt;</span><!--
+			--></span>
+		</code> element, and it will render all by itself. Or, if you'd rather do it via JavaScript, use</p>
+		<p style="text-align:center;white-space:nowrap;width:100%;overflow-x:auto"><code>
+			<span class="JavaScriptcode"><!--
+				--><span class="plain">fontTeX</span><!--
+				--><span class="dot">.</span><!--
+				--><span class="method">parse</span><!--
+				--><span class="paren">(</span><!--
+				--><span class="builtin">String</span><!--
+				--><span class="dot">.</span><!--
+				--><span class="method">raw</span><!--
+				--><span class="string">`$\mathrm{Font\TeX}$ code`</span><!--
+				--><span class="paren">)</span><!--
+				--><span class="dot">.</span><!--
+				--><span class="method">renderIn</span><!--
+				--><span class="paren">(</span><!--
+				--><span class="string">"#element"</span><!--
+				--><span class="paren">)</span><!--
+				--><span class="plain">;</span><!--
+			--></span>
+		</code></p>
+		<p>to parse the passed in string and render it in <code>#element</code>.</p>
+	</section>
 </div>
 <script>
 (function() {

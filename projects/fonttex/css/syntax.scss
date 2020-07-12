@@ -1,6 +1,11 @@
 ---
 ---
 .TeXcode {
+	& > .plain,
+	& > .brace {
+		color: #FFFFFF;
+	}
+
 	& > .mathshift {
 		color: #E6DB74;
 	}
@@ -19,12 +24,30 @@
 }
 
 .HTMLcode {
+	& > .plain {
+		color: #FFFFFF;
+	}
+
 	& > .tag {
 		color: #F92672;
 	}
 
 	& > .attribute {
 		color: #A6E22E;
+	}
+
+	& > .string {
+		color: #E6DB74;
+	}
+}
+
+.JavaScriptcode {
+	& > .plain {
+		color: #FFFFFF;
+	}
+
+	& > .builtin {
+		color: #66D9EF
 	}
 
 	& > .string {

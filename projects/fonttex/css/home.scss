@@ -26,10 +26,12 @@ nav {
 	justify-content: space-between;
 	line-height: 1;
 	z-index: 1;
+	overflow-x: auto;
 
 	ul {
 		display: flex;
 		margin: 0;
+		padding: 0;
 
 		li {
 			display: block;
@@ -91,6 +93,7 @@ nav {
 
 		p {
 			font-size: 1.2em;
+			text-align: justify;
 		}
 	}
 
@@ -99,6 +102,21 @@ nav {
 
 		&:hover {
 			text-decoration: none;
+		}
+	}
+
+	#download {
+		text-align: center;
+		margin-bottom: .5em;
+		font-size: 1.2em;
+
+		a {
+			text-decoration: none;
+			color: #FFF;
+			background-color: $accent;
+			font-family: "Roboto Mono";
+			padding: 0.3em .7em;
+			border-radius: .5rem;
 		}
 	}
 }
@@ -157,6 +175,21 @@ nav {
 	}
 }
 
+@media (orientation: portrait) {
+	.example {
+		flex-direction: column;
+
+		.frame {
+			width: calc(100% - 2rem);
+			margin-bottom: .5em;
+		}
+
+		.input {
+			width: calc(100% - 2rem);
+		}
+	}
+}
+
 #demo {
 	&-fontcontainer {
 		@include fontcontainer;
@@ -200,4 +233,8 @@ nav {
 		padding: 0.4rem 0.8rem;
 		resize: vertical;
 	}
+}
+
+code {
+	font-family: "Roboto Mono";
 }
