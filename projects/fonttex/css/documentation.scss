@@ -2,8 +2,9 @@
 ---
 {% include css-funcs.scss %}
 
-$background: #26292C;
-$accent: #00849D;
+$background: {{ site.style.color.background }};
+$accent: {{ site.style.color.accent }};
+$link: {{ site.style.color.link }};
 
 html, body {
 	overflow-x: hidden;
@@ -231,6 +232,115 @@ body {
 	font-size: 1.75em;
 }
 
+#table {
+	$list-padding: 2em;
+
+	max-width: 95%;
+	width: 60em;
+	margin: 2em auto 0;
+	ul {
+		list-style-type: none;
+		padding-left: $list-padding;
+
+		li:before {
+			display: inline-block;
+			margin-left: -$list-padding;
+			margin-right: 0.25em;
+			width: $list-padding - 0.25em;
+			text-align: right;
+		}
+	}
+
+	> ul {
+		> li:before {
+			content: "1";
+		}
+
+		> li > ul {
+			> li:nth-child(1):before {
+				content: "\0391";
+			}
+			> li:nth-child(2):before {
+				content: "\0392";
+			}
+			> li:nth-child(3):before {
+				content: "\0393";
+			}
+			> li:nth-child(4):before {
+				content: "\0394";
+			}
+			> li:nth-child(5):before {
+				content: "\0395";
+			}
+			> li:nth-child(6):before {
+				content: "\0396";
+			}
+			> li:nth-child(7):before {
+				content: "\0397";
+			}
+			> li:nth-child(8):before {
+				content: "\0398";
+			}
+			> li:nth-child(9):before {
+				content: "\0399";
+			}
+
+			> li > ul {
+				> li:nth-child(1):before {
+					content: "\03b1";
+				}
+				> li:nth-child(2):before {
+					content: "\03b2";
+				}
+				> li:nth-child(3):before {
+					content: "\03b3";
+				}
+				> li:nth-child(4):before {
+					content: "\03b4";
+				}
+				> li:nth-child(5):before {
+					content: "\03b5";
+				}
+				> li:nth-child(6):before {
+					content: "\03b6";
+				}
+				> li:nth-child(7):before {
+					content: "\03b7";
+				}
+				> li:nth-child(8):before {
+					content: "\03b8";
+				}
+				> li:nth-child(9):before {
+					content: "\03b9";
+				}
+				> li:nth-child(10):before {
+					content: "\03ba";
+				}
+				> li:nth-child(11):before {
+					content: "\03bb";
+				}
+				> li:nth-child(12):before {
+					content: "\03bc";
+				}
+				> li:nth-child(13):before {
+					content: "\03bd";
+				}
+				> li:nth-child(14):before {
+					content: "\03be";
+				}
+			}
+		}
+	}
+
+	a {
+		color: $link;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
 #content {
 	max-width: 95%;
 	width: 60em;
@@ -238,9 +348,8 @@ body {
 
 	& > section {
 		h2 {
-			font-size: 2em;
+			font-size: 1.5em;
 			font-family: "Roboto Slab";
-			text-align: center;
 		}
 
 		p {
@@ -250,145 +359,18 @@ body {
 	}
 
 	a {
-		color: #66D9EF;
+		color: $link;
 
 		&:hover {
 			text-decoration: none;
 		}
 	}
-
-	#download {
-		text-align: center;
-		margin-bottom: .5em;
-		font-size: 1.2em;
-
-		a {
-			text-decoration: none;
-			color: #FFF;
-			background-color: $accent;
-			font-family: "Roboto Mono";
-			padding: 0.3em .7em;
-			border-radius: .5rem;
-		}
-	}
-}
-
-@mixin fontcontainer {
-	text-align: center;
-	margin: 0.8em 0;
-	font-size: 1.2em;
-
-	select {
-		font-size: 1em;
-	}
-}
-
-#examples-fontcontainer {
-	@include fontcontainer;
-}
-
-.example {
-	width: 100%;
-	display: flex;
-	flex-direction: row-reverse;
-	flex-wrap: wrap;
-	justify-content: space-between;
-
-	.description {
-		flex-basis: 100%;
-		font-family: "Roboto Slab";
-		font-size: 1.5em;
-		text-align: center;
-		margin: 0.7em 0;
-	}
-
-	&:first-of-type .description {
-		margin-top: 0;
-	}
-
-	.frame {
-		width: calc(50% - 2.5rem - 2px);
-		font-size: 1.25em;
-		border: 1px solid #FFF;
-		padding: 0.5rem 1rem;
-		overflow-x: auto;
-		border-radius: 0.7rem;
-		text-align: center;
-		font-family: serif;
-	}
-
-	.input {
-		width: calc(50% - 2.5rem - 2px);
-		border: 1px solid #FFF;
-		padding: 0.5rem 1rem;
-		border-radius: 0.7rem;
-		font-family: "Roboto Mono";
-		white-space: nowrap;
-		overflow: auto;
-	}
-}
-
-@media (orientation: portrait) {
-	.example {
-		flex-direction: column;
-
-		.frame {
-			width: calc(100% - 2rem);
-			margin-bottom: .5em;
-		}
-
-		.input {
-			width: calc(100% - 2rem);
-		}
-	}
-}
-
-#demo {
-	&-fontcontainer {
-		@include fontcontainer;
-	}
-
-	&-input {
-		background: inherit;
-		border: 1px solid #FFF;
-		width: calc(100% - 0.8rem * 2);
-		height: 6em;
-		border-radius: 0.7rem;
-		overflow: auto;
-		color: #FFF;
-		font-family: "Roboto Mono";
-		font-size: 1.2em;
-		padding: 0.4rem 0.8rem;
-		resize: vertical;
-		display: block;
-	}
-
-	& > span {
-		display: block;
-		text-align: center;
-		padding: 0.4em 0;
-
-		&:before, &:after {
-			content: "\2014";
-			margin: 0 0.5em;
-		}
-	}
-
-	&-output {
-		background: inherit;
-		border: 1px solid #FFF;
-		width: calc(100% - 0.8rem * 2);
-		height: 6em;
-		border-radius: 0.7rem;
-		overflow: auto;
-		color: #FFF;
-		font-size: 1.5em;
-		padding: 0.4rem 0.8rem;
-		resize: vertical;
-		font-family: serif;
-	}
 }
 
 code {
+	display: inline-block;
 	font-family: "Roboto Mono";
+	background: scale-color($background, $lightness: 20%);
+	border-radius: .25em;
+	padding: 0 .125em;
 }

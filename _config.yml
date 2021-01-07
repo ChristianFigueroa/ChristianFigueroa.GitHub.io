@@ -17,22 +17,26 @@ exclude:
   - projects/fonttex/node_modules
   - vendor
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+style:
+  color:
+    background: "#26292C"
+    accent: "#00849D"
+    link: "#66D9EF"
+    text: "#FFF"
+    code:
+      background: "#26292C"
+      lineHighlight: "#202325"
+      purple: "#AE81FF"
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - package.json
+  - package-lock.json
+  - gulpfile.js
+  - fontawesome/

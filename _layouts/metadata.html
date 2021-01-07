@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-script-enabled="false">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
     <title>{{ page.title }}</title>
-    {% if page.webapp %}
+    {%- if page.webapp -%}
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="{{ page.title }}">
     <meta name="application-name" content="{{ page.title }}">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="{{ site.baseurl }}meta/browserconfig.xml">
-    {% endif %}
+    {%- endif -%}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/meta/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/meta/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/meta/favicon-16x16.png">
@@ -18,15 +18,17 @@
     <link rel="mask-icon" href="{{ site.baseurl }}meta/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="{{ site.baseurl }}/meta/favicon.ico">
     <meta name="theme-color" content="#fafafa">
-    {% if jekyll.environment != "development" %}{% include googleanalytics %}{% endif %}
-    {% include getgooglefonts %}
-    {% capture _stylespath %}{{ site.baseurl }}/css/{% endcapture %}
-    {% include getstyles path=_stylespath %}
+    <script type="text/javascript">document.documentElement.setAttribute("data-script-enabled","true")</script>
+    {%- if jekyll.environment != "development" -%}{%- include googleanalytics -%}{%- endif -%}
+    {%- include getgooglefonts -%}
+    {%- capture _stylespath -%}{{ site.baseurl }}/css/{%- endcapture -%}
+    {%- include getstyles path=_stylespath -%}
     <link href="/css/base.css" rel="stylesheet" type="text/css">
-    {% capture _scriptspath %}{{ site.baseurl }}/scripts/{% endcapture %}
-    {% include getscripts path=_scriptspath %}
+    {%- capture _scriptspath -%}{{ site.baseurl }}/scripts/{%- endcapture -%}
+    {%- include getscripts path=_scriptspath afterbody=false -%}
 </head>
 <body>
     {{ content }}
+    {%- include getscripts path=_scriptspath afterbody=true -%}
 </body>
 </html>

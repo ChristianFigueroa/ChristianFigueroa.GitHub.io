@@ -1,5 +1,21 @@
 ---
 ---
+{% include variables.scss %}
+
 body, html {
 	margin: 0;
+}
+
+html[data-script-enabled="false"] .withscript {
+	display: none;
+}
+
+.link {
+	color: $link-color;
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
 }
