@@ -2,28 +2,33 @@
 layout: project
 ---
 <header>
-    <nav>
-        <a href="home#">
-            <div class="logo">FontTeX</div>
-        </a>
-        <ul>
-            <li>
-                <a href="home#demo">Demo</a>
-            </li>
-            <li>
-                <a href="documentation">Documentation</a>
-            </li>
-            <li>
-                <a href="home#download">Download</a>
-            </li>
-            <li>
-                <a href="https://github.com/ChristianFigueroa/FontTeX">GitHub</a>
-            </li>
-        </ul>
+    <nav id="navbar">
+        <input type="checkbox" aria-label="Toggle menu" />
+        <div id="navbar-toggle">
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <a href="home#" id="menu-logo"><div class="logo">FontTeX</div></a>
+        <div id="menu">
+            <ul>
+                <li><a href="home#demo">Demo</a></li>
+                <li><a href="documentation#">Documentation</a></li>
+                <li><a href="home#download">Download</a></li>
+                <li><a href="https://github.com/ChristianFigueroa/FontTeX">GitHub</a></li>
+            </ul>
+        </div>
     </nav>
     <div>
         <h1 id="title" class="logo">FontTeX</h1>
-        <h3 id="description">HTML, font-friendly math equations</h3>
+        <h3 id="description">{{ page.description }}</h3>
     </div>
 </header>
 {{ content }}
+<script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function() {
+        document.documentElement.scrollLeft = document.body.scrollLeft = 0;
+    });
+</script>

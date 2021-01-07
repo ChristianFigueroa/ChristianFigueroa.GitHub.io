@@ -1,12 +1,15 @@
 ---
 title: FontTeX – HTML, font-friendly math equations
+description: HTML, font-friendly math equations
 projectroot: /projects/fonttex
 layout: project.fonttex
 styles:
   - home.css
   - syntax.css
 scripts:
-  - fonttex.min.js
+#  - https://cdn.jsdelivr.net/gh/ChristianFigueroa/FontTeX/fonttex.min.js:
+#      external: true
+  - fonttex.js:
   - https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js:
       external: true
       async: true
@@ -31,7 +34,7 @@ fonts:
 				<option value="">Loading more fonts...</option>
 			</select>
 		</div>
-		<section class="example">
+		<section class="example" id="fractions">
 			<h5 class="description">Fractions</h5>
 			<div class="frame"></div>
 			<div class="input">
@@ -70,7 +73,7 @@ fonts:
 				--></span>
 			</div>
 		</section>
-		<section class="example">
+		<section class="example" id="superscripts_subscripts">
 			<h5 class="description">Superscripts & Subscripts</h5>
 			<div class="frame"></div>
 			<div class="input">
@@ -111,20 +114,19 @@ fonts:
 				<span class="TeXcode"><!--
 					--><span class="mathshift">$$</span><!--
 					--><span class="macro">\rm</span><!--
+					--><span class="macro">\obeyspaces</span><!--
 					--><span class="plain">&nbsp;H</span><!--
 					--><span class="operator">_</span><!--
 					--><span class="number">3</span><!--
 					--><span class="plain">O</span><!--
 					--><span class="operator">_</span><!--
 					--><span class="number">4</span><!--
-					--><span class="macro">\&nbsp;</span><!--
-					--><span class="plain">(aq)&nbsp;</span><!--
+					--><span class="plain">&nbsp;(aq)&nbsp;</span><!--
 					--><span class="macro">\rightleftharpoons</span><!--
 					--><span class="plain">&nbsp;H</span><!--
 					--><span class="operator">^</span><!--
 					--><span class="plain">+</span><!--
-					--><span class="macro">\&nbsp;</span><!--
-					--><span class="plain">(aq)&nbsp;</span><!--
+					--><span class="plain">&nbsp;(aq)&nbsp;</span><!--
 					--><span class="operator">+</span><!--
 					--><span class="plain">&nbsp;H</span><!--
 					--><span class="operator">_</span><!--
@@ -134,14 +136,13 @@ fonts:
 					--><span class="number">4</span><!--
 					--><span class="operator">^</span><!--
 					--><span class="plain">-</span><!--
-					--><span class="macro">\&nbsp;</span><!--
-					--><span class="plain">(aq)</span><!--
+					--><span class="plain">&nbsp;(aq)</span><!--
 					--><span class="mathshift">$$</span><!--
 				--></span>
 			</div>
 		</section>
-		<section class="example">
-			<h5 class="description">Fancy operators</h5>
+		<section class="example" id="large_operators">
+			<h5 class="description">Large operators</h5>
 			<div class="frame"></div>
 			<div class="input">
 				<span class="TeXcode"><!--
@@ -182,7 +183,78 @@ fonts:
 				--></span>
 			</div>
 		</section>
-		<section class="example">
+		<section class="example" id="halign_Tables">
+			<h5 class="description"><span style="font-family:'Roboto Mono'">\halign</span> Tables</h5>
+			<div class="frame"></div>
+			<div class="input">
+				<span class="TeXcode"><!--
+					--><span class="mathshift">$$</span><!--
+					--><span class="plain">|x|</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="operator">=</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\left</span><!--
+					--><span class="macro">\{</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\halign</span><!--
+					--><span class="brace">{</span><!--
+					--><br><!--
+					--><span class="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><!--
+					--><span class="parameter">#</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="alignment">&</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\quad</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\mathrm</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="plain">if</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\quad</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="parameter">#</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\cr</span><!--
+					--><br><!--
+					--><span class="plain">&nbsp;&nbsp;</span><!--
+					--><span class="macro">\phantom</span><!--
+					--><span class="operator">-</span><!--
+					--><span class="plain">x</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="alignment">&</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="plain">x</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\geq</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="number">0</span><!--
+					--><span class="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><!--
+					--><span class="macro">\cr</span><!--
+					--><br><!--
+					--><span class="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><!--
+					--><span class="operator">-</span><!--
+					--><span class="plain">x</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="alignment">&</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="plain">x</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="operator">&lt;</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="number">0</span><!--
+					--><span class="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><!--
+					--><span class="macro">\cr</span><!--
+					--><br><!--
+					--><span class="brace">}</span><!--
+					--><span class="plain">&nbsp;</span><!--
+					--><span class="macro">\right</span><!--
+					--><span class="plain">.</span><!--
+					--><span class="mathshift">$$</span><!--
+				--></span>
+			</div>
+		</section>
+		<section class="example" id="Scoped_Macro_defs">
 			<h5 class="description">Scoped Macro <span style="font-family:'Roboto Mono'">\def</span>s</h5>
 			<div class="frame"></div>
 			<div class="input">
@@ -223,7 +295,7 @@ fonts:
 				works.
 			</div>
 		</section>
-		<section class="example">
+		<section class="example" id="HTML_Support">
 			<h5 class="description">HTML Support</h5>
 			<div class="frame"></div>
 			<div class="input">
@@ -364,6 +436,7 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 			--></span>
 		</code></p>
 		<p>to parse the passed in string and render it in <code>#element</code>.</p>
+		<p>More details are specified in the <a href="documentation">documentation</a>.</p>
 	</section>
 </div>
 <script>
@@ -388,7 +461,7 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 	}
 
 	// Render logos.
-	fontTeX.parse(String.raw`\(\mathrm{Font\TeX}\)`).renderIn(".logo");
+	fontTeX.parse(String.raw`\(\mathrm{FontT\kern-.1667em{\lower.5exE}\kern-.125emX}\)`).renderIn(".logo");
 
 	// Render each example from its input text.
 	let examples = document.getElementsByClassName("example");
@@ -439,7 +512,7 @@ $$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
 
 				oldFont = "Roboto";
 
-				if (typeof WebFont == "undefined") {
+				if (typeof WebFont != "undefined") {
 					chooseNewFont.call(select1);
 				}
 			} else {

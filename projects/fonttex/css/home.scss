@@ -3,11 +3,15 @@
 $background: #26292C;
 $accent: #00849D;
 
+html, body {
+	overflow-x: hidden;
+}
+
 body {
 	font-family: Roboto;
 	background-color: $background;
 	color: #FFF;
-	padding: (1em * 1.2 * (1 + 0.8 * 2)) 0 3em;
+	padding: 0 0 3em;
 }
 
 .logo {
@@ -15,52 +19,198 @@ body {
 	font-weight: 700;
 }
 
-nav {
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	font-size: 1.2em;
-	background: $accent;
+#navbar {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
-	line-height: 1;
+	align-items: stretch;
+	margin-bottom: 20px;
+	background: #00849d;
+	color: #ffffff;
 	z-index: 1;
-	overflow-x: auto;
+	box-sizing: border-box;
 
-	ul {
-		display: flex;
+	#menu-logo {
+		font-size: 1.2em;
+		color: #FFF;
+		padding: .5em .8em;
+		line-height: 1;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: scale-color($accent, $lightness: -20%);
+		}
+	}
+
+	input {
+		width: 3em;
+		height: 100%;
+		display: block;
 		margin: 0;
-		padding: 0;
+		position: absolute;
+		cursor: pointer;
+		opacity: 0;
+		z-index: 2;
+		-webkit-touch-callout: none;
+		font-size: 1em;
+	}
 
-		li {
+	#navbar-toggle {
+		width: 3em;
+		display: flex;
+		flex-direction: column;
+		z-index: 1;
+		justify-content: space-around;
+		align-items: center;
+		transition: background-color 0.3s ease;
+
+		span {
 			display: block;
+			width: 2em;
+			height: .25em;
+			position: relative;
+			background-color: #FFF;
+			border-radius: .125em;
+			transform-origin: center;
+			transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+				opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+				background-color 0.3s ease;
+		}
 
-			a {
-				display: block;
-				padding: 0.8em 1em;
+		span + span {
+			margin-top: .25em;
+		}
+	}
+
+	input:checked ~ #navbar-toggle {
+		background-color: #FFF;
+
+		span {
+			background-color: $accent;
+
+			&:nth-child(1) {
+				opacity: 1;
+				transform: translateY(.5em) rotate(45deg);
+			}
+
+			&:nth-child(2) {
+				opacity: 1;
+				transform: rotate(-45deg);
+			}
+
+			&:nth-child(3) {
+				opacity: 0;
+				transform: scale(0, 0);
 			}
 		}
 	}
 
-	a {
-		color: inherit;
-		text-decoration: none;
-
-		&:hover {
-			background: lighten($accent, 5%);
-		}
+	input:checked:hover ~ #navbar-toggle span,
+	input:checked:focus ~ #navbar-toggle span {
+		background-color: scale-color($accent, $lightness: -25%);
 	}
 
-	& > a {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		padding: 0 .8em;
+	input:hover:not(:checked) ~ #navbar-toggle,
+	input:focus:not(:checked) ~ #navbar-toggle {
+		background-color: scale-color($accent, $lightness: -20%);
+	}
 
-		.logo {
+	#menu ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		text-decoration: none;
+		transition: background-color 0.3s ease,
+			color 0.3s ease;
+	}
+}
+
+/* mobile styles */
+@media only screen and (max-width: 767px) { 
+	#navbar {
+		flex-direction: row-reverse;
+
+		#menu {
+			position: absolute;
+			box-sizing: border-box;
+			width: min(20em, 100vw);
+			left: 100vw;
+			top: 100%;
+			padding: 2em;
+			background: #FFF;
+			-webkit-font-smoothing: antialiased;
+			transition: left 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+			overflow: auto;
+
+			li {
+				margin: 0 -2em;
+
+				a {
+					display: block;
+					text-decoration: none;
+					color: $accent;
+					padding: .3em 2em;
+
+					&:hover,
+					&:focus,
+					&:active {
+						background-color: $accent;
+						color: #FFF;
+					}
+				}
+			}
+		}
+
+		input:checked ~ #menu {
+			left: calc(100vw - min(20em, 100vw));
+		}
+	}
+}
+
+/* desktop styles */
+@media only screen and (min-width: 768px) { 
+	#navbar {
+		width: 100%;
+
+		input {
+			display: none;
+		}
+
+		#navbar-toggle {
+			display: none;
+		}
+
+		a {
 			color: #FFF;
-			font-size: 1.2em;
+
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: scale-color($accent, $lightness: -20%);
+			}
+		}
+
+		#menu {
+			position: relative;
+			justify-content: space-between;
+
+			ul {
+				padding: 0;
+				display: flex;
+				height: 100%;
+
+				a {
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-around;
+					padding: 0 1em;
+				}
+			}
 		}
 	}
 }
@@ -162,6 +312,7 @@ nav {
 		overflow-x: auto;
 		border-radius: 0.7rem;
 		text-align: center;
+		font-family: serif;
 	}
 
 	.input {
@@ -232,6 +383,7 @@ nav {
 		font-size: 1.5em;
 		padding: 0.4rem 0.8rem;
 		resize: vertical;
+		font-family: serif;
 	}
 }
 
