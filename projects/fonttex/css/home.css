@@ -89,5 +89,3 @@ body { font-family: Roboto; background-color: #26292C; color: #FFF; padding: 0 0
 #demo-output { background: inherit; border: 1px solid #FFF; width: calc(100% - 0.8rem * 2); height: 6em; border-radius: 0.7rem; overflow: auto; color: #FFF; font-size: 1.5em; padding: 0.4rem 0.8rem; resize: vertical; font-family: serif; }
 
 code { font-family: "Roboto Mono"; }
-
-/*# sourceMappingURL=home.css.map */

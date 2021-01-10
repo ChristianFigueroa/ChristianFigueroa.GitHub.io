@@ -25,7 +25,7 @@ html, body { margin: 0; overflow-y: hidden; }
 
 #history > div > div { max-width: 100%; }
 
-#custom { min-height: 3.6em; height: calc(100% - .4em); border: 0; min-width: calc(100% - .8em - 1ch); font-size: 1em; padding: 0.2em 0.4em 0.2em calc(.4em + 1ch); white-space: pre; tab-size: 4; }
+#custom { min-height: 3.6em; height: calc(100% - .4em); border: 0; min-width: calc(100% - .8em - 1ch); font-size: 1em; padding: 0.2em 0.4em 0.2em calc(.4em + 1ch); white-space: pre; -moz-tab-size: 4; -o-tab-size: 4; tab-size: 4; }
 
 #inputSymbol { position: absolute; }
 
@@ -222,5 +222,3 @@ option { font-family: Philosopher, sans-serif; }
 span.hide { opacity: .45; }
 
 @media (max-aspect-ratio: 1/1) { #main { flex-direction: column; } #left { width: calc(100% - 2em); height: calc(50% - 3em); } #right { width: 100%; height: 50%; } #history { height: calc(100% - 2.35em - 1px); max-height: initial; } #custom { height: 1.15em; min-height: initial; } #customContainer { height: auto; min-height: 1.55em; min-height: initial; position: absolute; bottom: 0; } #slider_x { display: none; } #slider_y { display: block; position: absolute; top: calc(50vh - 1vh - .5px); left: 0; height: 2vh; width: 100%; cursor: ns-resize; z-index: 1; } }
-
-/*# sourceMappingURL=roll.css.map */
