@@ -1,0 +1,5 @@
+body, html { margin: 0; }
+
+html[data-script-enabled="false"] .withscript { display: none; }
+
+/*# sourceMappingURL=base.css.map */

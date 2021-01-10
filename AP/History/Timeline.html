@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Timeline &#183; ChristianFigueroa.GitHub.io</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91403443-1', 'auto');
+	 	ga('send', 'pageview');</script>
+	<style>
+		body, html {
+			margin: 0;
+			padding-top: .5rem;
+			background: #CCC;
+		}
+
+		#timeline {
+			max-width: calc(100% - 2em);
+			margin: 0 1em 1em;
+			position: relative;
+			overflow-x: auto;
+			height: 47.2em;
+			border: 1px solid #AAA;
+			box-shadow: 0.2rem 0.2rem 0.4rem 0 rgba(80, 80, 80, 0.8);
+		}
+
+		.timePeriodDark, .timePeriodLight, .overlay {
+			height: 100%;
+			position: absolute;
+		}
+
+		.timePeriodDark {
+			background: #009cb1;
+		}
+
+		.timePeriodLight {
+			background: #10bcd1;
+		}
+
+		/* 10 years = 1em */
+		#foundationsTimePeriod, #foundationsOverlay {
+			width: 270em;
+		}
+
+		#classicalTimePeriod, #classicalOverlay {
+			left: 270em;
+			width: 120em;
+		}
+
+		#postclassicalTimePeriod, #postclassicalOverlay {
+			left: 390em;
+			width: 85em;
+		}
+
+		#earlymodernTimePeriod, #earlymodernOverlay {
+			left: 475em;
+			width: 30em;
+		}
+
+		#industrialTimePeriod, #industrialOverlay {
+			left: 505em;
+			width: 15em;
+		}
+
+		#currentTimePeriod, #currentOverlay {
+			left: 520em;
+			width: 20em;
+		}
+
+		#overlay {
+			height: 100%;
+			width: 540em;
+		}
+
+		.decade {
+			width: 1em;
+			height: 100%;
+			position: absolute;
+		}
+
+		.decade:nth-child(10n):not(:last-child) {
+			border-right: 1px solid #000;
+			margin-right: -1px;
+		}
+
+		.decade:nth-child(10n + 1) {
+			border-left: 1px solid #000;
+			margin-left: -1px;
+		}
+
+		.subdecade {
+			height: 1em;
+		}
+
+		.decade:not(:first-child):not(:nth-child(10n + 1)) .subdecade {
+			border-left: 1px solid #456;
+			margin-left: -1px;
+		}
+
+		.decade:not(:last-child):not(:nth-child(10n)) .subdecade {
+			border-right: 1px solid #456;
+			margin-right: -1px;
+		}
+
+		#tooltip {
+			min-width: 5em;
+			font-family: "Roboto Slab", Arial, sans-serif;
+			position: fixed;
+			top: 0;
+			background: #F5F5F5;
+			padding: .4em .6em;
+			text-align: center;
+			pointer-events: none;
+			border-radius: .2em;
+			box-shadow: .2rem .2rem .4rem 0 rgba(80,80,80, .8);
+			z-index: 3;
+		}
+
+		.tooltipTri {
+			width: 0;
+			height: 0;
+			left: calc(50% - .5em);
+			position: absolute;
+			border-left: .5em solid rgba(0,0,0,0);
+			border-right: .5em solid rgba(0,0,0,0);
+			margin: auto;
+		}
+
+		#tooltipTriBottom {
+			border-top: 1em solid #F5F5F5;
+			top: 100%;
+		}
+
+		#tooltipTriTop {
+			border-bottom: 1em solid #F5F5F5;
+			bottom: 100%;
+		}
+
+		.timelineEvent {
+			position: absolute;
+			padding: .2em .3em;
+			background: #DDD;
+			border-radius: .3em;
+			font-family: "Roboto Slab", Arial, sans-serif;
+			overflow: hidden;
+			white-space: pre;
+			text-overflow: ellipsis;
+			box-shadow: .2rem .2rem .4rem 0 rgba(80, 80, 80, .8);
+		}
+
+		.timelineEvent.closing {
+			transition: width 1s cubic-bezier(0, .5, .5, 1), color .5s ease-out;
+		}
+
+		.timelineEvent.disabled {
+			pointer-events: none;
+			opacity: .35;
+		}
+
+		.timelineEvent a {
+			color: #008ca1;
+			text-decoration: none;
+		}
+
+		.timelineEvent a:hover {
+			text-decoration: underline;
+		}
+
+		#eventSelectionSpan {
+			background: rgba(255, 255, 255, .4);
+			border-left: 1px solid #FFF;
+			border-right: 1px solid #FFF;
+			margin-left: -1px;
+			position: absolute;
+			display: none;
+		}
+
+		#yearSelection {
+			position: absolute;
+			background: rgba(255, 255, 255,.4);
+			height: 100%;
+			border-left: 1px solid #FFF;
+			border-right: 1px solid #FFF;
+			margin: 0 -1px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id='timeline'>
+		<div id='timelineBackground'>
+			<div id='foundationsTimePeriod' class='timePeriodDark'></div>
+			<div id='classicalTimePeriod' class='timePeriodLight'></div>
+			<div id='postclassicalTimePeriod' class='timePeriodDark'></div>
+			<div id='earlymodernTimePeriod' class='timePeriodLight'></div>
+			<div id='industrialTimePeriod' class='timePeriodDark'></div>
+			<div id='currentTimePeriod' class='timePeriodLight'></div>
+		</div>
+		<div id='decadeContainer'>
+			<div id='decadeTemplate' class='decade'>
+				<div class='subdecade'></div>
+			</div>
+		</div>
+		<div id='eventSelectionSpan'></div>
+		<div id='overlay'>
+			<div id='foundationsOverlay' class='overlay' name='Foundations'></div>
+			<div id='classicalOverlay' class='overlay' name='Classical'></div>
+			<div id='postclassicalOverlay' class='overlay' name='Post-Classical'></div>
+			<div id='earlymodernOverlay' class='overlay' name='Early Modern'></div>
+			<div id='industrialOverlay' class='overlay' name='Industrial'></div>
+			<div id='currentOverlay' class='overlay' name='Current Time'></div>
+			<div id='yearSelection'></div>
+		</div>
+		<div id='eventContainer'></div>
+	</div>
+	<div id='tooltip' style='display:none;top:-5em'>
+		<div id='tooltipTriTop' class='tooltipTri'></div>
+		<div id='tooltipTriBottom' class='tooltipTri'></div>
+		<div id='tooltipText'></div>
+	</div>
+	<script src='Timeline_Events.js'></script>
+	<script>
+		!function() {
+			"use strict";
+			var yearRange = 5400;
+			var mouseDown = false;
+			window.em = function em() {
+				return Math.round(document.getElementById('timeline').getBoundingClientRect().top) + topScroll();
+			}
+
+			function topScroll() {
+				return document.documentElement.scrollTop || document.body.scrollTop;
+			}
+
+			var decadeTemplate = document.getElementById('decadeTemplate');
+			for (var i = yearRange / 10; i > 1; i--) {
+				var clone = decadeTemplate.cloneNode(true);
+				clone.id = 'decadeClone' + (yearRange / 10 - i);
+				clone.style.left = ((yearRange / 10 - i) + 1) + 'em';
+				decadeTemplate.parentNode.appendChild(clone);
+			}
+
+			document.getElementById('overlay').addEventListener('mousemove', function(e) {
+				var tooltip = document.getElementById('tooltip'), timeline = document.getElementById('timeline');
+
+				tooltip.mouseCoords = [e.clientX, e.clientY];
+				if (mouseDown) {
+					var temp, overlayLeft = this.getBoundingClientRect().left;
+					var startYear = Math.round((mouseDown.x - overlayLeft) / em() * 10) - yearRange + 2100;
+					startYear = startYear < 0 ? startYear : startYear + 1;
+					var endYear = Math.round((e.clientX - overlayLeft) / em() * 10) - yearRange + 2100;
+					endYear = endYear < 0 ? endYear : endYear + 1;
+					temp = Math.max(startYear, endYear);
+					startYear = Math.min(startYear, endYear);
+					endYear = temp;
+					setTimeout(function() {
+						document.getElementById('tooltipText').innerHTML = Math.abs(startYear) + ' <small>' + (startYear < 0 ? 'B.' : '') + 'C.E.</small>' + (startYear == endYear ? '' : ' &#150; ' + Math.abs(endYear) + ' <small>' + (endYear < 0 ? 'B.' : '') + 'C.E.</small>') + '<br>' + (endYear - startYear + (startYear < 0 && endYear > 0 ? 0 : 1)) + ' year span';
+					}, 0);
+					mouseDown.startYear = startYear;
+					mouseDown.endYear = endYear;
+				} else {
+					var year = Math.round((e.clientX - this.getBoundingClientRect().left) / em() * 10) - yearRange + 2100;
+					year = year < 0 ? year : year + 1;
+					setTimeout(function() {
+						document.getElementById('tooltipText').innerHTML = Math.abs(year) + ' <small>' + (year > 0 ? '' : 'B.') + 'C.E.</small><br>' + ['Foundations','Classical','Post-Classical','Early Modern','Industrial','Current Time'][year > 1900 ? 5 : year > 1750 ? 4 : year > 1450 ? 3 : year > 600 ? 2 : year > -600 ? 1 : 0] + ' Period';
+					}, 0);
+				}
+				tooltip.style.left = Math.min(timeline.offsetLeft + timeline.offsetWidth - tooltip.offsetWidth, Math.max(timeline.offsetLeft, e.clientX - tooltip.offsetWidth / 2)) + 'px';
+				tooltip.style.top = e.clientY + (innerHeight / 2 > e.clientY ? em() + 10 : -tooltip.offsetHeight - em() - 7) + 'px';
+				document.getElementById('tooltipTriTop').style.marginLeft = document.getElementById('tooltipTriBottom').style.marginLeft = Math.max(-tooltip.offsetWidth / 2 + em(), Math.min(tooltip.offsetWidth / 2 - em(), e.clientX - (parseFloat(tooltip.style.left) + tooltip.offsetWidth / 2))) + 'px';
+				document.getElementById('tooltipTri' + (innerHeight / 2 > e.clientY ? 'Bottom' : 'Top')).style.display = 'none';
+				document.getElementById('tooltipTri' + (innerHeight / 2 > e.clientY ? 'Top' : 'Bottom')).style.display = '';
+			});
+
+			document.getElementById('overlay').addEventListener('mouseleave', function() {
+				document.getElementById('tooltip').style.display = 'none';
+			});
+
+			document.getElementById('overlay').addEventListener('mouseenter', function() {
+				document.getElementById('tooltip').style.display = '';
+			});
+
+			document.getElementById('overlay').addEventListener('mousedown', function(e) {
+				mouseDown = {
+					x: e.clientX
+				}
+				var yearSelection = document.getElementById('yearSelection');
+				if (document.getElementById('yearSelection').style.display) {
+					setTimeout(function() {
+						if (mouseDown) {
+							yearSelection.style.width = 0;
+							yearSelection.style.left = e.clientX - document.getElementById('overlay').getBoundingClientRect().left + 'px';
+						} else {
+							yearSelection.style.display = '';
+							Array.prototype.forEach.call(document.querySelectorAll('.timelineEvent.disabled'), function(element) {
+								element.className = element.className.replace('disabled','');
+							});
+						}
+					},225);
+				} else {
+					yearSelection.style.width = 0;
+					yearSelection.style.left = e.clientX - this.getBoundingClientRect().left + 'px';
+				}
+				var overlay = this.getBoundingClientRect();
+				var temp;
+				var startYear = Math.round((mouseDown.x - overlay.left) / em() * 10) - yearRange + 2100;
+				startYear = startYear < 0 ? startYear : startYear + 1;
+				var endYear = Math.round((e.clientX - overlay.left) / em() * 10) - yearRange + 2100;
+				endYear = endYear < 0 ? endYear : endYear + 1;
+				temp = Math.max(startYear, endYear);
+				startYear = Math.min(startYear, endYear);
+				endYear = temp;
+				document.getElementById('tooltipText').innerHTML = Math.abs(startYear) + ' <small>' + (startYear < 0 ? 'B.' : '') + 'C.E.</small>' + (startYear == endYear ? '' : ' &#150; ' + Math.abs(endYear) + ' <small>' + (endYear < 0 ? 'B.' : '') + 'C.E.</small>') + '<br>' + (endYear - startYear + (startYear < 0 && endYear > 0 ? 0 : 1)) + ' year span';
+				mouseDown.startYear = startYear;
+				mouseDown.endYear = endYear;
+				yearSelection.style.display = 'block';
+
+				var tooltip = document.getElementById('tooltip'), trect = document.getElementById('timeline').getBoundingClientRect(), rect = tooltip.getBoundingClientRect();
+				tooltip.style.left = Math.min(trect.right - rect.width, Math.max(trect.left, tooltip.mouseCoords[0] - rect.width / 2)) + 'px';
+				document.getElementById('tooltipTriTop').style.marginLeft = document.getElementById('tooltipTriBottom').style.marginLeft = Math.max(-rect.width / 2 + em(), Math.min(rect.width / 2 - em(), tooltip.mouseCoords[0] - (parseFloat(tooltip.style.left) + rect.width / 2))) + 'px';
+
+				Array.prototype.forEach.call(document.querySelectorAll('[data-open="open"]'), function(element) {
+					element.dispatchEvent(new MouseEvent('mouseleave'));
+				});
+				Array.prototype.forEach.call(document.querySelectorAll('.timelineEvent.disabled'), function(element) {
+					element.className = element.className.replace('disabled','');
+				});
+				document.documentElement.style.cursor = 'crosshair';
+			});
+
+			window.addEventListener('mouseup', function() {
+				document.documentElement.style.cursor = '';
+				var startYear = mouseDown.startYear, endYear = mouseDown.endYear;
+				setTimeout(function() {
+					if (!document.getElementById('yearSelection').style.display) return;
+					Array.prototype.forEach.call(document.getElementsByClassName('timelineEvent'), function(event) {
+						if ((event.year1 <= endYear && event.year2 >= startYear) || event.className.includes('disabled')) return;
+						event.className += ' disabled';
+					});
+				},100);
+				mouseDown = false;
+				var tooltip = document.getElementById('tooltip');
+				var year = Math.round((tooltip.mouseCoords[0] - document.getElementById('overlay').getBoundingClientRect().left) / em() * 10) - (yearRange - 2100);
+				year = year < 0 ? year : year + 1;
+				document.getElementById('tooltipText').innerHTML = Math.abs(year) + ' <small>' + (year > 0 ? '' : 'B.') + 'C.E.</small><br>' + ['Foundations','Classical','Post-Classical','Early Modern','Industrial','Current Time'][year > 1900 ? 5 : year > 1750 ? 4 : year > 1450 ? 3 : year > 600 ? 2 : year > -600 ? 1 : 0] + ' Period';
+				var trect = document.getElementById('timeline').getBoundingClientRect(), rect = tooltip.getBoundingClientRect();
+				tooltip.style.left = Math.min(trect.right - rect.width, Math.max(trect.left, tooltip.mouseCoords[0] - rect.width / 2)) + 'px';
+				document.getElementById('tooltipTriTop').style.marginLeft = document.getElementById('tooltipTriBottom').style.marginLeft = Math.max(-rect.width / 2 + em(), Math.min(rect.width / 2 - em(), tooltip.mouseCoords[0] - (parseFloat(document.getElementById('tooltip').style.left) + rect.width / 2))) + 'px';
+			});
+
+			window.addEventListener('mousemove', function(e) {
+				if (mouseDown) {
+					var selection = document.getElementById('yearSelection'), overlay = document.getElementById('overlay');
+					if (e.clientX - mouseDown.x > 0) {
+						setTimeout(function() {
+							selection.style.left = mouseDown.x - overlay.getBoundingClientRect().left + 'px';
+							selection.style.width = e.clientX - mouseDown.x + 'px';
+						},0);
+					} else if (e.clientX - mouseDown.x < 0) {
+						setTimeout(function(){
+							selection.style.width = Math.abs(e.clientX - mouseDown.x) + 'px';
+							selection.style.left = mouseDown.x - overlay.getBoundingClientRect().left + (e.clientX - mouseDown.x) + 'px';
+						},0);
+					} else {
+						setTimeout(function(){
+							selection.style.width = '1px';
+							selection.style.left = mouseDown.x - overlay.getBoundingClientRect().left + 'px';
+						},0);
+					};
+				}
+			})
+
+			document.getElementById('timeline').addEventListener('scroll', function(e) {
+				if (!document.getElementById('tooltip').mouseCoords) return;
+				var year = Math.round((tooltip.mouseCoords[0] - document.getElementById('overlay').getBoundingClientRect().left) / em() * 10) - (yearRange - 2100);
+				year = year < 0 ? year : year + 1;
+				setTimeout(function() {
+					document.getElementById('tooltipText').innerHTML = Math.abs(year) + ' <small>' + (year > 0 ? '' : 'B.') + 'C.E.</small><br>' + ['Foundations','Classical','Post-Classical','Early Modern','Industrial','Current Time'][year > 1900 ? 5 : year > 1750 ? 4 : year > 1450 ? 3 : year > 600 ? 2 : year > -600 ? 1 : 0] + ' Period';
+				}, 0);
+				tooltip.style.left = Math.min(this.offsetLeft + this.offsetWidth - tooltip.offsetWidth, Math.max(this.offsetLeft, tooltip.mouseCoords[0] - tooltip.offsetWidth / 2)) + 'px';
+				document.getElementById('tooltipTriTop').style.marginLeft = document.getElementById('tooltipTriBottom').style.marginLeft = Math.max(-tooltip.offsetWidth / 2 + em(), Math.min(tooltip.offsetWidth / 2 - em(), tooltip.mouseCoords[0] - (parseFloat(tooltip.style.left) + tooltip.offsetWidth / 2))) + 'px';
+			});
+
+			EVENTS.forEach(function(event) {
+				var div = document.createElement('div');
+				div.className = 'timelineEvent';
+				div.setAttribute('data-type', event.type);
+				div.setAttribute('data-chapter', event.chapter);
+				div.setAttribute('data-layer', event.layer);
+				div.innerHTML = '[';
+				if (event.type == EVENTS.RANGED) {
+					div.setAttribute('data-year1', event.year1);
+					div.setAttribute('data-year2', event.year2);
+					div.innerHTML += Math.abs(event.year1) + (event.year1 < 0 != event.year2 < 0 ? ' <small>' + (event.year1 < 0 ? 'B.' : '') + 'C.E.</small>' : '') + ' &#150; ' + Math.abs(event.year2) + ' <small>' + (event.year2 < 0 ? 'B.' : '') + 'C.E.</small>] ';
+					div.style.width = (event.year2 - event.year1) / 10 + 'em';
+					div.year1 = event.year1;
+					div.year2 = event.year2;
+				} else {
+					div.setAttribute('data-year', event.year);
+					div.innerHTML += Math.abs(event.year) + ' <small>' + (event.year1 < 0 ? 'B.' : '') + 'C.E.</small>] ';
+					div.style.width = 0;
+					div.style.color = 'transparent';
+					div.year1 = event.year;
+					div.year2 = event.year;
+				}
+				var links = event.text.match(/{{[^}]+}}/g);
+				if (links) {
+					links.forEach(function(link, index) {
+						event.text = event.text.replace(link, '<a href="Flash_Cards/find?id=' + link.match(/{{([^|]+)/)[1] + '">' + link.match(/\|([^}]+)}}/)[1] + '</a>');
+					});
+				}
+				div.innerHTML += event.text;
+				var regions = ('00000' + event.region.toString(2)).substring(event.region.toString(2).length).split('');
+				regions.forEach(function(region, index) {
+					regions[index] = region == '1' ? ['Americas','Oceania','Europe','Africa','Asia'][index] : '';
+				});
+				div.setAttribute('data-regions', regions.join(''));
+				div.style.left = ((event.year || event.year1) + yearRange - 2100) / 10 - .3 + 'em';
+				div.style.top = event.layer * 2.2 + 'em';
+				div.defaultWidth = div.style.width;
+				div.addEventListener('mouseenter', function(e) {
+					this.className = this.className.replace('closing','');
+					if (this.timeout) clearTimeout(this.timeout), this.timeout = 0;
+					if (event.type == EVENTS.POINT) this.style.color = '';
+					var computedStyle = getComputedStyle(this);
+
+					var span = document.getElementById('eventSelectionSpan');
+					span.style.display = 'block';
+					span.style.width = this.style.width;
+					span.style.height = this.getBoundingClientRect().top - document.getElementById('timeline').getBoundingClientRect().top + 'px';
+					span.style.left = parseFloat(computedStyle.left) + parseFloat(computedStyle.paddingLeft) + 'px';
+
+					var currentWidth = this.getBoundingClientRect().width;
+					this.style.width = '';
+					this.style.width = Math.max(currentWidth, this.getBoundingClientRect().width) - parseFloat(computedStyle.paddingLeft) * 2 + 'px';
+					this.style.zIndex = 2;
+					this.setAttribute('data-open','open');
+					if (e.isTrusted) this.setAttribute('data-hovering', 'hovering');
+				});
+				div.addEventListener('mouseleave', function(e) {
+					this.className = this.className.includes('closing') ? this.className : this.className + ' closing';
+					document.getElementById('eventSelectionSpan').style.display = '';
+					this.style.width = this.defaultWidth;
+					this.style.zIndex = 1;
+					this.timeout = setTimeout(function() {
+						div.timeout = 0;
+						div.style.zIndex = '';
+						div.className = div.className.replace('closing','');
+					}, 1050);
+					if (event.type == EVENTS.POINT) this.style.color = 'transparent';
+					this.removeAttribute('data-open');
+					this.removeAttribute('data-hovering');
+				});
+				document.getElementById('eventContainer').appendChild(div);
+			});
+
+			setInterval(function() {
+				var selection = window.getSelection();
+				if (selection.isCollapsed) return;
+				if (selection.focusNode) {
+					var focusNode = selection.focusNode.className && selection.focusNode.className.includes('timelineEvent') ? selection.focusNode : selection.focusNode.parentNode && selection.focusNode.parentNode.className && selection.focusNode.parentNode.className.includes('timelineEvent') ? selection.focusNode.parentNode : selection.focusNode.parentNode.parentNode && selection.focusNode.parentNode.parentNode.className && selection.focusNode.parentNode.parentNode.className.includes('timelineEvent') ? selection.focusNode.parentNode.parentNode : null;
+					if (!focusNode) return;
+					Array.prototype.forEach.call(document.querySelectorAll('[data-open="open"]'), function(element) {
+						if (element == focusNode || element.hasAttribute('data-hovering')) return;
+						element.dispatchEvent(new MouseEvent('mouseleave'));
+					});
+					if (!focusNode.getAttribute('data-open')) focusNode.dispatchEvent(new MouseEvent('mouseenter'));
+				};
+			}, 100)
+		}();
+	</script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    
+    <title>Die Roller – Analyze Dice Roll Probabilities</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="meta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="meta/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="meta/favicon-16x16.png">
+    <link rel="manifest" href="meta/site.webmanifest">
+    <link rel="mask-icon" href="meta/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="meta/favicon.ico">
+    <meta name="theme-color" content="#fafafa">
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-91403443-1','auto');ga('send','pageview');</script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto|Share+Tech+Mono" rel="stylesheet" type="text/css">
+    
+    <link href="/projects/dice/css/stats.css" rel="stylesheet" type="text/css">
+    <link href="/css/base.css" rel="stylesheet" type="text/css">
+    
+    <script type="text/javascript" src="/projects/dice/scripts/dieroller.js"></script><script type="text/javascript" src="/projects/dice/scripts/syntax.js"></script><script type="text/javascript" src="/projects/dice/scripts/plotly.min.js"></script>
+</head>
+<body>
+    <div id='input_win' class='window active'>
+    <div id='input_container'>
+        <div id='input_text'>Enter a roll to get the statistics of.</div>
+        <div id='input' contenteditable='true'></div>
+        <div id='error_text'>The roll you entered contains errors.</div>
+        <button id='submit'>Submit</button>
+    </div>
+</div>
+<div id='loading' class='window'>
+    <div id='loading_container'>
+        <div id='loading_text'>Calculating total&hellip;</div>
+        <div id='loading_bar_container'>
+            <div id='loading_bar'></div>
+        </div>
+        <button id='cancel'>Cancel</button>
+    </div>
+</div>
+<div id='results' class='window'>
+    <div id='results_up'>
+        <div id='graph' style='height:90%;width:calc(100% - 5vw)'></div>
+    </div>
+    <div id='results_down'>
+        <div id='prob_container'>
+            <div id='prob_total'>
+                <div id='prob_total_num'></div>
+                <div id='prob_total_text'>total possibilities</div>
+            </div>
+            <div id='prob_hover'>
+                <div id='prob_of_text'></div>
+                <div id='prob_percent'></div>
+                <div id='prob_extra'></div>
+            </div>
+        </div>
+        <div id='stats_container'>
+            <table>
+                <td>
+                    <div id='stats'></div>
+                    <button id='new' class='main'>Analyze another roll</button>
+                </td>
+            </table>
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+    !function() {
+        "use strict";
+        document.body.className = "theme_" + dieroller.theme.type;
+
+        var probTotalText = document.getElementById("prob_total_text"),
+            probTotalNum = document.getElementById("prob_total_num"),
+            loadingText = document.getElementById("loading_text"),
+            probPercent = document.getElementById("prob_percent"),
+            probOfText = document.getElementById("prob_of_text"),
+            loadingBar = document.getElementById("loading_bar"),
+            errorText = document.getElementById("error_text"),
+            probTotal = document.getElementById("prob_total"),
+            probHover = document.getElementById("prob_hover"),
+            probExtra = document.getElementById("prob_extra"),
+            inputWin = document.getElementById("input_win"),
+            loading = document.getElementById("loading"),
+            results = document.getElementById("results"),
+            submit = document.getElementById("submit"),
+            stats = document.getElementById("stats"),
+            input = document.getElementById("input"),
+            graph = document.getElementById("graph"),
+            worker, distribution, distributionArray;
+
+        input.style.backgroundColor = dieroller.theme.background || "";
+        input.style.color = dieroller.theme.text || "";
+        input.style.borderColor = dieroller.theme.separator || "";
+
+        document.getElementById("new").addEventListener("click", function() {
+            loading.className = "window";
+            results.className = "window";
+            inputWin.className = "window active";
+            location.replace("#");
+            input.innerText = "";
+            input.isInvalid = false;
+            input.focus();
+        });
+
+        input.addEventListener("input", function() {
+            var selection = document.getSelection();
+            this.selectionDirection = "forward";
+
+            if (!this.innerText || !this.firstChild || this.firstChild.nodeName == "BR") {
+                this.selectionStart = this.selectionEnd = 0;
+            } else if (selection.anchorNode.parentNode == this) {
+                this.selectionStart = this.selectionEnd = selection.anchorOffset;
+            } else {
+                var anchorOffset = selection.anchorOffset,
+                    anchorNode = selection.anchorNode;
+
+                if (anchorNode.parentNode.parentNode.parentNode == this) {
+                    anchorNode.parentNode.parentNode.insertBefore(anchorNode, anchorNode.parentNode);
+                    anchorNode.parentNode.removeChild(anchorNode.nextSibling);
+                }
+
+                while (anchorNode.parentNode.firstChild != anchorNode) {
+                    anchorOffset += anchorNode.previousSibling.data.length;
+                    anchorNode.data = anchorNode.previousSibling.data + anchorNode.data;
+                    anchorNode.parentNode.removeChild(anchorNode.previousSibling);
+                }
+
+                anchorNode = selection.anchorNode;
+                if (anchorNode.nodeName == "SPAN") anchorNode = anchorNode.firstChild;
+
+                var totalOffset = 0;
+                for (var i = Array.prototype.indexOf.call(this.children, anchorNode.parentNode) - 1; i >= 0; i--) {
+                    totalOffset += this.children[i].innerText.length;
+                }
+                this.selectionStart = this.selectionEnd = totalOffset + anchorOffset;
+            }
+
+            this.value = this.innerText.replace(/ /g, "\u00A0").replace(/\n/g, "");
+
+            var oldCharLength = parseInt(this.style.width.substring(12)),
+                newCharLength = Math.max.apply(Math, this.value.split("\n").map(function(line) {
+                return line.length;
+            }));
+
+            this.innerText = "";
+            var roll = syntax.parse(this.value),
+                renderedText = syntax.render(roll);
+            this.isInvalid = roll.invalid;
+            if (roll.invalid) {
+                errorText.innerText = "The roll you entered contains errors.";
+            } else if (!this.value.trim()) {
+                errorText.innerText = "The roll you entered cannot be empty.";
+            } else {
+                errorText.style.display = "";
+            }
+            while (renderedText.firstChild) {
+                this.appendChild(renderedText.firstChild);
+            }
+
+            var range = document.createRange();
+            if (!this.firstChild) {
+                this.appendChild(document.createTextNode(""));
+                range.setStart(this.firstChild, 0);
+                range.setEnd(this.firstChild, 0);
+            } else {
+                for (var i = 0, offset = 0; i < this.children.length && offset + this.children[i].innerText.length < this.selectionStart; offset += this.children[i++].innerText.length) {}
+                range.setStart(this.children[i].firstChild, this.selectionStart - offset);
+                for (var i = 0, offset = 0; offset + this.children[i].innerText.length < this.selectionEnd && i < this.children.length; offset += this.children[i++].innerText.length) {}
+                range.setEnd(this.children[i].firstChild, this.selectionEnd - offset);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        });
+
+        input.addEventListener("keydown", function(e) {
+            if (e.key == "Enter" || e.keyCode == 13) {
+                submit.click();
+                e.preventDefault();
+            }
+        });
+
+        submit.addEventListener("click", function() {
+            if (input.isInvalid) {
+                errorText.innerText = "The roll you entered contains errors.";
+                errorText.style.display = "block";
+            } else if (!input.value.trim()) {
+                errorText.innerText = "The roll you entered cannot be empty.";
+                errorText.style.display = "block";
+            } else {
+                if (decodeURIComponent(location.hash.substring(1)) == input.value) run();
+                location.replace("#" + encodeURIComponent(input.value));
+            }
+        });
+
+        document.getElementById("cancel").addEventListener("click", function() {
+            if (worker) worker.terminate();
+            loading.className = "window";
+            results.className = "window";
+            inputWin.className = "window active";
+            location.replace("#");
+            input.innerText = "";
+            input.isInvalid = false;
+            input.focus();
+        });
+
+        // If the page is loaded with a hash already pointing to a roll, start immediately
+        // evaluating it without prompting for an input.
+        if (location.hash.substring(1)) run();
+
+        // If the hash changes in the URL, treat it as a new input to evaluate.
+        window.addEventListener("hashchange", run);
+        function run() {
+            // This is where the evaluating starts. If the URL has anything in its hash, it
+            // should evaluate it.
+            if (location.hash.substring(1)) {
+                var roll = syntax.parse(decodeURIComponent(location.hash.substring(1)));
+                if (!roll.invalid) {
+                    inputWin.className = "window";
+                    results.className = "window";
+                    loading.className = "window active";
+                    roll = syntax.normalize(roll);
+                    roll = roll.filter(function(token) {
+                        return token.type != "whitespace";
+                    });
+
+                    if (roll.length) {
+                        var totalText;
+                        loadingText.innerText = "Calculating total\u2026";
+                        loadingBar.style.width = "";
+
+                        if (worker) worker.terminate();
+                        worker = new Worker("scripts/stats.js");
+                        worker.addEventListener("message", checkNumberListener);
+                        worker.postMessage({
+                            roll: roll,
+                            savedRolls: dieroller.savedRolls,
+                            functionNames: dieroller.functionNames
+                        });
+
+                        function checkNumberListener(e) {
+                            totalText = Plotly.d3.format(",.4s")(e.data);
+                            loadingText.innerText = "0 of " + totalText + " possibilities checked";
+                            loadingBar.style.width = "";
+                            worker.removeEventListener("message", checkNumberListener);
+                            worker.addEventListener("message", progressListener);
+                        }
+
+                        function progressListener(e) {
+                            if (e.data.done) {
+                                worker.terminate();
+                                worker = null;
+
+                                loadingText.innerText = Plotly.d3.format(".4s")(e.data.progress) + " of " + totalText + " possibilities checked";
+                                loadingBar.style.width = "100%";
+
+                                inputWin.className = "window";
+                                loading.className = "window";
+                                results.className = "window active";
+
+                                probTotalNum.innerText = totalText;
+                                probTotalText.innerText = "total possibilit" + (e.data.total == "1" ? "y" : "ies");
+                                probHover.style.display = "";
+                                probTotal.style.display = "block";
+
+                                distribution = e.data.distribution;
+                                distributionArray = [];
+                                for (var key in distribution) {
+                                    distributionArray = distributionArray.concat(new Array(+distribution[key]).fill(key));
+                                }
+
+                                var _stats = {};
+
+                                graph.className = "";
+                                Plotly.purge(graph);
+                                setTimeout(function() {
+                                    newGraph(e.data.distribution, e.data.total);
+                                }, 10);
+
+                                var sortedKeys = Object.keys(distribution).sort(function(a, b) {
+                                    return a - b;
+                                });
+                                _stats.Minimum = +sortedKeys[0];
+                                _stats.Maximum = +sortedKeys[sortedKeys.length - 1];
+                                _stats.Midrange = (_stats.Minimum + _stats.Maximum) / 2;
+                                _stats.Range = _stats.Maximum - _stats.Minimum;
+                                _stats.Sum = Plotly.d3.round(distributionArray.reduce(function(a, b) {
+                                    return +a + +b;
+                                }, 0), 4);
+                                _stats["Mean (μ)"] = Plotly.d3.round(_stats.Sum / e.data.total, 4);
+                                _stats.Median = Plotly.d3.round((function() {
+                                    var mid = (distributionArray.length - 1) / 2;
+                                    if (mid == Math.floor(mid)) return +distributionArray[mid];
+                                    return (+distributionArray[Math.floor(mid)] + +distributionArray[Math.ceil(mid)]) / 2;
+                                })(), 4);
+                                _stats.Mode = (function() {
+                                    var max = 0, modes;
+                                    for (var key in distribution) {
+                                        if (distribution[key] > max) {
+                                            max = +distribution[key];
+                                            modes = [+key];
+                                        } else if (distribution[key] == max) {
+                                            modes.push(+key);
+                                        }
+                                    }
+                                    return modes.sort(function(a, b) {
+                                        return a - b;
+                                    });
+                                })();
+                                _stats["Variance (σ²)"] = (function() {
+                                    var squares = [];
+                                    for (var i = distributionArray.length - 1; i >= 0; i--) {
+                                        squares.push(Math.pow(distributionArray[i] - _stats["Mean (μ)"], 2));
+                                    }
+                                    return Plotly.d3.round(squares.reduce(function(a, b) {
+                                        return a + b
+                                    }) / squares.length, 4);
+                                })();
+                                _stats["Standard Deviation (σ)"] = Plotly.d3.round(Math.sqrt(_stats["Variance (σ²)"]), 4);
+
+                                var nameList = ["Minimum", "Midrange", "Maximum", "Range", "Mean (μ)" ,"Median", "Mode", "Sum", "Variance (σ²)", "Standard Deviation (σ)"];
+                                stats.innerHTML = "";
+                                for (var i = 0; i < 10; i++) {
+                                    var div = document.createElement("div");
+                                    if (Array.isArray(_stats[nameList[i]])) {
+                                        var str = "", j = 0, n = 0;
+                                        while (n < 42 && _stats[nameList[i]].length > j) {
+                                            var current = _stats[nameList[i]][j];
+                                            current = Plotly.d3.format(",")(current);
+                                            if (current.length + 2 > 42) break;
+                                            str += ", " + current;
+                                            n += current.length + 2;
+                                            j++;
+                                        }
+                                        if (!str) {
+                                            str = ", " + _stats[nameList[0]];
+                                            j = 1;
+                                        }
+                                        if (j != _stats[nameList[i]].length) {
+                                            str += " + " + (_stats[nameList[i]].length - j) + " more";
+                                        }
+                                        str = str.substring(2);
+                                        div.innerText = nameList[i] + " = " + str;
+                                    } else {
+                                        div.innerText = nameList[i] + " = " + Plotly.d3.format(",")(_stats[nameList[i]]);
+                                    }
+                                    stats.appendChild(div);
+                                }
+                            } else {
+                                var progressStr = Plotly.d3.format("s")(e.data.progress);
+                                progressStr = progressStr.replace(/^(\d+)(?=M|B|T|q|Q|s|S)/, "$1.0").replace(/(\.\d+)(?=M|B|T|q|Q|s|S)/, "$100").replace(/(\.\d{3})\d+/, "$1");
+                                loadingText.innerText = progressStr + " of " + totalText + " possibilities checked";
+                                loadingBar.style.width = e.data.progress / e.data.total * 100 + "%";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        window.addEventListener("resize", function() {
+            Plotly.Plots.resize(graph);
+        });
+
+        // This function creates a new graph from a distribution JSON object.
+        function newGraph(dist, possibilities) {
+            var keys = Object.keys(dist).sort(function(a,b) {
+                    return a - b;
+                }),
+                x = keys.map(function(a) {
+                    return +a;
+                }),
+                y = [];
+            for (var i = Math.ceil(+keys[0]), l = +keys[keys.length - 1]; i <= l; i++) {
+                x.push(i);
+            }
+            x = x.filter(function(number, index) {
+                return x.indexOf(number) == index;
+            }).sort(function(a, b) {
+                return a - b;
+            });
+            for (var i = 0, l = x.length; i < l; i++) {
+                y.push(dist[x[i]] || "0");
+            }
+            var color1 = dieroller.theme.type == "light" ? "#000" : "#FFF",
+                color2 = dieroller.theme.type == "light" ? "#BCD" : "#89A";
+
+            try {
+                Plotly.plot(graph, [{
+                    x: x,
+                    y: y,
+                    type: "bar",
+                    marker: {
+                        color: "#03A9D4"
+                    }
+                }], {
+                    margin: {
+                        t: 5,
+                        r: 25,
+                        b: 24,
+                        l: 40
+                    },
+                    font: {
+                        family: "Roboto, sans-serif",
+                        size: 14
+                    },
+                    paper_bgcolor: "transparent",
+                    plot_bgcolor: "transparent",
+                    xaxis: {
+                        tickcolor: color1,
+                        tickfont: {
+                            color: color1
+                        },
+                        tickformat: ",.5r",
+                        linecolor: color1,
+                        fixedrange: true
+                    },
+                    yaxis: {
+                        tickcolor: color1,
+                        tickfont: {
+                            color: color1
+                        },
+                        linecolor: color1,
+                        tickformat: ".4s",
+                        gridcolor: color2,
+                        fixedrange: true
+                    },
+                    bargap: 0
+                });
+                graph.className += " success";
+                if (!graph.hoverable) {
+                    graph.hoveringBar = null;
+                    graph.on("plotly_hover", function(e) {
+                        var digits = Plotly.d3.format(",")(e.points[0].x).match(/^-?\d+/)[0];
+                        probOfText.innerText = "Probability of a" + (digits[0] == "8" || digits == "11" || digits == "18" ? "n " : " ") + Plotly.d3.format(",")(e.points[0].x);
+                        var percent = Plotly.d3.round(e.points[0].y / possibilities * 100, 3);
+                        probPercent.innerText = e.points[0].y == possibilities ? "100%" :
+                            e.points[0].y == 0 ? "0%" :
+                            percent == 100 ? ">99.999%" :
+                            percent == 0 ? "<0.001%" :
+                            percent + "%";
+                        probExtra.innerText = Plotly.d3.format(",")(e.points[0].y) + " / " + Plotly.d3.format(",")(possibilities);
+                        probTotal.style.display = "";
+                        probHover.style.display = "block";
+                        graph.hoveringBar = document.querySelector(".point path[data-x-value=\"" + e.points[0].x + "\"]");
+                        if (graph.hoveringBar) graph.hoveringBar.style.fill = "#0091BC";
+                    });
+                    graph.on("plotly_unhover", function() {
+                        if (graph.hoveringBar) graph.hoveringBar.style.fill = "#03A9D4";
+                        graph.hoveringBar = null;
+                        probHover.style.display = "";
+                        probTotal.style.display = "block";
+                    });
+                    document.addEventListener("mouseup", function(e) {
+                        if (graph.hoveringBar) graph.hoveringBar.style.fill = "#03A9D4";
+                        graph.hoveringBar = null;
+                        probHover.style.display = "";
+                        probTotal.style.display = "block";
+                    });
+                }
+            } catch (e) {
+                graph.className = "error";
+            }
+        }
+    }();
+</script>
+</body>
+</html>

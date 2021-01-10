@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <g transform="matrix(4.1204245,0,0,4.1204245,-93.61019,-81.174952)">
+    <g>
+      <path d="M30,29.464102 30,34 36,30.535898 36,26Z" style="fill:#345;stroke:none"/>
+      <path d="M24,26 30,29.464102 30,34 24,30.535898Z" style="fill:#456;stroke:none"/>
+    </g>
+    <g>
+      <path style="fill:#10bcd1;stroke:none" d="m27,21.6875 3,1.732051 3.007772,-1.736538 -3,-1.732051z"/>
+      <path style="fill:#009cb1;stroke:none" d="M30,23.419551 30,29l3.007772,-1.736538 0,-5.580449z"/>
+      <path style="fill:#00acc1;stroke:none" d="M27,21.6875 30,23.419551 30,29 27,27.267949Z"/>
+    </g>
+    <g>
+      <path style="fill:#10bcd1;stroke:none" d="M30,24.267949 33,26l3.013082,-1.739604 -3,-1.73205z"/>
+      <path style="fill:#009cb1;stroke:none" d="m33,26 0,1.75 3.013082,-1.739604 0,-1.75z"/>
+      <path style="fill:#00acc1;stroke:none" d="M30,24.267949 33,26l0,1.75 -3,-1.732051z"/>
+    </g>
+    <g>
+      <path d="M24,24.267949 27,26l3.013082,-1.739604 -3,-1.73205z" style="fill:#10bcd1;stroke:none"/>
+      <path d="m27,26 0,1.75 3.013082,-1.739604 0,-1.75z" style="fill:#009cb1;stroke:none"/>
+      <path d="M24,24.267949 27,26l0,1.75 -3,-1.732051z" style="fill:#00acc1;stroke:none"/>
+    </g>
+    <g>
+      <path d="M27,26.75 30,28.482051 33,26.75 30,25.017949Z" style="fill:#10bcd1"/>
+      <path d="m30,28.482051 0,1.002324 3,-1.732051L33,26.75Z" style="fill:#009cb1"/>
+      <path d="m27,26.75 3,1.732051 0,1.002324 -3,-1.732051z" style="fill:#00acc1"/>
+    </g>
+    <path d="m24,26 -1.281631,2.268583 6,3.576737 1.285537,-2.358831z" style="fill:#345"/>
+    <path style="fill:#456" d="m36.003065,26 1.281631,2.268583 -6,3.576737 -1.285537,-2.358831z"/>
+  </g>
+</svg>

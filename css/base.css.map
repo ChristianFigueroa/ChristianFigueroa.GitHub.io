@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "base.css",
+	"sources": [
+		"base.scss"
+	],
+	"sourcesContent": [
+		"body, html {\n\tmargin: 0;\n}\n\nhtml[data-script-enabled=\"false\"] .withscript {\n\tdisplay: none;\n}"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,IAAI,EAAE,IAAI,CAAC,EACV,MAAM,EAAE,CAAC,GACT;;AAED,AAAA,IAAI,CAAA,AAAA,mBAAC,CAAoB,OAAO,AAA3B,EAA6B,WAAW,CAAC,EAC7C,OAAO,EAAE,IAAI,GACb"
+}

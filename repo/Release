@@ -1,0 +1,8 @@
+Origin: Christian Figueroa's Repo
+Label: Christian Figueroa's Repo
+Suite: Stable
+Version: 1.0
+Codename: FiggChristian
+Architectures: iphoneos-arm
+Components: main
+Description: Christian Figueroa's personal repo
