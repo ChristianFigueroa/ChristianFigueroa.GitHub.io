@@ -1,3 +1,7 @@
 body, html { margin: 0; }
 
 html[data-script-enabled="false"] .withscript { display: none; }
+
+.link { color: #66D9EF; text-decoration: none; }
+
+.link:hover, .link:focus { text-decoration: underline; }
