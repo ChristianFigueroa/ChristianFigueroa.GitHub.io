@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    
+    <title>FontTeX – HTML, font-friendly math equations</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="meta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="meta/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="meta/favicon-16x16.png">
+    <link rel="manifest" href="meta/site.webmanifest">
+    <link rel="mask-icon" href="meta/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="meta/favicon.ico">
+    <meta name="theme-color" content="#fafafa">
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-91403443-1','auto');ga('send','pageview');</script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab:700,400" rel="stylesheet" type="text/css">
+    
+    <link href="/projects/fonttex/css/documentation.css" rel="stylesheet" type="text/css"><link href="/projects/fonttex/css/syntax.css" rel="stylesheet" type="text/css">
+    <link href="/css/base.css" rel="stylesheet" type="text/css">
+    
+    <script type="text/javascript" src="/projects/fonttex/scripts/fonttex.min.js"></script>
+</head>
+<body>
+    <header>
+    <nav id="navbar">
+        <input type="checkbox" aria-label="Toggle menu" />
+        <div id="navbar-toggle">
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <a href="home#" id="menu-logo"><div class="logo">FontTeX</div></a>
+        <div id="menu">
+            <ul>
+                <li><a href="home#demo">Demo</a></li>
+                <li><a href="documentation#">Documentation</a></li>
+                <li><a href="home#download">Download</a></li>
+                <li><a href="https://github.com/ChristianFigueroa/FontTeX">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        <h1 id="title" class="logo">FontTeX</h1>
+        <h3 id="description">Documentation</h3>
+    </div>
+</header>
+<div id="table">
+	<ul>
+		<li>
+			<a href="#fontTeX">fontTeX</a>
+			<ul>
+				<li>
+					<a href="#fontTeX-ParsedFontTeX">ParsedFontTeX</a>
+					<ul>
+						<li><a href="#fontTeX-ParsedFontTeX-again">again</a></li>
+						<li><a href="#fontTeX-ParsedFontTeX-parsedTokens">parsedTokens</a></li>
+						<li><a href="#fontTeX-ParsedFontTeX-renderIn">renderIn</a></li>
+						<li><a href="#fontTeX-ParsedFontTeX-reparse">reparse</a></li>
+						<li><a href="#fontTeX-ParsedFontTeX-texString">texString</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#fontTeX-config">config</a>
+					<ul>
+						<li><a href="#fontTeX-config-autoupdate">autoudpate</a></li>
+						<li><a href="#fontTeX-config-invalid-color">invalid.color</a></li>
+						<li><a href="#fontTeX-config-operator-growamount">operator.growamount</a></li>
+						<li><a href="#fontTeX-config-operator-growchars">operator.growchars</a></li>
+						<li><a href="#fontTeX-config-parsehtml">parsehtml</a></li>
+						<li><a href="#fontTeX-config-radical-build">radical.build</a></li>
+						<li><a href="#fontTeX-config-radical-verticalthreshold">radical.verticalthreshold</a></li>
+						<li><a href="#fontTeX-config-radical-h">radical.h</a></li>
+						<li><a href="#fontTeX-config-radical-t">radical.t</a></li>
+						<li><a href="#fontTeX-config-radical-w">radical.w</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#fontTeX-fontDimen">fontDimen</a>
+					<ul>
+						<li><a href="#fontTeX-fontDimen-baselineHeightOf">baselineHeightOf</a></li>
+						<li><a href="#fontTeX-fontDimen-depthOf">depthOf</a></li>
+						<li><a href="#fontTeX-fontDimen-heightOf">heightOf</a></li>
+						<li><a href="#fontTeX-fontDimen-italicCorrOf">italicCorrOf</a></li>
+						<li><a href="#fontTeX-fontDimen-leftOffsetOf">leftOffsetOf</a></li>
+						<li><a href="#fontTeX-fontDimen-scriptOffsetOf">scriptOffsetOf</a></li>
+						<li><a href="#fontTeX-fontDimen-trueDepthOf">trueDepthOf</a></li>
+						<li><a href="#fontTeX-fontDimen-visibleWidthOf">visibleWidthOf</a></li>
+						<li><a href="#fontTeX-fontDimen-widthOf">widthOf</a></li>
+						<li><a href="#fontTeX-fontDimen-cache">cache</a></li>
+						<li><a href="#fontTeX-fontDimen-canvas">canvas</a></li>
+						<li><a href="#fontTeX-fontDimen-context">context</a></li>
+					</ul>
+				</li>
+				<li><a href="#fontTeX-parse">parse</a></li>
+				<li><a href="#fontTeX-render">render</a></li>
+				<li><a href="#fontTeX-rerender">rerender</a></li>
+				<li><a href="#fontTeX-updateStyles">updateStyles</a></li>
+				<li><a href="#fontTeX-version">version</a></li>
+				<li>
+					<a href="#fontTeX-_debug">_debug</a>
+					<ul>
+						<li><a href="#fontTeX-_debug-clearFontCache">clearFontCache</a></li>
+						<li><a href="#fontTeX-_debug-data">data</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="content">
+			<section id="fontTeX">
+				<h2>fontTeX</h2>
+			</section>
+			<section id="fontTeX-ParsedFontTeX">
+				<h2>ParsedFontTeX</h2>
+			</section>
+			<section id="fontTeX-ParsedFontTeX-again">
+				<h2>again</h2>
+			</section>
+			<section id="fontTeX-ParsedFontTeX-parsedTokens">
+				<h2>parsedTokens</h2>
+			</section>
+			<section id="fontTeX-ParsedFontTeX-renderIn">
+				<h2>renderIn</h2>
+			</section>
+			<section id="fontTeX-ParsedFontTeX-reparse">
+				<h2>reparse</h2>
+			</section>
+			<section id="fontTeX-ParsedFontTeX-texString">
+				<h2>texString</h2>
+			</section>
+			<section id="fontTeX-config">
+				<h2>config</h2>
+			</section>
+			<section id="fontTeX-config-autoupdate">
+				<h2>autoudpate</h2>
+			</section>
+			<section id="fontTeX-config-invalid-color">
+				<h2>invalid.color</h2>
+			</section>
+			<section id="fontTeX-config-operator-growamount">
+				<h2>operator.growamount</h2>
+			</section>
+			<section id="fontTeX-config-operator-growchars">
+				<h2>operator.growchars</h2>
+			</section>
+			<section id="fontTeX-config-parsehtml">
+				<h2>parsehtml</h2>
+			</section>
+			<section id="fontTeX-config-radical-build">
+				<h2>radical.build</h2>
+			</section>
+			<section id="fontTeX-config-radical-verticalthreshold">
+				<h2>radical.verticalthreshold</h2>
+			</section>
+			<section id="fontTeX-config-radical-h">
+				<h2>radical.h</h2>
+			</section>
+			<section id="fontTeX-config-radical-t">
+				<h2>radical.t</h2>
+			</section>
+			<section id="fontTeX-config-radical-w">
+				<h2>radical.w</h2>
+			</section>
+			<section id="fontTeX-fontDimen">
+				<h2>fontDimen</h2>
+			</section>
+			<section id="fontTeX-fontDimen-baselineHeightOf">
+				<h2>baselineHeightOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-depthOf">
+				<h2>depthOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-heightOf">
+				<h2>heightOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-italicCorrOf">
+				<h2>italicCorrOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-leftOffsetOf">
+				<h2>leftOffsetOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-scriptOffsetOf">
+				<h2>scriptOffsetOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-trueDepthOf">
+				<h2>trueDepthOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-visibleWidthOf">
+				<h2>visibleWidthOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-widthOf">
+				<h2>widthOf</h2>
+			</section>
+			<section id="fontTeX-fontDimen-cache">
+				<h2>cache</h2>
+			</section>
+			<section id="fontTeX-fontDimen-canvas">
+				<h2>canvas</h2>
+			</section>
+			<section id="fontTeX-fontDimen-context">
+				<h2>context</h2>
+			</section>
+			<section id="fontTeX-fontDimen-init">
+				<h2>init</h2>
+			</section>
+			<section id="fontTeX-fontDimen-isInit">
+				<h2>isInit</h2>
+			</section>
+			<section id="fontTeX-parse">
+				<h2>parse</h2>
+			</section>
+			<section id="fontTeX-render">
+				<h2>render</h2>
+			</section>
+			<section id="fontTeX-rerender">
+				<h2>rerender</h2>
+			</section>
+			<section id="fontTeX-updateStyles">
+				<h2>updateStyles</h2>
+			</section>
+			<section id="fontTeX-version">
+				<h2>version</h2>
+			</section>
+			<section id="fontTeX-_debug">
+				<h2>_debug</h2>
+			</section>
+			<section id="fontTeX-_debug-clearFontCache">
+				<h2>clearFontCache</h2>
+			</section>
+			<section id="fontTeX-_debug-data">
+				<h2>data</h2>
+			</section>
+</div>
+<script>
+(function() {
+	"use strict";
+
+	let input = document.getElementById("demo-input");
+	let output = document.getElementById("demo-output");
+
+	let searchObject = {};
+	if (location.search) {
+		let query = location.search.substring(1);
+		let vars = query.split('&');
+		for (let i = vars.length - 1; i >= 0; i--) {
+			let pair = vars[i].split('=');
+			searchObject[decodeURIComponent(pair[0]).toLowerCase()] = decodeURIComponent(pair[1]);
+		}
+	}
+
+	// Render logos.
+	fontTeX.parse(String.raw`\(\mathrm{FontT\kern-.1667em{\lower.5exE}\kern-.125emX}\)`).renderIn(".logo");
+})();
+</script>
+
+<script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function() {
+        document.documentElement.scrollLeft = document.body.scrollLeft = 0;
+    });
+</script>
+</body>
+</html>
