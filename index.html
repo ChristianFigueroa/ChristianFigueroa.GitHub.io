@@ -8,17 +8,6 @@ fonts:
     - 700
   - Roboto:
     - 400
-scripts:
-  - https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js:
-      external: true
-  - https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js:
-      external: true
-  # - https://unpkg.com/react@17/umd/react.production.min.js:
-  #     external: true
-  #     crossorigin: true
-  # - https://unpkg.com/react-dom@17/umd/react-dom.production.min.js:
-  #     external: true
-  #     crossorigin: true
 ---
 <header>
     <h1 id="name">
@@ -147,16 +136,22 @@ scripts:
     <section id="personal-projects" class="resume-section">
         <h2>Personal Projects</h2>
         <section>
-            <h3>First Generation First Scholarship Website<a href="/projects/firstgenfirst.org" class="external link" target="_blank" rel="noopener noreferr"></a></h3>
+            <h3>First Generation First Scholarship Website<a href="/projects/firstgenfirst.org" class="external link" target="_blank" rel="noopener noreferrer"></a></h3>
             <h4>Scholarship and College Resource Website<span class="pipe">|</span>July 2020 &ndash; Present</h4>
             <p><a href="https://firstgenfirst.org" class="link" target="_blank" rel="noreferrer noopener">First Generation First</a> is an organization for helping first-generation college students through high school, the college application process, and the first few years getting acquainted with college, as well as offering an annual scholarship of $500 to multiple recipients.</p>
             <p>Along with being involved in the scholarship selection process, I am responsible for all technical aspects of the organization, including maintaining and updating both the front- and back-end of the firstgenfirst.org website, mass-sending emails to hundreds of subscribers and applicants, and creating an interface for internal use amongst other members responsible for running the organization.</p>
         </section>
         <section>
-            <h3>FontT<span style="position:relative;top:.5ex;margin-left:-.1667em;margin-right:-.125em">E</span>X<a href="/projects/fonttex/home" class="external link" target="_blank" rel="noopener noreferr"></a></h3>
+            <h3>FontT<span style="position:relative;top:.5ex;margin-left:-.1667em;margin-right:-.125em">E</span>X<a href="/projects/fonttex/home" class="external link" target="_blank" rel="noopener noreferrer"></a></h3>
             <h4>HTML Mathematics Renderer Using LaTeX<span class="pipe">|</span>March 2018 &ndash; July 2020</h4>
             <p>FontTeX is a JavaScript library for rendering mathematical formulas on webpages. FontTeX is capable of rendering math formulas in any web font to keep it inline with surrounding text. It reads and parses LaTeX syntax to determine what to display.</p>
             <p>The script is based closely on TeX's own parsing and rendering algorithms as described in <i>The TeXbook</i>. More complex components like nested fractions and sub/superscripts required creative use of CSS and pixel-perfect measurements of fonts, but the end result is a nearly complete implementation of TeX, built entirely from plain JavaScript.</p>
+        </section>
+        <section>
+            <h3>N-Sided Dice Roller<a href="/projects/dice/roll" class="external link" target="_blank" rel="noopener noreferrer"></a></h3>
+            <h4>Online N-Sided Dice Roller for Tabletop RPGs<span class="pipe">|</span>April 2018 &ndash; February 2019</h4>
+            <p>This die roller rolls any number of n-sided dice and can use perform mathematical operations like addition, multiplication, rounding, dropping rolls, etc. It can be used for tabletop RPGs like Dungeons & Dragons that often make use of more complicated rolls that involve multiple dice at once. There is also a statistics calculator to analyze rolls.</p>
+            <p>The dice roller uses a custom syntax familiar to some tabletop RPG players. There's also a console-like input for evaluating rolls on the fly, and a system for conveniently saving user-created rolls to be used easily in the future. The statistics calculator can analyze millions of rolls in a matter of seconds for quick calculations.</p>
         </section>
     </section>
     <section id="education" class="resume-section">
@@ -239,14 +234,8 @@ customers’ orders or supervisors’ instructions, following approved procedure
         <h2>Skills</h2>
         <section>
             <ul>
-                <li>Organized</li>
-                <li>Microsoft Office</li>
-                <li>Adobe Photoshop and Illustrator</li>
-            </ul>
-        </section>
-        <section>
-            <ul>
                 <li>JavaScript</li>
+                <li>Node.js</li>
                 <li>Python</li>
                 <li>C++</li>
                 <li>Java</li>
@@ -256,8 +245,5 @@ customers’ orders or supervisors’ instructions, following approved procedure
                 <li>HTML/CSS</li>
             </ul>
         </section>
-    </section>
-    <section id="skills" class="resume-section">
-        
     </section>
 </div>
