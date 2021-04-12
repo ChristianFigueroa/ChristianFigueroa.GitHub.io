@@ -50,8 +50,8 @@
 <div id="content">
 	<section>
 		<p><span class="logo">FontTeX</span> (or just FontTeX) is a JavaScript library for rendering math equations in HTML using TeX syntax. FontTeX, as its name implies, is focused on working for any arbitrary web font.</p>
-		<p>Webpages can use pretty much any font for displaying content, but typesetting math equations is typically only possible for very specific fonts, usually in a <span style="font-family:serif;">serif font</span> like this: <font-tex style="font-family:serif;">$\frac{25}{16}=1.25^2$</font-tex>. FontTeX works around this by typesetting mathemtics in <i>any</i> web font, including this one (<a href="https://fonts.google.com/specimen/Roboto" target="googlefonts">Roboto</a>): <font-tex>$\frac{25}{16}=1.25^2$</font-tex>.</p>
-		<p>Look at the examples below for different use cases that FontTeX can handle, or jump straight to the <a href="#demo">demo</a>. The font selector only shows a list of <a href="https://fonts.google.com" target="googlefonts">Google Fonts</a>, but FontTeX can handle any other fonts too.</p>
+		<p>Webpages can use pretty much any font for displaying content, but typesetting math equations is typically only possible for very specific fonts, usually in a specific <span style="font-family:serif;">serif font</span> like this: <font-tex style="font-family:serif;">$\frac{25}{16}=1.25^2$</font-tex>. Instead of making math formulae stick out from the rest of the text on your webpage, FontTeX works by typesetting mathemtics in <i>any</i> web font, including this one (<a href="https://fonts.google.com/specimen/Roboto" target="googlefonts">Roboto</a>): <font-tex>$\frac{25}{16}=1.25^2$</font-tex>.</p>
+		<p>Look at the examples below for different use cases that FontTeX can handle, or jump straight to the <a href="#demo">demo</a>. The font selector only shows a list of <a href="https://fonts.google.com" target="googlefonts">Google Fonts</a>, but FontTeX can handle any other fonts you throw at it too.</p>
 	</section>
 	<section id="examples">
 		<h2>Examples</h2>
@@ -142,7 +142,9 @@
 					--><span class="mathshift">$$</span><!--
 					--><span class="macro">\rm</span><!--
 					--><span class="macro">\obeyspaces</span><!--
-					--><span class="plain">&nbsp;H</span><!--
+					--><span class="brace">{</span><!--
+					--><span class="brace">}</span><!--
+					--><span class="plain">H</span><!--
 					--><span class="operator">_</span><!--
 					--><span class="number">3</span><!--
 					--><span class="plain">O</span><!--
@@ -205,7 +207,9 @@
 					--><span class="number">0</span><!--
 					--><span class="operator">^</span><!--
 					--><span class="plain">x</span><!--
-					--><span class="plain">&nbsp;f(x)</span><!--
+					--><span class="plain">&nbsp;f(x)&nbsp;</span><!--
+					--><span class="macro">\,</span><!--
+					--><span class="plain">&nbsp;dx</span><!--
 					--><span class="mathshift">$$</span><!--
 				--></span>
 			</div>
@@ -408,8 +412,7 @@
 		<textarea id="demo-input">$\global\def\FontTeX{\mathrm{Font\TeX}}$
 
 \( \FontTeX \) can handle formulas like
-$$ \int_0^\infty \! \frac{1}{x^2} = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$
-</textarea>
+$$ \int_0^\infty \! \frac{1}{x^2} \, dx = \left[ \frac{1}{x^2} \right]_0^\infty = 1 $$</textarea>
 		<span>to get this</span>
 		<div id="demo-output"></div>
 	</section>
