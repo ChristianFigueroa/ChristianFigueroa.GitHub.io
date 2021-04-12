@@ -501,7 +501,7 @@ window.fontTeX = (function() {
     childList: true,
     subtree: true
   });
-  renderAutoRenderingElements();
+  setTimeout(renderAutoRenderingElements, 0);
 
   // This class is what gets returned when the user calls `fontTeX.parse`. It can be used to render
   // the parsed TeX in an HTML element with its `renderIn` method.
@@ -8427,7 +8427,7 @@ window.fontTeX = (function() {
                 break;
 
               case 2:
-                space.style.width = `${4 / 18}}em`;
+                space.style.width = `${4 / 18}em`;
                 space.style.maxWidth = `${(4 + 2) / 18}em`;
                 space.style.flexGrow = 1;
                 space.style.flexShrink = 1;

@@ -1,0 +1,102 @@
+---
+---
+{% include variables.scss %}
+
+body, html {
+	background-color: $background-color;
+	color: $text-color;
+	min-height: 100%;
+	font-family: $Roboto;
+	padding: 0 .75em;
+}
+
+h2 {
+	border-top: 2pt solid transparentize(white, .3);
+	padding: 1em 0 0;
+}
+
+#demos, #intro {
+	@include body-width;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+.image {
+	padding: 1em;
+	background-color: white;
+	max-width: 100%;
+	border-radius: .5em;
+
+	img {
+		display: block;
+		margin: auto;
+		max-width: 100%;
+		width: 40em;
+	}
+}
+
+.code {
+	position: relative;
+
+	input[type=checkbox] {
+		position: absolute;
+		pointer-events: none;
+		visibility: hidden;
+
+		&:checked ~ label {
+			background-color: scale-color({{ site.style.color.code.background }}, $lightness: 15%);
+
+			span.hide {
+				display: inline;
+			}
+
+			span.show {
+				display: none;
+			}
+
+			svg {
+				transform: rotate(-90deg);
+			}
+		}
+
+		&:checked ~ .code_container {
+			display: block;
+		}
+	}
+
+	label {
+		margin-top: 1em;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 1.2em;
+		padding: .3em .6em;
+		text-decoration: underline;
+		cursor: pointer;
+		border-radius: .3em;
+
+		span.hide {
+			display: none;
+		}
+		
+		span.show {
+			display: inline;
+		}
+
+		&:hover {
+			background-color: scale-color({{ site.style.color.code.background }}, $lightness: 15%);
+		}
+
+		svg {
+			fill: currentColor;
+			height: .8em;
+			display: block;
+			transition: transform .2s ease-in-out;
+		}
+	}
+
+	.code_container {
+		display: none;
+		overflow: auto;
+	}
+}
