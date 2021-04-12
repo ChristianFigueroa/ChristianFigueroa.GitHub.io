@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-script-enabled="false">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title><link rel="apple-touch-icon" sizes="180x180" href="/meta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/meta/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/meta/favicon-16x16.png">
+    <link rel="manifest" href="/meta/site.webmanifest">
+    <link rel="mask-icon" href="meta/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/meta/favicon.ico">
+    <meta name="theme-color" content="#fafafa">
+    <script type="text/javascript">document.documentElement.setAttribute("data-script-enabled","true")</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-91403443-1','auto');ga('send','pageview');</script><link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400" rel="stylesheet" type="text/css"><link href="/css/3b1bmathshowcase.css" rel="stylesheet" type="text/css"><link href="/css/base.css" rel="stylesheet" type="text/css"></head>
+<body>
+    <div>
+	<div id="intro">
+    <p>These three examples are all different problems from coursework while studying in my undergraduate career. Since they're just homework problems, there isn't as much room to go quite as above-and-beyond as I'd like (the way this internship would allow for!), but nonetheless, I still love stylizing mathematics, even to more than is what required of me from the class. (E.g., I submitted every problem set of my multivariable calculus course in a LaTeX PDF, even though it took at least three hours longer each time than just drawing it, simply for that feeling of appreciating how beautiful my homework looked by typesetting it at the end.)</p>
+</div>
+<div id="demos">
+    <section class="demo">
+        <h2>Example #1</h2>
+        <div class="image">
+            <img src="/assets/contour.png">
+        </div>
+        <div class="code">
+            <input type="checkbox" name="show_demo1" id="show_demo1">
+            <label for="show_demo1"><span><span class="show">Show</span><span class="hide">Hide</span> code (LaTeX)</span> <svg class="dropdown_ind" viewBox="0 0 1 1"><polyline points="1,1 1,0 0,.5" /></svg></label>
+            <div class="code_container">
+                <pre>\begin{tikzpicture}[x=.75cm,y=.75cm]
+    \begin{scope}
+        \path[clip] (-4.5,-4.5) rectangle (4.5,4.5);
+        \draw[help lines,step=1] (-5,-5) grid (5,5);
+        \foreach \i in {-4,-2,2,4} {
+            \node[left,fill=white] at (0,\i) {$\i$};
+            \node[below,fill=white] at (\i,0) {$\i$};
+        }
+        \draw[<->,line width=1pt] (-4.5,0) edge (4.5,0)
+            (0,-4.5) edge (0,4.5);
+
+        \foreach \i in {3,6,...,15} {
+            \draw[smooth,variable=\x,domain=-5:5,line width=1pt,draw=red!\the\numexpr\i*10/3+50\relax!blue]
+                plot (\x, sqrt{((\x)^2+\i)});
+            \draw[smooth,variable=\x,domain=-5:5,line width=1pt,draw=red!\the\numexpr\i*10/3+50\relax!blue]
+                plot (\x, -sqrt{((\x)^2+\i)});
+        }
+
+        \draw[line width=1pt,draw=red!50!blue] (-5,-5) edge (5,5)
+            (-5,5) edge (5,-5);
+
+        \foreach \i in {3,6,...,15} {
+            \draw[smooth,variable=\y,domain=-5:5,line width=1pt,draw=red!\the\numexpr\i*-10/3+50\relax!blue]
+                plot (sqrt{((\y)^2+\i)}, \y);
+            \draw[smooth,variable=\y,domain=-5:5,line width=1pt,draw=red!\the\numexpr\i*-10/3+50\relax!blue]
+                plot (-sqrt{((\y)^2+\i)}, \y);
+        }
+    \end{scope}
+
+    \begin{scope}[xshift=4.5cm]
+        \draw[shading=axis,bottom color=red,top color=blue] (0,-4) rectangle (.5,4);
+        \foreach \i in {-15,-12,...,15} {
+            \draw (0,\i*4/15) -- (-.2,\i*4/15) node [left] {$\i$};
+        }
+    \end{scope}
+\end{tikzpicture}</pre>
+            </div>
+        </div>
+        <p>This is a colorized contour map of the 3D function <font-tex>$z=y^2+x^2$</font-tex>. This was a subproblem from a problem set at the start of my multivariable calculus course. It uses tikz in LaTeX to draw the graph. To represent it on a 2D plane, I used a color gradient with red values being lower and blue values being higher along the (hidden) <i>z</i>-axis.</p>
+    </section>
+    <section class="demo">
+        <h2>Example #2</h2>
+        <div class="image">
+            <img src="/assets/confidence.png">
+        </div>
+        <div class="code">
+            <input type="checkbox" name="show_demo2" id="show_demo2">
+            <label for="show_demo2"><span><span class="show">Show</span><span class="hide">Hide</span> code (R)</span> <svg class="dropdown_ind" viewBox="0 0 1 1"><polyline points="1,1 1,0 0,.5" /></svg></label>
+            <div class="code_container">
+                <pre># Generate 40 random samples from a beta distribution
+raw_samples <- replicate(40, rbeta(65, 10, 1))
+# Get their means and standard deviations
+ci_samples <- raw_samples %>% {data.frame(
+    means=apply(., 2, mean),
+    sds=apply(., 2, sd)
+)}
+
+# Calculate standard errors and lower/upper ranges for a 95% confidence interval
+ci_samples$ses <- qt(0.975, 65 - 1) * ci_samples$sd / sqrt(65)
+ci_samples$lower <- ci_samples$mean - ci_samples$se
+ci_samples$upper <- ci_samples$mean + ci_samples$se
+
+# Actual mean of a beta distribution
+true_mean = 10 / (10 + 1)
+# Form a new data frame that we will use to draw the lines
+ci_lines <- ci_samples %>% {data.frame(
+    y=rep(1:40, 2),
+    x=c(.$lower, .$upper),
+    # Keeps track of whether this CI intersects the true mean
+    intersecting=.$lower < true_mean & .$upper > true_mean
+)}
+
+ggplot() +
+# Draw the lines first
+geom_line(aes(
+    x=ci_lines$x,
+    y=ci_lines$y,
+    group=ci_lines$y,
+    color=ci_lines$intersecting
+)) +
+# Highlight the ones that don't intersect
+scale_color_manual(values=c("red", "#777777")) +
+# Draw the lower range of the CI
+geom_point(aes(
+    x=ci_samples$lower,
+    y=as.numeric(row.names(ci_samples))
+)) +
+# Draw the upper range
+geom_point(aes(
+    x=ci_samples$upper,
+    y=as.numeric(row.names(ci_samples))
+)) +
+# Add a line for where the true mean is
+geom_vline(xintercept=true_mean) +
+# Change axes and legend
+xlab("95% Confidence Intervals") +
+theme(
+    legend.position="none",
+    axis.text.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.title.y=element_blank()
+)</pre>
+            </div>
+        </div>
+        <p>This diagram shows an intuitive visual for a 95% confidence interval. The black vertical line shows the true mean and 40 random samples were taken to show which of them contained the true mean in their 95% confidence interval. 38/40 (95%) happened to intersect, perfectly illustrating the meaning of the 95%. Since this was for a timed assignment in my biostatistics course, I wasn't able to make it as stylistically appealing as I would have today, but with more time and maybe an ability to animate, this visual could be made to look even better.</p>
+    </section>
+    <section class="demo">
+        <h2>Example #3</h2>
+        <div class="image">
+            <img src="/assets/regex.png">
+        </div>
+        <div class="code">
+            <input type="checkbox" name="show_demo3" id="show_demo3">
+            <label for="show_demo3"><span><span class="show">Show</span><span class="hide">Hide</span> code (LaTeX)</span> <svg class="dropdown_ind" viewBox="0 0 1 1"><polyline points="1,1 1,0 0,.5" /></svg></label>
+            <div class="code_container">
+                <pre>\definecolor{gray}{HTML}{546E7A}
+\definecolor{green}{HTML}{43A047}
+\definecolor{blue}{HTML}{0097A7}
+\definecolor{red}{HTML}{F44336}
+\definecolor{yellow}{HTML}{FFB300}
+\begin{tikzpicture}[
+    every node/.style={inner sep=0pt,outer sep=0pt},
+    underline/.style={line width=.75pt,line cap=round,transform canvas={yshift=\dimexpr#1pt*3/-2-1pt\relax}},
+    connector/.style={line width=.75pt,line cap=round,line join=round}
+]
+    \node[anchor=west] (0)  at ( 0, 0 ) {\texttt{\color{gray}(}};
+    \node[anchor=west] (1)  at (0.east) {\texttt{\color{green}(}};
+    \node[anchor=west] (2)  at (1.east) {\texttt{\color{blue}(ab|ba)}};
+    \node[anchor=west] (3)  at (2.east) {\texttt{\color{red}(aa|bb)*}};
+    \node[anchor=west] (4)  at (3.east) {\texttt{\color{blue}(ab|ba)}};
+    \node[anchor=west] (5)  at (4.east) {\texttt{\color{green})}};
+    \node[anchor=west] (6)  at (5.east) {\texttt{\color{gray}|}};
+    \node[anchor=west] (7)  at (6.east) {\texttt{\color{yellow}\rlap{\phantom(}aa}};
+    \node[anchor=west] (8)  at (7.east) {\texttt{\color{gray}|}};
+    \node[anchor=west] (9)  at (8.east) {\texttt{\color{yellow}\rlap{\phantom(}bb}};
+    \node[anchor=west] (10) at (9.east) {\texttt{\color{gray})*}};
+
+    \node[anchor=north west] (p0) at (0.5,-1) {
+        \begin{minipage}{\dimexpr\linewidth-0.5cm\relax}
+            \color{gray}\strut The entire capture group where each of its inner groups can be repeated 0 or more times to end at an even number of \texttt{a}s and \texttt{b}s.\strut
+        \end{minipage}
+    };
+    \node[anchor=north west] (p1) at ($(p0.south west) + (0,-0.5em)$) {
+        \begin{minipage}{\dimexpr\linewidth-0.5cm\relax}
+            \color{green}\strut The capture group that keeps track of \texttt{a}s and \texttt{b}s when they are not adjacent to each other in the string.\strut
+        \end{minipage}
+    };
+    \node[anchor=north west] (p2) at ($(p1.south west) + (0,-0.5em)$) {
+        \begin{minipage}{\dimexpr\linewidth-0.5cm\relax}
+            \color{blue}\strut Makes sure that any solo \texttt{a} or \texttt{b} is matched with another \texttt{a} or \texttt{b}, respectively, later on in the string.\strut
+        \end{minipage}
+    };
+    \node[anchor=north west] (p3) at ($(p2.south west) + (0,-0.5em)$) {
+        \begin{minipage}{\dimexpr\linewidth-0.5cm\relax}
+            \color{red}\strut Allows for \texttt{aa} or \texttt{bb} pairs to occur between matching pairs of \texttt{\color{blue}ab}s/\texttt{\color{blue}ba}s.\strut
+        \end{minipage}
+    };
+    \node[anchor=north west] (p4) at ($(p3.south west) + (0,-0.5em)$) {
+        \begin{minipage}{\dimexpr\linewidth-0.5cm\relax}
+            \color{yellow}\strut Captures \texttt{aa} and \texttt{bb} pairs that occur outside of \texttt{\color{blue}ab}/\texttt{\color{blue}ba} pairs since a pair does not change the parity of \texttt{a}s and \texttt{b}s.\strut
+        \end{minipage}
+    };
+
+    \draw[underline=0,color=gray] (10.south east) -- (0.south west);
+    \draw[underline=1,color=green] (5.south east) -- (1.south west);
+    \draw[underline=2,color=blue] (4.south east) -- (2.south west);
+    \draw[underline=3,color=red] (3.south east) -- (3.south west);
+    \draw[underline=1,color=yellow] (7.south east) -- (7.south west);
+    \draw[underline=1,color=yellow] (9.south east) -- (9.south west);
+
+    \draw[connector,color=yellow] ($(9.south west) + (.525em,-2.5pt)$)
+        |- ($(7.south west) + (.525em,-8.5pt)$)
+            edge ($(7.south west) + (.525em,-2.5pt)$)
+        -| ($(p4.north west) + (\dimexpr-0.5cm+6.0pt,-0.5em)$)
+        -- ($(p4.north west) + (-0.1cm,-0.5em)$);
+    \draw[connector,color=red] ($(3.south west) + (2.1em,-5.5pt)$)
+        -- ($(3.south west) + (2.1em,-7.0pt)$)
+        -| ($(p3.north west) + (\dimexpr-0.5cm+4.5pt,-0.5em)$)
+        -- ($(p3.north west) + (-0.1cm,-0.5em)$);
+    \draw[connector,color=blue] ($(2.south west) + (1.8375em,-4.0pt)$)
+        -- ($(2.south west) + (1.8375em,-5.5pt)$)
+        -| ($(p2.north west) + (\dimexpr-0.5cm+3pt,-0.5em)$)
+        -- ($(p2.north west) + (-0.1cm,-0.5em)$);
+    \draw[connector,color=green] ($(1.south west) + (0.2625em,-2.5pt)$)
+        -- ($(1.south west) + (0.2625em,-4.0pt)$)
+        -| ($(p1.north west) + (\dimexpr-0.5cm+1.5pt,-0.5em)$)
+        -- ($(p1.north west) + (-0.1cm,-0.5em)$);
+    \draw[connector,color=gray] ($(0.south west) + (0,-1.0pt)$)
+        |- ($(p0.north west) + (-0.1cm,-0.5em)$);
+\end{tikzpicture}</pre>
+            </div>
+        </div>
+        <p>This is a colorized explanation of a regular expression. This is one of the subproblems from my computability class that I took freshman year. Even though it looks relatively simple, I thought it looked aesthetically pleasing because of the different colors and straight lines, and it uses somewhat complex tikz syntax to get all the dimensions correct.</p>
+    </section>
+</div>
+</div><script type="text/javascript" src="/projects/fonttex/scripts/fonttex.js"></script></body>
+</html>

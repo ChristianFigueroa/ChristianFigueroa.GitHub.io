@@ -1,0 +1,35 @@
+body, html { background-color: #26292C; color: #FFF; min-height: 100%; font-family: Roboto, Consolas, "Menlo Regular", monospace; padding: 0 .75em; }
+
+h2 { border-top: 2pt solid rgba(255, 255, 255, 0.7); padding: 1em 0 0; }
+
+#demos, #intro { width: 60rem; max-width: 100%; margin-left: auto; margin-right: auto; box-sizing: border-box; margin-top: 2em; margin-bottom: 2em; }
+
+.image { padding: 1em; background-color: white; max-width: 100%; border-radius: .5em; }
+
+.image img { display: block; margin: auto; max-width: 100%; width: 40em; }
+
+.code { position: relative; }
+
+.code input[type=checkbox] { position: absolute; pointer-events: none; visibility: hidden; }
+
+.code input[type=checkbox]:checked ~ label { background-color: #44494e; }
+
+.code input[type=checkbox]:checked ~ label span.hide { display: inline; }
+
+.code input[type=checkbox]:checked ~ label span.show { display: none; }
+
+.code input[type=checkbox]:checked ~ label svg { transform: rotate(-90deg); }
+
+.code input[type=checkbox]:checked ~ .code_container { display: block; }
+
+.code label { margin-top: 1em; display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; padding: .3em .6em; text-decoration: underline; cursor: pointer; border-radius: .3em; }
+
+.code label span.hide { display: none; }
+
+.code label span.show { display: inline; }
+
+.code label:hover { background-color: #44494e; }
+
+.code label svg { fill: currentColor; height: .8em; display: block; transition: transform .2s ease-in-out; }
+
+.code .code_container { display: none; overflow: auto; }
