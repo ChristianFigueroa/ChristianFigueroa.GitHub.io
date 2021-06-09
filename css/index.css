@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) */
 .fa, .fas, main h3 > a span.arrow:after, main h4 > a span.arrow:after, main h2 > a:after, main h2 > a:before, .far, .fal, .fad, .fab { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; display: inline-block; font-style: normal; font-variant: normal; text-rendering: auto; line-height: 1; }
 
@@ -3048,35 +3049,17 @@ readers do not read off random characters that represent icons */
 @keyframes disappear { from { opacity: 1; }
   to { opacity: 0; } }
 
-@-webkit-keyframes arrow-move-1 { 0% { transform: translateX(0em);
+@-webkit-keyframes arrow-move { 0% { transform: translateX(0em);
     opacity: 0; }
   50% { opacity: 1; }
   100% { transform: translateX(0.8em);
     opacity: 0; } }
 
-@keyframes arrow-move-1 { 0% { transform: translateX(0em);
+@keyframes arrow-move { 0% { transform: translateX(0em);
     opacity: 0; }
   50% { opacity: 1; }
   100% { transform: translateX(0.8em);
     opacity: 0; } }
-
-@-webkit-keyframes arrow-move-2 { 0% { opacity: 1;
-    transform: translateX(0.4em); }
-  49.999999% { opacity: 0;
-    transform: translateX(0.8em); }
-  50.000001% { opacity: 0;
-    transform: translateX(0em); }
-  100% { opacity: 1;
-    transform: translateX(0.4em); } }
-
-@keyframes arrow-move-2 { 0% { opacity: 1;
-    transform: translateX(0.4em); }
-  49.999999% { opacity: 0;
-    transform: translateX(0.8em); }
-  50.000001% { opacity: 0;
-    transform: translateX(0em); }
-  100% { opacity: 1;
-    transform: translateX(0.4em); } }
 
 body, html { background-color: #ECEFF1; color: rgba(0, 0, 0, 0.94); height: 100%; font-family: Roboto, Consolas, "Menlo Regular", monospace; }
 
@@ -3084,7 +3067,7 @@ body, html { background-color: #ECEFF1; color: rgba(0, 0, 0, 0.94); height: 100%
 
 header { display: flex; flex-direction: column; justify-content: center; height: calc(100% - 4.75rem); background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.1), transparent, transparent, rgba(0, 0, 0, 0.1)); }
 
-@media only screen and (max-width: 767px) { header { height: max(100vw, calc(100% - 9.6rem)); } }
+@media only screen and (max-width: 767px) { header { height: calc(100% - 9.6rem); min-height: 12em; } }
 
 @media (prefers-color-scheme: dark) { header { background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.25), transparent, transparent, rgba(0, 0, 0, 0.25)); } }
 
@@ -3098,101 +3081,101 @@ header #name { font-family: "Roboto Slab", Consolas, "Menlo Regular", monospace;
 
 #name-svg *[pathLength="1"] { stroke-dasharray: 1px; }
 
-#name-svg line.h:nth-of-type(5) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-75, 0s linear 3.15s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-75, 0s linear 3.15s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(7) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-75, 0s linear 3.15s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-75, 0s linear 3.15s 1 normal both running disappear; }
 
-#name-svg line.h:nth-of-type(3) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.075s 1 normal both running stroke-in-out-75, 0s linear 3.225s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.075s 1 normal both running stroke-in-out-75, 0s linear 3.225s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(5) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.075s 1 normal both running stroke-in-out-75, 0s linear 3.225s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.075s 1 normal both running stroke-in-out-75, 0s linear 3.225s 1 normal both running disappear; }
 
-#name-svg line.h:nth-of-type(1) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.15s 1 normal both running stroke-in-out-75, 0s linear 3.3s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.15s 1 normal both running stroke-in-out-75, 0s linear 3.3s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(2) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.15s 1 normal both running stroke-in-out-75, 0s linear 3.3s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.15s 1 normal both running stroke-in-out-75, 0s linear 3.3s 1 normal both running disappear; }
 
-#name-svg line.h:nth-of-type(7) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.225s 1 normal both running stroke-in-out-75, 0s linear 3.375s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.225s 1 normal both running stroke-in-out-75, 0s linear 3.375s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(4) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.225s 1 normal both running stroke-in-out-75, 0s linear 3.375s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.225s 1 normal both running stroke-in-out-75, 0s linear 3.375s 1 normal both running disappear; }
 
-#name-svg line.h:nth-of-type(6) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.3s 1 normal both running stroke-in-out-75, 0s linear 3.45s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.3s 1 normal both running stroke-in-out-75, 0s linear 3.45s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(1) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.3s 1 normal both running stroke-in-out-75, 0s linear 3.45s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.3s 1 normal both running stroke-in-out-75, 0s linear 3.45s 1 normal both running disappear; }
 
-#name-svg line.h:nth-of-type(2) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.375s 1 normal both running stroke-in-out-75, 0s linear 3.525s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.375s 1 normal both running stroke-in-out-75, 0s linear 3.525s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(6) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.375s 1 normal both running stroke-in-out-75, 0s linear 3.525s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.375s 1 normal both running stroke-in-out-75, 0s linear 3.525s 1 normal both running disappear; }
 
-#name-svg line.h:nth-of-type(4) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.45s 1 normal both running stroke-in-out-75, 0s linear 3.6s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.45s 1 normal both running stroke-in-out-75, 0s linear 3.6s 1 normal both running disappear; }
+#name-svg line.h:nth-of-type(3) { -webkit-animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.45s 1 normal both running stroke-in-out-75, 0s linear 3.6s 1 normal both running disappear; animation: 3.15s cubic-bezier(0.37, 0, 0.63, 1) 0.45s 1 normal both running stroke-in-out-75, 0s linear 3.6s 1 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(21) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-50, 0s linear 3.15 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-50, 0s linear 3.15 normal both running disappear; }
+#name-svg line.v:nth-of-type(10) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-50, 0s linear 3.15 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0s 1 normal both running stroke-in-out-50, 0s linear 3.15 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(36) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0182926829s 1 normal both running stroke-in-out-50, 0s linear 3.1682926829 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0182926829s 1 normal both running stroke-in-out-50, 0s linear 3.1682926829 normal both running disappear; }
+#name-svg line.v:nth-of-type(45) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0182926829s 1 normal both running stroke-in-out-50, 0s linear 3.1682926829 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0182926829s 1 normal both running stroke-in-out-50, 0s linear 3.1682926829 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(13) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0365853659s 1 normal both running stroke-in-out-50, 0s linear 3.1865853659 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0365853659s 1 normal both running stroke-in-out-50, 0s linear 3.1865853659 normal both running disappear; }
+#name-svg line.v:nth-of-type(40) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0365853659s 1 normal both running stroke-in-out-50, 0s linear 3.1865853659 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0365853659s 1 normal both running stroke-in-out-50, 0s linear 3.1865853659 normal both running disappear; }
 
 #name-svg line.v:nth-of-type(28) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0548780488s 1 normal both running stroke-in-out-50, 0s linear 3.2048780488 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0548780488s 1 normal both running stroke-in-out-50, 0s linear 3.2048780488 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(18) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0731707317s 1 normal both running stroke-in-out-50, 0s linear 3.2231707317 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0731707317s 1 normal both running stroke-in-out-50, 0s linear 3.2231707317 normal both running disappear; }
+#name-svg line.v:nth-of-type(37) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0731707317s 1 normal both running stroke-in-out-50, 0s linear 3.2231707317 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0731707317s 1 normal both running stroke-in-out-50, 0s linear 3.2231707317 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(19) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0914634146s 1 normal both running stroke-in-out-50, 0s linear 3.2414634146 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0914634146s 1 normal both running stroke-in-out-50, 0s linear 3.2414634146 normal both running disappear; }
+#name-svg line.v:nth-of-type(25) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0914634146s 1 normal both running stroke-in-out-50, 0s linear 3.2414634146 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.0914634146s 1 normal both running stroke-in-out-50, 0s linear 3.2414634146 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(33) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1097560976s 1 normal both running stroke-in-out-50, 0s linear 3.2597560976 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1097560976s 1 normal both running stroke-in-out-50, 0s linear 3.2597560976 normal both running disappear; }
+#name-svg line.v:nth-of-type(27) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1097560976s 1 normal both running stroke-in-out-50, 0s linear 3.2597560976 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1097560976s 1 normal both running stroke-in-out-50, 0s linear 3.2597560976 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(47) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1280487805s 1 normal both running stroke-in-out-50, 0s linear 3.2780487805 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1280487805s 1 normal both running stroke-in-out-50, 0s linear 3.2780487805 normal both running disappear; }
+#name-svg line.v:nth-of-type(16) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1280487805s 1 normal both running stroke-in-out-50, 0s linear 3.2780487805 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1280487805s 1 normal both running stroke-in-out-50, 0s linear 3.2780487805 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(42) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1463414634s 1 normal both running stroke-in-out-50, 0s linear 3.2963414634 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1463414634s 1 normal both running stroke-in-out-50, 0s linear 3.2963414634 normal both running disappear; }
+#name-svg line.v:nth-of-type(12) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1463414634s 1 normal both running stroke-in-out-50, 0s linear 3.2963414634 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1463414634s 1 normal both running stroke-in-out-50, 0s linear 3.2963414634 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(12) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1646341463s 1 normal both running stroke-in-out-50, 0s linear 3.3146341463 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1646341463s 1 normal both running stroke-in-out-50, 0s linear 3.3146341463 normal both running disappear; }
+#name-svg line.v:nth-of-type(22) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1646341463s 1 normal both running stroke-in-out-50, 0s linear 3.3146341463 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1646341463s 1 normal both running stroke-in-out-50, 0s linear 3.3146341463 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(44) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1829268293s 1 normal both running stroke-in-out-50, 0s linear 3.3329268293 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1829268293s 1 normal both running stroke-in-out-50, 0s linear 3.3329268293 normal both running disappear; }
+#name-svg line.v:nth-of-type(21) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1829268293s 1 normal both running stroke-in-out-50, 0s linear 3.3329268293 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.1829268293s 1 normal both running stroke-in-out-50, 0s linear 3.3329268293 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(26) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2012195122s 1 normal both running stroke-in-out-50, 0s linear 3.3512195122 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2012195122s 1 normal both running stroke-in-out-50, 0s linear 3.3512195122 normal both running disappear; }
+#name-svg line.v:nth-of-type(18) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2012195122s 1 normal both running stroke-in-out-50, 0s linear 3.3512195122 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2012195122s 1 normal both running stroke-in-out-50, 0s linear 3.3512195122 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(34) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2195121951s 1 normal both running stroke-in-out-50, 0s linear 3.3695121951 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2195121951s 1 normal both running stroke-in-out-50, 0s linear 3.3695121951 normal both running disappear; }
+#name-svg line.v:nth-of-type(30) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2195121951s 1 normal both running stroke-in-out-50, 0s linear 3.3695121951 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2195121951s 1 normal both running stroke-in-out-50, 0s linear 3.3695121951 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(25) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.237804878s 1 normal both running stroke-in-out-50, 0s linear 3.387804878 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.237804878s 1 normal both running stroke-in-out-50, 0s linear 3.387804878 normal both running disappear; }
+#name-svg line.v:nth-of-type(19) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.237804878s 1 normal both running stroke-in-out-50, 0s linear 3.387804878 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.237804878s 1 normal both running stroke-in-out-50, 0s linear 3.387804878 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(17) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.256097561s 1 normal both running stroke-in-out-50, 0s linear 3.406097561 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.256097561s 1 normal both running stroke-in-out-50, 0s linear 3.406097561 normal both running disappear; }
+#name-svg line.v:nth-of-type(31) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.256097561s 1 normal both running stroke-in-out-50, 0s linear 3.406097561 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.256097561s 1 normal both running stroke-in-out-50, 0s linear 3.406097561 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(31) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2743902439s 1 normal both running stroke-in-out-50, 0s linear 3.4243902439 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2743902439s 1 normal both running stroke-in-out-50, 0s linear 3.4243902439 normal both running disappear; }
+#name-svg line.v:nth-of-type(41) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2743902439s 1 normal both running stroke-in-out-50, 0s linear 3.4243902439 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2743902439s 1 normal both running stroke-in-out-50, 0s linear 3.4243902439 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(20) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2926829268s 1 normal both running stroke-in-out-50, 0s linear 3.4426829268 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2926829268s 1 normal both running stroke-in-out-50, 0s linear 3.4426829268 normal both running disappear; }
+#name-svg line.v:nth-of-type(34) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2926829268s 1 normal both running stroke-in-out-50, 0s linear 3.4426829268 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.2926829268s 1 normal both running stroke-in-out-50, 0s linear 3.4426829268 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(35) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3109756098s 1 normal both running stroke-in-out-50, 0s linear 3.4609756098 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3109756098s 1 normal both running stroke-in-out-50, 0s linear 3.4609756098 normal both running disappear; }
+#name-svg line.v:nth-of-type(44) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3109756098s 1 normal both running stroke-in-out-50, 0s linear 3.4609756098 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3109756098s 1 normal both running stroke-in-out-50, 0s linear 3.4609756098 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(14) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3292682927s 1 normal both running stroke-in-out-50, 0s linear 3.4792682927 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3292682927s 1 normal both running stroke-in-out-50, 0s linear 3.4792682927 normal both running disappear; }
+#name-svg line.v:nth-of-type(48) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3292682927s 1 normal both running stroke-in-out-50, 0s linear 3.4792682927 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3292682927s 1 normal both running stroke-in-out-50, 0s linear 3.4792682927 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(32) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3475609756s 1 normal both running stroke-in-out-50, 0s linear 3.4975609756 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3475609756s 1 normal both running stroke-in-out-50, 0s linear 3.4975609756 normal both running disappear; }
+#name-svg line.v:nth-of-type(17) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3475609756s 1 normal both running stroke-in-out-50, 0s linear 3.4975609756 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3475609756s 1 normal both running stroke-in-out-50, 0s linear 3.4975609756 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(8) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3658536585s 1 normal both running stroke-in-out-50, 0s linear 3.5158536585 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3658536585s 1 normal both running stroke-in-out-50, 0s linear 3.5158536585 normal both running disappear; }
+#name-svg line.v:nth-of-type(13) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3658536585s 1 normal both running stroke-in-out-50, 0s linear 3.5158536585 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3658536585s 1 normal both running stroke-in-out-50, 0s linear 3.5158536585 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(10) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3841463415s 1 normal both running stroke-in-out-50, 0s linear 3.5341463415 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3841463415s 1 normal both running stroke-in-out-50, 0s linear 3.5341463415 normal both running disappear; }
+#name-svg line.v:nth-of-type(43) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3841463415s 1 normal both running stroke-in-out-50, 0s linear 3.5341463415 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.3841463415s 1 normal both running stroke-in-out-50, 0s linear 3.5341463415 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(16) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4024390244s 1 normal both running stroke-in-out-50, 0s linear 3.5524390244 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4024390244s 1 normal both running stroke-in-out-50, 0s linear 3.5524390244 normal both running disappear; }
+#name-svg line.v:nth-of-type(35) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4024390244s 1 normal both running stroke-in-out-50, 0s linear 3.5524390244 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4024390244s 1 normal both running stroke-in-out-50, 0s linear 3.5524390244 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(29) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4207317073s 1 normal both running stroke-in-out-50, 0s linear 3.5707317073 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4207317073s 1 normal both running stroke-in-out-50, 0s linear 3.5707317073 normal both running disappear; }
+#name-svg line.v:nth-of-type(9) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4207317073s 1 normal both running stroke-in-out-50, 0s linear 3.5707317073 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4207317073s 1 normal both running stroke-in-out-50, 0s linear 3.5707317073 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(23) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4390243902s 1 normal both running stroke-in-out-50, 0s linear 3.5890243902 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4390243902s 1 normal both running stroke-in-out-50, 0s linear 3.5890243902 normal both running disappear; }
+#name-svg line.v:nth-of-type(24) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4390243902s 1 normal both running stroke-in-out-50, 0s linear 3.5890243902 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4390243902s 1 normal both running stroke-in-out-50, 0s linear 3.5890243902 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(30) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4573170732s 1 normal both running stroke-in-out-50, 0s linear 3.6073170732 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4573170732s 1 normal both running stroke-in-out-50, 0s linear 3.6073170732 normal both running disappear; }
+#name-svg line.v:nth-of-type(38) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4573170732s 1 normal both running stroke-in-out-50, 0s linear 3.6073170732 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4573170732s 1 normal both running stroke-in-out-50, 0s linear 3.6073170732 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(39) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4756097561s 1 normal both running stroke-in-out-50, 0s linear 3.6256097561 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4756097561s 1 normal both running stroke-in-out-50, 0s linear 3.6256097561 normal both running disappear; }
+#name-svg line.v:nth-of-type(15) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4756097561s 1 normal both running stroke-in-out-50, 0s linear 3.6256097561 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.4756097561s 1 normal both running stroke-in-out-50, 0s linear 3.6256097561 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(37) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.493902439s 1 normal both running stroke-in-out-50, 0s linear 3.643902439 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.493902439s 1 normal both running stroke-in-out-50, 0s linear 3.643902439 normal both running disappear; }
+#name-svg line.v:nth-of-type(39) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.493902439s 1 normal both running stroke-in-out-50, 0s linear 3.643902439 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.493902439s 1 normal both running stroke-in-out-50, 0s linear 3.643902439 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(40) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.512195122s 1 normal both running stroke-in-out-50, 0s linear 3.662195122 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.512195122s 1 normal both running stroke-in-out-50, 0s linear 3.662195122 normal both running disappear; }
+#name-svg line.v:nth-of-type(32) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.512195122s 1 normal both running stroke-in-out-50, 0s linear 3.662195122 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.512195122s 1 normal both running stroke-in-out-50, 0s linear 3.662195122 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(22) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5304878049s 1 normal both running stroke-in-out-50, 0s linear 3.6804878049 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5304878049s 1 normal both running stroke-in-out-50, 0s linear 3.6804878049 normal both running disappear; }
+#name-svg line.v:nth-of-type(33) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5304878049s 1 normal both running stroke-in-out-50, 0s linear 3.6804878049 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5304878049s 1 normal both running stroke-in-out-50, 0s linear 3.6804878049 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(15) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5487804878s 1 normal both running stroke-in-out-50, 0s linear 3.6987804878 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5487804878s 1 normal both running stroke-in-out-50, 0s linear 3.6987804878 normal both running disappear; }
+#name-svg line.v:nth-of-type(46) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5487804878s 1 normal both running stroke-in-out-50, 0s linear 3.6987804878 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5487804878s 1 normal both running stroke-in-out-50, 0s linear 3.6987804878 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(43) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5670731707s 1 normal both running stroke-in-out-50, 0s linear 3.7170731707 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5670731707s 1 normal both running stroke-in-out-50, 0s linear 3.7170731707 normal both running disappear; }
+#name-svg line.v:nth-of-type(14) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5670731707s 1 normal both running stroke-in-out-50, 0s linear 3.7170731707 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5670731707s 1 normal both running stroke-in-out-50, 0s linear 3.7170731707 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(46) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5853658537s 1 normal both running stroke-in-out-50, 0s linear 3.7353658537 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5853658537s 1 normal both running stroke-in-out-50, 0s linear 3.7353658537 normal both running disappear; }
+#name-svg line.v:nth-of-type(29) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5853658537s 1 normal both running stroke-in-out-50, 0s linear 3.7353658537 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.5853658537s 1 normal both running stroke-in-out-50, 0s linear 3.7353658537 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(45) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6036585366s 1 normal both running stroke-in-out-50, 0s linear 3.7536585366 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6036585366s 1 normal both running stroke-in-out-50, 0s linear 3.7536585366 normal both running disappear; }
+#name-svg line.v:nth-of-type(11) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6036585366s 1 normal both running stroke-in-out-50, 0s linear 3.7536585366 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6036585366s 1 normal both running stroke-in-out-50, 0s linear 3.7536585366 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(38) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6219512195s 1 normal both running stroke-in-out-50, 0s linear 3.7719512195 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6219512195s 1 normal both running stroke-in-out-50, 0s linear 3.7719512195 normal both running disappear; }
+#name-svg line.v:nth-of-type(42) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6219512195s 1 normal both running stroke-in-out-50, 0s linear 3.7719512195 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6219512195s 1 normal both running stroke-in-out-50, 0s linear 3.7719512195 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(24) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6402439024s 1 normal both running stroke-in-out-50, 0s linear 3.7902439024 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6402439024s 1 normal both running stroke-in-out-50, 0s linear 3.7902439024 normal both running disappear; }
+#name-svg line.v:nth-of-type(36) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6402439024s 1 normal both running stroke-in-out-50, 0s linear 3.7902439024 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6402439024s 1 normal both running stroke-in-out-50, 0s linear 3.7902439024 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(11) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6585365854s 1 normal both running stroke-in-out-50, 0s linear 3.8085365854 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6585365854s 1 normal both running stroke-in-out-50, 0s linear 3.8085365854 normal both running disappear; }
+#name-svg line.v:nth-of-type(20) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6585365854s 1 normal both running stroke-in-out-50, 0s linear 3.8085365854 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6585365854s 1 normal both running stroke-in-out-50, 0s linear 3.8085365854 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(48) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6768292683s 1 normal both running stroke-in-out-50, 0s linear 3.8268292683 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6768292683s 1 normal both running stroke-in-out-50, 0s linear 3.8268292683 normal both running disappear; }
+#name-svg line.v:nth-of-type(26) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6768292683s 1 normal both running stroke-in-out-50, 0s linear 3.8268292683 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6768292683s 1 normal both running stroke-in-out-50, 0s linear 3.8268292683 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(27) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6951219512s 1 normal both running stroke-in-out-50, 0s linear 3.8451219512 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6951219512s 1 normal both running stroke-in-out-50, 0s linear 3.8451219512 normal both running disappear; }
+#name-svg line.v:nth-of-type(23) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6951219512s 1 normal both running stroke-in-out-50, 0s linear 3.8451219512 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.6951219512s 1 normal both running stroke-in-out-50, 0s linear 3.8451219512 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(41) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7134146341s 1 normal both running stroke-in-out-50, 0s linear 3.8634146341 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7134146341s 1 normal both running stroke-in-out-50, 0s linear 3.8634146341 normal both running disappear; }
+#name-svg line.v:nth-of-type(47) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7134146341s 1 normal both running stroke-in-out-50, 0s linear 3.8634146341 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7134146341s 1 normal both running stroke-in-out-50, 0s linear 3.8634146341 normal both running disappear; }
 
-#name-svg line.v:nth-of-type(9) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7317073171s 1 normal both running stroke-in-out-50, 0s linear 3.8817073171 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7317073171s 1 normal both running stroke-in-out-50, 0s linear 3.8817073171 normal both running disappear; }
+#name-svg line.v:nth-of-type(8) { -webkit-animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7317073171s 1 normal both running stroke-in-out-50, 0s linear 3.8817073171 normal both running disappear; animation: 2.9s cubic-bezier(0.37, 0, 0.63, 1) 0.7317073171s 1 normal both running stroke-in-out-50, 0s linear 3.8817073171 normal both running disappear; }
 
 #name-svg path:nth-child(50), #name-svg rect:nth-child(50) { -webkit-animation: 0.75s cubic-bezier(0.61, 1, 0.88, 1) 0.65s 1 normal both running stroke-in, 0.5s cubic-bezier(0.37, 0, 0.63, 1) 1.15s 1 normal both running fill-in; animation: 0.75s cubic-bezier(0.61, 1, 0.88, 1) 0.65s 1 normal both running stroke-in, 0.5s cubic-bezier(0.37, 0, 0.63, 1) 1.15s 1 normal both running fill-in; }
 
@@ -3302,7 +3285,7 @@ header #name { font-family: "Roboto Slab", Consolas, "Menlo Regular", monospace;
 
 main { margin-top: 1rem; font-weight: 300; }
 
-main h2 { font-family: "Roboto Slab", Consolas, "Menlo Regular", monospace; font-weight: 700; font-size: 2rem; margin: 0 0 2.5rem; line-height: 1; }
+main h2 { font-family: "Roboto Slab", Consolas, "Menlo Regular", monospace; font-weight: 700; font-size: 2rem; margin: 0 0 1.5rem; line-height: 1; }
 
 @media only screen and (max-width: 767px) { main h2 { font-size: 1.5rem; margin: 0 0 1rem; } }
 
@@ -3342,87 +3325,59 @@ main h3 > a span.arrow:last-of-type, main h4 > a span.arrow:last-of-type { margi
 
 main h3 > a span.arrow:nth-last-of-type(2):after, main h4 > a span.arrow:nth-last-of-type(2):after { transform: translate(0); opacity: 0; }
 
-main h3 > a span.arrow:nth-last-of-type(1):after, main h4 > a span.arrow:nth-last-of-type(1):after { transform: translate(0.4em); opacity: 1; }
+main h3 > a span.arrow:nth-last-of-type(1):after, main h4 > a span.arrow:nth-last-of-type(1):after { transform: translate(0.4em); opacity: 1; -webkit-animation-delay: -0.4s; animation-delay: -0.4s; }
 
 main h3 > a span.arrow:after, main h4 > a span.arrow:after { content: "\f105"; color: #3949AB; display: inline-block; width: 0.3em; margin-right: -0.3em; -webkit-animation-timing-function: linear; animation-timing-function: linear; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; -webkit-animation-duration: 0.8s; animation-duration: 0.8s; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation-name: none; animation-name: none; }
 
 @media (prefers-color-scheme: dark) { main h3 > a span.arrow:after, main h4 > a span.arrow:after { color: #64B5F6; } }
 
-main h3 > a:hover:not([data-hover-state]) span.arrow:nth-last-of-type(2):after, main h3 > a[data-playing-state=active] span.arrow:nth-last-of-type(2):after, main h4 > a:hover:not([data-hover-state]) span.arrow:nth-last-of-type(2):after, main h4 > a[data-playing-state=active] span.arrow:nth-last-of-type(2):after { -webkit-animation-name: arrow-move-1; animation-name: arrow-move-1; }
-
-main h3 > a:hover:not([data-hover-state]) span.arrow:nth-last-of-type(1):after, main h3 > a[data-playing-state=active] span.arrow:nth-last-of-type(1):after, main h4 > a:hover:not([data-hover-state]) span.arrow:nth-last-of-type(1):after, main h4 > a[data-playing-state=active] span.arrow:nth-last-of-type(1):after { -webkit-animation-name: arrow-move-2; animation-name: arrow-move-2; }
+main h3 > a:hover:not([data-hover-state]) span.arrow:after, main h3 > a[data-playing-state=active] span.arrow:after, main h4 > a:hover:not([data-hover-state]) span.arrow:after, main h4 > a[data-playing-state=active] span.arrow:after { -webkit-animation-name: arrow-move; animation-name: arrow-move; }
 
 main h4 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0; font-family: Roboto, Consolas, "Menlo Regular", monospace; }
 
-main p, main ul { margin-bottom: 0; line-height: 1.5; }
+main h5 { font-family: "Roboto Slab", Consolas, "Menlo Regular", monospace; font-size: 1rem; margin: 0.25em 0; }
 
-main ul { padding-left: 0; list-style-type: none; display: flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start; }
+main p, main .proficiencies, main ol:not(.proficiencies) { margin-bottom: 0; line-height: 1.5; }
 
-main ul li { position: relative; padding-left: 1.5em; min-width: calc(50% - 1.5em); }
+main .flex-wrap { display: flex; flex-wrap: wrap; align-items: flex-start; }
 
-main ul li:nth-child(0):before { content: "-1"; }
+main .flex-wrap > * { flex-grow: 1; flex-shrink: 0; }
 
-main ul li:nth-child(0):after { content: "\00a0:"; }
+main ol:not(.proficiencies) { margin: 0; padding-left: 0; counter-reset: resume-list -1; list-style: none; }
 
-main ul li:nth-child(1) { order: 0; }
+main ol:not(.proficiencies) li { counter-increment: resume-list; position: relative; white-space: nowrap; }
 
-main ul li:nth-child(1):before { content: "0"; }
+main ol:not(.proficiencies) li:before { content: counter(resume-list) ": "; display: inline-block; width: 1.5em; text-align: right; color: #3949AB; }
 
-main ul li:nth-child(1):after { content: "\00a0:"; }
+@media (prefers-color-scheme: dark) { main ol:not(.proficiencies) li:before { color: rgba(255, 255, 255, 0.85); } }
 
-main ul li:nth-child(2) { order: 2; }
+main .proficiencies { margin: 0; list-style: none; padding: 0; }
 
-main ul li:nth-child(2):before { content: "1"; }
+main .proficiencies li { white-space: nowrap; }
 
-main ul li:nth-child(2):after { content: "\00a0:"; }
+main .proficiencies li:before { content: ""; display: inline-block; height: 0.7em; border-width: 0; border-left-color: #3949AB; border-style: solid; border-right-color: rgba(0, 0, 0, 0.14); margin-right: 0.5em; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.44); }
 
-main ul li:nth-child(3) { order: 4; }
+@media (prefers-color-scheme: dark) { main .proficiencies li:before { border-left-color: rgba(255, 255, 255, 0.85); border-right-color: rgba(255, 255, 255, 0.2); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5); } }
 
-main ul li:nth-child(3):before { content: "2"; }
+main .proficiencies li:after { opacity: 0.5; font-style: italic; padding-right: .2em; }
 
-main ul li:nth-child(3):after { content: "\00a0:"; }
+main .proficiencies li[data-proficiency="3"]:first-of-type:after, main .proficiencies li[data-proficiency="2"] + [data-proficiency="3"]:after, main .proficiencies li[data-proficiency="1"] + [data-proficiency="3"]:after { content: "Proficient"; }
 
-main ul li:nth-child(4) { order: 6; }
+main .proficiencies li[data-proficiency="2"]:first-of-type:after, main .proficiencies li[data-proficiency="3"] + [data-proficiency="2"]:after, main .proficiencies li[data-proficiency="1"] + [data-proficiency="2"]:after { content: "Familiar"; }
 
-main ul li:nth-child(4):before { content: "3"; }
+main .proficiencies li[data-proficiency="1"]:first-of-type:after, main .proficiencies li[data-proficiency="3"] + [data-proficiency="1"]:after, main .proficiencies li[data-proficiency="2"] + [data-proficiency="1"]:after { content: "Some experience"; }
 
-main ul li:nth-child(4):after { content: "\00a0:"; }
+main .proficiencies li[data-proficiency="3"]:before { border-left-width: 2.8em; border-right-width: 0em; }
 
-main ul li:nth-child(5) { order: 8; }
+main .proficiencies li[data-proficiency="2"]:before { border-left-width: 2.1em; border-right-width: 0.7em; }
 
-main ul li:nth-child(5):before { content: "4"; }
+main .proficiencies li[data-proficiency="1"]:before { border-left-width: 1.4em; border-right-width: 1.4em; }
 
-main ul li:nth-child(5):after { content: "\00a0:"; }
+main .double-list { display: flex; overflow-x: auto; overflow-y: hidden; }
 
-main ul li:nth-child(6) { order: 10; }
+main .double-list ol, main .double-list ul { margin: 0; }
 
-main ul li:nth-child(6):before { content: "5"; }
-
-main ul li:nth-child(6):after { content: "\00a0:"; }
-
-main ul li:nth-child(7) { order: 12; }
-
-main ul li:nth-child(7):before { content: "6"; }
-
-main ul li:nth-child(7):after { content: "\00a0:"; }
-
-main ul li:nth-child(8) { order: 14; }
-
-main ul li:nth-child(8):before { content: "7"; }
-
-main ul li:nth-child(8):after { content: "\00a0:"; }
-
-main ul li:nth-child(9) { order: 16; }
-
-main ul li:nth-child(9):before { content: "8"; }
-
-main ul li:nth-child(9):after { content: "\00a0:"; }
-
-main ul li:nth-child(10) { order: 18; }
-
-main ul li:before, main ul li:after { position: absolute; left: 0; top: 0; display: inline-block; font-family: Consolas, "Menlo Regular", monospace; }
-
-main ul li:before { color: #AE81FF; }
+main .double-list :first-child { margin-right: .5em; }
 
 main > section { padding: 2rem 0; }
 

@@ -1,5 +1,5 @@
-# ChristianFigueroa.github.io
+# figgchristian.com
 
-Personal website with a bunch of stuff and things
+Personal website to hold projects and information about me and whatnot
 
-[Link](https://christianfigueroa.github.io)
+Clickable link: [figgchristian.com](https://figgchristian.com)
