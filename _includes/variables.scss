@@ -1,7 +1,13 @@
-$background-color: {{ site.style.color.background  }};
-$text-color: {{ site.style.color.text }};
-$link-color: {{ site.style.color.link }};
-$accent-color: {{ site.style.color.accent }};
+$light-color-background: #ECEFF1;
+$light-color-text: transparentize(black, 0.06);
+$light-color-accent: #3949AB;
+$light-color-link: $light-color-accent;
+
+$dark-color-background: #263238;
+$dark-color-text: white;
+$dark-color-accent: transparentize(white, 0.15);
+$dark-color-link: #64B5F6;
+
 $RobotoSlab: "Roboto Slab", Consolas, "Menlo Regular", monospace;
 $Roboto: Roboto, Consolas, "Menlo Regular", monospace;
 
@@ -9,10 +15,11 @@ $content-width: 60rem;
 
 // For use in @media queriess
 $mobile: "only screen and (max-width: 767px)";
+$dark: "(prefers-color-scheme: dark)";
 
 @mixin body-width {
 	width: $content-width;
-	max-width: 100%;
+	max-width: calc(100% - 2rem);
 	margin-left: auto;
 	margin-right: auto;
 	box-sizing: border-box;
@@ -33,6 +40,111 @@ $animation-number: null;
 	@at-root {
 		@keyframes #{$name} {
 			@content;
+		}
+	}
+}
+
+$arrow-move-rand: unique-id();
+@keyframes #{$arrow-move-rand}-h {
+	0% {
+		transform: translateX(0em);
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateX(0.8em);
+		opacity: 0;
+	}
+}
+
+@import "fontawesome/variables";
+@import "fontawesome/mixins";
+@import "fontawesome/core";
+@import "fontawesome/solid.scss";
+
+%arrow-right-still {
+	@extend %fa-icon;
+	@extend .fas;
+
+	display: inline-block;
+	white-space: nowrap;
+	width: 1.3em;
+	text-align: left;
+
+	&:before,
+	&:after {
+		content: fa-content($fa-var-angle-right);
+		color: inherit;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+		animation-duration: 0.8s;
+		animation-fill-mode: both;
+		animation-name: none;
+		display: inline-block;
+		width: 0;
+	}
+
+	&:before {
+		transform: translate(0);
+		opacity: 0;
+	}
+
+	&:after {
+		transform: translate(0.4em);
+		opacity: 1;
+		animation-delay: -0.4s;
+	}
+}
+
+%arrow-left-still {
+	@extend %arrow-right-still;
+
+	&:before {
+		margin-left: calc(100% - 1.3em);
+	}
+
+	&:before,
+	&:after {
+		content: fa-content($fa-var-angle-left);
+		animation-direction: reverse;
+	}
+}
+
+%arrow-right-move {
+	@extend %arrow-right-still;
+
+	&:before,
+	&:after {
+		animation-name: #{$arrow-move-rand}-h;
+	}
+}
+
+%arrow-left-move {
+	@extend %arrow-left-still;
+
+	&:before,
+	&:after {
+		animation-name: #{$arrow-move-rand}-h;
+	}
+}
+
+@mixin hoverable-arrows($selector: "span.arrow", $direction: "right") {
+	#{$selector} {
+		@extend %arrow-#{$direction}-still;
+	}
+
+	&:focus #{$selector},
+	&:hover:not([data-hover-state]) #{$selector},
+	&[data-playing-state=active] #{$selector} {
+		&:before,
+		&:after {
+			@if $direction == "left" or $direction == "right" {
+				animation-name: #{$arrow-move-rand}-h;
+			}
 		}
 	}
 }

@@ -1,12 +1,24 @@
-{%- for script in page.scripts -%}
-    {%- capture name -%}{{ script }}{%- endcapture -%}
-    {%- capture path -%}{{ include.path }}{%- endcapture -%}
-    {%- capture bodydone -%}{{ include.afterbody | default: false }}{%- endcapture -%}
+{%- if include.scripts != nil -%}
+    {%- assign scripts = include.scripts -%}
+{%- elsif page.scripts -%}
+    {%- if layout.scripts -%}
+        {%- assign scripts = page.scripts | concat: layout.scripts | uniq -%}
+    {%- else -%}
+        {%- assign scripts = page.scripts | uniq -%}
+    {%- endif -%}
+{%- elsif layout.scripts -%}
+    {%- assign scripts = layout.scripts | uniq -%}
+{%- endif -%}
+<!-- {{ scripts }} -->
+{%- for script in scripts -%}
+    {%- assign name = script -%}
+    {%- assign path = include.path -%}
+    {%- assign bodydone = include.afterbody | default: false -%}
     {%- assign async = false -%}
     {%- assign crossorigin = false -%}
-    {%- assign afterbody = "false" -%}
+    {%- assign afterbody = false -%}
     {%- if script.first -%}
-        {%- capture name -%}{{ script.first[0] }}{%- endcapture -%}
+        {%- assign name = script.first[0] -%}
         {%- if script.first[1].external -%}
             {%- assign path = "" -%}
         {%- endif -%}
@@ -17,7 +29,7 @@
             {%- assign crossorigin = true -%}
         {%- endif -%}
         {%- if script.first[1].afterbody -%}
-            {%- assign afterbody = "true" -%}
+            {%- assign afterbody = true -%}
         {%- endif -%}
         {%- if script.first[1].path -%}
             {%- capture path -%}{{ script.first[1].path }}/{%- endcapture -%}

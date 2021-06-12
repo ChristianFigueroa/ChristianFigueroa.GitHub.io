@@ -2,6 +2,11 @@
 ---
 {% include variables.scss %}
 
+@import "fontawesome/variables";
+@import "fontawesome/mixins";
+@import "fontawesome/core";
+@import "fontawesome/solid.scss";
+
 body, html {
 	margin: 0;
 }
@@ -11,11 +16,191 @@ html[data-script-enabled="false"] .withscript {
 }
 
 .link {
-	color: $link-color;
+	color: $light-color-link;
 	text-decoration: none;
+
+	@media #{$dark} {
+		color: $dark-color-link;
+	}
 
 	&:hover,
 	&:focus {
 		text-decoration: underline;
+	}
+}
+
+a.external:after,
+.external.link:after, {
+	@extend %fa-icon;
+	@extend .fas;
+	content: fa-content($fa-var-external-link-alt);
+	font-size: .7em;
+	position: relative;
+	top: -.2em;
+	color: inherit;
+	text-decoration: none;
+	border-radius: 50%;
+	padding: .4em .4em .5em .5em;
+	margin: -.4em -.4em -.5em #{-.5em + 0.6em};
+}
+
+button,
+.button {
+	text-decoration: none;
+	background-color: $light-color-accent;
+	color: $light-color-background;
+	display: inline-block;
+	padding: 0.3em 0.7em;
+	border-radius: 0.3em;
+	background-image: linear-gradient(0deg, transparentize(black, .9), transparent);
+	position: relative;
+	transition:
+		box-shadow 0.2s ease-in-out,
+		background-color 0.2s ease-in-out;
+	box-shadow: 
+		0 0.3rem mix($light-color-accent, $light-color-background, 75%),
+		0 0.6rem mix($light-color-accent, $light-color-background, 50%),
+		0 0.9rem mix($light-color-accent, $light-color-background, 25%);
+
+	@media #{$dark} {
+		background-color: $dark-color-accent;
+		color: $dark-color-background;
+		box-shadow: 
+			0 0.3rem mix($dark-color-accent, $dark-color-background, 75%),
+			0 0.6rem mix($dark-color-accent, $dark-color-background, 50%),
+			0 0.9rem mix($dark-color-accent, $dark-color-background, 25%);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: mix($light-color-accent, black, 90%);
+		box-shadow: 
+			0 0.15rem mix($light-color-accent, $light-color-background, 75%),
+			0 0.3rem mix($light-color-accent, $light-color-background, 50%),
+			0 0.45rem mix($light-color-accent, $light-color-background, 25%);
+
+		@media #{$dark} {
+			background-color: mix($dark-color-accent, black, 90%);
+			box-shadow: 
+				0 0.15rem mix($dark-color-accent, $dark-color-background, 75%),
+				0 0.3rem mix($dark-color-accent, $dark-color-background, 50%),
+				0 0.45rem mix($dark-color-accent, $dark-color-background, 25%);
+		}
+	}
+}
+
+.fa-icon-list {
+	padding-left: 0;
+	list-style: none;
+
+	li {
+		padding-left: 1.5em;
+
+		&:before {
+			@extend %fa-icon;
+			@extend .fas;
+			color: $light-color-accent;
+
+			@media #{$dark} {
+				color: $dark-color-accent;
+			}
+		}
+	}
+
+	&.square-check li:before {
+		content: fa-content($fa-var-check-square) "\00a0";
+		text-align: right;
+		width: 1.5em;
+		display: inline-block;
+		margin-left: -1.5em;
+	}
+}
+
+main {
+	h2 {
+		@include body-width;
+		font-family: $RobotoSlab;
+		font-weight: 700;
+		font-size: 2rem;
+		margin-bottom: 1.5rem;
+		line-height: 1;
+
+		@media #{$mobile} {
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+		}
+
+		> a,
+		> span {
+			color: inherit;
+			text-decoration: none;
+			display: inline-block;
+			border-style: none solid double;
+			border-width: 0 0 .2em;
+			border-color: transparent transparent $light-color-accent;
+			padding: 0 .2em;
+			margin: 0;
+			position: relative;
+			cursor: pointer;
+
+			@media #{$dark} {
+				border-color: transparent transparent $dark-color-accent;
+			}
+
+			&:hover:before,
+			&:focus:before {
+				display: block;
+			}
+
+			&:hover:after,
+			&:focus:after {
+				display: none;
+			}
+
+			@media only screen and (max-width: #{$content-width + 7rem}) {
+				&:hover:before,
+				&:focus:before {
+					display: none;
+				}
+
+				&:hover:after,
+				&:focus:after {
+					display: inline-block;
+				}
+			}
+
+			&:before {
+				@extend %fa-icon;
+				@extend .fas;
+				color: $light-color-link;
+				content: fa-content($fa-var-link);
+				font-size: .7em;
+				top: .2em;
+				margin-right: .5em;
+				position: absolute;
+				right: 100%;
+				display: none;
+
+				@media #{$dark} {
+					color: $dark-color-link;
+				}
+			}
+
+			&:after {
+				@extend %fa-icon;
+				@extend .fas;
+				color: $light-color-accent;
+				content: fa-content($fa-var-link);
+				font-size: .7em;
+				top: -.2em;
+				margin-left: .5em;
+				position: relative;
+				display: none;
+
+				@media #{$dark} {
+					color: $dark-color-accent;
+				}
+			}
+		}
 	}
 }

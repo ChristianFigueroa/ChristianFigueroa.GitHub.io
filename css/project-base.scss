@@ -1,0 +1,16 @@
+---
+---
+{% include variables.scss %}
+
+@import "fontawesome/variables";
+@import "fontawesome/mixins";
+@import "fontawesome/core";
+@import "fontawesome/solid.scss";
+
+body, html {
+	margin: 0;
+}
+
+html[data-script-enabled="false"] .withscript {
+	display: none;
+}

@@ -2,9 +2,9 @@
 ---
 {% include css-funcs.scss %}
 
-$background: {{ site.style.color.background }};
-$accent: {{ site.style.color.accent }};
-$link: {{ site.style.color.link }};
+$background: #26292C;
+$accent: #00849D;
+$link: #66D9EF;
 
 html, body {
 	overflow-x: hidden;

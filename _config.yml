@@ -6,8 +6,8 @@ baseurl: ""
 url: ""
 social:
   github:
-    username: ChristianFigueroa
-    link: https://github.com/ChristianFigueroa
+    username: figgchristian
+    link: https://github.com/figgchristian
   linkedin:
     username: figgchristian
     link: https://linkedin.com/in/figgchristian
@@ -17,16 +17,8 @@ exclude:
   - projects/fonttex/node_modules
   - vendor
 
-style:
-  color:
-    background: "#26292C"
-    accent: "#00849D"
-    link: "#66D9EF"
-    text: "#FFF"
-    code:
-      background: "#26292C"
-      lineHighlight: "#202325"
-      purple: "#AE81FF"
+sass:
+  style: compressed
 
 exclude:
   - .sass-cache/
