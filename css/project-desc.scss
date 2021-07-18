@@ -123,4 +123,16 @@ main {
         line-height: 1.5;
         @include body-width;
     }
+
+    .button-link {
+        text-align: center;
+        padding-bottom: 0.9em;
+
+        a {
+            margin-top: 1em;
+            font-weight: bold;
+            font-size: 1.5em;
+            font-family: $RobotoSlab;
+        }
+    }
 }

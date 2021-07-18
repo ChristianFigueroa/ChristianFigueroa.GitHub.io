@@ -19,12 +19,14 @@
     <meta name="msapplication-config" content="/meta/browserconfig.xml">
     <meta name="theme-color" content="#eceff1">
     <meta name="msapplication-TileColor" content="#3949ab">
-    {%- include googleanalytics -%}
+    {%- if jekyll.environment != "development" -%}{%- include googleanalytics -%}{%- endif -%}
     {%- include getgooglefonts -%}
     {%- capture projstylespath -%}{{ page.projectroot }}/css/{%- endcapture -%}
-    {%- include getstyles styles=page.styles path=projstylespath -%}
+    {%- assign pagestyles = page.styles | default: false -%}
+    {%- include getstyles styles=pagestyles path=projstylespath -%}
     {%- capture stylespath -%}{{ site.baseurl }}/css/{%- endcapture -%}
-    {%- include getstyles styles=layout.styles path=stylespath -%}
+    {%- assign layoutstyles = layout.styles | default: false -%}
+    {%- include getstyles styles=layoutstyles path=stylespath -%}
     <link href="/css/project-base.css" rel="stylesheet" type="text/css">
     {%- capture projscriptspath -%}{{ page.projectroot }}/scripts/{%- endcapture -%}
     {%- assign pagescripts = page.scripts | default: false -%}

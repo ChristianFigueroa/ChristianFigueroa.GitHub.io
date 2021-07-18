@@ -5,16 +5,13 @@ projectroot: /projects/firstgenfirst.org
 projecttitle: FirstGenFirst.org
 projectsubtitle: Scholarship and College Resource Website
 layout: project-desc
-styles:
-  - desc.css:
-      path: /projects/firstgenfirst.org/css/
 fonts:
   - Roboto
   - Roboto Slab:
     - 400
     - 700
 ---
-<section id="link">
+<section class="button-link">
     <a href="https://firstgenfirst.org" target="_blank" class="external button">FirstGenFirst.org</a></h2>
 </section>
 <section id="what-it-is">
@@ -25,7 +22,8 @@ fonts:
     <h2><a href="#what-i-do">What I do</a></h2>
     <p>I built and currently maintain the website using as minimal financial resources as possible (since we're all broke college students who don't want to pay for server fees). Some of my responsibilities include:</p>
     <ul class="fa-icon-list square-check">
-        <li><strong>Coding the website frontend</strong> &ndash; I built the website from scratch using HTML and CSS. Since the target audience is for first-generation and low-income students, I had to be more mindful of working on older web browsers since many non-tech savvy parents and students may be visiting the site on an older computer. The website is hosted using a <a href="https://github.com/firstgenerationfirst/firstgenfirst.org" target="_blank" class="external link">GitHub Pages respository</a> using Jekyll CMS.</li>
+        <li><strong>Building the website frontend</strong> &ndash; I built the website from scratch using HTML and CSS. Since the target audience is for first-generation and low-income students, I had to be more mindful of working on older web browsers since many non-tech savvy parents and students may be visiting the site on an older computer. The website is hosted using a <a href="https://github.com/firstgenerationfirst/firstgenfirst.org" target="_blank" class="external link">GitHub Pages respository</a> using Jekyll CMS.</li>
+        <li><strong>Making an interface for internal use</strong> &ndash; Along with the front-facing website, I made an interface for myself and other FGF members to perform common activities like viewing applicants' responses, making changes to the front-facing website, etc. I used React to design the UI, and use the Google Sheets API to retrieve, edit, and store applicant data.</li>
         <li><strong>Maintaining the website</strong> &ndash; Since we want to highlight different things on the front page, I constantly make changes to the website in order to make sure information is up-to-date. Along with this, I maintain the backend by using the Google Cloud Functions API to implement form submissions on the website.</li>
         <li><strong>Search Engine Optimization</strong> &ndash; Since this was my first public-facing website, I learned how to optimize the website for search engine traffic. The website is currently the first Google result when searching for <a href="https://google.com/search?q=first+gen+first" target="_blank" class="external link">"first gen first"</a> (which wasn't originally the case because the spaces don't match the non-spaced domain name).</li>
         <li><strong>Mass-emailing</strong> &ndash; Since we collected nearly 500 applications in our first year, I setup an account on MailChimp and created emails that matched the website's brand to send out to all applicants and keep them informed.</li>
@@ -33,6 +31,7 @@ fonts:
     <p>Some of the technologies I used in order to make and maintain the website are:</p>
     <ul class="fa-icon-list square-check">
         <li>GitHub Pages</li>
+        <li>React</li>
         <li>Jekyll Content Management System</li>
         <li>Google Cloud Functions API</li>
         <li>Google Cloud Translation API</li>

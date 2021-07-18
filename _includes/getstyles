@@ -11,7 +11,7 @@
 {%- endif -%}
 {%- for style in styles -%}
     {%- assign name = style -%}
-    {%- assign path = include.path |cdefault: "/" -%}
+    {%- assign path = include.path | default: "/" -%}
     {%- if style.first -%}
         {%- assign name = style.first[0] -%}
         {%- if style.first[1].external -%}

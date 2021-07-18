@@ -9,7 +9,6 @@
 {%- elsif layout.scripts -%}
     {%- assign scripts = layout.scripts | uniq -%}
 {%- endif -%}
-<!-- {{ scripts }} -->
 {%- for script in scripts -%}
     {%- assign name = script -%}
     {%- assign path = include.path -%}
