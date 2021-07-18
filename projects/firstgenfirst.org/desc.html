@@ -17,7 +17,7 @@
     <meta name="theme-color" content="#eceff1">
     <meta name="msapplication-TileColor" content="#3949ab">
     <script type="text/javascript">document.documentElement.setAttribute("data-script-enabled","true")</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-91403443-1','auto');ga('send','pageview');</script><link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:ital,wght@0,400;0,700&display=swap" rel="stylesheet" type="text/css"><link href="/projects/firstgenfirst.org/css/desc.css" rel="stylesheet" type="text/css"><link href="/css/project-desc.css" rel="stylesheet" type="text/css"><link href="/css/base.css" rel="stylesheet" type="text/css"><!-- hoverable-arrows.js --><script type="text/javascript" src="/scripts/hoverable-arrows.js"></script></head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:ital,wght@0,400;0,700&display=swap" rel="stylesheet" type="text/css"><link href="/css/project-desc.css" rel="stylesheet" type="text/css"><link href="/css/base.css" rel="stylesheet" type="text/css"><script type="text/javascript" src="/scripts/hoverable-arrows.js"></script></head>
 <body>
     <header>
     <div id="all-projects"><a href="/projects" class="hoverable-arrows"><span><span class="arrow"></span>All projects</span></a></div>
@@ -30,7 +30,7 @@
 <span class="shadow"></span>
 <span class="shadow"></span>
 <main>
-    <section id="link">
+    <section class="button-link">
     <a href="https://firstgenfirst.org" target="_blank" class="external button">FirstGenFirst.org</a></h2>
 </section>
 <section id="what-it-is">
@@ -41,7 +41,8 @@
     <h2><a href="#what-i-do">What I do</a></h2>
     <p>I built and currently maintain the website using as minimal financial resources as possible (since we're all broke college students who don't want to pay for server fees). Some of my responsibilities include:</p>
     <ul class="fa-icon-list square-check">
-        <li><strong>Coding the website frontend</strong> &ndash; I built the website from scratch using HTML and CSS. Since the target audience is for first-generation and low-income students, I had to be more mindful of working on older web browsers since many non-tech savvy parents and students may be visiting the site on an older computer. The website is hosted using a <a href="https://github.com/firstgenerationfirst/firstgenfirst.org" target="_blank" class="external link">GitHub Pages respository</a> using Jekyll CMS.</li>
+        <li><strong>Building the website frontend</strong> &ndash; I built the website from scratch using HTML and CSS. Since the target audience is for first-generation and low-income students, I had to be more mindful of working on older web browsers since many non-tech savvy parents and students may be visiting the site on an older computer. The website is hosted using a <a href="https://github.com/firstgenerationfirst/firstgenfirst.org" target="_blank" class="external link">GitHub Pages respository</a> using Jekyll CMS.</li>
+        <li><strong>Making an interface for internal use</strong> &ndash; Along with the front-facing website, I made an interface for myself and other FGF members to perform common activities like viewing applicants' responses, making changes to the front-facing website, etc. I used React to design the UI, and use the Google Sheets API to retrieve, edit, and store applicant data.</li>
         <li><strong>Maintaining the website</strong> &ndash; Since we want to highlight different things on the front page, I constantly make changes to the website in order to make sure information is up-to-date. Along with this, I maintain the backend by using the Google Cloud Functions API to implement form submissions on the website.</li>
         <li><strong>Search Engine Optimization</strong> &ndash; Since this was my first public-facing website, I learned how to optimize the website for search engine traffic. The website is currently the first Google result when searching for <a href="https://google.com/search?q=first+gen+first" target="_blank" class="external link">"first gen first"</a> (which wasn't originally the case because the spaces don't match the non-spaced domain name).</li>
         <li><strong>Mass-emailing</strong> &ndash; Since we collected nearly 500 applications in our first year, I setup an account on MailChimp and created emails that matched the website's brand to send out to all applicants and keep them informed.</li>
@@ -49,6 +50,7 @@
     <p>Some of the technologies I used in order to make and maintain the website are:</p>
     <ul class="fa-icon-list square-check">
         <li>GitHub Pages</li>
+        <li>React</li>
         <li>Jekyll Content Management System</li>
         <li>Google Cloud Functions API</li>
         <li>Google Cloud Translation API</li>
@@ -59,5 +61,5 @@
         <li>Google Domains</li>
     </ul>
 </section>
-</main><!-- hoverable-arrows.js --></body>
+</main></body>
 </html>
